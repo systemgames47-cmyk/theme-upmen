@@ -1,0 +1,199 @@
+{%- comment -%} Founder Story — same structure as the original landing (card + struggles / story + before-after / tried list), Mars dark styling, all images uploadable {%- endcomment -%}
+{%- assign sid = section.id -%}
+<style>
+  #mm-fs-{{ sid }} { background: var(--mars-panel, #1a0e07); color: var(--text, #fff); padding: 56px 0; position: relative; overflow: hidden; }
+  @media (min-width: 768px) { #mm-fs-{{ sid }} { padding: 88px 0; } }
+  #mm-fs-{{ sid }} .mm-wrap { max-width: 64rem; margin: 0 auto; padding: 0 16px; position: relative; z-index: 1; }
+
+  #mm-fs-{{ sid }} .mm-ph {
+    border: 2px dashed rgba(255,86,0,0.5); background: rgba(255,86,0,0.05); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; text-align: center; padding: 16px;
+    font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.55); line-height: 1.7;
+  }
+
+  /* ROW 1 — founder card + intro */
+  #mm-fs-{{ sid }} .mm-row1 { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start; }
+  @media (min-width: 768px) { #mm-fs-{{ sid }} .mm-row1 { grid-template-columns: 280px 1fr; gap: 40px; } }
+  #mm-fs-{{ sid }} .mm-card {
+    border-radius: 16px; overflow: hidden; margin: 0 auto; width: 100%; max-width: 280px;
+    border: 1px solid var(--mars-line, rgba(255,255,255,0.12)); box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  #mm-fs-{{ sid }} .mm-card .photo { position: relative; aspect-ratio: 4/5; background: #0a0503; }
+  #mm-fs-{{ sid }} .mm-card .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  #mm-fs-{{ sid }} .mm-card .photo .mm-ph { position: absolute; inset: 10px; }
+  #mm-fs-{{ sid }} .mm-card .name { background: var(--brand, #ff5600); color: #fff; text-align: center; padding: 12px 8px; }
+  #mm-fs-{{ sid }} .mm-card .name .n { font-family: var(--font-heading); font-size: calc((18px) * var(--fs-b, 1)); font-weight: 800; letter-spacing: 0.04em; margin: 0; }
+  #mm-fs-{{ sid }} .mm-card .name .r { font-size: calc((10px) * var(--fs-b, 1)); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin: 0; }
+  #mm-fs-{{ sid }} .mm-intro { display: flex; flex-direction: column; gap: 16px; }
+  #mm-fs-{{ sid }} .mm-intro h2 {
+    font-family: var(--font-heading); font-size: calc((clamp(22px, 3.6vw, 32px)) * var(--fs-h, 1)); font-weight: 800;
+    text-transform: uppercase; line-height: 1.2; margin: 0;
+  }
+  #mm-fs-{{ sid }} .mm-intro h2 .orange { color: var(--brand, #ff5600); }
+  #mm-fs-{{ sid }} .mm-intro p { font-size: calc((16px) * var(--fs-b, 1)); color: rgba(255,255,255,0.85); margin: 0; }
+  #mm-fs-{{ sid }} .mm-intro p.bold { font-weight: 700; color: #fff; margin-top: 8px; }
+  #mm-fs-{{ sid }} .mm-struggles { display: grid; grid-template-columns: 1fr; gap: 8px 24px; margin: 4px 0 0; list-style: none; padding: 0; }
+  @media (min-width: 640px) { #mm-fs-{{ sid }} .mm-struggles { grid-template-columns: 1fr 1fr; } }
+  #mm-fs-{{ sid }} .mm-struggle { display: flex; align-items: center; gap: 8px; font-size: calc((15.5px) * var(--fs-b, 1)); font-weight: 700; }
+  #mm-fs-{{ sid }} .mm-x {
+    width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--brand, #ff5600); color: var(--brand, #ff5600);
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  #mm-fs-{{ sid }} .mm-x svg { width: 11px; height: 11px; }
+
+  /* ROW 2 — story + before/after */
+  #mm-fs-{{ sid }} .mm-row2 { display: grid; grid-template-columns: 1fr; gap: 32px; margin-top: 48px; align-items: center; }
+  @media (min-width: 768px) { #mm-fs-{{ sid }} .mm-row2 { grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 64px; } }
+  #mm-fs-{{ sid }} .mm-row2 .txt { font-size: calc((16px) * var(--fs-b, 1)); line-height: 1.65; color: rgba(255,255,255,0.85); }
+  #mm-fs-{{ sid }} .mm-row2 .txt p { margin: 0 0 16px; }
+  #mm-fs-{{ sid }} .mm-row2 .txt p.black { font-weight: 900; color: #fff; }
+  #mm-fs-{{ sid }} .mm-ba { border-radius: 16px; overflow: hidden; border: 1px solid var(--mars-line, rgba(255,255,255,0.12)); }
+  #mm-fs-{{ sid }} .mm-ba img { width: 100%; height: auto; display: block; }
+  #mm-fs-{{ sid }} .mm-ba .mm-ph { aspect-ratio: 4/3; border-radius: 0; border-width: 0; }
+
+  /* ROW 3 — tried everything */
+  #mm-fs-{{ sid }} .mm-row3 { display: grid; grid-template-columns: 1fr; gap: 32px; margin-top: 48px; align-items: center; }
+  @media (min-width: 768px) { #mm-fs-{{ sid }} .mm-row3 { grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 64px; } }
+  #mm-fs-{{ sid }} .mm-row3 h3 {
+    font-family: var(--font-heading); font-size: calc((clamp(20px, 3.4vw, 30px)) * var(--fs-h, 1)); font-weight: 800;
+    text-transform: uppercase; margin: 0 0 20px;
+  }
+  #mm-fs-{{ sid }} .mm-tried { display: grid; grid-template-columns: 1fr; gap: 10px 24px; list-style: none; padding: 0; margin: 0; }
+  @media (min-width: 640px) { #mm-fs-{{ sid }} .mm-tried { grid-template-columns: 1fr 1fr; } }
+  #mm-fs-{{ sid }} .mm-tried li { display: flex; align-items: center; gap: 10px; font-size: calc((15.5px) * var(--fs-b, 1)); font-weight: 700; }
+  #mm-fs-{{ sid }} .mm-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--brand, #ff5600); flex-shrink: 0; }
+  #mm-fs-{{ sid }} .mm-tried-photo { border-radius: 16px; overflow: hidden; border: 1px solid var(--mars-line, rgba(255,255,255,0.12)); }
+  #mm-fs-{{ sid }} .mm-tried-photo img { width: 100%; height: auto; display: block; filter: grayscale(100%); }
+  #mm-fs-{{ sid }} .mm-tried-photo .mm-ph { aspect-ratio: 4/3; border-radius: 0; border-width: 0; }
+
+  /* FOLLOWUP band */
+  #mm-fs-{{ sid }} .mm-follow {
+    margin-top: 56px; background: var(--mars-black, #0a0503); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    border-radius: 16px; padding: 28px 24px;
+  }
+  @media (min-width: 768px) { #mm-fs-{{ sid }} .mm-follow { padding: 40px; } }
+  #mm-fs-{{ sid }} .mm-follow h3 {
+    font-family: var(--font-heading); font-size: calc((clamp(18px, 3vw, 26px)) * var(--fs-h, 1)); font-weight: 800;
+    text-transform: uppercase; margin: 0 0 14px;
+  }
+  #mm-fs-{{ sid }} .mm-follow h3 .orange { color: var(--brand, #ff5600); }
+  #mm-fs-{{ sid }} .mm-follow p { font-size: calc((15.5px) * var(--fs-b, 1)); line-height: 1.65; color: rgba(255,255,255,0.85); margin: 0 0 12px; }
+  #mm-fs-{{ sid }} .mm-follow p:last-child { margin-bottom: 0; }
+</style>
+
+<section id="mm-fs-{{ sid }}" class="reveal" data-testid="founder-story">
+  <div class="mm-wrap">
+
+    <div class="mm-row1">
+      <div class="mm-card">
+        <div class="photo">
+          {%- if section.settings.founder_image != blank -%}
+            <img src="{{ section.settings.founder_image | image_url: width: 600 }}" alt="{{ section.settings.founder_name }}" loading="lazy">
+          {%- else -%}
+            <img src="{{ 'upmen-preview-founder.jpg' | asset_url }}" alt="{{ section.settings.founder_name }}" loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="name">
+          <p class="n">{{ section.settings.founder_name }}</p>
+          <p class="r">{{ section.settings.founder_role }}</p>
+        </div>
+      </div>
+
+      <div class="mm-intro">
+        <h2>{{ section.settings.intro_title_pre }} <span class="orange">{{ section.settings.intro_title_highlight }}</span></h2>
+        <p>{{ section.settings.intro_text }}</p>
+        <ul class="mm-struggles">
+          {%- assign struggles = section.settings.struggles | split: '|' -%}
+          {%- for s in struggles -%}
+            <li class="mm-struggle">
+              <span class="mm-x" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </span>
+              {{ s | strip }}
+            </li>
+          {%- endfor -%}
+        </ul>
+        <p class="bold">{{ section.settings.intro_footer }}</p>
+      </div>
+    </div>
+
+    <div class="mm-row2">
+      <div class="txt">
+        <p>{{ section.settings.story_p1 }}</p>
+        <p>{{ section.settings.story_p2 }}</p>
+        <p class="black">{{ section.settings.story_p3 }}</p>
+        <p>{{ section.settings.story_p4 }}</p>
+      </div>
+      <div class="mm-ba">
+        {%- if section.settings.before_after_image != blank -%}
+          <img src="{{ section.settings.before_after_image | image_url: width: 900 }}" alt="Before and after" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'upmen-preview-beforeafter.jpg' | asset_url }}" alt="Before and after" loading="lazy">
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="mm-row3">
+      <div>
+        <h3>{{ section.settings.tried_title }}</h3>
+        <ul class="mm-tried">
+          {%- assign tried = section.settings.tried_list | split: '|' -%}
+          {%- for t in tried -%}
+            <li><span class="mm-dot" aria-hidden="true"></span>{{ t | strip }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="mm-tried-photo">
+        {%- if section.settings.tried_image != blank -%}
+          <img src="{{ section.settings.tried_image | image_url: width: 900 }}" alt="What didn't work" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'upmen-preview-tried.jpg' | asset_url }}" alt="What didn't work" loading="lazy">
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="mm-follow">
+      <h3>{{ section.settings.follow_title_pre }} <span class="orange">{{ section.settings.follow_title_highlight }}</span></h3>
+      <p>{{ section.settings.follow_p1 }}</p>
+      <p>{{ section.settings.follow_p2 }}</p>
+      <p><strong>{{ section.settings.follow_p3 }}</strong></p>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Founder Story",
+  "settings": [
+    { "type": "header", "content": "Founder card" },
+    { "type": "image_picker", "id": "founder_image", "label": "Founder photo" },
+    { "type": "text", "id": "founder_name", "label": "Founder name", "default": "The Founder" },
+    { "type": "text", "id": "founder_role", "label": "Founder role", "default": "Founder of Up Men" },
+    { "type": "header", "content": "Intro" },
+    { "type": "text", "id": "intro_title_pre", "label": "Title", "default": "WHY I CREATED" },
+    { "type": "text", "id": "intro_title_highlight", "label": "Title highlight (orange)", "default": "UP MEN" },
+    { "type": "textarea", "id": "intro_text", "label": "Intro text", "default": "A few years ago I was doing everything \"right\" — training, working hard, grinding — and still dealing with:" },
+    { "type": "textarea", "id": "struggles", "label": "Struggles (separate with |)", "default": "Low Energy|Brain Fog|Slow Recovery|Low Drive" },
+    { "type": "text", "id": "intro_footer", "label": "Closing line", "default": "And more things I won't bore you by listing…" },
+    { "type": "header", "content": "Story + before/after" },
+    { "type": "textarea", "id": "story_p1", "label": "Paragraph 1", "default": "Every day felt like a battle. I was running on caffeine and willpower, and it still wasn't enough." },
+    { "type": "textarea", "id": "story_p2", "label": "Paragraph 2", "default": "I looked fine on the outside, but I knew I wasn't performing at my real level." },
+    { "type": "text", "id": "story_p3", "label": "Paragraph 3 (bold)", "default": "Then I got my testosterone tested — and everything made sense." },
+    { "type": "textarea", "id": "story_p4", "label": "Paragraph 4", "default": "I went all-in on understanding what actually moves the needle for male hormones, naturally." },
+    { "type": "image_picker", "id": "before_after_image", "label": "Before/after banner" },
+    { "type": "header", "content": "Tried everything" },
+    { "type": "text", "id": "tried_title", "label": "Title", "default": "I TRIED EVERYTHING:" },
+    { "type": "textarea", "id": "tried_list", "label": "List (separate with |)", "default": "More caffeine|Generic multivitamins|Random T-boosters|Crash diets|Cold showers|Sleep hacks|Expensive clinics|And more" },
+    { "type": "image_picker", "id": "tried_image", "label": "\"What I tried\" image" },
+    { "type": "header", "content": "Follow-up band" },
+    { "type": "text", "id": "follow_title_pre", "label": "Title", "default": "THE ANSWER WAS" },
+    { "type": "text", "id": "follow_title_highlight", "label": "Title highlight (orange)", "default": "SIMPLER THAN I THOUGHT" },
+    { "type": "textarea", "id": "follow_p1", "label": "Paragraph 1", "default": "Don't get me wrong — some of those habits are good, and I still keep them today. But none of them were the game-changer I was looking for." },
+    { "type": "textarea", "id": "follow_p2", "label": "Paragraph 2", "default": "What actually worked was giving my body the exact raw materials it needs to produce testosterone on its own: clinically dosed Tongkat Ali, Shilajit, Zinc, Boron, Fenugreek and more — all in one daily serving." },
+    { "type": "textarea", "id": "follow_p3", "label": "Paragraph 3 (bold)", "default": "That's Up Men. No hormones, no shortcuts — just your body working the way it was designed to." }
+  ],
+  "presets": [{ "name": "Founder Story" }]
+}
+{% endschema %}

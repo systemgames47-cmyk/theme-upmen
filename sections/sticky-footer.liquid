@@ -1,0 +1,132 @@
+{%- comment -%} Sticky footer bar — appears on scroll, jumps to the packages section {%- endcomment -%}
+{%- assign sid = section.id | slice: -8, 8 -%}
+{%- if section.settings.enabled -%}
+{% style %}
+#mm-sf-{{ sid }} {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 60;
+  transform: translateY(110%);
+  transition: transform 0.35s ease;
+  background: #14090366;
+}
+#mm-sf-{{ sid }}.is-visible { transform: translateY(0); }
+#mm-sf-{{ sid }} .mm-sf-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  background: linear-gradient(90deg, #1a0e07 -10%, rgba(255, 86, 0, 0.28) 30%, #1a0e07 70%, rgba(255, 86, 0, 0.18) 110%), #140903;
+  border-top: 1px solid rgba(255, 86, 0, 0.45);
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.55);
+}
+#mm-sf-{{ sid }} .mm-sf-text { text-align: center; }
+#mm-sf-{{ sid }} .mm-sf-text a { text-decoration: none; display: block; }
+#mm-sf-{{ sid }} .mm-sf-line1 {
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: 0.6px;
+  line-height: 115%;
+  text-transform: uppercase;
+}
+#mm-sf-{{ sid }} .mm-sf-line2 {
+  display: block;
+  color: var(--mars-orange, #ff5600);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  line-height: 120%;
+}
+#mm-sf-{{ sid }} .mm-sf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--mars-orange, #ff5600);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  white-space: nowrap;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+#mm-sf-{{ sid }} .mm-sf-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+#mm-sf-{{ sid }} .mm-sf-btn svg { width: 18px; height: 18px; flex: none; }
+@media (min-width: 640px) {
+  #mm-sf-{{ sid }} .mm-sf-wrap { gap: 30px; padding: 12px 24px; }
+  #mm-sf-{{ sid }} .mm-sf-line1 { font-size: 20px; }
+  #mm-sf-{{ sid }} .mm-sf-line2 { font-size: 16px; }
+  #mm-sf-{{ sid }} .mm-sf-btn { font-size: 16px; padding: 12px 24px; }
+}
+{% endstyle %}
+
+<div id="mm-sf-{{ sid }}" data-testid="sticky-footer" aria-hidden="true">
+  <div class="mm-sf-wrap">
+    <div class="mm-sf-text">
+      <a href="{{ section.settings.link }}" data-mm-sf-link>
+        <span class="mm-sf-line1">{{ section.settings.line1 }}</span>
+        <span class="mm-sf-line2">{{ section.settings.line2 }}</span>
+      </a>
+    </div>
+    <a class="mm-sf-btn" href="{{ section.settings.link }}" data-mm-sf-link>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+      <span>{{ section.settings.button_label }}</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var bar = document.getElementById('mm-sf-{{ sid }}');
+    if (!bar) return;
+    var threshold = {{ section.settings.scroll_threshold | default: 600 }};
+    var targetSel = '{{ section.settings.link | escape }}';
+    var target = null;
+    try { target = document.querySelector(targetSel); } catch (e) {}
+
+    function update() {
+      var show = window.scrollY > threshold;
+      if (show && target) {
+        var r = target.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) show = false;
+      }
+      bar.classList.toggle('is-visible', show);
+      bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+
+    bar.querySelectorAll('[data-mm-sf-link]').forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        if (target) {
+          ev.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Sticky footer bar",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Enable sticky bar", "default": true },
+    { "type": "text", "id": "line1", "label": "Headline", "default": "LAUNCH OFFER ENDING SOON" },
+    { "type": "text", "id": "line2", "label": "Subheadline", "default": "SAVE UP TO 25% TODAY" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "CLAIM NOW!" },
+    { "type": "text", "id": "link", "label": "Anchor or link", "default": "#join_pkg", "info": "Use #join_pkg to scroll to the packages section" },
+    { "type": "range", "id": "scroll_threshold", "label": "Show after scrolling (px)", "min": 100, "max": 2000, "step": 100, "default": 600 }
+  ]
+}
+{% endschema %}

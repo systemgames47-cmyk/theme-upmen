@@ -1,0 +1,53 @@
+{%- comment -%} Custom Liquid — free-form Liquid/HTML content section {%- endcomment -%}
+{%- assign sid = section.id -%}
+<style>
+  #mm-custom-liquid-{{ sid }} {
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+  #mm-custom-liquid-{{ sid }} .mm-wrap {
+    {%- if section.settings.full_width -%}
+    width: 100%;
+    {%- else -%}
+    max-width: 1100px; margin: 0 auto; padding: 0 16px;
+    {%- endif -%}
+  }
+  #mm-custom-liquid-{{ sid }} .mm-heading {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((clamp(24px, 4vw, 40px)) * var(--fs-h, 1)); line-height: 1.15; margin: 0 0 24px; text-align: center;
+  }
+  #mm-custom-liquid-{{ sid }} .mm-heading .orange { color: var(--brand, #ff5600); }
+</style>
+
+<section id="mm-custom-liquid-{{ sid }}" class="reveal" data-testid="custom-liquid">
+  <div class="mm-wrap">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="mm-heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {{ section.settings.custom_liquid }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Liquid",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading (optional)" },
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Liquid code",
+      "info": "Add app snippets or other Liquid code. You can access store objects like products, collections and cart."
+    },
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": false },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#0a0503" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "Custom Liquid" }]
+}
+{% endschema %}

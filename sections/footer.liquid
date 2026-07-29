@@ -1,0 +1,187 @@
+{%- comment -%} Footer — dark Mars footer with slogan, menus and disclaimer {%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- if section.settings.bg_mobile != blank -%}
+  {%- assign ft_bg_mobile = section.settings.bg_mobile | image_url: width: 1200 -%}
+{%- else -%}
+  {%- assign ft_bg_mobile = 'Mobile-Footer_1.webp' | asset_url -%}
+{%- endif -%}
+{%- if section.settings.bg_desktop != blank -%}
+  {%- assign ft_bg_desktop = section.settings.bg_desktop | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign ft_bg_desktop = 'Footer_1.webp' | asset_url -%}
+{%- endif -%}
+{%- case section.settings.height_mobile -%}
+  {%- when 'small' -%}{%- assign minh_mobile = '55svh' -%}
+  {%- when 'medium' -%}{%- assign minh_mobile = '70svh' -%}
+  {%- when 'large' -%}{%- assign minh_mobile = '85svh' -%}
+  {%- when 'full' -%}{%- assign minh_mobile = '100svh' -%}
+  {%- else -%}{%- assign minh_mobile = 'auto' -%}
+{%- endcase -%}
+{%- case section.settings.height_desktop -%}
+  {%- when 'small' -%}{%- assign minh_desktop = '520px' -%}
+  {%- when 'medium' -%}{%- assign minh_desktop = '640px' -%}
+  {%- when 'large' -%}{%- assign minh_desktop = '85vh' -%}
+  {%- when 'full' -%}{%- assign minh_desktop = '100vh' -%}
+  {%- else -%}{%- assign minh_desktop = 'auto' -%}
+{%- endcase -%}
+<style>
+  #mm-footer-{{ sid }} {
+    background: #000 url('{{ ft_bg_mobile }}') center bottom / cover no-repeat;
+    color: var(--text, #fff); padding: 72px 0 40px; position: relative;
+    min-height: {{ minh_mobile }}; display: flex; flex-direction: column; justify-content: center;
+  }
+  @media (min-width: 768px) {
+    #mm-footer-{{ sid }} { background-image: url('{{ ft_bg_desktop }}'); min-height: {{ minh_desktop }}; }
+  }
+  #mm-footer-{{ sid }}::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.55); pointer-events: none; }
+  #mm-footer-{{ sid }} .mm-wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  #mm-footer-{{ sid }} .mm-slogan {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; text-align: center;
+    font-size: calc((clamp(22px, 4vw, 38px)) * var(--fs-b, 1)); line-height: 1.2; margin: 0 0 12px; letter-spacing: 0.04em;
+  }
+  #mm-footer-{{ sid }} .mm-slogan .orange { color: var(--brand, #ff5600); }
+  #mm-footer-{{ sid }} .mm-tag { text-align: center; font-size: calc((14px) * var(--fs-b, 1)); color: rgba(255,255,255,0.7); margin: 0 0 36px; }
+  #mm-footer-{{ sid }} .mm-cta-row { text-align: center; margin-bottom: 48px; }
+  #mm-footer-{{ sid }} .mm-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--brand, #ff5600); color: #fff; text-decoration: none;
+    font-weight: 800; font-size: calc((16px) * var(--fs-b, 1)); text-transform: uppercase;
+    padding: 16px 40px; border-radius: 6px; box-shadow: 0 8px 28px rgba(255,86,0,0.4);
+  }
+  #mm-footer-{{ sid }} .mm-cta:hover { filter: brightness(1.1); }
+  #mm-footer-{{ sid }} .mm-cols {
+    display: grid; grid-template-columns: 1fr; gap: 28px; text-align: center;
+    padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.15); margin-bottom: 36px;
+  }
+  @media (min-width: 768px) { #mm-footer-{{ sid }} .mm-cols { grid-template-columns: repeat(3, 1fr); text-align: left; } }
+  #mm-footer-{{ sid }} .mm-col h3 {
+    font-family: var(--font-heading); font-size: calc((12px) * var(--fs-h, 1)); font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--brand, #ff5600); margin: 0 0 14px;
+  }
+  #mm-footer-{{ sid }} .mm-col a, #mm-footer-{{ sid }} .mm-col span {
+    display: block; color: rgba(255,255,255,0.8); text-decoration: none; font-size: calc((14px) * var(--fs-b, 1)); margin-bottom: 8px;
+  }
+  #mm-footer-{{ sid }} .mm-col a:hover { color: #fff; }
+  #mm-footer-{{ sid }} .mm-social { display: flex; gap: 14px; justify-content: center; }
+  @media (min-width: 768px) { #mm-footer-{{ sid }} .mm-social { justify-content: flex-start; } }
+  #mm-footer-{{ sid }} .mm-social a {
+    display: inline-flex; width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+    align-items: center; justify-content: center; color: #fff;
+  }
+  #mm-footer-{{ sid }} .mm-social a:hover { border-color: var(--brand, #ff5600); color: var(--brand, #ff5600); }
+  #mm-footer-{{ sid }} .mm-legal {
+    border-top: 1px solid rgba(255,255,255,0.15); padding-top: 24px;
+    font-size: calc((11.5px) * var(--fs-b, 1)); line-height: 1.6; color: rgba(255,255,255,0.55); text-align: center;
+  }
+  #mm-footer-{{ sid }} .mm-legal p { margin: 0 0 10px; }
+</style>
+
+<footer id="mm-footer-{{ sid }}" role="contentinfo">
+  <div class="mm-wrap">
+    <h2 class="mm-slogan">{{ section.settings.slogan_pre }} <span class="orange">{{ section.settings.slogan_highlight }}</span></h2>
+    <p class="mm-tag">{{ section.settings.tagline }}</p>
+    <div class="mm-cta-row">
+      <a href="{{ section.settings.cta_link | default: '#join_pkg' }}" class="mm-cta">{{ section.settings.cta_label }}</a>
+    </div>
+
+    <div class="mm-cols">
+      <div class="mm-col">
+        <h3>{{ section.settings.menu_title }}</h3>
+        {%- if section.settings.menu != blank -%}
+          {%- for link in section.settings.menu.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="#ingredients">Ingredients</a>
+          <a href="#faq">FAQ</a>
+          <a href="{{ routes.cart_url }}">Cart</a>
+        {%- endif -%}
+      </div>
+      <div class="mm-col">
+        <h3>{{ section.settings.support_title }}</h3>
+        {%- assign email = settings.contact_email | default: 'support@mengotomars.com' -%}
+        <a href="mailto:{{ email }}">{{ email }}</a>
+        {%- if section.settings.support_menu != blank -%}
+          {%- for link in section.settings.support_menu.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      <div class="mm-col">
+        <h3>{{ section.settings.social_title }}</h3>
+        <div class="mm-social">
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" aria-label="Instagram" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          {%- endif -%}
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" aria-label="Facebook" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          {%- endif -%}
+          {%- if settings.social_youtube != blank -%}
+            <a href="{{ settings.social_youtube }}" aria-label="YouTube" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.85-.5-5.7a3 3 0 0 0-2.1-2.1C18.6 3.7 12 3.7 12 3.7s-6.6 0-8.4.5A3 3 0 0 0 1.5 6.3C1 8.15 1 12 1 12s0 3.85.5 5.7a3 3 0 0 0 2.1 2.1c1.8.5 8.4.5 8.4.5s6.6 0 8.4-.5a3 3 0 0 0 2.1-2.1c.5-1.85.5-5.7.5-5.7zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+          {%- endif -%}
+          {%- if settings.social_tiktok != blank -%}
+            <a href="{{ settings.social_tiktok }}" aria-label="TikTok" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.3a4.8 4.8 0 0 1-3.5-1.6v7.6a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v2.9a2.7 2.7 0 1 0 2 2.6V2h3a4.8 4.8 0 0 0 3.5 4.3z"/></svg></a>
+          {%- endif -%}
+          {%- if settings.social_instagram == blank and settings.social_facebook == blank and settings.social_youtube == blank and settings.social_tiktok == blank -%}
+            <span style="font-size:13px;color:rgba(255,255,255,0.5);">Set social links in Theme Settings.</span>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="mm-legal">
+      <p>{{ section.settings.disclaimer }}</p>
+      <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "header", "content": "Banner size" },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Banner height (mobile)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (55% of screen)" },
+        { "value": "medium", "label": "Medium (70% of screen)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Banner height (desktop)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (520px)" },
+        { "value": "medium", "label": "Medium (640px)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "bg_mobile", "label": "Background (mobile)" },
+    { "type": "image_picker", "id": "bg_desktop", "label": "Background (desktop)" },
+    { "type": "text", "id": "slogan_pre", "label": "Slogan", "default": "ONE GIANT BOOST" },
+    { "type": "text", "id": "slogan_highlight", "label": "Slogan highlight (orange)", "default": "FOR MANKIND." },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Natural testosterone support for the modern man." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "CLAIM 50% OFF NOW" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "menu_title", "label": "Menu column title", "default": "EXPLORE" },
+    { "type": "link_list", "id": "menu", "label": "Footer menu" },
+    { "type": "text", "id": "support_title", "label": "Support column title", "default": "SUPPORT" },
+    { "type": "link_list", "id": "support_menu", "label": "Support menu" },
+    { "type": "text", "id": "social_title", "label": "Social column title", "default": "FOLLOW US" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Results may vary. Consult your physician before use if you have a medical condition or take medication." }
+  ],
+  "presets": [{ "name": "Footer" }]
+}
+{% endschema %}

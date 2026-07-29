@@ -1,0 +1,296 @@
+{%- comment -%} Hero — Up Men headline over Mars landscape background {%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- if section.settings.bg_mobile != blank -%}
+  {%- assign hero_bg_mobile = section.settings.bg_mobile | image_url: width: 1200 -%}
+{%- else -%}
+  {%- assign hero_bg_mobile = 'bg-mobile.jpg' | asset_url -%}
+{%- endif -%}
+{%- if section.settings.bg_desktop != blank -%}
+  {%- assign hero_bg_desktop = section.settings.bg_desktop | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign hero_bg_desktop = 'hero-desktop.jpg' | asset_url -%}
+{%- endif -%}
+{%- case section.settings.height_mobile -%}
+  {%- when 'small' -%}{%- assign hero_minh_mobile = '55svh' -%}
+  {%- when 'medium' -%}{%- assign hero_minh_mobile = '70svh' -%}
+  {%- when 'large' -%}{%- assign hero_minh_mobile = '85svh' -%}
+  {%- when 'full' -%}{%- assign hero_minh_mobile = '100svh' -%}
+  {%- else -%}{%- assign hero_minh_mobile = 'auto' -%}
+{%- endcase -%}
+{%- case section.settings.height_desktop -%}
+  {%- when 'small' -%}{%- assign hero_minh_desktop = '520px' -%}
+  {%- when 'medium' -%}{%- assign hero_minh_desktop = '640px' -%}
+  {%- when 'large' -%}{%- assign hero_minh_desktop = '85vh' -%}
+  {%- when 'full' -%}{%- assign hero_minh_desktop = '100vh' -%}
+  {%- else -%}{%- assign hero_minh_desktop = '640px' -%}
+{%- endcase -%}
+<style>
+  #mm-hero-{{ sid }} {
+    position: relative; overflow: hidden; color: #fff;
+    background: #0a0503 url('{{ hero_bg_mobile }}') center top / cover no-repeat;
+    padding: 48px 0 64px;
+    min-height: {{ hero_minh_mobile }};
+    display: flex; align-items: center;
+  }
+  @media (min-width: 768px) {
+    #mm-hero-{{ sid }} {
+      background-image: url('{{ hero_bg_desktop }}');
+      background-position: center;
+      padding: 96px 0 120px;
+      min-height: {{ hero_minh_desktop }};
+    }
+  }
+  #mm-hero-{{ sid }}::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,5,3,0.55) 0%, rgba(10,5,3,0.15) 40%, rgba(10,5,3,0.75) 100%);
+    pointer-events: none;
+  }
+  #mm-hero-{{ sid }} .mm-wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 16px; width: 100%; }
+  #mm-hero-{{ sid }} .mm-inner { max-width: 620px; }
+  #mm-hero-{{ sid }} .mm-stars {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px;
+    font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  #mm-hero-{{ sid }} .mm-stars .st { color: var(--brand, #ff5600); letter-spacing: 0.05em; font-size: calc((14px) * var(--fs-b, 1)); }
+  #mm-hero-{{ sid }} h1 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((clamp(30px, 6.4vw, 58px)) * var(--fs-h, 1)); line-height: 1.08; letter-spacing: 0.01em; margin: 0 0 20px;
+  }
+  #mm-hero-{{ sid }} h1 .orange { color: var(--brand, #ff5600); }
+  #mm-hero-{{ sid }} .mm-sub { font-family: var(--font-body); font-size: calc((clamp(16px, 2vw, 19px)) * var(--fs-b, 1)); line-height: 1.5; color: rgba(255,255,255,0.92); margin: 0 0 28px; max-width: 480px; }
+  #mm-hero-{{ sid }} .mm-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--brand, #ff5600); color: #fff; text-decoration: none;
+    font-family: var(--font-body); font-weight: 800; font-size: calc((17px) * var(--fs-b, 1)); text-transform: uppercase; letter-spacing: 0.02em;
+    padding: 18px 32px; border-radius: 6px;
+    box-shadow: 0 8px 28px rgba(255,86,0,0.45);
+    transition: transform .15s ease, filter .15s ease;
+  }
+  #mm-hero-{{ sid }} .mm-cta:hover { filter: brightness(1.1); transform: translateY(-2px); }
+  #mm-hero-{{ sid }} .mm-guarantee {
+    display: flex; align-items: center; gap: 10px; margin-top: 20px;
+    font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85);
+  }
+  #mm-hero-{{ sid }} .mm-guarantee svg { flex-shrink: 0; color: #fff; }
+  #mm-hero-{{ sid }} .mm-product { display: none; }
+
+  /* ===== Media box (video/GIF, egg shape) ===== */
+  {%- case section.settings.media_size_mobile -%}
+    {%- when 'small' -%}{%- assign media_w_mobile = '160px' -%}
+    {%- when 'large' -%}{%- assign media_w_mobile = '260px' -%}
+    {%- when 'xl' -%}{%- assign media_w_mobile = '320px' -%}
+    {%- else -%}{%- assign media_w_mobile = '200px' -%}
+  {%- endcase -%}
+  {%- case section.settings.media_size_desktop -%}
+    {%- when 'small' -%}{%- assign media_w_desktop = '180px' -%}
+    {%- when 'large' -%}{%- assign media_w_desktop = '300px' -%}
+    {%- when 'xl' -%}{%- assign media_w_desktop = '380px' -%}
+    {%- else -%}{%- assign media_w_desktop = '230px' -%}
+  {%- endcase -%}
+  #mm-hero-{{ sid }} .mm-media {
+    position: relative; width: {{ media_w_mobile }}; max-width: 80vw;
+    margin: 0 auto 24px; z-index: 2;
+  }
+  #mm-hero-{{ sid }} .mm-media-shape {
+    position: relative; width: 100%; aspect-ratio: 300 / 460; overflow: hidden;
+    border-radius: 50%; clip-path: ellipse(50% 50% at 50% 50%); -webkit-clip-path: ellipse(50% 50% at 50% 50%);
+    background: #1a0e07; box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  }
+  #mm-hero-{{ sid }} .mm-media-shape video,
+  #mm-hero-{{ sid }} .mm-media-shape img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer;
+  }
+  #mm-hero-{{ sid }} .mm-media-tag {
+    position: absolute; right: -18px; bottom: 6px; z-index: 4; width: 92px; height: 92px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    text-decoration: none; transform: rotate(8deg);
+  }
+  #mm-hero-{{ sid }} .mm-media-tag .bg { position: absolute; inset: 0; }
+  #mm-hero-{{ sid }} .mm-media-tag .bg img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  #mm-hero-{{ sid }} .mm-media-tag .bg.default {
+    border-radius: 50%; background: var(--brand, #ff5600);
+    border: 2px dashed rgba(255,255,255,0.7); box-shadow: 0 0 0 5px var(--brand, #ff5600), 0 10px 26px rgba(255,86,0,0.45);
+    inset: 4px;
+  }
+  #mm-hero-{{ sid }} .mm-media-tag .l1 { position: relative; z-index: 1; color: #fff; font-size: calc((10px) * var(--fs-b, 1)); letter-spacing: 0.14em; text-transform: uppercase; }
+  #mm-hero-{{ sid }} .mm-media-tag .l2 {
+    position: relative; z-index: 1; color: #ffd44d; font-family: var(--font-heading); font-weight: 900; text-transform: uppercase;
+    font-size: calc((11px) * var(--fs-b, 1)); line-height: 1.05; padding: 0 10px;
+    animation: mm-hero-tag-pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes mm-hero-tag-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+  @media (prefers-reduced-motion: reduce) { #mm-hero-{{ sid }} .mm-media-tag .l2 { animation: none; } }
+  @media (min-width: 990px) {
+    #mm-hero-{{ sid }} .mm-media {
+      position: absolute; right: 36px; bottom: 36px; margin: 0; width: {{ media_w_desktop }}; max-width: none;
+    }
+    #mm-hero-{{ sid }} .mm-media-tag { width: 104px; height: 104px; right: -22px; }
+  }
+  @media (min-width: 990px) {
+    #mm-hero-{{ sid }} .mm-wrap { display: grid; grid-template-columns: 1fr 0.9fr; align-items: center; gap: 40px; }
+    #mm-hero-{{ sid }} .mm-product { display: block; max-width: 460px; margin: 0 auto; }
+    #mm-hero-{{ sid }} .mm-product img { width: 100%; height: auto; display: block; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.55)); }
+  }
+</style>
+
+<section id="mm-hero-{{ sid }}" class="reveal" data-testid="hero">
+  <div class="mm-wrap">
+    <div class="mm-inner">
+      <p class="mm-stars"><span class="st" aria-hidden="true">★★★★★</span> {{ section.settings.reviews_text }}</p>
+      <h1>
+        {{ section.settings.title_line1 }}<br>
+        {{ section.settings.title_line2 }}<br>
+        <span class="orange">{{ section.settings.title_highlight }}</span><br>
+        {{ section.settings.title_line3 }}
+      </h1>
+      <p class="mm-sub">{{ section.settings.subtitle }}</p>
+      {%- if section.settings.media_enabled -%}
+        <div class="mm-media">
+          <div class="mm-media-shape" data-hero-media>
+            {%- if section.settings.media_video != blank -%}
+              <video autoplay loop muted playsinline preload="metadata"
+                {%- if section.settings.media_video.preview_image %} poster="{{ section.settings.media_video.preview_image | image_url: width: 600 }}"{% endif -%}
+                aria-label="Hero video — click to toggle sound">
+                {%- for source in section.settings.media_video.sources -%}
+                  <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                {%- endfor -%}
+              </video>
+            {%- elsif section.settings.media_image != blank -%}
+              <img src="{{ section.settings.media_image | image_url: width: 600 }}" alt="" loading="lazy" style="cursor: default;">
+            {%- endif -%}
+          </div>
+          {%- if section.settings.media_tag_enabled -%}
+            <a href="{{ section.settings.media_tag_link | default: '#join_pkg' }}" class="mm-media-tag">
+              {%- if section.settings.media_tag_image != blank -%}
+                <span class="bg"><img src="{{ section.settings.media_tag_image | image_url: width: 300 }}" alt="" loading="lazy"></span>
+              {%- else -%}
+                <span class="bg default"></span>
+              {%- endif -%}
+              <span class="l1">{{ section.settings.media_tag_top }}</span>
+              <span class="l2">{{ section.settings.media_tag_main }}</span>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      <a href="{{ section.settings.cta_link | default: '#join_pkg' }}" class="mm-cta">
+        {{ section.settings.cta_label }}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <p class="mm-guarantee">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        {{ section.settings.guarantee_text }}
+      </p>
+    </div>
+    {%- if section.settings.show_product_image -%}
+      <div class="mm-product">
+        {%- if section.settings.product_image != blank -%}
+          <img src="{{ section.settings.product_image | image_url: width: 920 }}" alt="{{ section.settings.product_alt }}" loading="eager">
+        {%- else -%}
+          <img src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.product_alt }}" loading="eager">
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+(function(){
+  var box = document.querySelector('#mm-hero-{{ sid }} [data-hero-media]');
+  if (!box) return;
+  var video = box.querySelector('video');
+  if (!video) return;
+  box.addEventListener('click', function(){
+    if (video.muted) {
+      video.muted = false;
+      video.play();
+    } else if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "reviews_text", "label": "Reviews text", "default": "4,548 REVIEWS" },
+    { "type": "text", "id": "title_line1", "label": "Headline line 1", "default": "UP MEN" },
+    { "type": "text", "id": "title_line2", "label": "Headline line 2", "default": "THE MOST" },
+    { "type": "text", "id": "title_highlight", "label": "Headline highlight (orange)", "default": "POTENT & NATURAL" },
+    { "type": "text", "id": "title_line3", "label": "Headline line 3", "default": "TESTOSTERONE STACK ON EARTH" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "8 powerful ingredients packed into one daily male-vitality supplement." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "UNLOCK YOUR POWER TODAY" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "guarantee_text", "label": "Guarantee text", "default": "TRY IT FOR 90 DAYS. HIGHER T OR YOUR MONEY BACK." },
+    { "type": "header", "content": "Media box (video or GIF)" },
+    { "type": "checkbox", "id": "media_enabled", "label": "Show media box", "default": false },
+    { "type": "video", "id": "media_video", "label": "Video", "info": "Autoplays muted. Click toggles sound / pause." },
+    { "type": "image_picker", "id": "media_image", "label": "GIF or image (fallback)", "info": "Used when no video is selected. GIFs are supported." },
+    {
+      "type": "select",
+      "id": "media_size_mobile",
+      "label": "Media box size (mobile)",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "xl", "label": "Extra large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "media_size_desktop",
+      "label": "Media box size (desktop)",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "xl", "label": "Extra large" }
+      ],
+      "default": "medium"
+    },
+    { "type": "checkbox", "id": "media_tag_enabled", "label": "Show offer tag on media box", "default": true },
+    { "type": "text", "id": "media_tag_top", "label": "Tag small text", "default": "GET" },
+    { "type": "text", "id": "media_tag_main", "label": "Tag highlight text", "default": "50% OFF TODAY" },
+    { "type": "image_picker", "id": "media_tag_image", "label": "Tag image (optional)", "info": "Transparent PNG replaces the default circle badge." },
+    { "type": "url", "id": "media_tag_link", "label": "Tag link", "info": "Default: #join_pkg (pricing section)." },
+    { "type": "checkbox", "id": "show_product_image", "label": "Show product image (desktop)", "default": true },
+    { "type": "text", "id": "product_alt", "label": "Product image alt text", "default": "Up Men Natural Testosterone Support" },
+    { "type": "header", "content": "Banner size" },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Banner height (mobile)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (55% of screen)" },
+        { "value": "medium", "label": "Medium (70% of screen)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Banner height (desktop)",
+      "options": [
+        { "value": "small", "label": "Small (520px)" },
+        { "value": "medium", "label": "Medium (640px)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "full"
+    },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "bg_mobile", "label": "Background (mobile)" },
+    { "type": "image_picker", "id": "bg_desktop", "label": "Background (desktop)" },
+    { "type": "image_picker", "id": "product_image", "label": "Product image" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

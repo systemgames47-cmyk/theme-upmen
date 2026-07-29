@@ -1,0 +1,59 @@
+<section class="cart-page" data-section-id="{{ section.id }}">
+  <div class="container">
+    <h1>Your Cart</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <div class="cart-list">
+          {%- for item in cart.items -%}
+            <div class="cart-row">
+              <a href="{{ item.url }}">
+                {%- if item.image -%}
+                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.product.title }}">
+                {%- else -%}
+                  <img src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ item.product.title }}">
+                {%- endif -%}
+              </a>
+              <div>
+                <h3>{{ item.product.title }}</h3>
+                {%- unless item.product.has_only_default_variant -%}
+                  <p class="meta">{{ item.variant.title }}</p>
+                {%- endunless -%}
+                <input class="qty-input" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity">
+                <p class="price">{{ item.final_line_price | money }}</p>
+              </div>
+              <a class="remove" href="{{ item.url_to_remove }}" aria-label="Remove {{ item.product.title }}">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+              </a>
+            </div>
+          {%- endfor -%}
+
+          <div class="cart-summary">
+            <span class="label">Subtotal</span>
+            <span class="total">{{ cart.total_price | money }}</span>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+            <button type="submit" name="update" class="btn btn-outline">Update cart</button>
+            <button type="submit" name="checkout" class="btn btn-green" style="flex:1;min-width:200px;">Checkout</button>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="cart-list">
+        <div class="empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <h2>Your cart is empty</h2>
+          <a href="{{ routes.root_url }}" class="btn btn-pink">Continue Shopping</a>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

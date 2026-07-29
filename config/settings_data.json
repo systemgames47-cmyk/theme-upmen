@@ -1,0 +1,22 @@
+{
+  "current": {
+    "color_brand": "#ff5600",
+    "color_brand_dark": "#120804",
+    "color_brand_soft": "#fff4ec",
+    "color_brand_green": "#39c46e",
+    "color_brand_yellow": "#ff8a00",
+    "logo_height": 32,
+    "contact_email": "support@mengotomars.com"
+  },
+  "presets": {
+    "Default": {
+      "color_brand": "#ff5600",
+      "color_brand_dark": "#120804",
+      "color_brand_soft": "#fff4ec",
+      "color_brand_green": "#39c46e",
+      "color_brand_yellow": "#ff8a00",
+      "logo_height": 32,
+      "contact_email": "support@mengotomars.com"
+    }
+  }
+}

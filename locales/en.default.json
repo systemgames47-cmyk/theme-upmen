@@ -1,0 +1,59 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close",
+      "menu": "Menu"
+    },
+    "search": {
+      "placeholder": "Search products...",
+      "submit": "Search"
+    },
+    "cart": {
+      "title": "Your cart",
+      "empty": "Your cart is empty",
+      "continue_shopping": "Continue shopping",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "remove": "Remove",
+      "quantity": "Quantity",
+      "items_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      }
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you are looking for does not exist.",
+      "link": "Back to home"
+    },
+    "newsletter": {
+      "label": "Email",
+      "placeholder": "you@email.com",
+      "submit": "Subscribe",
+      "success": "Subscription successful!"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity",
+      "vendor": "Brand",
+      "from_price_html": "From {{ price }}"
+    }
+  },
+  "collections": {
+    "general": {
+      "no_matches": "No products found",
+      "view_all": "View all"
+    }
+  },
+  "customer": {
+    "login": "Sign in",
+    "logout": "Sign out",
+    "register": "Create account",
+    "account": "My account"
+  }
+}
