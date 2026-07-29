@@ -1,0 +1,147 @@
+{%- comment -%} About mission — mission statement + value cards {%- endcomment -%}
+{%- assign sid = section.id -%}
+<style>
+  #mm-abmis-{{ sid }} { background: var(--mars-black, #0a0503); color: var(--text, #fff); padding: 64px 0; }
+  @media (min-width: 768px) { #mm-abmis-{{ sid }} { padding: 96px 0; } }
+  #mm-abmis-{{ sid }} .mm-wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  #mm-abmis-{{ sid }} .mm-top {
+    display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; margin-bottom: 52px;
+  }
+  @media (min-width: 900px) {
+    #mm-abmis-{{ sid }} .mm-top { grid-template-columns: 1fr 1fr; gap: 48px; }
+    {%- if section.settings.image_position == 'left' -%}
+      #mm-abmis-{{ sid }} .mm-top-text { order: 2; }
+      #mm-abmis-{{ sid }} .mm-top-media { order: 1; }
+    {%- endif -%}
+  }
+  #mm-abmis-{{ sid }} .mm-eyebrow {
+    font-family: var(--font-heading); font-size: calc((12px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--brand, #ff5600); margin: 0 0 12px;
+  }
+  #mm-abmis-{{ sid }} h2 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((clamp(24px, 4.2vw, 40px)) * var(--fs-h, 1)); line-height: 1.15; margin: 0 0 18px;
+  }
+  #mm-abmis-{{ sid }} h2 .orange { color: var(--brand, #ff5600); }
+  #mm-abmis-{{ sid }} p { font-size: calc((16px) * var(--fs-b, 1)); line-height: 1.65; color: rgba(255,255,255,0.82); margin: 0 0 16px; }
+  #mm-abmis-{{ sid }} p:last-child { margin-bottom: 0; }
+  #mm-abmis-{{ sid }} p.mm-bold { color: #fff; font-weight: 700; }
+  #mm-abmis-{{ sid }} .mm-top-media img {
+    width: 100%; display: block; border-radius: 16px;
+    border: 1px solid var(--mars-line, rgba(255,255,255,0.12)); box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  #mm-abmis-{{ sid }} .mm-values-head { text-align: center; margin-bottom: 32px; }
+  #mm-abmis-{{ sid }} .mm-values-head h3 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((clamp(20px, 3.4vw, 30px)) * var(--fs-h, 1)); margin: 0;
+  }
+  #mm-abmis-{{ sid }} .mm-values-head h3 .orange { color: var(--brand, #ff5600); }
+  #mm-abmis-{{ sid }} .mm-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 640px) { #mm-abmis-{{ sid }} .mm-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 990px) { #mm-abmis-{{ sid }} .mm-grid { grid-template-columns: repeat({{ section.blocks.size | at_most: 4 | at_least: 1 }}, 1fr); } }
+  #mm-abmis-{{ sid }} .mm-card {
+    background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    border-radius: 14px; padding: 24px 20px;
+  }
+  #mm-abmis-{{ sid }} .mm-icon {
+    font-size: calc((28px) * var(--fs-h, 1)); line-height: 1; display: block; margin-bottom: 14px;
+  }
+  #mm-abmis-{{ sid }} .mm-card h4 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((14px) * var(--fs-h, 1)); letter-spacing: 0.04em; margin: 0 0 8px; color: #fff;
+  }
+  #mm-abmis-{{ sid }} .mm-card p { font-size: calc((13.5px) * var(--fs-b, 1)); line-height: 1.55; margin: 0; }
+</style>
+
+<section id="mm-abmis-{{ sid }}" class="reveal" data-testid="about-mission">
+  <div class="mm-wrap">
+    <div class="mm-top">
+      <div class="mm-top-text">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2>{{ section.settings.title_pre }} <span class="orange">{{ section.settings.title_highlight }}</span></h2>
+        {%- if section.settings.p1 != blank -%}<p>{{ section.settings.p1 }}</p>{%- endif -%}
+        {%- if section.settings.p2 != blank -%}<p>{{ section.settings.p2 }}</p>{%- endif -%}
+        {%- if section.settings.p3 != blank -%}<p class="mm-bold">{{ section.settings.p3 }}</p>{%- endif -%}
+      </div>
+      <div class="mm-top-media">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.title_pre }} {{ section.settings.title_highlight }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'The_Solution.jpg' | asset_url }}" alt="{{ section.settings.title_pre }} {{ section.settings.title_highlight }}" loading="lazy">
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      {%- if section.settings.values_title_pre != blank or section.settings.values_title_highlight != blank -%}
+        <div class="mm-values-head">
+          <h3>{{ section.settings.values_title_pre }} <span class="orange">{{ section.settings.values_title_highlight }}</span></h3>
+        </div>
+      {%- endif -%}
+      <div class="mm-grid">
+        {%- for block in section.blocks -%}
+          <div class="mm-card" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != blank -%}
+              <span class="mm-icon">{{ block.settings.icon }}</span>
+            {%- endif -%}
+            <h4>{{ block.settings.title }}</h4>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Mission",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "OUR MISSION" },
+    { "type": "text", "id": "title_pre", "label": "Title", "default": "WE DON'T SELL" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "SHORTCUTS" },
+    { "type": "textarea", "id": "p1", "label": "Paragraph 1", "default": "Up Men started with a simple frustration: the supplement aisle is full of underdosed blends, hidden \"proprietary formulas\" and promises nobody can back up. Men deserve better than that." },
+    { "type": "textarea", "id": "p2", "label": "Paragraph 2", "default": "So we built the opposite. Every ingredient in our formula is disclosed, dosed to match the clinical research, and manufactured in a CGMP facility in the USA with third-party testing on every batch." },
+    { "type": "text", "id": "p3", "label": "Paragraph 3 (bold)", "default": "No hormones. No fillers. No hype — just your body working the way it was designed to." },
+    { "type": "image_picker", "id": "image", "label": "Section image" },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position (desktop)",
+      "options": [
+        { "value": "right", "label": "Right" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "right"
+    },
+    { "type": "header", "content": "Values" },
+    { "type": "text", "id": "values_title_pre", "label": "Values title", "default": "WHAT WE" },
+    { "type": "text", "id": "values_title_highlight", "label": "Values title highlight (orange)", "default": "STAND FOR" }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "🔬" },
+        { "type": "text", "id": "title", "label": "Title", "default": "VALUE TITLE" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Short description of this value." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Mission",
+      "blocks": [
+        { "type": "value", "settings": { "icon": "🔬", "title": "CLINICAL DOSES", "text": "Every ingredient is dosed at the level used in published research — not a dusting for the label." } },
+        { "type": "value", "settings": { "icon": "📋", "title": "FULL TRANSPARENCY", "text": "No proprietary blends. You see exactly what's in every serving and how much of it." } },
+        { "type": "value", "settings": { "icon": "🇺🇸", "title": "MADE IN THE USA", "text": "Manufactured in a CGMP-certified facility and third-party tested batch by batch." } },
+        { "type": "value", "settings": { "icon": "🤝", "title": "RISK ON US", "text": "A 90-day guarantee, because you shouldn't have to gamble on your own health." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

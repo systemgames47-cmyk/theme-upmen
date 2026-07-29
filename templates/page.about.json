@@ -1,0 +1,161 @@
+{
+  "sections": {
+    "about_hero": {
+      "type": "about-hero",
+      "settings": {
+        "eyebrow": "OUR STORY",
+        "title_pre": "BUILT FOR MEN WHO",
+        "title_highlight": "REFUSE TO SETTLE",
+        "lede": "Up Men exists for one reason: too many men are running at half capacity and being told it's just age. We build clinically dosed formulas that give your body what it needs to perform the way it was designed to.",
+        "height_desktop": "small"
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {},
+      "blocks": {
+        "item-1": { "type": "item", "settings": { "text": "Made In A CGMP Facility" } },
+        "item-2": { "type": "item", "settings": { "text": "Non-GMO" } },
+        "item-3": { "type": "item", "settings": { "text": "Vegan" } },
+        "item-4": { "type": "item", "settings": { "text": "Hormone-Free" } },
+        "item-5": { "type": "item", "settings": { "text": "Made in USA" } },
+        "item-6": { "type": "item", "settings": { "text": "Third Party Tested" } }
+      },
+      "block_order": ["item-1", "item-2", "item-3", "item-4", "item-5", "item-6"]
+    },
+    "about_mission": {
+      "type": "about-mission",
+      "settings": {},
+      "blocks": {
+        "value-1": {
+          "type": "value",
+          "settings": {
+            "icon": "🔬",
+            "title": "CLINICAL DOSES",
+            "text": "Every ingredient is dosed at the level used in published research — not a dusting for the label."
+          }
+        },
+        "value-2": {
+          "type": "value",
+          "settings": {
+            "icon": "📋",
+            "title": "FULL TRANSPARENCY",
+            "text": "No proprietary blends. You see exactly what's in every serving and how much of it."
+          }
+        },
+        "value-3": {
+          "type": "value",
+          "settings": {
+            "icon": "🇺🇸",
+            "title": "MADE IN THE USA",
+            "text": "Manufactured in a CGMP-certified facility and third-party tested batch by batch."
+          }
+        },
+        "value-4": {
+          "type": "value",
+          "settings": {
+            "icon": "🤝",
+            "title": "RISK ON US",
+            "text": "A 90-day guarantee, because you shouldn't have to gamble on your own health."
+          }
+        }
+      },
+      "block_order": ["value-1", "value-2", "value-3", "value-4"]
+    },
+    "about_stats": {
+      "type": "about-stats",
+      "settings": {},
+      "blocks": {
+        "stat-1": { "type": "stat", "settings": { "number": "50K+", "label": "Men supported worldwide" } },
+        "stat-2": { "type": "stat", "settings": { "number": "4.8★", "label": "Average customer rating" } },
+        "stat-3": { "type": "stat", "settings": { "number": "8", "label": "Clinically dosed ingredients" } },
+        "stat-4": { "type": "stat", "settings": { "number": "90", "label": "Day money-back guarantee" } }
+      },
+      "block_order": ["stat-1", "stat-2", "stat-3", "stat-4"]
+    },
+    "founder_story": {
+      "type": "founder-story",
+      "settings": {}
+    },
+    "facility": {
+      "type": "facility",
+      "settings": {},
+      "blocks": {
+        "badge-1": { "type": "badge", "settings": { "text": "CGMP Certified" } },
+        "badge-2": { "type": "badge", "settings": { "text": "Third-Party Tested" } },
+        "badge-3": { "type": "badge", "settings": { "text": "Made in the USA" } }
+      },
+      "block_order": ["badge-1", "badge-2", "badge-3"]
+    },
+    "experts": {
+      "type": "testimonials",
+      "settings": {},
+      "blocks": {
+        "expert-1": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "rdm-experts-1.jpg",
+            "name": "DR. ROBERT DORFMAN",
+            "role": "PLASTIC SURGEON · FOUNDER, DONE BY DORFMAN",
+            "bio": "Beverly Hills plastic surgeon trained at Northwestern, Oxford, and UCLA. Through his work with thousands of patients, he helps men take ownership of their health and show up more confidently."
+          }
+        },
+        "expert-2": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "rdm-experts-2.jpg",
+            "name": "ERIC LEIJA",
+            "role": "PRIMAL SWOLEDIER",
+            "bio": "Eric Leija has dedicated his career to helping men build functional strength and train in ways that enhance everyday life — emphasizing longevity, athleticism, and resilience."
+          }
+        },
+        "expert-3": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "Dr._Schilling.png",
+            "name": "DR. BLAINE SCHILLING",
+            "role": "HORMONAL HEALTH SPECIALIST",
+            "bio": "With over 30 years of experience in family medicine, Dr. Schilling has spent his career helping men navigate the realities of aging — a trusted voice on health, energy, and performance."
+          }
+        },
+        "expert-4": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "rdm-experts-6.jpg",
+            "name": "DR. KYLE GILLETT",
+            "role": "DOUBLE BOARD-CERTIFIED PHYSICIAN",
+            "bio": "Specializes in hormone optimization, longevity, and men's health. He combines advanced testing, evidence-based medicine, and personalized plans to help men perform at their highest level."
+          }
+        },
+        "expert-5": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "rdm-experts-13.jpg",
+            "name": "DANIEL CORMIER",
+            "role": "UFC HALL OF FAME · UFC CHAMPION · OLYMPIAN",
+            "bio": "Beyond his accomplishments in combat sports, Daniel embodies the values at the core of Up Men: consistency, accountability, and the belief that strong men are built through daily habits."
+          }
+        }
+      },
+      "block_order": ["expert-1", "expert-2", "expert-3", "expert-4", "expert-5"]
+    },
+    "guarantee": {
+      "type": "scarcity-cta",
+      "settings": {
+        "title_pre": "READY TO FEEL LIKE",
+        "title_highlight": "YOURSELF AGAIN?",
+        "text": "Try Up Men risk-free for 90 days. If you're not satisfied, we will refund you, no questions asked."
+      }
+    }
+  },
+  "order": [
+    "about_hero",
+    "marquee",
+    "about_mission",
+    "about_stats",
+    "founder_story",
+    "facility",
+    "experts",
+    "guarantee"
+  ]
+}

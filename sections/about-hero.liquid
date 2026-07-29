@@ -1,0 +1,122 @@
+{%- comment -%} About hero — page intro banner with eyebrow, title and lede {%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- if section.settings.bg_mobile != blank -%}
+  {%- assign ab_bg_mobile = section.settings.bg_mobile | image_url: width: 1200 -%}
+{%- else -%}
+  {%- assign ab_bg_mobile = 'bg-mobile.jpg' | asset_url -%}
+{%- endif -%}
+{%- if section.settings.bg_desktop != blank -%}
+  {%- assign ab_bg_desktop = section.settings.bg_desktop | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign ab_bg_desktop = 'bg-desktop.jpg' | asset_url -%}
+{%- endif -%}
+{%- case section.settings.height_mobile -%}
+  {%- when 'small' -%}{%- assign minh_mobile = '55svh' -%}
+  {%- when 'medium' -%}{%- assign minh_mobile = '70svh' -%}
+  {%- when 'large' -%}{%- assign minh_mobile = '85svh' -%}
+  {%- when 'full' -%}{%- assign minh_mobile = '100svh' -%}
+  {%- else -%}{%- assign minh_mobile = 'auto' -%}
+{%- endcase -%}
+{%- case section.settings.height_desktop -%}
+  {%- when 'small' -%}{%- assign minh_desktop = '520px' -%}
+  {%- when 'medium' -%}{%- assign minh_desktop = '640px' -%}
+  {%- when 'large' -%}{%- assign minh_desktop = '85vh' -%}
+  {%- when 'full' -%}{%- assign minh_desktop = '100vh' -%}
+  {%- else -%}{%- assign minh_desktop = 'auto' -%}
+{%- endcase -%}
+<style>
+  #mm-abhero-{{ sid }} {
+    background: var(--mars-black, #0a0503) url('{{ ab_bg_mobile }}') center / cover no-repeat;
+    color: var(--text, #fff); padding: 72px 0; position: relative;
+    min-height: {{ minh_mobile }}; display: flex; flex-direction: column; justify-content: center;
+  }
+  @media (min-width: 768px) {
+    #mm-abhero-{{ sid }} { background-image: url('{{ ab_bg_desktop }}'); padding: 112px 0; min-height: {{ minh_desktop }}; }
+  }
+  #mm-abhero-{{ sid }}::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,5,3,0.55) 0%, rgba(10,5,3,0.78) 100%);
+    pointer-events: none;
+  }
+  #mm-abhero-{{ sid }} .mm-wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 16px; text-align: center; }
+  #mm-abhero-{{ sid }} .mm-eyebrow {
+    font-family: var(--font-heading); font-size: calc((12px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--brand, #ff5600); margin: 0 0 14px;
+  }
+  #mm-abhero-{{ sid }} h1 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((clamp(28px, 5.2vw, 52px)) * var(--fs-h, 1)); line-height: 1.12; margin: 0 0 18px; letter-spacing: 0.02em;
+  }
+  #mm-abhero-{{ sid }} h1 .orange { color: var(--brand, #ff5600); }
+  #mm-abhero-{{ sid }} .mm-lede {
+    font-size: calc((16.5px) * var(--fs-b, 1)); line-height: 1.65; color: rgba(255,255,255,0.85);
+    margin: 0 auto; max-width: 640px;
+  }
+  #mm-abhero-{{ sid }} .mm-cta {
+    display: inline-flex; align-items: center; gap: 10px; margin-top: 30px;
+    background: var(--brand, #ff5600); color: #fff; text-decoration: none;
+    font-weight: 800; font-size: calc((16px) * var(--fs-b, 1)); text-transform: uppercase;
+    padding: 16px 40px; border-radius: 6px; box-shadow: 0 8px 28px rgba(255,86,0,0.45);
+  }
+  #mm-abhero-{{ sid }} .mm-cta:hover { filter: brightness(1.1); }
+</style>
+
+<section id="mm-abhero-{{ sid }}" class="reveal" data-testid="about-hero">
+  <div class="mm-wrap">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h1>{{ section.settings.title_pre }} <span class="orange">{{ section.settings.title_highlight }}</span></h1>
+    {%- if section.settings.lede != blank -%}
+      <p class="mm-lede">{{ section.settings.lede }}</p>
+    {%- endif -%}
+    {%- if section.settings.cta_label != blank -%}
+      <a href="{{ section.settings.cta_link | default: '#join_pkg' }}" class="mm-cta">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "OUR STORY" },
+    { "type": "text", "id": "title_pre", "label": "Title", "default": "BUILT FOR MEN WHO" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "REFUSE TO SETTLE" },
+    { "type": "textarea", "id": "lede", "label": "Intro text", "default": "Up Men exists for one reason: too many men are running at half capacity and being told it's just age. We build clinically dosed formulas that give your body what it needs to perform the way it was designed to." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "header", "content": "Banner size" },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Banner height (mobile)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (55% of screen)" },
+        { "value": "medium", "label": "Medium (70% of screen)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Banner height (desktop)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (520px)" },
+        { "value": "medium", "label": "Medium (640px)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "small"
+    },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "bg_mobile", "label": "Background (mobile)" },
+    { "type": "image_picker", "id": "bg_desktop", "label": "Background (desktop)" }
+  ],
+  "presets": [{ "name": "About Hero" }]
+}
+{% endschema %}

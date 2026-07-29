@@ -1,0 +1,79 @@
+{%- comment -%} About stats — key numbers strip {%- endcomment -%}
+{%- assign sid = section.id -%}
+<style>
+  #mm-abstat-{{ sid }} {
+    background: var(--mars-panel, #1a0e07); color: var(--text, #fff); padding: 48px 0;
+    border-top: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    border-bottom: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+  }
+  @media (min-width: 768px) { #mm-abstat-{{ sid }} { padding: 64px 0; } }
+  #mm-abstat-{{ sid }} .mm-wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  #mm-abstat-{{ sid }} .mm-head { text-align: center; margin-bottom: 34px; }
+  #mm-abstat-{{ sid }} h2 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((clamp(22px, 3.6vw, 34px)) * var(--fs-h, 1)); margin: 0;
+  }
+  #mm-abstat-{{ sid }} h2 .orange { color: var(--brand, #ff5600); }
+  #mm-abstat-{{ sid }} .mm-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 28px 16px; text-align: center;
+  }
+  @media (min-width: 900px) { #mm-abstat-{{ sid }} .mm-grid { grid-template-columns: repeat({{ section.blocks.size | at_most: 4 | at_least: 1 }}, 1fr); } }
+  #mm-abstat-{{ sid }} .mm-num {
+    font-family: var(--font-heading); font-weight: 800; color: var(--brand, #ff5600);
+    font-size: calc((clamp(30px, 5.4vw, 46px)) * var(--fs-h, 1)); line-height: 1; display: block; margin-bottom: 10px;
+  }
+  #mm-abstat-{{ sid }} .mm-label {
+    font-family: var(--font-heading); font-size: calc((11.5px) * var(--fs-b, 1)); font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.72); line-height: 1.5; margin: 0;
+  }
+</style>
+
+<section id="mm-abstat-{{ sid }}" class="reveal" data-testid="about-stats">
+  <div class="mm-wrap">
+    {%- if section.settings.title_pre != blank or section.settings.title_highlight != blank -%}
+      <div class="mm-head">
+        <h2>{{ section.settings.title_pre }} <span class="orange">{{ section.settings.title_highlight }}</span></h2>
+      </div>
+    {%- endif -%}
+    <div class="mm-grid">
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}>
+          <span class="mm-num">{{ block.settings.number }}</span>
+          <p class="mm-label">{{ block.settings.label }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Stats",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "title_pre", "label": "Title", "default": "UP MEN" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "BY THE NUMBERS" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "10K+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Description" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Stats",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "50K+", "label": "Men supported worldwide" } },
+        { "type": "stat", "settings": { "number": "4.8★", "label": "Average customer rating" } },
+        { "type": "stat", "settings": { "number": "8", "label": "Clinically dosed ingredients" } },
+        { "type": "stat", "settings": { "number": "90", "label": "Day money-back guarantee" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
