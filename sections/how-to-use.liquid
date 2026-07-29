@@ -1,0 +1,170 @@
+{%- comment -%} How to Use — 3 steps with editable media: image, GIF or video (upload in theme editor) {%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- case section.settings.media_size_mobile -%}
+  {%- when 'small' -%}{%- assign media_w_mobile = '60%' -%}
+  {%- when 'medium' -%}{%- assign media_w_mobile = '75%' -%}
+  {%- when 'large' -%}{%- assign media_w_mobile = '90%' -%}
+  {%- else -%}{%- assign media_w_mobile = '100%' -%}
+{%- endcase -%}
+{%- case section.settings.media_size_desktop -%}
+  {%- when 'small' -%}{%- assign media_w_desktop = '60%' -%}
+  {%- when 'medium' -%}{%- assign media_w_desktop = '75%' -%}
+  {%- when 'large' -%}{%- assign media_w_desktop = '90%' -%}
+  {%- else -%}{%- assign media_w_desktop = '100%' -%}
+{%- endcase -%}
+{%- case section.settings.media_format -%}
+  {%- when 'stories' -%}{%- assign media_ar = '9 / 16' -%}
+  {%- when 'portrait' -%}{%- assign media_ar = '4 / 5' -%}
+  {%- when 'original' -%}{%- assign media_ar = 'auto' -%}
+  {%- else -%}{%- assign media_ar = '1 / 1' -%}
+{%- endcase -%}
+<style>
+  #mm-htu-{{ sid }} { background: var(--mars-black, #0a0503); color: var(--text, #fff); padding: 64px 0; --htu-media-w: {{ media_w_mobile }}; }
+  @media (min-width: 768px) { #mm-htu-{{ sid }} { padding: 96px 0; --htu-media-w: {{ media_w_desktop }}; } }
+  #mm-htu-{{ sid }} .mm-wrap { max-width: 1024px; margin: 0 auto; padding: 0 16px; }
+  #mm-htu-{{ sid }} h2 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; text-align: center;
+    font-size: calc((clamp(26px, 4.6vw, 42px)) * var(--fs-h, 1)); margin: 0 0 40px;
+  }
+  #mm-htu-{{ sid }} h2 .orange { color: var(--brand, #ff5600); }
+  #mm-htu-{{ sid }} .mm-steps { display: grid; grid-template-columns: 1fr; gap: 28px; }
+  @media (min-width: 768px) { #mm-htu-{{ sid }} .mm-steps { grid-template-columns: repeat(3, 1fr); } }
+  #mm-htu-{{ sid }} .mm-step {
+    background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    border-radius: 16px; padding: 20px; text-align: center; position: relative;
+  }
+  #mm-htu-{{ sid }} .mm-num {
+    position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+    width: 34px; height: 34px; border-radius: 50%; background: var(--brand, #ff5600); color: #fff;
+    font-family: var(--font-heading); font-weight: 800; font-size: calc((15px) * var(--fs-b, 1));
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(255,86,0,0.4);
+    z-index: 2;
+  }
+  #mm-htu-{{ sid }} .mm-step img { width: var(--htu-media-w, 100%); aspect-ratio: {{ media_ar }}; object-fit: cover; border-radius: 10px; margin: 12px auto 16px; display: block; }
+  #mm-htu-{{ sid }} .mm-media { position: relative; width: var(--htu-media-w, 100%); margin: 12px auto 16px; border-radius: 10px; overflow: hidden; cursor: pointer; }
+  #mm-htu-{{ sid }} .mm-media video { width: 100%; aspect-ratio: {{ media_ar }}; object-fit: cover; display: block; border-radius: 10px; }
+  #mm-htu-{{ sid }} .mm-media .mm-sound-hint {
+    position: absolute; right: 10px; bottom: 10px; z-index: 2;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(10,5,3,0.75); color: #fff; border-radius: 999px; padding: 6px 12px;
+    font-family: var(--font-heading); font-size: calc((10px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    pointer-events: none;
+  }
+  #mm-htu-{{ sid }} .mm-media.mm-sound-on .mm-sound-hint { display: none; }
+  #mm-htu-{{ sid }} .mm-ph {
+    width: var(--htu-media-w, 100%); aspect-ratio: {% if media_ar == 'auto' %}1 / 1{% else %}{{ media_ar }}{% endif %}; border-radius: 10px; margin: 12px auto 16px;
+    border: 2px dashed rgba(255,86,0,0.5); background: rgba(255,86,0,0.05);
+    display: flex; align-items: center; justify-content: center; text-align: center; padding: 16px;
+    font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.55); line-height: 1.6;
+  }
+  #mm-htu-{{ sid }} .mm-t { font-weight: 800; font-size: calc((16px) * var(--fs-h, 1)); margin: 0 0 6px; }
+  #mm-htu-{{ sid }} .mm-s { font-size: calc((13.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.7); margin: 0; }
+</style>
+
+<section id="mm-htu-{{ sid }}" class="reveal" data-testid="how-to-use">
+  <div class="mm-wrap">
+    <h2>{{ section.settings.title_pre }} <span class="orange">{{ section.settings.title_highlight }}</span></h2>
+    <div class="mm-steps">
+      {%- for block in section.blocks -%}
+        <div class="mm-step" {{ block.shopify_attributes }}>
+          <div class="mm-num">{{ forloop.index }}</div>
+          {%- if block.settings.video != blank -%}
+            <div class="mm-media" data-mm-video{% if block.settings.video_autoplay %} data-autoplay{% endif %}>
+              {%- if block.settings.video_autoplay -%}
+                {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata' }}
+                <span class="mm-sound-hint">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12z"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2"/></svg>
+                  Tap for sound
+                </span>
+              {%- else -%}
+                {{ block.settings.video | video_tag: controls: true, playsinline: true, preload: 'metadata' }}
+              {%- endif -%}
+            </div>
+          {%- elsif block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="Step {{ forloop.index }}: {{ block.settings.title }}" loading="lazy">
+          {%- else -%}
+            {%- assign step_cycle = forloop.index0 | modulo: 3 | plus: 1 -%}
+            {%- assign step_preview = 'upmen-preview-step' | append: step_cycle | append: '.jpg' -%}
+            <img src="{{ step_preview | asset_url }}" alt="Step {{ forloop.index }}: {{ block.settings.title }}" loading="lazy">
+          {%- endif -%}
+          <p class="mm-t">{{ block.settings.title }}</p>
+          {%- if block.settings.subtitle != blank -%}
+            <p class="mm-s">{{ block.settings.subtitle }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How to Use",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "title_pre", "label": "Title", "default": "HOW TO" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "USE IT" },
+    { "type": "header", "content": "Media size (image / GIF / video)" },
+    {
+      "type": "select",
+      "id": "media_format",
+      "label": "Media box format",
+      "options": [
+        { "value": "square", "label": "Square (1:1) — current" },
+        { "value": "portrait", "label": "Portrait (4:5)" },
+        { "value": "stories", "label": "Stories (9:16)" },
+        { "value": "original", "label": "Original (no crop — shows the whole GIF)" }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "select",
+      "id": "media_size_mobile",
+      "label": "Media size (mobile)",
+      "options": [
+        { "value": "small", "label": "Small (60%)" },
+        { "value": "medium", "label": "Medium (75%)" },
+        { "value": "large", "label": "Large (90%)" },
+        { "value": "full", "label": "Full width" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "media_size_desktop",
+      "label": "Media size (desktop)",
+      "options": [
+        { "value": "small", "label": "Small (60%)" },
+        { "value": "medium", "label": "Medium (75%)" },
+        { "value": "large", "label": "Large (90%)" },
+        { "value": "full", "label": "Full width" }
+      ],
+      "default": "full"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image or GIF" },
+        { "type": "video", "id": "video", "label": "Video (used instead of the image when set)" },
+        { "type": "checkbox", "id": "video_autoplay", "label": "Autoplay video (starts muted — sound only after the visitor taps it)", "default": true },
+        { "type": "text", "id": "title", "label": "Title", "default": "Step title" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How to Use",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Take your daily serving every morning.", "subtitle": "With water and food, for best absorption." } },
+        { "type": "step", "settings": { "title": "Stay consistent — every single day.", "subtitle": "Use the free metal case to carry it anywhere." } },
+        { "type": "step", "settings": { "title": "Track your transformation for 90 days.", "subtitle": "Use the free 90-Day Transformation Tracker." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

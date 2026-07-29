@@ -1,0 +1,488 @@
+{%- comment -%} Pricing — Up Men launch kit packages with direct checkout {%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- if section.settings.bg_mobile != blank -%}
+  {%- assign pr_bg_mobile = section.settings.bg_mobile | image_url: width: 1200 -%}
+{%- else -%}
+  {%- assign pr_bg_mobile = 'bg-mobile.jpg' | asset_url -%}
+{%- endif -%}
+{%- if section.settings.bg_desktop != blank -%}
+  {%- assign pr_bg_desktop = section.settings.bg_desktop | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign pr_bg_desktop = 'bg-desktop.jpg' | asset_url -%}
+{%- endif -%}
+<section class="mm-pricing" id="join_pkg" data-section-id="{{ sid }}">
+  {%- case section.settings.height_mobile -%}
+  {%- when 'small' -%}{%- assign minh_mobile = '55svh' -%}
+  {%- when 'medium' -%}{%- assign minh_mobile = '70svh' -%}
+  {%- when 'large' -%}{%- assign minh_mobile = '85svh' -%}
+  {%- when 'full' -%}{%- assign minh_mobile = '100svh' -%}
+  {%- else -%}{%- assign minh_mobile = 'auto' -%}
+{%- endcase -%}
+{%- case section.settings.height_desktop -%}
+  {%- when 'small' -%}{%- assign minh_desktop = '520px' -%}
+  {%- when 'medium' -%}{%- assign minh_desktop = '640px' -%}
+  {%- when 'large' -%}{%- assign minh_desktop = '85vh' -%}
+  {%- when 'full' -%}{%- assign minh_desktop = '100vh' -%}
+  {%- else -%}{%- assign minh_desktop = 'auto' -%}
+{%- endcase -%}
+<style>
+    #shopify-section-{{ sid }} .mm-pricing {
+      background: #0a0503 url('{{ pr_bg_mobile }}') center / cover no-repeat;
+      padding: 64px 0; color: #fff;
+    min-height: {{ minh_mobile }}; display: flex; flex-direction: column; justify-content: center;
+  }
+    @media (min-width: 768px) {
+      #shopify-section-{{ sid }} .mm-pricing { background-image: url('{{ pr_bg_desktop }}'); padding: 96px 0; min-height: {{ minh_desktop }}; }
+    }
+    #shopify-section-{{ sid }} .mm-gifts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+    #shopify-section-{{ sid }} .mm-gifts img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); display: block; }
+    #shopify-section-{{ sid }} .mm-wrap { max-width: 1024px; margin: 0 auto; padding: 0 16px; }
+    #shopify-section-{{ sid }} .mm-head { text-align: center; margin-bottom: 36px; }
+    #shopify-section-{{ sid }} .mm-eyebrow {
+      display: inline-block; font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700;
+      color: #fff; background: var(--brand, #ff5600); padding: 6px 14px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 14px;
+    }
+    #shopify-section-{{ sid }} .mm-title {
+      font-family: var(--font-heading); font-size: calc((clamp(26px, 4.6vw, 44px)) * var(--fs-h, 1)); line-height: 1.12;
+      font-weight: 800; text-transform: uppercase; margin: 0;
+    }
+    #shopify-section-{{ sid }} .mm-title strong { color: var(--brand, #ff5600); font-weight: 800; }
+    #shopify-section-{{ sid }} .mm-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
+    @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-grid { grid-template-columns: 1fr 1fr; } }
+    #shopify-section-{{ sid }} .mm-card {
+      position: relative; background: #17100b; border-radius: 16px; border: 1px solid rgba(255,255,255,0.14);
+      padding: 24px 20px; display: flex; flex-direction: column;
+    }
+    @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-card { padding: 28px; } }
+    #shopify-section-{{ sid }} .mm-card.popular { border: 2px solid var(--brand, #ff5600); box-shadow: 0 16px 48px rgba(255,86,0,0.25); }
+    #shopify-section-{{ sid }} .mm-ribbon {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--brand, #ff5600); color: #fff; font-family: var(--font-heading);
+      font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em;
+      padding: 6px 16px; border-radius: 999px; font-size: calc((11px) * var(--fs-b, 1)); white-space: nowrap;
+    }
+    #shopify-section-{{ sid }} .mm-card-head { text-align: center; padding: 8px 0 16px; border-bottom: 1px solid rgba(255,255,255,0.12); margin-bottom: 16px; }
+    #shopify-section-{{ sid }} .mm-badge { font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700; color: var(--brand, #ff5600); text-transform: uppercase; letter-spacing: 0.14em; margin: 0 0 4px; }
+    #shopify-section-{{ sid }} .mm-name { font-family: var(--font-heading); font-size: calc((22px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 4px 0; }
+    #shopify-section-{{ sid }} .mm-sub { font-size: calc((14px) * var(--fs-b, 1)); color: rgba(255,255,255,0.7); font-weight: 600; margin: 0; }
+    #shopify-section-{{ sid }} .mm-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: #0a0503; margin-bottom: 16px; display: block; }
+    #shopify-section-{{ sid }} .mm-addons { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+    #shopify-section-{{ sid }} .mm-addon { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: calc((13px) * var(--fs-b, 1)); color: rgba(255,255,255,0.9); }
+    #shopify-section-{{ sid }} .mm-addon .left { display: flex; align-items: center; gap: 7px; }
+    #shopify-section-{{ sid }} .mm-addon .left .ck { color: var(--brand, #ff5600); font-weight: 800; }
+    #shopify-section-{{ sid }} .mm-addon .free { color: #39c46e; font-weight: 700; }
+    #shopify-section-{{ sid }} .mm-addon .val { font-weight: 700; }
+    #shopify-section-{{ sid }} .mm-addon .val.free { color: #39c46e; text-decoration: line-through; }
+    #shopify-section-{{ sid }} .mm-qty-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); margin-bottom: 14px; }
+    #shopify-section-{{ sid }} .mm-qty-label { font-size: calc((13px) * var(--fs-b, 1)); font-weight: 700; }
+    #shopify-section-{{ sid }} .mm-stepper { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; padding: 4px 6px; }
+    #shopify-section-{{ sid }} .mm-stepper button { background: none; border: none; cursor: pointer; padding: 4px; color: #fff; font-size: calc((15px) * var(--fs-b, 1)); }
+    #shopify-section-{{ sid }} .mm-stepper .num { font-weight: 800; min-width: 18px; text-align: center; }
+    #shopify-section-{{ sid }} .mm-price { display: inline-flex; align-items: baseline; gap: 8px; }
+    #shopify-section-{{ sid }} .mm-price .old { color: rgba(255,255,255,0.45); text-decoration: line-through; font-size: calc((14px) * var(--fs-b, 1)); }
+    #shopify-section-{{ sid }} .mm-price .now { color: var(--brand, #ff5600); font-weight: 900; font-size: calc((24px) * var(--fs-b, 1)); }
+    #shopify-section-{{ sid }} .mm-cta {
+      background: var(--brand, #ff5600); color: #fff; font-weight: 800; text-transform: uppercase;
+      padding: 15px 16px; border: none; border-radius: 8px; font-size: calc((16px) * var(--fs-b, 1)); cursor: pointer; width: 100%;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;
+      box-shadow: 0 8px 24px rgba(255,86,0,0.35);
+    }
+    #shopify-section-{{ sid }} .mm-cta:hover { filter: brightness(1.1); }
+    #shopify-section-{{ sid }} .mm-cta:disabled { opacity: 0.6; cursor: not-allowed; }
+    #shopify-section-{{ sid }} .mm-perks { list-style: none; padding: 0; margin: 0 0 12px 0; display: flex; flex-direction: column; gap: 6px; }
+    #shopify-section-{{ sid }} .mm-perks li { font-size: calc((12.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.8); padding-left: 18px; position: relative; }
+    #shopify-section-{{ sid }} .mm-perks li::before { content: '✓'; position: absolute; left: 0; color: #39c46e; font-weight: 900; }
+    #shopify-section-{{ sid }} .mm-ship { font-size: calc((12px) * var(--fs-b, 1)); text-align: center; padding: 8px; background: rgba(255,255,255,0.06); border-radius: 8px; }
+    #shopify-section-{{ sid }} .mm-warn { font-size: calc((12px) * var(--fs-b, 1)); color: #fecaca; background: rgba(185,28,28,0.25); border: 1px solid rgba(185,28,28,0.5); padding: 10px; border-radius: 8px; margin-bottom: 12px; }
+    #shopify-section-{{ sid }} .mm-guar-note { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 28px; font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+
+    /* ===== Offer header (tags + countdown + scarcity) ===== */
+    #shopify-section-{{ sid }} .mm-offer { text-align: center; margin-bottom: 32px; }
+    #shopify-section-{{ sid }} .mm-offer-title { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 18px; }
+    #shopify-section-{{ sid }} .mm-offer-arrow { font-size: calc((26px) * var(--fs-h, 1)); color: var(--brand, #ff5600); line-height: 1; animation: mm-offer-bob 1.4s ease-in-out infinite; }
+    @keyframes mm-offer-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+    #shopify-section-{{ sid }} .mm-offer-title h2 {
+      font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; margin: 0;
+      font-size: calc((clamp(26px, 4.6vw, 44px)) * var(--fs-h, 1)); line-height: 1.12;
+    }
+    #shopify-section-{{ sid }} .mm-offer-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-row { gap: 20px; } }
+    #shopify-section-{{ sid }} .mm-offer-tag {
+      position: relative; flex: 0 0 auto; width: 82px; height: 82px; border-radius: 50%;
+      background: var(--brand, #ff5600); border: 2px dashed rgba(255,255,255,0.7);
+      box-shadow: 0 0 0 5px var(--brand, #ff5600), 0 10px 26px rgba(255,86,0,0.45);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+      transform: rotate(-8deg);
+    }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-tag { width: 118px; height: 118px; } }
+    #shopify-section-{{ sid }} .mm-offer-tag.right { transform: rotate(8deg); }
+    #shopify-section-{{ sid }} .mm-offer-tag img { position: absolute; inset: -7px; width: calc(100% + 14px); height: calc(100% + 14px); object-fit: contain; }
+    #shopify-section-{{ sid }} .mm-offer-tag .t1 { position: relative; z-index: 1; font-size: calc((10px) * var(--fs-b, 1)); font-weight: 400; letter-spacing: 0.14em; color: #fff; text-transform: uppercase; }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-tag .t1 { font-size: calc((14px) * var(--fs-b, 1)); } }
+    #shopify-section-{{ sid }} .mm-offer-tag .t2 {
+      position: relative; z-index: 1; font-family: var(--font-heading); font-weight: 900; text-transform: uppercase;
+      font-size: calc((11px) * var(--fs-b, 1)); line-height: 1.05; color: #ffd44d; padding: 0 8px;
+      animation: mm-offer-pulse 1.2s ease-in-out infinite;
+    }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-tag .t2 { font-size: calc((16px) * var(--fs-b, 1)); } }
+    @keyframes mm-offer-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+    #shopify-section-{{ sid }} .mm-offer-timer { display: flex; align-items: stretch; justify-content: center; gap: 4px; }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-timer { gap: 8px; } }
+    #shopify-section-{{ sid }} .mm-offer-unit {
+      background: #1a0e07; border: 1px solid rgba(255,86,0,0.45); border-radius: 8px;
+      padding: 8px 6px; min-width: 52px; text-align: center;
+    }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-unit { padding: 14px 10px; min-width: 80px; } }
+    #shopify-section-{{ sid }} .mm-offer-unit .num { font-family: var(--font-heading); font-weight: 800; color: #ffd44d; font-size: calc((16px) * var(--fs-b, 1)); }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-unit .num { font-size: calc((22px) * var(--fs-b, 1)); } }
+    #shopify-section-{{ sid }} .mm-offer-unit .lbl { font-size: calc((10px) * var(--fs-b, 1)); color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.08em; }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-unit .lbl { font-size: calc((13px) * var(--fs-b, 1)); } }
+    #shopify-section-{{ sid }} .mm-offer-scarcity {
+      display: inline-block; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px; padding: 7px 16px; margin-top: 20px;
+      font-size: calc((12.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.9);
+    }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-scarcity { font-size: calc((15px) * var(--fs-b, 1)); } }
+    #shopify-section-{{ sid }} .mm-offer-scarcity strong { font-weight: 800; }
+    #shopify-section-{{ sid }} .mm-offer-scarcity .u { text-decoration: underline; font-weight: 800; }
+    @media (prefers-reduced-motion: reduce) {
+      #shopify-section-{{ sid }} .mm-offer-arrow, #shopify-section-{{ sid }} .mm-offer-tag .t2 { animation: none; }
+    }
+  </style>
+
+  <div class="mm-wrap">
+    {%- if section.settings.offer_enabled -%}
+    <div class="mm-offer">
+      {%- if section.settings.offer_title != blank -%}
+        <div class="mm-offer-title">
+          <span class="mm-offer-arrow" aria-hidden="true">↓</span>
+          <h2>{{ section.settings.offer_title }}</h2>
+          <span class="mm-offer-arrow" aria-hidden="true">↓</span>
+        </div>
+      {%- endif -%}
+      <div class="mm-offer-row">
+        {%- if section.settings.offer_tag_enabled -%}
+          <div class="mm-offer-tag">
+            {%- if section.settings.offer_tag_image != blank -%}<img src="{{ section.settings.offer_tag_image | image_url: width: 300 }}" alt="" aria-hidden="true">{%- endif -%}
+            <span class="t1">{{ section.settings.offer_tag_top }}</span>
+            <span class="t2">{{ section.settings.offer_tag_main }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.countdown_enabled and section.settings.countdown_target != blank -%}
+          <div class="mm-offer-timer" data-countdown-block data-target="{{ section.settings.countdown_target }}">
+            <div class="mm-offer-unit"><div class="num" data-unit="days">0</div><div class="lbl">{{ section.settings.label_days }}</div></div>
+            <div class="mm-offer-unit"><div class="num" data-unit="hours">0</div><div class="lbl">{{ section.settings.label_hours }}</div></div>
+            <div class="mm-offer-unit"><div class="num" data-unit="minutes">0</div><div class="lbl">{{ section.settings.label_min }}</div></div>
+            <div class="mm-offer-unit"><div class="num" data-unit="seconds">0</div><div class="lbl">{{ section.settings.label_sec }}</div></div>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.offer_tag_enabled -%}
+          <div class="mm-offer-tag right">
+            {%- if section.settings.offer_tag_image != blank -%}<img src="{{ section.settings.offer_tag_image | image_url: width: 300 }}" alt="" aria-hidden="true">{%- endif -%}
+            <span class="t1">{{ section.settings.offer_tag_top }}</span>
+            <span class="t2">{{ section.settings.offer_tag_main }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.scarcity_enabled -%}
+        {%- assign mm_month = 'now' | date: '%B' -%}
+        <div class="mm-offer-scarcity">
+          <span aria-hidden="true">🚨</span>
+          <strong>{{ mm_month }}</strong>
+          {{ section.settings.scarcity_text_1 }}
+          <span class="u">{{ section.settings.scarcity_number }}</span>
+          {{ section.settings.scarcity_text_2 }}
+        </div>
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+    <div class="mm-head">
+      <p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="mm-title">{{ section.settings.title | replace: '<p>', '' | replace: '</p>', '' }}</h2>
+    </div>
+
+    <div class="mm-grid">
+
+      {%- comment -%} Package 1: Launch Kit subscription (popular) {%- endcomment -%}
+      {%- assign pk = section.settings.product_kit -%}
+      {%- if pk == blank or pk.id == blank -%}{%- assign pk = all_products['up-men-launch-kit'] -%}{%- endif -%}
+      {%- if pk == blank or pk.id == blank -%}{%- assign pk = all_products['up-men-subscription'] -%}{%- endif -%}
+      {%- if pk == blank or pk.id == blank -%}{%- assign pk = all_products['launch-kit'] -%}{%- endif -%}
+      {%- if pk == blank or pk.id == blank -%}{%- assign pk = all_products['up-men'] -%}{%- endif -%}
+      {%- if pk == blank or pk.id == blank -%}
+        {%- for prod in collections.all.products limit: 250 -%}
+          {%- if prod.tags contains 'up-men-launch-kit' or prod.tags contains 'launch-kit' or prod.tags contains 'mm-subscription' -%}
+            {%- assign pk = prod -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+      <div class="mm-card popular">
+        <div class="mm-ribbon">FLASH SALE · 1ST MONTH FREE</div>
+        <div class="mm-card-head">
+          <p class="mm-badge">3-MONTH AUTO-RENEW SUBSCRIPTION</p>
+          <h3 class="mm-name">{{ section.settings.kit_name }}</h3>
+          <p class="mm-sub">{{ section.settings.kit_sub }}</p>
+        </div>
+        {%- if pk != blank and pk.id != blank and pk.featured_image -%}
+          <img class="mm-img" src="{{ pk.featured_image | image_url: width: 600 }}" alt="{{ pk.title }}" loading="lazy">
+        {%- elsif section.settings.fallback_image != blank -%}
+          <img class="mm-img" src="{{ section.settings.fallback_image | image_url: width: 600 }}" alt="{{ section.settings.kit_name }}" loading="lazy">
+        {%- else -%}
+          <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.kit_name }}" loading="lazy">
+        {%- endif -%}
+        <div class="mm-addons">
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>90-Day Supply — 3 Bottles</span></span><span class="val"><s style="color:rgba(255,255,255,0.45);font-weight:400;">$177</s> $118</span></div>
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>1st Bottle</span></span><span class="val free">Save $59</span></div>
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Capsule Case</span></span><span class="val free">$10</span></div>
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Testosterone Guide</span></span><span class="val free">$20</span></div>
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>1 Month of Ladder Workout App</span></span><span class="val free">$30</span></div>
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>Surprise Gift</span></span><span class="val free"></span></div>
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>Free US shipping on your first order</span></span><span class="val"></span></div>
+        </div>
+        <div class="mm-gifts" aria-label="Free gifts included">
+          {%- if section.settings.gift_1 != blank -%}
+            <img src="{{ section.settings.gift_1 | image_url: width: 400 }}" alt="Free gift: metal storage case" loading="lazy">
+          {%- else -%}
+            <img src="{{ 'free-gift-1.png' | asset_url }}" alt="Free gift: metal storage case" loading="lazy">
+          {%- endif -%}
+          {%- if section.settings.gift_2 != blank -%}
+            <img src="{{ section.settings.gift_2 | image_url: width: 400 }}" alt="Free gift: testosterone cheat sheet" loading="lazy">
+          {%- else -%}
+            <img src="{{ 'free-gift-2.png' | asset_url }}" alt="Free gift: testosterone cheat sheet" loading="lazy">
+          {%- endif -%}
+          {%- if section.settings.gift_3 != blank -%}
+            <img src="{{ section.settings.gift_3 | image_url: width: 400 }}" alt="Free gift: high-T cookbook" loading="lazy">
+          {%- else -%}
+            <img src="{{ 'free-gift-3.png' | asset_url }}" alt="Free gift: high-T cookbook" loading="lazy">
+          {%- endif -%}
+          {%- if section.settings.gift_4 != blank -%}
+            <img src="{{ section.settings.gift_4 | image_url: width: 400 }}" alt="Free gift: 90-day tracker" loading="lazy">
+          {%- else -%}
+            <img src="{{ 'free-gift-4.png' | asset_url }}" alt="Free gift: 90-day tracker" loading="lazy">
+          {%- endif -%}
+        </div>
+        {%- if pk != blank and pk.id != blank and pk.available -%}
+          {%- assign vk = pk.selected_or_first_available_variant -%}
+          {%- assign vk_id = section.settings.variant_id_kit -%}
+          {%- if vk_id == blank -%}{%- assign vk_id = vk.id -%}{%- endif -%}
+          {%- assign spk = section.settings.selling_plan_kit -%}
+          {%- if spk == blank and pk.selling_plan_groups.size > 0 -%}
+            {%- assign spk = pk.selling_plan_groups.first.selling_plans.first.id -%}
+          {%- endif -%}
+          <form action="{{ routes.cart_add_url }}" method="post">
+            <input type="hidden" name="return_to" value="/checkout">
+            <input type="hidden" name="id" value="{{ vk_id }}">
+            {%- if spk != blank -%}
+              <input type="hidden" name="selling_plan" value="{{ spk }}">
+            {%- endif -%}
+            <input type="hidden" name="quantity" value="1">
+            <div class="mm-qty-row">
+              <span class="mm-qty-label">Quantity</span>
+              <div class="mm-stepper">
+                <button type="button" aria-label="Decrease">−</button>
+                <span class="num">1</span>
+                <button type="button" aria-label="Increase">+</button>
+              </div>
+              <div class="mm-price">
+                {%- if vk.compare_at_price > vk.price -%}<span class="old">{{ vk.compare_at_price | money }}</span>{%- endif -%}
+                <span class="now">{{ vk.price | money }}</span>
+              </div>
+            </div>
+            <button type="submit" class="mm-cta">Start My 90-Day Protocol →</button>
+          </form>
+        {%- else -%}
+          <div class="mm-warn">⚙️ Select a product in the theme editor (Packages section → "Product") OR create a Shopify product with handle <code>up-men-launch-kit</code> (or <code>up-men</code>).</div>
+          <div class="mm-qty-row"><span class="mm-qty-label">Quantity</span><div class="mm-stepper"><button type="button" disabled>−</button><span class="num">1</span><button type="button" disabled>+</button></div><div class="mm-price"><span class="old">$177</span><span class="now">$118</span></div></div>
+          <button type="button" class="mm-cta" disabled>Start My 90-Day Protocol →</button>
+        {%- endif -%}
+        <ul class="mm-perks">
+          <li>Just $39.33 per month</li>
+          <li>Auto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime</li>
+          <li>90-day higher-T money-back guarantee</li>
+        </ul>
+        <div class="mm-ship"><strong>Ships in 24h</strong> if ordered today.</div>
+      </div>
+
+      {%- comment -%} Package 2: Try once {%- endcomment -%}
+      {%- assign p1 = section.settings.product_once -%}
+      {%- if p1 == blank or p1.id == blank -%}{%- assign p1 = all_products['up-men-try-once'] -%}{%- endif -%}
+      {%- if p1 == blank or p1.id == blank -%}{%- assign p1 = all_products['up-men-one-time'] -%}{%- endif -%}
+      {%- if p1 == blank or p1.id == blank -%}{%- assign p1 = all_products['try-once'] -%}{%- endif -%}
+      {%- if p1 == blank or p1.id == blank -%}{%- assign p1 = all_products['up-men'] -%}{%- endif -%}
+      {%- if p1 == blank or p1.id == blank -%}
+        {%- for prod in collections.all.products limit: 250 -%}
+          {%- if prod.tags contains 'up-men-try-once' or prod.tags contains 'try-once' or prod.tags contains 'mm-one-time' -%}
+            {%- assign p1 = prod -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+      <div class="mm-card">
+        <div class="mm-card-head">
+          <p class="mm-badge">AUTO-SHIP & SAVE</p>
+          <h3 class="mm-name">{{ section.settings.once_name }}</h3>
+          <p class="mm-sub">{{ section.settings.once_sub }}</p>
+        </div>
+        {%- if p1 != blank and p1.id != blank and p1.featured_image -%}
+          <img class="mm-img" src="{{ p1.featured_image | image_url: width: 600 }}" alt="{{ p1.title }}" loading="lazy">
+        {%- elsif section.settings.fallback_image != blank -%}
+          <img class="mm-img" src="{{ section.settings.fallback_image | image_url: width: 600 }}" alt="{{ section.settings.once_name }}" loading="lazy">
+        {%- else -%}
+          <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.once_name }}" loading="lazy">
+        {%- endif -%}
+        <div class="mm-addons">
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>1 Bottle — 30-Day Supply</span></span><span class="val">$59</span></div>
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>$15 off your first order</span></span><span class="val free">Save $15</span></div>
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Capsule Case</span></span><span class="val free"></span></div>
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Testosterone Guide</span></span><span class="val free"></span></div>
+          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>Free US shipping on your first order</span></span><span class="val"></span></div>
+        </div>
+        {%- if p1 != blank and p1.id != blank and p1.available -%}
+          {%- assign v1 = p1.selected_or_first_available_variant -%}
+          {%- assign v1_id = section.settings.variant_id_once -%}
+          {%- if v1_id == blank -%}{%- assign v1_id = v1.id -%}{%- endif -%}
+          {%- assign sp1 = '' -%}
+          {%- if v1.requires_selling_plan and p1.selling_plan_groups.size > 0 -%}
+            {%- assign sp1 = p1.selling_plan_groups.first.selling_plans.first.id -%}
+          {%- endif -%}
+          <form action="{{ routes.cart_add_url }}" method="post">
+            <input type="hidden" name="return_to" value="/checkout">
+            <input type="hidden" name="id" value="{{ v1_id }}">
+            {%- if sp1 != blank -%}
+              <input type="hidden" name="selling_plan" value="{{ sp1 }}">
+            {%- endif -%}
+            <input type="hidden" name="quantity" value="1">
+            <div class="mm-qty-row">
+              <span class="mm-qty-label">Quantity</span>
+              <div class="mm-stepper">
+                <button type="button" aria-label="Decrease">−</button>
+                <span class="num">1</span>
+                <button type="button" aria-label="Increase">+</button>
+              </div>
+              <div class="mm-price">
+                {%- if v1.compare_at_price > v1.price -%}<span class="old">{{ v1.compare_at_price | money }}</span>{%- endif -%}
+                <span class="now">{{ v1.price | money }}</span>
+              </div>
+            </div>
+            <button type="submit" class="mm-cta">Try Up Men →</button>
+          </form>
+        {%- else -%}
+          <div class="mm-warn">⚙️ Select a product in the theme editor (Packages section → "Product") OR create a Shopify product with handle <code>up-men-try-once</code> (or <code>up-men</code>).</div>
+          <div class="mm-qty-row"><span class="mm-qty-label">Quantity</span><div class="mm-stepper"><button type="button" disabled>−</button><span class="num">1</span><button type="button" disabled>+</button></div><div class="mm-price"><span class="old">$59</span><span class="now">$44</span></div></div>
+          <button type="button" class="mm-cta" disabled>Try Up Men →</button>
+        {%- endif -%}
+        <ul class="mm-perks">
+          <li>Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime</li>
+          <li>90-day higher-T money-back guarantee</li>
+        </ul>
+        <div class="mm-ship"><strong>Ships in 24h</strong> if ordered today.</div>
+      </div>
+
+    </div>
+
+    <p class="mm-guar-note">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      {{ section.settings.guarantee_note }}
+    </p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.getElementById('shopify-section-{{ sid }}');
+  if (!root) return;
+  root.querySelectorAll('.mm-stepper').forEach(function(st){
+    var btns = st.querySelectorAll('button');
+    var numEl = st.querySelector('.num');
+    var form = st.closest('form');
+    if (btns.length < 2 || !numEl) return;
+    btns[0].addEventListener('click', function(){
+      var n = parseInt(numEl.textContent, 10) || 1; if (n > 1) n--;
+      numEl.textContent = n; if (form) form.querySelector('input[name="quantity"]').value = n;
+    });
+    btns[1].addEventListener('click', function(){
+      var n = parseInt(numEl.textContent, 10) || 1; n++;
+      numEl.textContent = n; if (form) form.querySelector('input[name="quantity"]').value = n;
+    });
+  });
+  /* Add-to-cart submits are intercepted globally by the cart drawer
+     (snippets/cart-drawer.liquid), which adds the item and opens the drawer. */
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Packages (Custom)",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FLASH SALE: 1ST MONTH FREE" },
+    { "type": "richtext", "id": "title", "label": "Title", "default": "<p>GET YOUR FIRST MONTH FREE</p>" },
+    { "type": "header", "content": "Offer header (top of section)" },
+    { "type": "checkbox", "id": "offer_enabled", "label": "Show offer header", "default": false },
+    { "type": "text", "id": "offer_title", "label": "Offer title", "default": "JOIN UP MEN TODAY" },
+    { "type": "checkbox", "id": "offer_tag_enabled", "label": "Show offer tags", "default": true },
+    { "type": "text", "id": "offer_tag_top", "label": "Tag small text", "default": "GET" },
+    { "type": "text", "id": "offer_tag_main", "label": "Tag highlight text", "default": "50% OFF TODAY" },
+    { "type": "image_picker", "id": "offer_tag_image", "label": "Tag image (optional)", "info": "Replaces the default circle badge. Use a transparent PNG (e.g. a starburst sticker)." },
+    { "type": "checkbox", "id": "countdown_enabled", "label": "Show countdown", "default": true },
+    { "type": "text", "id": "countdown_target", "label": "Countdown end date", "info": "Format: 2026-07-31T23:59:59", "default": "2026-07-31T23:59:59" },
+    { "type": "text", "id": "label_days", "label": "Days label", "default": "DAYS" },
+    { "type": "text", "id": "label_hours", "label": "Hours label", "default": "HOURS" },
+    { "type": "text", "id": "label_min", "label": "Minutes label", "default": "MIN" },
+    { "type": "text", "id": "label_sec", "label": "Seconds label", "default": "SEC" },
+    { "type": "checkbox", "id": "scarcity_enabled", "label": "Show scarcity note", "default": true },
+    { "type": "text", "id": "scarcity_text_1", "label": "Scarcity text (after month)", "default": "has a high risk of selling out —" },
+    { "type": "text", "id": "scarcity_number", "label": "Scarcity number", "default": "2140" },
+    { "type": "text", "id": "scarcity_text_2", "label": "Scarcity text (after number)", "default": "purchases made today." },
+    { "type": "header", "content": "Launch Kit (subscription)" },
+    { "type": "product", "id": "product_kit", "label": "Product", "info": "Product sold in this card. If empty, the theme looks for the handle up-men-launch-kit (or up-men)." },
+    { "type": "text", "id": "kit_name", "label": "Package name", "default": "3-MONTH PLAN" },
+    { "type": "text", "id": "kit_sub", "label": "Subtitle", "default": "The complete 90-day protocol" },
+    { "type": "text", "id": "variant_id_kit", "label": "Variant ID (optional)", "info": "If empty, uses the product's first available variant." },
+    { "type": "text", "id": "selling_plan_kit", "label": "Selling plan ID (optional)", "info": "Required for subscription pricing. Leave empty for one-time purchase." },
+    { "type": "header", "content": "Try Once (one-time)" },
+    { "type": "product", "id": "product_once", "label": "Product", "info": "Product sold in this card. If empty, the theme looks for the handle up-men-try-once (or up-men)." },
+    { "type": "text", "id": "once_name", "label": "Package name", "default": "MONTHLY PLAN" },
+    { "type": "text", "id": "once_sub", "label": "Subtitle", "default": "1-month supply, delivered monthly" },
+    { "type": "text", "id": "variant_id_once", "label": "Variant ID (optional)" },
+    { "type": "text", "id": "guarantee_note", "label": "Guarantee note", "default": "90-DAY HIGHER-T GUARANTEE · TRY IT RISK-FREE" },
+    { "type": "header", "content": "Banner size" },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Banner height (mobile)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (55% of screen)" },
+        { "value": "medium", "label": "Medium (70% of screen)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Banner height (desktop)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (520px)" },
+        { "value": "medium", "label": "Medium (640px)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "bg_mobile", "label": "Background (mobile)" },
+    { "type": "image_picker", "id": "bg_desktop", "label": "Background (desktop)" },
+    { "type": "image_picker", "id": "fallback_image", "label": "Fallback product image", "info": "Shown when no product is connected to the store yet." },
+    { "type": "image_picker", "id": "gift_1", "label": "Free gift image 1" },
+    { "type": "image_picker", "id": "gift_2", "label": "Free gift image 2" },
+    { "type": "image_picker", "id": "gift_3", "label": "Free gift image 3" },
+    { "type": "image_picker", "id": "gift_4", "label": "Free gift image 4" }
+  ],
+  "presets": [{ "name": "Packages (Custom)" }]
+}
+{% endschema %}

@@ -1,0 +1,61 @@
+{%- comment -%} Stats strip — customer survey numbers {%- endcomment -%}
+{%- assign sid = section.id -%}
+<style>
+  #mm-stats-{{ sid }} { background: #1a0e07; color: var(--text, #fff); padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  #mm-stats-{{ sid }} .mm-wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  #mm-stats-{{ sid }} .mm-grid { display: grid; grid-template-columns: 1fr; gap: 28px; text-align: center; }
+  @media (min-width: 768px) { #mm-stats-{{ sid }} .mm-grid { grid-template-columns: repeat(3, 1fr); } }
+  #mm-stats-{{ sid }} .mm-num {
+    font-family: var(--font-heading); font-size: calc((clamp(40px, 6vw, 56px)) * var(--fs-b, 1)); font-weight: 800;
+    color: var(--brand, #ff5600); line-height: 1; display: block; margin-bottom: 10px;
+  }
+  #mm-stats-{{ sid }} .mm-text { font-size: calc((14.5px) * var(--fs-b, 1)); line-height: 1.5; color: rgba(255,255,255,0.85); margin: 0 auto; max-width: 280px; }
+  #mm-stats-{{ sid }} .mm-note {
+    text-align: center; margin-top: 28px; font-size: calc((11px) * var(--fs-b, 1)); color: rgba(255,255,255,0.45);
+  }
+</style>
+
+<section id="mm-stats-{{ sid }}" class="reveal" data-testid="stats">
+  <div class="mm-wrap">
+    <div class="mm-grid">
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}>
+          <span class="mm-num">{{ block.settings.number }}</span>
+          <p class="mm-text">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.note != blank -%}
+      <p class="mm-note">{{ section.settings.note }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Stats",
+  "settings": [
+    { "type": "text", "id": "note", "label": "Footnote", "default": "*Based on a survey of past and current Up Men customers in 2026." }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "90%" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Stats",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "90%", "text": "rated Up Men effective at improving testosterone levels*" } },
+        { "type": "stat", "settings": { "number": "64%", "text": "saw better results with Up Men than competing T support*" } },
+        { "type": "stat", "settings": { "number": "93%", "text": "reported trusting the quality & transparency of Up Men's ingredients*" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,30 @@
+<section class="collection-page" data-section-id="{{ section.id }}">
+  <div class="container">
+    <h1>{{ collection.title }}</h1>
+
+    {%- if collection.products.size > 0 -%}
+      <div class="grid">
+        {%- for product in collection.products -%}
+          <a href="{{ product.url }}" class="product-card">
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" loading="lazy">
+            {%- endif -%}
+            <div class="info">
+              <h3>{{ product.title }}</h3>
+              <p class="price">{{ product.price | money }}</p>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p style="text-align:center;color:var(--muted);">No products found.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": []
+}
+{% endschema %}

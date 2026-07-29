@@ -1,0 +1,42 @@
+<section class="search-results">
+  <div class="container">
+    <h1>{{ section.settings.title }}</h1>
+    {% if search.performed %}
+      <p class="lead">{{ section.settings.results_label | replace: '{count}', search.results_count }} "{{ search.terms | escape }}"</p>
+      {% if search.results_count > 0 %}
+        <div class="grid">
+          {% for item in search.results %}
+            <article class="card">
+              {% if item.featured_image %}
+                <a href="{{ item.url }}"><img src="{{ item.featured_image | image_url: width: 400 }}" alt="{{ item.title | escape }}" loading="lazy"></a>
+              {% endif %}
+              <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+              {% if item.price %}<p class="price">{{ item.price | money }}</p>{% endif %}
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>{{ section.settings.no_results }}</p>
+      {% endif %}
+    {% else %}
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.placeholder }}" required>
+        <button type="submit" class="btn btn-pink">{{ section.settings.submit }}</button>
+      </form>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search results",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Search results" },
+    { "type": "text", "id": "results_label", "label": "Count label", "default": "{count} results for" },
+    { "type": "text", "id": "no_results", "label": "No results", "default": "No results found." },
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Search products..." },
+    { "type": "text", "id": "submit", "label": "Button", "default": "Search" }
+  ],
+  "presets": [{ "name": "Search results" }]
+}
+{% endschema %}

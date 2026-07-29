@@ -1,0 +1,119 @@
+{%- comment -%} Guarantee banner — Boost your testosterone in 90 days, risk-free {%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- if section.settings.bg_mobile != blank -%}
+  {%- assign guar_bg_mobile = section.settings.bg_mobile | image_url: width: 1200 -%}
+{%- else -%}
+  {%- assign guar_bg_mobile = 'Mobile-90_Day_Higher_T.jpg' | asset_url -%}
+{%- endif -%}
+{%- if section.settings.bg_desktop != blank -%}
+  {%- assign guar_bg_desktop = section.settings.bg_desktop | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign guar_bg_desktop = 'guarantee-banner-desktop-new.jpg' | asset_url -%}
+{%- endif -%}
+{%- case section.settings.height_mobile -%}
+  {%- when 'small' -%}{%- assign minh_mobile = '55svh' -%}
+  {%- when 'medium' -%}{%- assign minh_mobile = '70svh' -%}
+  {%- when 'large' -%}{%- assign minh_mobile = '85svh' -%}
+  {%- when 'full' -%}{%- assign minh_mobile = '100svh' -%}
+  {%- else -%}{%- assign minh_mobile = 'auto' -%}
+{%- endcase -%}
+{%- case section.settings.height_desktop -%}
+  {%- when 'small' -%}{%- assign minh_desktop = '520px' -%}
+  {%- when 'medium' -%}{%- assign minh_desktop = '640px' -%}
+  {%- when 'large' -%}{%- assign minh_desktop = '85vh' -%}
+  {%- when 'full' -%}{%- assign minh_desktop = '100vh' -%}
+  {%- else -%}{%- assign minh_desktop = 'auto' -%}
+{%- endcase -%}
+<style>
+  #mm-guar-{{ sid }} {
+    background: #120804 url('{{ guar_bg_mobile }}') center / cover no-repeat;
+    color: var(--text, #fff); padding: 80px 0; position: relative;
+    min-height: {{ minh_mobile }}; display: flex; flex-direction: column; justify-content: center;
+  }
+  @media (min-width: 768px) {
+    #mm-guar-{{ sid }} { background-image: url('{{ guar_bg_desktop }}'); padding: 120px 0; min-height: {{ minh_desktop }}; }
+  }
+  #mm-guar-{{ sid }}::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(10,5,3,0.75) 0%, rgba(10,5,3,0.25) 60%, rgba(10,5,3,0) 100%);
+    pointer-events: none;
+  }
+  #mm-guar-{{ sid }} .mm-wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  #mm-guar-{{ sid }} .mm-inner { max-width: 540px; text-align: center; margin: 0 auto; }
+  @media (min-width: 768px) { #mm-guar-{{ sid }} .mm-inner { text-align: left; margin: 0; } }
+  #mm-guar-{{ sid }} .mm-badge {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;
+    font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--brand, #ff5600);
+    border: 1px solid var(--brand, #ff5600); border-radius: 999px; padding: 6px 14px;
+  }
+  #mm-guar-{{ sid }} h2 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((clamp(26px, 4.6vw, 44px)) * var(--fs-h, 1)); line-height: 1.12; margin: 0 0 16px;
+  }
+  #mm-guar-{{ sid }} h2 .orange { color: var(--brand, #ff5600); }
+  #mm-guar-{{ sid }} p { font-size: calc((16px) * var(--fs-b, 1)); line-height: 1.6; color: rgba(255,255,255,0.88); margin: 0 0 28px; }
+  #mm-guar-{{ sid }} .mm-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--brand, #ff5600); color: #fff; text-decoration: none;
+    font-weight: 800; font-size: calc((16px) * var(--fs-b, 1)); text-transform: uppercase;
+    padding: 16px 40px; border-radius: 6px; box-shadow: 0 8px 28px rgba(255,86,0,0.45);
+  }
+  #mm-guar-{{ sid }} .mm-cta:hover { filter: brightness(1.1); }
+</style>
+
+<section id="mm-guar-{{ sid }}" class="reveal" data-testid="guarantee">
+  <div class="mm-wrap">
+    <div class="mm-inner">
+      <span class="mm-badge">✓ {{ section.settings.badge }}</span>
+      <h2>{{ section.settings.title_pre }} <span class="orange">{{ section.settings.title_highlight }}</span></h2>
+      <p>{{ section.settings.text }}</p>
+      <a href="{{ section.settings.cta_link | default: '#join_pkg' }}" class="mm-cta">{{ section.settings.cta_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Guarantee Banner",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge text", "default": "90-DAY HIGHER-T GUARANTEE" },
+    { "type": "text", "id": "title_pre", "label": "Title", "default": "BOOST YOUR TESTOSTERONE" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "IN 90 DAYS" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Try Up Men risk-free for 90 days. If you're not satisfied, we will refund you, no questions asked. Reclaim your masculinity, risk-free." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "TRY IT NOW" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "header", "content": "Banner size" },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Banner height (mobile)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (55% of screen)" },
+        { "value": "medium", "label": "Medium (70% of screen)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Banner height (desktop)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (520px)" },
+        { "value": "medium", "label": "Medium (640px)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "bg_mobile", "label": "Banner background (mobile)" },
+    { "type": "image_picker", "id": "bg_desktop", "label": "Banner background (desktop)" }
+  ],
+  "presets": [{ "name": "Guarantee Banner" }]
+}
+{% endschema %}

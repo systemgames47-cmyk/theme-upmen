@@ -1,0 +1,56 @@
+{%- comment -%} Custom HTML — free-form HTML content section {%- endcomment -%}
+{%- assign sid = section.id -%}
+<style>
+  #mm-custom-html-{{ sid }} {
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+  #mm-custom-html-{{ sid }} .mm-wrap {
+    {%- if section.settings.full_width -%}
+    width: 100%;
+    {%- else -%}
+    max-width: 1100px; margin: 0 auto; padding: 0 16px;
+    {%- endif -%}
+  }
+  #mm-custom-html-{{ sid }} .mm-heading {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((clamp(24px, 4vw, 40px)) * var(--fs-h, 1)); line-height: 1.15; margin: 0 0 24px; text-align: center;
+  }
+  #mm-custom-html-{{ sid }} .mm-heading .orange { color: var(--brand, #ff5600); }
+  #mm-custom-html-{{ sid }} img, #mm-custom-html-{{ sid }} video, #mm-custom-html-{{ sid }} iframe {
+    max-width: 100%;
+  }
+</style>
+
+<section id="mm-custom-html-{{ sid }}" class="reveal" data-testid="custom-html">
+  <div class="mm-wrap">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="mm-heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {{ section.settings.custom_html }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom HTML",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading (optional)" },
+    {
+      "type": "html",
+      "id": "custom_html",
+      "label": "HTML code",
+      "info": "Paste any HTML: embeds, widgets, tables, videos, etc."
+    },
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": false },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#0a0503" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "Custom HTML" }]
+}
+{% endschema %}

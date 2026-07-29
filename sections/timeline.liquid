@@ -1,0 +1,273 @@
+{%- comment -%} Timeline — vertical results calendar with scroll-filling progress line {%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- if section.settings.bg_mobile != blank -%}
+  {%- assign tl_bg_mobile = section.settings.bg_mobile | image_url: width: 1200 -%}
+{%- else -%}
+  {%- assign tl_bg_mobile = 'rdm-What-to-Expect-bg-mob.webp' | asset_url -%}
+{%- endif -%}
+{%- if section.settings.bg_desktop != blank -%}
+  {%- assign tl_bg_desktop = section.settings.bg_desktop | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign tl_bg_desktop = 'rdm-What_-to-Expect-bg-desk.webp' | asset_url -%}
+{%- endif -%}
+{%- case section.settings.height_mobile -%}
+  {%- when 'small' -%}{%- assign minh_mobile = '55svh' -%}
+  {%- when 'medium' -%}{%- assign minh_mobile = '70svh' -%}
+  {%- when 'large' -%}{%- assign minh_mobile = '85svh' -%}
+  {%- when 'full' -%}{%- assign minh_mobile = '100svh' -%}
+  {%- else -%}{%- assign minh_mobile = 'auto' -%}
+{%- endcase -%}
+{%- case section.settings.height_desktop -%}
+  {%- when 'small' -%}{%- assign minh_desktop = '520px' -%}
+  {%- when 'medium' -%}{%- assign minh_desktop = '640px' -%}
+  {%- when 'large' -%}{%- assign minh_desktop = '85vh' -%}
+  {%- when 'full' -%}{%- assign minh_desktop = '100vh' -%}
+  {%- else -%}{%- assign minh_desktop = 'auto' -%}
+{%- endcase -%}
+<style>
+  #mm-tl-{{ sid }} {
+    background: #0a0503 url('{{ tl_bg_mobile }}') center / cover no-repeat;
+    color: var(--text, #fff); padding: 64px 0;
+    min-height: {{ minh_mobile }}; display: flex; flex-direction: column; justify-content: center;
+  }
+  @media (min-width: 768px) {
+    #mm-tl-{{ sid }} { background-image: url('{{ tl_bg_desktop }}'); padding: 96px 0; min-height: {{ minh_desktop }}; }
+  }
+  #mm-tl-{{ sid }} .mm-wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  #mm-tl-{{ sid }} .mm-head { text-align: center; margin-bottom: 48px; }
+  #mm-tl-{{ sid }} h2 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((clamp(26px, 4.6vw, 44px)) * var(--fs-h, 1)); line-height: 1.15; margin: 0 0 12px;
+  }
+  #mm-tl-{{ sid }} .mm-sub { font-size: calc((16px) * var(--fs-b, 1)); color: rgba(255,255,255,0.8); margin: 0; }
+
+  /* ===== Vertical timeline ===== */
+  #mm-tl-{{ sid }} .mm-timeline { position: relative; }
+  #mm-tl-{{ sid }} .mm-track {
+    position: absolute; top: 0; bottom: 0; left: 19px; width: 4px;
+    background: rgba(255,255,255,0.14); border-radius: 999px; overflow: hidden;
+  }
+  #mm-tl-{{ sid }} .mm-track .mm-fill {
+    position: absolute; top: 0; left: 0; width: 100%; height: 0%;
+    background: linear-gradient(180deg, var(--brand, #ff5600), #ff8a4d);
+    border-radius: 999px;
+  }
+  #mm-tl-{{ sid }} .mm-row { position: relative; padding: 0 0 40px 56px; }
+  #mm-tl-{{ sid }} .mm-row:last-of-type { padding-bottom: 0; }
+  #mm-tl-{{ sid }} .mm-dot {
+    position: absolute; left: 13px; top: 6px; width: 16px; height: 16px; border-radius: 50%;
+    background: #1a0e07; border: 3px solid rgba(255,255,255,0.35); z-index: 1;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  #mm-tl-{{ sid }} .mm-row.viewing .mm-dot {
+    background: var(--brand, #ff5600); border-color: #fff;
+    box-shadow: 0 0 0 6px rgba(255,86,0,0.25);
+  }
+  #mm-tl-{{ sid }} .mm-week {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px;
+    background: var(--brand, #ff5600); color: #fff; border-radius: 999px; padding: 7px 16px;
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em;
+    font-size: calc((12px) * var(--fs-b, 1));
+    opacity: 0; transform: translateY(14px); transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  #mm-tl-{{ sid }} .mm-week svg { flex-shrink: 0; }
+  #mm-tl-{{ sid }} .mm-card {
+    background: rgba(26,14,7,0.9); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px;
+    overflow: hidden; max-width: 420px;
+    opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+  }
+  #mm-tl-{{ sid }} .mm-row.viewing .mm-week,
+  #mm-tl-{{ sid }} .mm-row.viewing .mm-card { opacity: 1; transform: translateY(0); }
+  #mm-tl-{{ sid }} .mm-card::before { content: none; }
+  #mm-tl-{{ sid }} .mm-card img.mm-photo { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+  #mm-tl-{{ sid }} .mm-card .mm-body { padding: 18px 20px 22px; }
+  #mm-tl-{{ sid }} .mm-phase {
+    font-family: var(--font-heading); font-size: calc((20px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase;
+    margin: 0 0 12px; letter-spacing: 0.04em; color: var(--brand, #ff5600);
+  }
+  #mm-tl-{{ sid }} ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  #mm-tl-{{ sid }} li { position: relative; padding-left: 22px; font-size: calc((14px) * var(--fs-b, 1)); line-height: 1.5; color: rgba(255,255,255,0.85); }
+  #mm-tl-{{ sid }} li::before { content: '▸'; position: absolute; left: 0; color: var(--brand, #ff5600); font-weight: 800; }
+
+  @media (min-width: 900px) {
+    #mm-tl-{{ sid }} .mm-track { left: 50%; transform: translateX(-50%); }
+    #mm-tl-{{ sid }} .mm-row { padding: 0 0 56px 0; display: grid; grid-template-columns: 1fr 88px 1fr; align-items: start; }
+    #mm-tl-{{ sid }} .mm-dot { left: 50%; transform: translateX(-50%); top: 8px; width: 18px; height: 18px; }
+    #mm-tl-{{ sid }} .mm-week { grid-column: 3; grid-row: 1; justify-self: start; margin: 4px 0 0; }
+    #mm-tl-{{ sid }} .mm-card { grid-column: 1; grid-row: 1; justify-self: end; }
+    #mm-tl-{{ sid }} .mm-row.reverse .mm-week { grid-column: 1; justify-self: end; }
+    #mm-tl-{{ sid }} .mm-row.reverse .mm-card { grid-column: 3; justify-self: start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #mm-tl-{{ sid }} .mm-week, #mm-tl-{{ sid }} .mm-card { opacity: 1; transform: none; transition: none; }
+    #mm-tl-{{ sid }} .mm-track .mm-fill { height: 100% !important; }
+  }
+
+  #mm-tl-{{ sid }} .mm-cta-row { text-align: center; margin-top: 48px; }
+  #mm-tl-{{ sid }} .mm-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--brand, #ff5600); color: #fff; text-decoration: none;
+    font-weight: 800; font-size: calc((16px) * var(--fs-b, 1)); text-transform: uppercase;
+    padding: 16px 40px; border-radius: 6px; box-shadow: 0 8px 28px rgba(255,86,0,0.4);
+  }
+  #mm-tl-{{ sid }} .mm-cta:hover { filter: brightness(1.1); }
+</style>
+
+<section id="mm-tl-{{ sid }}" class="reveal" data-testid="timeline">
+  <div class="mm-wrap">
+    <div class="mm-head">
+      <h2>{{ section.settings.title }}</h2>
+      <p class="mm-sub">{{ section.settings.subtitle }}</p>
+    </div>
+    <div class="mm-timeline" data-tl-timeline>
+      <div class="mm-track"><div class="mm-fill" data-tl-fill></div></div>
+      {%- for block in section.blocks -%}
+        <div class="mm-row{% cycle '', ' reverse' %}" data-tl-row {{ block.shopify_attributes }}>
+          <div class="mm-dot" data-tl-dot></div>
+          <div class="mm-week">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            {{ block.settings.day }}
+          </div>
+          <div class="mm-card">
+            {%- if block.settings.image != blank -%}
+              <img class="mm-photo" src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.day }} — {{ block.settings.phase }}" loading="lazy">
+            {%- elsif section.settings.show_preview_images -%}
+              {%- assign tl_cycle = forloop.index0 | modulo: 4 -%}
+              {%- case tl_cycle -%}
+                {%- when 0 -%}{%- assign tl_preview = 'upmen-preview-week1.jpg' -%}
+                {%- when 1 -%}{%- assign tl_preview = 'upmen-preview-month1.jpg' -%}
+                {%- when 2 -%}{%- assign tl_preview = 'upmen-preview-month3.jpg' -%}
+                {%- else -%}{%- assign tl_preview = 'upmen-preview-month6.jpg' -%}
+              {%- endcase -%}
+              <img class="mm-photo" src="{{ tl_preview | asset_url }}" alt="{{ block.settings.day }} — {{ block.settings.phase }}" loading="lazy">
+            {%- endif -%}
+            <div class="mm-body">
+              <h3 class="mm-phase">{{ block.settings.phase }}</h3>
+              <ul>
+                {%- assign items = block.settings.items | newline_to_br | split: '<br />' -%}
+                {%- for item in items -%}
+                  {%- assign trimmed = item | strip -%}
+                  {%- if trimmed != blank -%}<li>{{ trimmed }}</li>{%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="mm-cta-row">
+      <a href="{{ section.settings.cta_link | default: '#join_pkg' }}" class="mm-cta">{{ section.settings.cta_label }}</a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.getElementById('mm-tl-{{ sid }}');
+  if (!root) return;
+  var timeline = root.querySelector('[data-tl-timeline]');
+  var fill = root.querySelector('[data-tl-fill]');
+  var rows = Array.prototype.slice.call(root.querySelectorAll('[data-tl-row]'));
+  if (!timeline || !fill || !rows.length) return;
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var inDesignMode = window.Shopify && window.Shopify.designMode;
+  if (reduced || inDesignMode) {
+    fill.style.height = '100%';
+    rows.forEach(function(r){ r.classList.add('viewing'); });
+    return;
+  }
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var rect = timeline.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var anchor = vh * 0.65;
+    var progress = (anchor - rect.top) / rect.height;
+    progress = Math.max(0, Math.min(1, progress));
+    var fillPx = progress * rect.height;
+    fill.style.height = (progress * 100) + '%';
+    rows.forEach(function(row){
+      var dot = row.querySelector('[data-tl-dot]');
+      if (!dot) return;
+      var dotOffset = (dot.getBoundingClientRect().top - rect.top) + 8;
+      if (fillPx >= dotOffset) row.classList.add('viewing');
+      else row.classList.remove('viewing');
+    });
+  }
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Timeline",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "YOUR RESULTS CALENDAR" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "What to expect from week 1 to month 6 — as your natural testosterone production is optimized." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "TRY IT NOW" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "checkbox", "id": "show_preview_images", "label": "Show placeholder images when no image is uploaded", "default": true },
+    { "type": "header", "content": "Banner size" },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Banner height (mobile)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (55% of screen)" },
+        { "value": "medium", "label": "Medium (70% of screen)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Banner height (desktop)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (520px)" },
+        { "value": "medium", "label": "Medium (640px)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "bg_mobile", "label": "Background (mobile)" },
+    { "type": "image_picker", "id": "bg_desktop", "label": "Background (desktop)" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Milestone",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Milestone image" },
+        { "type": "text", "id": "day", "label": "Period label", "default": "WEEK 1" },
+        { "type": "text", "id": "phase", "label": "Phase name", "default": "IGNITION" },
+        { "type": "textarea", "id": "items", "label": "Bullet items (one per line)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Timeline",
+      "blocks": [
+        { "type": "step", "settings": { "day": "WEEK 1", "phase": "IGNITION", "items": "Tongkat Ali blocks stress hormones\nShilajit feeds starving testosterone cells\nMornings start to feel easier\nFirst hints of all-day energy" } },
+        { "type": "step", "settings": { "day": "MONTH 1", "phase": "SPARK", "items": "Boron helps free stuck T\nZinc provides T-making materials\nWorkouts feel intense again\nDrive and focus keep climbing" } },
+        { "type": "step", "settings": { "day": "MONTH 3", "phase": "LIFTOFF", "items": "All 8 ingredients working like a tuned engine\nBody looks leaner, stronger, more masculine\nRecovery between sessions speeds up\nPeople ask what you're doing differently" } },
+        { "type": "step", "settings": { "day": "MONTH 6", "phase": "ORBIT", "items": "T-production optimized fully\nStrength, sleep and mood at a new baseline\nNot temporary, this is your new normal\nWelcome to the man you're supposed to be" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

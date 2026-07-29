@@ -1,0 +1,193 @@
+{%- comment -%} Header — dark Up Men bar with wordmark, nav and CTA {%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- assign logo_image = section.settings.logo | default: settings.logo -%}
+{%- if section.settings.favicon != blank -%}
+<script>
+  (function(){
+    var href = {{ section.settings.favicon | image_url: width: 32, height: 32 | json }};
+    var link = document.querySelector('link[rel="icon"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.type = 'image/png';
+    link.setAttribute('sizes', '32x32');
+    link.href = href;
+  })();
+</script>
+{%- endif -%}
+{%- assign header_height = section.settings.logo_height | default: settings.logo_height | default: 32 -%}
+
+<style>
+  #mm-header-{{ sid }} {
+    position: sticky; top: 0; z-index: 60;
+    background: {{ section.settings.header_bg | default: '#0a0503' }};
+    color: {{ section.settings.header_text | default: '#ffffff' }};
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+  }
+  #mm-header-{{ sid }} .mm-row {
+    max-width: 1200px; margin: 0 auto; padding: 14px 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  #mm-header-{{ sid }} .mm-logo-link { display: inline-flex; align-items: center; text-decoration: none; }
+  #mm-header-{{ sid }} .mm-wordmark {
+    font-family: var(--font-heading); font-weight: 800; letter-spacing: 0.28em;
+    font-size: 18px; color: {{ section.settings.header_text | default: '#ffffff' }};
+    text-transform: uppercase; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  }
+  #mm-header-{{ sid }} .mm-wordmark .dot {
+    width: 12px; height: 12px; border-radius: 50%; background: var(--brand, #ff5600); display: inline-block;
+  }
+  #mm-header-{{ sid }} nav { display: none; align-items: center; gap: 24px; }
+  #mm-header-{{ sid }} nav a {
+    color: {{ section.settings.header_text | default: '#ffffff' }}; text-decoration: none;
+    font-family: var(--font-heading); font-size: calc((12px) * var(--fs-b, 1)); font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  #mm-header-{{ sid }} nav a:hover { color: var(--brand, #ff5600); }
+  #mm-header-{{ sid }} .mm-actions { display: flex; align-items: center; gap: 12px; }
+  #mm-header-{{ sid }} .mm-cta {
+    display: none; font-family: var(--font-heading); font-size: calc((12px) * var(--fs-b, 1)); font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+    color: var(--brand, #ff5600); border: 1px solid var(--brand, #ff5600);
+    border-radius: 8px; padding: 9px 16px; white-space: nowrap;
+  }
+  #mm-header-{{ sid }} .mm-cta:hover { background: var(--brand, #ff5600); color: #fff; }
+  #mm-header-{{ sid }} .mm-cart {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: {{ section.settings.header_text | default: '#ffffff' }}; text-decoration: none;
+    font-family: var(--font-heading); font-size: calc((12px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  #mm-header-{{ sid }} .mm-cart .mm-count {
+    background: var(--brand, #ff5600); color: #fff; font-size: calc((10px) * var(--fs-b, 1)); font-weight: 800;
+    min-width: 18px; height: 18px; border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center; padding: 0 5px;
+  }
+  #mm-header-{{ sid }} .menu-toggle { background: none; border: none; cursor: pointer; padding: 4px; display: inline-flex; color: {{ section.settings.header_text | default: '#ffffff' }}; }
+  @media (min-width: 990px) {
+    #mm-header-{{ sid }} nav { display: flex; }
+    #mm-header-{{ sid }} .mm-cta { display: inline-flex; }
+    #mm-header-{{ sid }} .menu-toggle { display: none; }
+    {%- unless section.settings.show_cart_desktop -%}
+    #mm-header-{{ sid }} .mm-cart { display: none; }
+    {%- endunless -%}
+  }
+  @media (max-width: 989.98px) {
+    {%- unless section.settings.show_cart_mobile -%}
+    #mm-header-{{ sid }} .mm-cart { display: none; }
+    {%- endunless -%}
+  }
+</style>
+
+<header id="mm-header-{{ sid }}" role="banner">
+  <div class="mm-row">
+    <a href="{{ routes.root_url }}" class="mm-logo-link" aria-label="{{ shop.name }}">
+      {%- if logo_image != blank -%}
+        <img src="{{ logo_image | image_url: width: 360 }}" alt="{{ shop.name }}" style="height: {{ header_height }}px; width: auto; display: block;">
+      {%- else -%}
+        <span class="mm-wordmark">UP MEN<span class="dot" aria-hidden="true"></span></span>
+      {%- endif -%}
+    </a>
+
+    <nav data-site-nav aria-label="Main menu">
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="#ingredients">Science</a>
+        <a href="#faq">FAQ</a>
+      {%- endif -%}
+    </nav>
+
+    <div class="mm-actions">
+      {%- if section.settings.show_cta -%}
+        <a href="{{ section.settings.cta_link | default: '#join_pkg' }}" class="mm-cta">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_menu_toggle and section.settings.menu != blank -%}
+        <button class="menu-toggle" data-menu-toggle aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      {%- endif -%}
+
+      {%- if section.settings.show_cart -%}
+        <a href="{{ routes.cart_url }}" class="mm-cart" aria-label="View cart" data-mm-open-cart>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="mm-count">{{ cart.item_count }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "header", "content": "Logo" },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Header logo",
+      "info": "If empty, uses the UP MEN wordmark."
+    },
+    {
+      "type": "image_picker",
+      "id": "favicon",
+      "label": "Favicon (browser tab icon)",
+      "info": "Square image, 32x32px recommended. Automatically resized. Replaces the theme-wide favicon."
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height (px)",
+      "min": 24,
+      "max": 100,
+      "step": 2,
+      "default": 32
+    },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "header_bg", "label": "Background color", "default": "#0a0503" },
+    { "type": "color", "id": "header_text", "label": "Text and icon color", "default": "#ffffff" },
+    { "type": "header", "content": "CTA button" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show CTA button", "default": true },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "50% OFF LAUNCH KIT" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "header", "content": "Cart" },
+    { "type": "checkbox", "id": "show_cart", "label": "Show cart icon", "default": true },
+    { "type": "checkbox", "id": "show_cart_mobile", "label": "Show cart icon on mobile", "default": true },
+    { "type": "checkbox", "id": "show_cart_desktop", "label": "Show cart icon on desktop", "default": true },
+    { "type": "header", "content": "Menu" },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_menu_toggle",
+      "label": "Show mobile menu button (hamburger)",
+      "info": "Only appears if a navigation menu is selected.",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "settings": {
+        "header_bg": "#0a0503",
+        "header_text": "#ffffff",
+        "show_cart": true,
+        "show_cart_mobile": true,
+        "show_cart_desktop": true,
+        "show_cta": true,
+        "cta_label": "50% OFF LAUNCH KIT",
+        "show_mobile_menu_toggle": false
+      }
+    }
+  ]
+}
+{% endschema %}

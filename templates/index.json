@@ -1,0 +1,549 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "marquee_intro": {
+      "type": "marquee-intro",
+      "settings": {}
+    },
+    "story": {
+      "type": "story",
+      "settings": {},
+      "blocks": {
+        "benefit-1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "⚡",
+            "title": "SKYROCKET ENERGY & STAMINA",
+            "text": "Increase energy & athletic performance"
+          }
+        },
+        "benefit-2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🔥",
+            "title": "SUPPORT MALE VITALITY",
+            "text": "Amplify passionate energy"
+          }
+        },
+        "benefit-3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🎯",
+            "title": "ENHANCE PRODUCTIVITY & FOCUS",
+            "text": "Stay sharp & focused all day"
+          }
+        },
+        "benefit-4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "💪",
+            "title": "SUPERCHARGE STRENGTH",
+            "text": "Build & maintain lean muscle mass"
+          }
+        },
+        "benefit-5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "😴",
+            "title": "IMPROVE RECOVERY",
+            "text": "Optimize sleep & muscle recovery"
+          }
+        }
+      },
+      "block_order": [
+        "benefit-1",
+        "benefit-2",
+        "benefit-3",
+        "benefit-4",
+        "benefit-5"
+      ]
+    },
+    "timeline": {
+      "type": "timeline",
+      "settings": {},
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "day": "WEEK 1",
+            "phase": "IGNITION",
+            "items": "Tongkat Ali blocks stress hormones\nShilajit feeds starving testosterone cells\nMornings start to feel easier\nFirst hints of all-day energy"
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "day": "MONTH 1",
+            "phase": "SPARK",
+            "items": "Boron helps free stuck T\nZinc provides T-making materials\nWorkouts feel intense again\nDrive and focus keep climbing"
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "day": "MONTH 3",
+            "phase": "LIFTOFF",
+            "items": "All 8 ingredients working like a tuned engine\nBody looks leaner, stronger, more masculine\nRecovery between sessions speeds up\nPeople ask what you're doing differently"
+          }
+        },
+        "step-4": {
+          "type": "step",
+          "settings": {
+            "day": "MONTH 6",
+            "phase": "ORBIT",
+            "items": "T-production optimized fully\nStrength, sleep and mood at a new baseline\nNot temporary, this is your new normal\nWelcome to the man you're supposed to be"
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3",
+        "step-4"
+      ]
+    },
+    "how_to_use": {
+      "type": "how-to-use",
+      "settings": {},
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "title": "Take your daily serving every morning.",
+            "subtitle": "With water and food, for best absorption."
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "title": "Stay consistent — every single day.",
+            "subtitle": "Use the free metal case to carry it anywhere."
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "title": "Track your transformation for 90 days.",
+            "subtitle": "Use the free 90-Day Transformation Tracker."
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3"
+      ]
+    },
+    "ingredients": {
+      "type": "ingredients",
+      "settings": {},
+      "blocks": {
+        "ingredient-1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Tongkat Ali",
+            "dose": "1000 mg",
+            "description": "Boosts testosterone, enhances libido, improves fertility & supports muscle growth",
+            "image_asset": "ing-1.png"
+          }
+        },
+        "ingredient-2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Shilajit",
+            "dose": "400 mg",
+            "description": "Improves fertility and boosts testosterone levels",
+            "image_asset": "ing-2.png"
+          }
+        },
+        "ingredient-3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "K1 & K2",
+            "dose": "100 mcg",
+            "description": "Supports bone health and density, improves mood, and encourages T production",
+            "image_asset": "ing-3.png"
+          }
+        },
+        "ingredient-4": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Vitamin D",
+            "dose": "4000 IU",
+            "description": "Essential for maintaining cellular health and helping regulate testosterone",
+            "image_asset": "ing-4.png"
+          }
+        },
+        "ingredient-5": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Zinc",
+            "dose": "30 mg",
+            "description": "An essential trace mineral that plays a role in testosterone metabolism and immune function",
+            "image_asset": "ing-5.png"
+          }
+        },
+        "ingredient-6": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Taurine",
+            "dose": "675 mg",
+            "description": "Reduces oxidative stress, improves blood flow, and supports increased testosterone levels",
+            "image_asset": "ing-6.png"
+          }
+        },
+        "ingredient-7": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Fenugreek",
+            "dose": "675 mg",
+            "description": "Supports testosterone production, DHT levels, and male vitality",
+            "image_asset": "ing-7.png"
+          }
+        },
+        "ingredient-8": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Boron",
+            "dose": "4 mg",
+            "description": "Trace mineral with the potential to increase free T and regulate estrogen levels",
+            "image_asset": "ing-8.png"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient-1",
+        "ingredient-2",
+        "ingredient-3",
+        "ingredient-4",
+        "ingredient-5",
+        "ingredient-6",
+        "ingredient-7",
+        "ingredient-8"
+      ]
+    },
+    "facility": {
+      "type": "facility",
+      "settings": {},
+      "blocks": {
+        "badge-1": {
+          "type": "badge",
+          "settings": {
+            "text": "CGMP Certified"
+          }
+        },
+        "badge-2": {
+          "type": "badge",
+          "settings": {
+            "text": "Third-Party Tested"
+          }
+        },
+        "badge-3": {
+          "type": "badge",
+          "settings": {
+            "text": "Made in the USA"
+          }
+        }
+      },
+      "block_order": [
+        "badge-1",
+        "badge-2",
+        "badge-3"
+      ]
+    },
+    "scarcity_cta": {
+      "type": "scarcity-cta",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {},
+      "blocks": {
+        "expert-1": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "rdm-experts-1.jpg",
+            "name": "DR. ROBERT DORFMAN",
+            "role": "PLASTIC SURGEON · FOUNDER, DONE BY DORFMAN",
+            "bio": "Beverly Hills plastic surgeon trained at Northwestern, Oxford, and UCLA. Through his work with thousands of patients, he helps men take ownership of their health and show up more confidently."
+          }
+        },
+        "expert-2": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "rdm-experts-2.jpg",
+            "name": "ERIC LEIJA",
+            "role": "PRIMAL SWOLEDIER",
+            "bio": "Eric Leija has dedicated his career to helping men build functional strength and train in ways that enhance everyday life — emphasizing longevity, athleticism, and resilience."
+          }
+        },
+        "expert-3": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "Dr._Schilling.png",
+            "name": "DR. BLAINE SCHILLING",
+            "role": "HORMONAL HEALTH SPECIALIST",
+            "bio": "With over 30 years of experience in family medicine, Dr. Schilling has spent his career helping men navigate the realities of aging — a trusted voice on health, energy, and performance."
+          }
+        },
+        "expert-4": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "rdm-experts-6.jpg",
+            "name": "DR. KYLE GILLETT",
+            "role": "DOUBLE BOARD-CERTIFIED PHYSICIAN",
+            "bio": "Specializes in hormone optimization, longevity, and men's health. He combines advanced testing, evidence-based medicine, and personalized plans to help men perform at their highest level."
+          }
+        },
+        "expert-5": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "rdm-experts-13.jpg",
+            "name": "DANIEL CORMIER",
+            "role": "UFC HALL OF FAME · UFC CHAMPION · OLYMPIAN",
+            "bio": "Beyond his accomplishments in combat sports, Daniel embodies the values at the core of Up Men: consistency, accountability, and the belief that strong men are built through daily habits."
+          }
+        }
+      },
+      "block_order": [
+        "expert-1",
+        "expert-2",
+        "expert-3",
+        "expert-4",
+        "expert-5"
+      ]
+    },
+    "founder_story": {
+      "type": "founder-story",
+      "settings": {}
+    },
+    "product_label": {
+      "type": "product-label",
+      "settings": {},
+      "blocks": {
+        "badge-1": {
+          "type": "badge",
+          "settings": { "icon": "🇺🇸", "text": "Made in USA" }
+        },
+        "badge-2": {
+          "type": "badge",
+          "settings": { "icon": "🧪", "text": "Third Party Tested" }
+        },
+        "badge-3": {
+          "type": "badge",
+          "settings": { "icon": "🚫", "text": "Non-GMO" }
+        }
+      },
+      "block_order": ["badge-1", "badge-2", "badge-3"]
+    },
+    "pricing": {
+      "type": "pricing",
+      "settings": {}
+    },
+    "marquee_fast": {
+      "type": "marquee-fast",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {},
+      "blocks": {
+        "review-1": {
+          "type": "review",
+          "settings": {
+            "name": "Marcus T.",
+            "flag": "🇺🇸",
+            "country": "United States",
+            "date": "06/28/2026",
+            "rating": 5,
+            "title": "MY ENERGY IS BACK — FOR REAL",
+            "body": "I'm 41 and had been feeling flat for a couple of years: dragging through the afternoon, no drive in the gym, short fuse at home. Six weeks into Up Men and my mornings feel completely different. I wake up before my alarm, my lifts are climbing again, and my wife noticed the difference before I even said anything. The 90-day guarantee is what got me to try it — I won't be needing it."
+          }
+        },
+        "review-2": {
+          "type": "review",
+          "settings": {
+            "name": "David R.",
+            "flag": "🇺🇸",
+            "country": "United States",
+            "date": "06/11/2026",
+            "rating": 5,
+            "title": "Finally something that isn't hype",
+            "body": "I've tried at least four different T-boosters over the years and this is the first one where I can actually feel the difference. Sharper at work, better sleep, and recovery between training days is noticeably faster. The ingredient doses match what the studies use, which is why I picked it in the first place."
+          }
+        },
+        "review-3": {
+          "type": "review",
+          "settings": {
+            "name": "James K.",
+            "flag": "🇨🇦",
+            "country": "Canada",
+            "date": "05/30/2026",
+            "rating": 5,
+            "title": "Third month, still impressed",
+            "body": "Ordered the Launch Kit, now on my third month. The focus improvement showed up first (around week two), then strength and drive followed. No jitters, no crash, nothing weird — just steady improvement. The free gifts were actually useful too, especially the tracker."
+          }
+        },
+        "review-4": {
+          "type": "review",
+          "settings": {
+            "name": "Robert M.",
+            "flag": "🇺🇸",
+            "country": "United States",
+            "date": "05/17/2026",
+            "rating": 5,
+            "title": "Skeptical husband, converted",
+            "body": "My wife bought this for me as a not-so-subtle hint. I rolled my eyes — and then a month later realized I was training four days a week again and actually had energy left after work. Bloodwork at my last checkup came back better than it's been in years. I owe her one."
+          }
+        }
+      },
+      "block_order": [
+        "review-1",
+        "review-2",
+        "review-3",
+        "review-4"
+      ]
+    },
+    "how_it_works": {
+      "type": "how-it-works",
+      "settings": {},
+      "blocks": {
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "text": "rated Up Men effective at improving testosterone levels*"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "number": "64%",
+            "text": "saw better results with Up Men than competing T support*"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "number": "93%",
+            "text": "reported trusting the quality & transparency of Up Men's ingredients*"
+          }
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {},
+      "blocks": {
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "What is Up Men and how does it work?",
+            "answer": "Up Men is a natural testosterone support supplement made with 8 clinically dosed ingredients — including Tongkat Ali, Shilajit, Fenugreek, Zinc and Boron — that work together to support your body's own testosterone production, energy, strength and focus."
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I take Up Men?",
+            "answer": "Take the daily serving with water, ideally in the morning with food. Consistency is key — take it every day for at least 90 days for full results."
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "When will I feel the results?",
+            "answer": "Most men start noticing improved energy and workout intensity within the first 7 days. By day 30 you should see visible changes, and by day 90 your T-production is fully optimized. That's why we back it with a 90-day guarantee."
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "Is Up Men a hormone or a steroid?",
+            "answer": "No. Up Men is 100% hormone-free. It doesn't put synthetic testosterone in your body — it supports your body's own natural ability to produce testosterone."
+          }
+        },
+        "faq-5": {
+          "type": "faq",
+          "settings": {
+            "question": "Are there any side effects?",
+            "answer": "Up Men is made with natural ingredients at clinically studied doses and is generally well tolerated. If you have a medical condition or take medication, consult your doctor before use."
+          }
+        },
+        "faq-6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it third-party tested?",
+            "answer": "Yes. Every batch is manufactured in a CGMP facility in the USA and third-party tested for purity and potency. Non-GMO, vegan and hormone-free."
+          }
+        },
+        "faq-7": {
+          "type": "faq",
+          "settings": {
+            "question": "How does the 90-day guarantee work?",
+            "answer": "Try Up Men for 90 days. If you don't feel a difference, contact our support and we'll refund your purchase — no questions asked."
+          }
+        },
+        "faq-8": {
+          "type": "faq",
+          "settings": {
+            "question": "How does the subscription work? Can I cancel?",
+            "answer": "Your Launch Kit ships every 30 days at 50% off the one-time price. You can cancel, skip or pause your subscription anytime through the customer portal — no phone calls, no hassle."
+          }
+        },
+        "faq-9": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "Orders placed today ship within 24 hours. Delivery typically takes 2–5 business days within the continental USA."
+          }
+        },
+        "faq-10": {
+          "type": "faq",
+          "settings": {
+            "question": "Who should use Up Men?",
+            "answer": "Up Men was designed for men 18+ who want to support healthy testosterone levels, energy, strength and drive — whether you're in your 20s and want an edge, or 40+ and want to feel like yourself again."
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4",
+        "faq-5",
+        "faq-6",
+        "faq-7",
+        "faq-8",
+        "faq-9",
+        "faq-10"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "marquee_intro",
+    "story",
+    "timeline",
+    "how_to_use",
+    "ingredients",
+    "facility",
+    "scarcity_cta",
+    "testimonials",
+    "founder_story",
+    "product_label",
+    "pricing",
+    "marquee_fast",
+    "reviews",
+    "how_it_works",
+    "faq"
+  ]
+}
