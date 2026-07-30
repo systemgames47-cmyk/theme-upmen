@@ -203,7 +203,7 @@
       ],
       "name": "NHM Hero",
       "settings": {
-        "logo_alt": "",
+        "logo_alt": "UPMEN",
         "logo_link": "",
         "brand_line1": "Natura",
         "brand_line2": "History",
@@ -217,7 +217,7 @@
         "description": "Step into the natural world and discover the stories written millions of years ago.",
         "cta_label": "Explore Now",
         "cta_link": "",
-        "cta_bg": "#DC5A1E",
+        "cta_bg": "#000000",
         "show_specimen": true,
         "specimen_title": "Tyrannosaurus Rex",
         "specimen_text": "Late Cretaceous period\n68-66 million years ago",
@@ -228,8 +228,8 @@
         "details_label": "View Details",
         "details_link": "",
         "scroll_label": "Scroll to explore",
-        "bg_color": "#000000",
-        "text_color": "#FFFFFF",
+        "bg_color": "#FFFFFF",
+        "text_color": "#FAFAFA",
         "use_google_fonts": true
       }
     },
@@ -978,6 +978,71 @@
         "text_color": "#111111",
         "use_google_fonts": true
       }
+    },
+    "nhm_explore_WVdr4R": {
+      "type": "nhm-explore",
+      "blocks": {
+        "pill_U8F7VE": {
+          "type": "pill",
+          "settings": {
+            "icon": "bone",
+            "label": "Dinosaurs",
+            "link": ""
+          }
+        },
+        "pill_E6VhPG": {
+          "type": "pill",
+          "settings": {
+            "icon": "dna",
+            "label": "Ancient Life",
+            "link": ""
+          }
+        },
+        "pill_4ncak3": {
+          "type": "pill",
+          "settings": {
+            "icon": "gem",
+            "label": "Minerals",
+            "link": ""
+          }
+        },
+        "pill_w3qLNj": {
+          "type": "pill",
+          "settings": {
+            "icon": "leaf",
+            "label": "Fossils",
+            "link": ""
+          }
+        },
+        "pill_bqMbi3": {
+          "type": "pill",
+          "settings": {
+            "icon": "book",
+            "label": "Learn More",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "pill_U8F7VE",
+        "pill_E6VhPG",
+        "pill_4ncak3",
+        "pill_w3qLNj",
+        "pill_bqMbi3"
+      ],
+      "name": "NHM Explore",
+      "settings": {
+        "label_number": "02",
+        "label_text": "Explore Our World",
+        "heading": "Unearth the stories of our planet's past\nthrough fossils, minerals, and ancient wonders.",
+        "spacer_mobile": 220,
+        "spacer_desktop": 450,
+        "foot_left": "WE DON'T JUST TELL STORIES.",
+        "foot_right": "PALEONTOLOGY (C) 2026",
+        "bg_color": "#fcfcfc",
+        "text_color": "#111111",
+        "use_google_fonts": true
+      }
     }
   },
   "order": [
@@ -999,6 +1064,7 @@
     "reviews",
     "how_it_works",
     "faq",
-    "nhm_explore_k339aF"
+    "nhm_explore_k339aF",
+    "nhm_explore_WVdr4R"
   ]
 }
