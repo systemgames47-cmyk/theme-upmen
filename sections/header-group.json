@@ -1,15 +1,46 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header",
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "settings": {}
+      "settings": {
+        "pre_text": "CLAIM YOUR OFFER",
+        "highlight": "50% OFF",
+        "post_text": "+ $70 FREE GIFTS",
+        "show_countdown": false,
+        "countdown_target": "2026-08-01T23:59:59"
+      }
     },
     "header": {
       "type": "header",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "logo_height": 32,
+        "header_bg": "#0a0503",
+        "header_text": "#ffffff",
+        "show_cta": true,
+        "cta_label": "50% OFF LAUNCH KIT",
+        "cta_link": "",
+        "show_cart": true,
+        "show_cart_mobile": true,
+        "show_cart_desktop": true,
+        "menu": "main-menu",
+        "show_mobile_menu_toggle": false
+      }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }

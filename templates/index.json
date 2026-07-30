@@ -1,16 +1,47 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "reviews_text": "4,548 REVIEWS",
+        "title_line1": "UP MEN",
+        "title_line2": "THE MOST",
+        "title_highlight": "POTENT & NATURAL",
+        "title_line3": "TESTOSTERONE STACK ON EARTH",
+        "subtitle": "8 powerful ingredients packed into one daily male-vitality supplement.",
+        "cta_label": "UNLOCK YOUR POWER TODAY",
+        "cta_link": "",
+        "guarantee_text": "TRY IT FOR 90 DAYS. HIGHER T OR YOUR MONEY BACK.",
+        "media_enabled": false,
+        "media_size_mobile": "medium",
+        "media_size_desktop": "medium",
+        "media_tag_enabled": true,
+        "media_tag_top": "GET",
+        "media_tag_main": "50% OFF TODAY",
+        "media_tag_link": "",
+        "show_product_image": true,
+        "product_alt": "Up Men Natural Testosterone Support",
+        "height_mobile": "auto",
+        "height_desktop": "full"
+      }
     },
     "marquee_intro": {
       "type": "marquee-intro",
-      "settings": {}
+      "settings": {
+        "label": "FEATURED IN"
+      }
     },
     "story": {
       "type": "story",
-      "settings": {},
       "blocks": {
         "benefit-1": {
           "type": "benefit",
@@ -59,11 +90,30 @@
         "benefit-3",
         "benefit-4",
         "benefit-5"
-      ]
+      ],
+      "settings": {
+        "decline_title_pre": "THE DECLINE OF T:",
+        "decline_title_highlight": "A MODERN EPIDEMIC",
+        "decline_p1": "Testosterone levels have been dropping by 1% every year since 1980. Stress, poor sleep, processed diets, and toxins are destroying natural hormone production.",
+        "decline_p2": "The impact? Low testosterone drains energy, strength, and focus — making it harder to perform at your best in life and the gym.",
+        "decline_p3": "The good news: Up Men helps you reclaim your edge with natural testosterone support for energy, focus, and strength.",
+        "solution_title": "THE SOLUTION?",
+        "solution_lede": "Maintaining balanced testosterone levels is pivotal for contributing to an overall sense of well-being. Encouraging our body's natural hormonal function can help us men:",
+        "cta_label": "TRY IT NOW",
+        "cta_link": "",
+        "decline_height_mobile": "auto",
+        "decline_height_desktop": "auto",
+        "stat_label": "AVERAGE TESTOSTERONE LEVELS SINCE 1980",
+        "stat_caption": "Men today have roughly half the testosterone their grandfathers had at the same age.*",
+        "stat_overlay_enabled": true,
+        "stat_overlay_color": "#1a0e07",
+        "stat_overlay_opacity": 45,
+        "height_mobile": "auto",
+        "height_desktop": "auto"
+      }
     },
     "timeline": {
       "type": "timeline",
-      "settings": {},
       "blocks": {
         "step-1": {
           "type": "step",
@@ -103,15 +153,24 @@
         "step-2",
         "step-3",
         "step-4"
-      ]
+      ],
+      "settings": {
+        "title": "YOUR RESULTS CALENDAR",
+        "subtitle": "What to expect from week 1 to month 6 — as your natural testosterone production is optimized.",
+        "cta_label": "TRY IT NOW",
+        "cta_link": "",
+        "show_preview_images": true,
+        "height_mobile": "auto",
+        "height_desktop": "auto"
+      }
     },
     "how_to_use": {
       "type": "how-to-use",
-      "settings": {},
       "blocks": {
         "step-1": {
           "type": "step",
           "settings": {
+            "video_autoplay": true,
             "title": "Take your daily serving every morning.",
             "subtitle": "With water and food, for best absorption."
           }
@@ -119,6 +178,7 @@
         "step-2": {
           "type": "step",
           "settings": {
+            "video_autoplay": true,
             "title": "Stay consistent — every single day.",
             "subtitle": "Use the free metal case to carry it anywhere."
           }
@@ -126,6 +186,7 @@
         "step-3": {
           "type": "step",
           "settings": {
+            "video_autoplay": true,
             "title": "Track your transformation for 90 days.",
             "subtitle": "Use the free 90-Day Transformation Tracker."
           }
@@ -135,11 +196,17 @@
         "step-1",
         "step-2",
         "step-3"
-      ]
+      ],
+      "settings": {
+        "title_pre": "HOW TO",
+        "title_highlight": "USE IT",
+        "media_format": "square",
+        "media_size_mobile": "full",
+        "media_size_desktop": "full"
+      }
     },
     "ingredients": {
       "type": "ingredients",
-      "settings": {},
       "blocks": {
         "ingredient-1": {
           "type": "ingredient",
@@ -223,11 +290,18 @@
         "ingredient-6",
         "ingredient-7",
         "ingredient-8"
-      ]
+      ],
+      "settings": {
+        "title": "8 INGREDIENTS IN 1 POWERFUL FORMULA",
+        "subtitle": "CLINICALLY DOSED + EFFECTIVE",
+        "cta_label": "TRY IT NOW",
+        "cta_link": "",
+        "height_mobile": "auto",
+        "height_desktop": "auto"
+      }
     },
     "facility": {
       "type": "facility",
-      "settings": {},
       "blocks": {
         "badge-1": {
           "type": "badge",
@@ -252,15 +326,28 @@
         "badge-1",
         "badge-2",
         "badge-3"
-      ]
+      ],
+      "settings": {
+        "title_pre": "MADE IN A CGMP",
+        "title_highlight": "FACILITY IN THE USA",
+        "autoplay_preview": true
+      }
     },
     "scarcity_cta": {
       "type": "scarcity-cta",
-      "settings": {}
+      "settings": {
+        "badge": "90-DAY HIGHER-T GUARANTEE",
+        "title_pre": "BOOST YOUR TESTOSTERONE",
+        "title_highlight": "IN 90 DAYS",
+        "text": "Try Up Men risk-free for 90 days. If you're not satisfied, we will refund you, no questions asked. Reclaim your masculinity, risk-free.",
+        "cta_label": "TRY IT NOW",
+        "cta_link": "",
+        "height_mobile": "auto",
+        "height_desktop": "auto"
+      }
     },
     "testimonials": {
       "type": "testimonials",
-      "settings": {},
       "blocks": {
         "expert-1": {
           "type": "expert",
@@ -314,42 +401,119 @@
         "expert-3",
         "expert-4",
         "expert-5"
-      ]
+      ],
+      "settings": {
+        "title_pre": "TRUSTED BY MEN'S HEALTH",
+        "title_highlight": "EXPERTS & WORLD-CLASS ATHLETES",
+        "hint": "SWIPE TO SEE MORE →"
+      }
     },
     "founder_story": {
       "type": "founder-story",
-      "settings": {}
+      "settings": {
+        "founder_name": "The Founder",
+        "founder_role": "Founder of Up Men",
+        "intro_title_pre": "WHY I CREATED",
+        "intro_title_highlight": "UP MEN",
+        "intro_text": "A few years ago I was doing everything \"right\" — training, working hard, grinding — and still dealing with:",
+        "struggles": "Low Energy|Brain Fog|Slow Recovery|Low Drive",
+        "intro_footer": "And more things I won't bore you by listing…",
+        "story_p1": "Every day felt like a battle. I was running on caffeine and willpower, and it still wasn't enough.",
+        "story_p2": "I looked fine on the outside, but I knew I wasn't performing at my real level.",
+        "story_p3": "Then I got my testosterone tested — and everything made sense.",
+        "story_p4": "I went all-in on understanding what actually moves the needle for male hormones, naturally.",
+        "tried_title": "I TRIED EVERYTHING:",
+        "tried_list": "More caffeine|Generic multivitamins|Random T-boosters|Crash diets|Cold showers|Sleep hacks|Expensive clinics|And more",
+        "follow_title_pre": "THE ANSWER WAS",
+        "follow_title_highlight": "SIMPLER THAN I THOUGHT",
+        "follow_p1": "Don't get me wrong — some of those habits are good, and I still keep them today. But none of them were the game-changer I was looking for.",
+        "follow_p2": "What actually worked was giving my body the exact raw materials it needs to produce testosterone on its own: clinically dosed Tongkat Ali, Shilajit, Zinc, Boron, Fenugreek and more — all in one daily serving.",
+        "follow_p3": "That's Up Men. No hormones, no shortcuts — just your body working the way it was designed to."
+      }
     },
     "product_label": {
       "type": "product-label",
-      "settings": {},
       "blocks": {
         "badge-1": {
           "type": "badge",
-          "settings": { "icon": "🇺🇸", "text": "Made in USA" }
+          "settings": {
+            "icon": "🇺🇸",
+            "icon_size": "medium",
+            "text": "Made in USA"
+          }
         },
         "badge-2": {
           "type": "badge",
-          "settings": { "icon": "🧪", "text": "Third Party Tested" }
+          "settings": {
+            "icon": "🧪",
+            "icon_size": "medium",
+            "text": "Third Party Tested"
+          }
         },
         "badge-3": {
           "type": "badge",
-          "settings": { "icon": "🚫", "text": "Non-GMO" }
+          "settings": {
+            "icon": "🚫",
+            "icon_size": "medium",
+            "text": "Non-GMO"
+          }
         }
       },
-      "block_order": ["badge-1", "badge-2", "badge-3"]
+      "block_order": [
+        "badge-1",
+        "badge-2",
+        "badge-3"
+      ],
+      "settings": {
+        "heading": "Here's What's Inside Every Capsule",
+        "use_text": "Suggested use: take 5 capsules daily with food.",
+        "box_size": "medium",
+        "box_size_mobile": "xl",
+        "disclaimer": "* These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+      }
     },
     "pricing": {
       "type": "pricing",
-      "settings": {}
+      "settings": {
+        "eyebrow": "FLASH SALE: 1ST MONTH FREE",
+        "title": "<p>GET YOUR FIRST MONTH FREE</p>",
+        "offer_enabled": false,
+        "offer_title": "JOIN UP MEN TODAY",
+        "offer_tag_enabled": true,
+        "offer_tag_top": "GET",
+        "offer_tag_main": "50% OFF TODAY",
+        "countdown_enabled": true,
+        "countdown_target": "2026-07-31T23:59:59",
+        "label_days": "DAYS",
+        "label_hours": "HOURS",
+        "label_min": "MIN",
+        "label_sec": "SEC",
+        "scarcity_enabled": true,
+        "scarcity_text_1": "has a high risk of selling out —",
+        "scarcity_number": "2140",
+        "scarcity_text_2": "purchases made today.",
+        "product_kit": "",
+        "kit_name": "3-MONTH PLAN",
+        "kit_sub": "The complete 90-day protocol",
+        "variant_id_kit": "",
+        "selling_plan_kit": "",
+        "product_once": "",
+        "once_name": "MONTHLY PLAN",
+        "once_sub": "1-month supply, delivered monthly",
+        "variant_id_once": "",
+        "guarantee_note": "90-DAY HIGHER-T GUARANTEE · TRY IT RISK-FREE",
+        "height_mobile": "auto",
+        "height_desktop": "auto"
+      }
     },
     "marquee_fast": {
       "type": "marquee-fast",
-      "settings": {}
+      "settings": {
+        "text": "ONE GIANT BOOST FOR MANKIND."
+      }
     },
     "reviews": {
       "type": "reviews",
-      "settings": {},
       "blocks": {
         "review-1": {
           "type": "review",
@@ -405,11 +569,18 @@
         "review-2",
         "review-3",
         "review-4"
-      ]
+      ],
+      "settings": {
+        "title_pre": "WHAT MEN ARE",
+        "title_highlight": "SAYING",
+        "avg_rating": "4.8",
+        "total_reviews": "4,548",
+        "dist_pcts": "86|8|3|1|2",
+        "dist_counts": "3,911|364|136|46|91"
+      }
     },
     "how_it_works": {
       "type": "how-it-works",
-      "settings": {},
       "blocks": {
         "stat-1": {
           "type": "stat",
@@ -437,11 +608,13 @@
         "stat-1",
         "stat-2",
         "stat-3"
-      ]
+      ],
+      "settings": {
+        "note": "*Based on a survey of past and current Up Men customers in 2026."
+      }
     },
     "faq": {
       "type": "faq",
-      "settings": {},
       "blocks": {
         "faq-1": {
           "type": "faq",
@@ -525,10 +698,137 @@
         "faq-8",
         "faq-9",
         "faq-10"
-      ]
+      ],
+      "settings": {
+        "title_pre": "FREQUENTLY ASKED",
+        "title_highlight": "QUESTIONS",
+        "height_mobile": "auto",
+        "height_desktop": "auto"
+      }
+    },
+    "terraelix_hero_RXt9kq": {
+      "type": "terraelix-hero",
+      "blocks": {
+        "nav_link_4BthkF": {
+          "type": "nav_link",
+          "settings": {
+            "label": "About",
+            "link": ""
+          }
+        },
+        "nav_link_UtbtTF": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Products",
+            "link": ""
+          }
+        },
+        "nav_link_MH3y3N": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Promotions",
+            "link": ""
+          }
+        },
+        "nav_link_xqqTzd": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Contact",
+            "link": ""
+          }
+        },
+        "card_bTP7bU": {
+          "type": "card",
+          "settings": {
+            "icon": "flask",
+            "icon_bg": "#000000",
+            "text": "Experience our newly enhanced natural formula"
+          }
+        },
+        "card_JrhDED": {
+          "type": "card",
+          "settings": {
+            "icon": "leaf",
+            "icon_bg": "#065f46",
+            "text": "Pure organic ingredients sourced sustainably"
+          }
+        },
+        "card_TKy3eX": {
+          "type": "card",
+          "settings": {
+            "icon": "droplets",
+            "icon_bg": "#155e75",
+            "text": "Advanced bioavailability for maximum absorption"
+          }
+        },
+        "card_rHhRdy": {
+          "type": "card",
+          "settings": {
+            "icon": "sun",
+            "icon_bg": "#b45309",
+            "text": "Clinically tested for daily energy & vitality"
+          }
+        }
+      },
+      "block_order": [
+        "nav_link_4BthkF",
+        "nav_link_UtbtTF",
+        "nav_link_MH3y3N",
+        "nav_link_xqqTzd",
+        "card_bTP7bU",
+        "card_JrhDED",
+        "card_TKy3eX",
+        "card_rHhRdy"
+      ],
+      "name": "TerraElix Hero",
+      "settings": {
+        "brand_name": "TerraElix",
+        "brand_link": "",
+        "show_search": true,
+        "search_link": "",
+        "show_bag": true,
+        "bag_link": "",
+        "show_cart_count": true,
+        "show_return": true,
+        "return_link": "",
+        "return_label": "Returns",
+        "show_avatar": true,
+        "avatar_link": "",
+        "headline": "The Power [of]\n[Nature] [in] Every\nCapsule",
+        "dim_opacity": 45,
+        "show_inline_image": true,
+        "btn_label": "Explore Now",
+        "btn_link": "",
+        "lede": "Discover our new plant-based supplements for daily balance and clean energy.",
+        "show_product_image": true,
+        "product_alt": "TerraElix supplement bottle",
+        "show_panel1": true,
+        "panel1_title": "Start your personalized path to natural balance",
+        "panel1_link_label": "Personal Assessment",
+        "panel1_link": "",
+        "show_panel1_image": true,
+        "panel1_bg": "#ECEDEC",
+        "panel1_text": "#000000",
+        "panel2_bg": "#FEFDF9",
+        "card_interval": 3500,
+        "show_dots": true,
+        "show_panel3": true,
+        "show_panel3_image": true,
+        "panel3_stat": "+14K",
+        "panel3_text": "People have already optimized their wellness",
+        "panel3_bg": "#000000",
+        "overlay_opacity": 0,
+        "text_color": "#ffffff",
+        "btn_bg": "#000000",
+        "btn_text": "#ffffff",
+        "height_mobile": "auto",
+        "height_desktop": "full",
+        "use_google_fonts": true
+      }
     }
   },
   "order": [
+    "terraelix_hero_RXt9kq",
     "hero",
     "marquee_intro",
     "story",
