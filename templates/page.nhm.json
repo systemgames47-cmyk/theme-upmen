@@ -116,6 +116,7 @@
         "chapter_word": "Chapter",
         "asterisks": "***",
         "interval": 3500,
+        "start_chapter": 3,
         "foot_text": "DIGGING INTO OUR PLANET'S PAST",
         "bg_color": "#0a0a0a",
         "text_color": "#ffffff",

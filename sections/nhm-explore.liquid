@@ -41,6 +41,8 @@
     margin: 0; max-width: 1000px; text-align: center; color: var(--nhm-ink);
     font-size: calc(2.2rem * var(--fs-h, 1)); line-height: 1.1; font-weight: 500; letter-spacing: -0.025em;
   }
+  /* The heading's line break is desktop-only — on mobile it wraps naturally */
+  #mm-nhmexp-{{ sid }} .nhm-heading br { display: none; }
 
   #mm-nhmexp-{{ sid }} .nhm-pills {
     display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
@@ -69,6 +71,7 @@
     #mm-nhmexp-{{ sid }} { min-height: 100vh; padding-top: 128px; }
     #mm-nhmexp-{{ sid }} .nhm-label { font-size: 11px; }
     #mm-nhmexp-{{ sid }} .nhm-heading { font-size: calc(3.5rem * var(--fs-h, 1)); }
+    #mm-nhmexp-{{ sid }} .nhm-heading br { display: inline; }
     #mm-nhmexp-{{ sid }} .nhm-pills { gap: 16px; margin-bottom: 96px; }
     #mm-nhmexp-{{ sid }} .nhm-spacer { min-height: {{ s.spacer_desktop | default: 450 }}px; }
     #mm-nhmexp-{{ sid }} .nhm-foot { display: flex; padding: 0 64px 48px; }

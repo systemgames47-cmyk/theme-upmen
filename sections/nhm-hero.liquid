@@ -105,7 +105,7 @@
   #mm-nhmhero-{{ sid }} .nhm-body {
     position: relative; z-index: 10; flex: 1 1 auto;
     display: flex; align-items: flex-start; justify-content: space-between; gap: 32px;
-    padding: 0 24px 96px;
+    padding: 0 40px 96px;
   }
 
   /* Left panel */
@@ -185,6 +185,9 @@
   }
 
   /* ---------------- Breakpoints ---------------- */
+  @media (min-width: 640px) {
+    #mm-nhmhero-{{ sid }} .nhm-left { margin-top: 112px; }
+  }
   @media (min-width: 768px) {
     #mm-nhmhero-{{ sid }} .nhm-header { padding: 24px 64px 0; }
     #mm-nhmhero-{{ sid }} .nhm-subnav { font-size: 11px; }

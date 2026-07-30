@@ -26,6 +26,13 @@
 {%- assign chapters = section.blocks | where: 'type', 'chapter' -%}
 {%- assign tags = section.blocks | where: 'type', 'tag' -%}
 
+{%- comment -%} Which chapter is highlighted on load (1-based in the editor) {%- endcomment -%}
+{%- assign start_idx = s.start_chapter | default: 3 | minus: 1 -%}
+{%- if start_idx >= chapters.size or start_idx < 0 -%}
+  {%- assign start_idx = 0 -%}
+{%- endif -%}
+{%- assign start_no = start_idx | plus: 1 | prepend: '0' | slice: -2, 2 -%}
+
 <style>
   #mm-nhmcol-{{ sid }} {
     --nhm-bg: {{ s.bg_color | default: '#0a0a0a' }};
@@ -37,6 +44,10 @@
     display: flex; flex-direction: column;
     background: var(--nhm-bg); color: var(--nhm-ink);
     font-family: {{ nhm_sans }};
+    /* The artwork is 160vw wide on mobile. `clip` kills the sideways scroll
+       without clipping the Y axis, so it can still bleed up over the section
+       above — `hidden` would force overflow-y to auto and cut it off. */
+    overflow-x: clip;
   }
   #mm-nhmcol-{{ sid }} *, #mm-nhmcol-{{ sid }} *::before, #mm-nhmcol-{{ sid }} *::after { box-sizing: border-box; }
   #mm-nhmcol-{{ sid }} ::selection { background: #fff; color: #000; }
@@ -253,7 +264,7 @@
             {%- assign chimg = block.settings.image_url -%}
           {%- endif -%}
           {%- if chimg != blank -%}
-            <img data-nhm-img class="{% if forloop.index0 == 0 %}is-active{% endif %}"
+            <img data-nhm-img class="{% if forloop.index0 == start_idx %}is-active{% endif %}"
               src="{{ chimg }}" alt="{{ block.settings.name | escape }}"
               referrerpolicy="no-referrer" loading="lazy">
           {%- endif -%}
@@ -261,7 +272,7 @@
       </div>
 
       <div class="nhm-counter">
-        <span class="nhm-num" data-nhm-counter>01</span>
+        <span class="nhm-num" data-nhm-counter>{{ start_no }}</span>
         <span class="nhm-sep">/</span>
         <span>{{ chapters.size | prepend: '0' | slice: -2, 2 }}</span>
       </div>
@@ -270,11 +281,11 @@
     <div class="nhm-list-wrap">
       <div class="nhm-bar">
         <span>{{ s.bar_text | escape }}</span>
-        <span class="nhm-chapno" data-nhm-chapno>{{ s.chapter_word | default: 'Chapter' }} 01</span>
+        <span class="nhm-chapno" data-nhm-chapno>{{ s.chapter_word | default: 'Chapter' }} {{ start_no }}</span>
       </div>
 
       {%- for block in chapters -%}
-        <button type="button" class="nhm-item{% if forloop.index0 == 0 %} is-active{% endif %}"
+        <button type="button" class="nhm-item{% if forloop.index0 == start_idx %} is-active{% endif %}"
           data-nhm-item="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
           <b>{{ block.settings.name | escape }}</b>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
@@ -327,7 +338,7 @@
   if (!items.length) return;
 
   var DURATION = 900;
-  var index = 0;
+  var index = {{ start_idx }};
   var busy = false;
 
   function pad(n) { return (n < 10 ? '0' : '') + n; }
@@ -393,33 +404,44 @@
     }
 
     busy = true;
-    if (from) {
-      from.classList.remove('is-active');
-      from.classList.add('is-leaving');
-      from.style.filter = 'url(#nhm-sand-out-{{ sid }})';
+
+    /* Phase 2 — the new image reassembles out of the sand (quartic ease-out) */
+    function enter() {
+      to.classList.add('is-active');
+      to.style.filter = 'url(#nhm-sand-in-{{ sid }})';
+      apply(pIn, 1, -80, -30);
+
+      var start = null;
+      requestAnimationFrame(function frame(ts) {
+        if (start === null) start = ts;
+        var t = Math.min(1, (ts - start) / DURATION);
+        apply(pIn, 1 - (1 - Math.pow(1 - t, 4)), -80, -30);
+        if (t < 1) { requestAnimationFrame(frame); }
+        else { to.style.filter = ''; busy = false; }
+      });
     }
-    to.classList.add('is-active');
-    to.style.filter = 'url(#nhm-sand-in-{{ sid }})';
+
+    /* Phase 1 — the old image dissolves away first (cubic ease-in).
+       AnimatePresence mode="wait": exit fully completes before enter starts. */
+    if (!from) { enter(); return; }
+
+    from.classList.remove('is-active');
+    from.classList.add('is-leaving');
+    from.style.filter = 'url(#nhm-sand-out-{{ sid }})';
 
     var start = null;
-    function frame(ts) {
+    requestAnimationFrame(function frame(ts) {
       if (start === null) start = ts;
       var t = Math.min(1, (ts - start) / DURATION);
-
-      /* exiting: cubic ease-in — dissolves away */
       apply(pOut, Math.pow(t, 3), 120, 30);
-      /* entering: quartic ease-out — reassembles */
-      apply(pIn, 1 - (1 - Math.pow(1 - t, 4)), -80, -30);
-
       if (t < 1) {
         requestAnimationFrame(frame);
       } else {
-        if (from) { from.classList.remove('is-leaving'); from.style.filter = ''; }
-        to.style.filter = '';
-        busy = false;
+        from.classList.remove('is-leaving');
+        from.style.filter = '';
+        enter();
       }
-    }
-    requestAnimationFrame(frame);
+    });
   }
 
   items.forEach(function (el) {
@@ -474,6 +496,7 @@
     { "type": "text", "id": "chapter_word", "label": "Chapter label word", "default": "Chapter" },
     { "type": "text", "id": "asterisks", "label": "Corner glyph", "default": "***" },
     { "type": "range", "id": "interval", "label": "Auto-advance", "min": 1500, "max": 8000, "step": 500, "unit": "ms", "default": 3500 },
+    { "type": "range", "id": "start_chapter", "label": "Chapter highlighted on load", "min": 1, "max": 12, "step": 1, "default": 3 },
     { "type": "paragraph", "content": "Add \"Chapter\" blocks below. The image cross-fades with a sand-dissolve effect." },
 
     { "type": "header", "content": "Footer" },
