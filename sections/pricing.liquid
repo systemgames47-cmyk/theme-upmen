@@ -74,6 +74,9 @@
     #shopify-section-{{ sid }} .mm-addon .free { color: #39c46e; font-weight: 700; }
     #shopify-section-{{ sid }} .mm-addon .val { font-weight: 700; }
     #shopify-section-{{ sid }} .mm-addon .val.free { color: #39c46e; text-decoration: line-through; }
+    #shopify-section-{{ sid }} .mm-addon .val.save { color: #39c46e; }
+    #shopify-section-{{ sid }} .mm-addon .val .was { color: rgba(255,255,255,0.45); font-weight: 400; }
+    #shopify-section-{{ sid }} .mm-gifts .mm-lb-trigger { aspect-ratio: 1/1; border-radius: 8px; }
     #shopify-section-{{ sid }} .mm-qty-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); margin-bottom: 14px; }
     #shopify-section-{{ sid }} .mm-qty-label { font-size: calc((13px) * var(--fs-b, 1)); font-weight: 700; }
     #shopify-section-{{ sid }} .mm-stepper { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; padding: 4px 6px; }
@@ -219,9 +222,11 @@
         {%- endfor -%}
       {%- endif -%}
       <div class="mm-card popular">
-        <div class="mm-ribbon">FLASH SALE · 1ST MONTH FREE</div>
+        {%- if section.settings.kit_ribbon != blank -%}
+          <div class="mm-ribbon">{{ section.settings.kit_ribbon }}</div>
+        {%- endif -%}
         <div class="mm-card-head">
-          <p class="mm-badge">3-MONTH AUTO-RENEW SUBSCRIPTION</p>
+          <p class="mm-badge">{{ section.settings.kit_badge }}</p>
           <h3 class="mm-name">{{ section.settings.kit_name }}</h3>
           <p class="mm-sub">{{ section.settings.kit_sub }}</p>
         </div>
@@ -232,36 +237,45 @@
         {%- else -%}
           <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.kit_name }}" loading="lazy">
         {%- endif -%}
+        {%- assign kit_addons = section.blocks | where: 'type', 'kit_addon' -%}
         <div class="mm-addons">
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>90-Day Supply — 3 Bottles</span></span><span class="val"><s style="color:rgba(255,255,255,0.45);font-weight:400;">$177</s> $118</span></div>
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>1st Bottle</span></span><span class="val free">Save $59</span></div>
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Capsule Case</span></span><span class="val free">$10</span></div>
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Testosterone Guide</span></span><span class="val free">$20</span></div>
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>1 Month of Ladder Workout App</span></span><span class="val free">$30</span></div>
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>Surprise Gift</span></span><span class="val free"></span></div>
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>Free US shipping on your first order</span></span><span class="val"></span></div>
+          {%- if kit_addons.size > 0 -%}
+            {%- for block in kit_addons -%}{% render 'mm-addon-row', block: block %}{%- endfor -%}
+          {%- else -%}
+            {%- comment -%} Fallback: the original hardcoded rows, for sections placed
+              before these became blocks. Add "Benefit — subscription card" blocks to
+              take over. {%- endcomment -%}
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>90-Day Supply — 3 Bottles</span></span><span class="val"><s class="was">$177</s> $118</span></div>
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>1st Bottle</span></span><span class="val save">Save $59</span></div>
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Capsule Case</span></span><span class="val free">$10</span></div>
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Testosterone Guide</span></span><span class="val free">$20</span></div>
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>1 Month of Ladder Workout App</span></span><span class="val free">$30</span></div>
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>Surprise Gift</span></span><span class="val free"></span></div>
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>Free US shipping on your first order</span></span><span class="val"></span></div>
+          {%- endif -%}
         </div>
-        <div class="mm-gifts" aria-label="Free gifts included">
-          {%- if section.settings.gift_1 != blank -%}
-            <img src="{{ section.settings.gift_1 | image_url: width: 400 }}" alt="Free gift: metal storage case" loading="lazy">
-          {%- else -%}
-            <img src="{{ 'free-gift-1.png' | asset_url }}" alt="Free gift: metal storage case" loading="lazy">
-          {%- endif -%}
-          {%- if section.settings.gift_2 != blank -%}
-            <img src="{{ section.settings.gift_2 | image_url: width: 400 }}" alt="Free gift: testosterone cheat sheet" loading="lazy">
-          {%- else -%}
-            <img src="{{ 'free-gift-2.png' | asset_url }}" alt="Free gift: testosterone cheat sheet" loading="lazy">
-          {%- endif -%}
-          {%- if section.settings.gift_3 != blank -%}
-            <img src="{{ section.settings.gift_3 | image_url: width: 400 }}" alt="Free gift: high-T cookbook" loading="lazy">
-          {%- else -%}
-            <img src="{{ 'free-gift-3.png' | asset_url }}" alt="Free gift: high-T cookbook" loading="lazy">
-          {%- endif -%}
-          {%- if section.settings.gift_4 != blank -%}
-            <img src="{{ section.settings.gift_4 | image_url: width: 400 }}" alt="Free gift: 90-day tracker" loading="lazy">
-          {%- else -%}
-            <img src="{{ 'free-gift-4.png' | asset_url }}" alt="Free gift: 90-day tracker" loading="lazy">
-          {%- endif -%}
+        <div class="mm-gifts" aria-label="{{ section.settings.gifts_label | escape }}">
+          {%- for i in (1..4) -%}
+            {%- assign gift_key = 'gift_' | append: i -%}
+            {%- assign gift_alt_key = gift_key | append: '_alt' -%}
+            {%- assign gift_img = section.settings[gift_key] -%}
+            {%- assign gift_alt = section.settings[gift_alt_key] -%}
+            {%- if gift_img != blank -%}
+              {%- assign gift_thumb = gift_img | image_url: width: 400 -%}
+              {%- assign gift_full = gift_img | image_url: width: 1600 -%}
+            {%- else -%}
+              {%- assign gift_asset = 'free-gift-' | append: i | append: '.png' -%}
+              {%- assign gift_thumb = gift_asset | asset_url -%}
+              {%- assign gift_full = gift_thumb -%}
+            {%- endif -%}
+            <button type="button" class="mm-lb-trigger"
+              data-lightbox="gifts-{{ sid }}"
+              data-lightbox-src="{{ gift_full }}"
+              data-lightbox-alt="{{ gift_alt | escape }}"
+              aria-label="{{ 'Enlarge: ' | append: gift_alt | escape }}">
+              <img src="{{ gift_thumb }}" alt="{{ gift_alt | escape }}" loading="lazy">
+            </button>
+          {%- endfor -%}
         </div>
         {%- if pk != blank and pk.id != blank and pk.available -%}
           {%- assign vk = pk.selected_or_first_available_variant -%}
@@ -279,7 +293,7 @@
             {%- endif -%}
             <input type="hidden" name="quantity" value="1">
             <div class="mm-qty-row">
-              <span class="mm-qty-label">Quantity</span>
+              <span class="mm-qty-label">{{ section.settings.qty_label }}</span>
               <div class="mm-stepper">
                 <button type="button" aria-label="Decrease">−</button>
                 <span class="num">1</span>
@@ -290,19 +304,25 @@
                 <span class="now">{{ vk.price | money }}</span>
               </div>
             </div>
-            <button type="submit" class="mm-cta">Start My 90-Day Protocol →</button>
+            <button type="submit" class="mm-cta">{{ section.settings.kit_cta_label }}</button>
           </form>
         {%- else -%}
           <div class="mm-warn">⚙️ Select a product in the theme editor (Packages section → "Product") OR create a Shopify product with handle <code>up-men-launch-kit</code> (or <code>up-men</code>).</div>
-          <div class="mm-qty-row"><span class="mm-qty-label">Quantity</span><div class="mm-stepper"><button type="button" disabled>−</button><span class="num">1</span><button type="button" disabled>+</button></div><div class="mm-price"><span class="old">$177</span><span class="now">$118</span></div></div>
-          <button type="button" class="mm-cta" disabled>Start My 90-Day Protocol →</button>
+          <div class="mm-qty-row"><span class="mm-qty-label">{{ section.settings.qty_label }}</span><div class="mm-stepper"><button type="button" disabled>−</button><span class="num">1</span><button type="button" disabled>+</button></div><div class="mm-price"><span class="old">$177</span><span class="now">$118</span></div></div>
+          <button type="button" class="mm-cta" disabled>{{ section.settings.kit_cta_label }}</button>
         {%- endif -%}
-        <ul class="mm-perks">
-          <li>Just $39.33 per month</li>
-          <li>Auto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime</li>
-          <li>90-day higher-T money-back guarantee</li>
-        </ul>
-        <div class="mm-ship"><strong>Ships in 24h</strong> if ordered today.</div>
+        {%- assign kit_perks = section.settings.kit_perks | strip | newline_to_br | split: '<br />' -%}
+        {%- if kit_perks.size > 0 -%}
+          <ul class="mm-perks">
+            {%- for perk in kit_perks -%}
+              {%- assign perk_t = perk | strip -%}
+              {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if section.settings.ship_strong != blank or section.settings.ship_rest != blank -%}
+          <div class="mm-ship"><strong>{{ section.settings.ship_strong }}</strong> {{ section.settings.ship_rest }}</div>
+        {%- endif -%}
       </div>
 
       {%- comment -%} Package 2: Try once {%- endcomment -%}
@@ -321,7 +341,7 @@
       {%- endif -%}
       <div class="mm-card">
         <div class="mm-card-head">
-          <p class="mm-badge">AUTO-SHIP & SAVE</p>
+          <p class="mm-badge">{{ section.settings.once_badge }}</p>
           <h3 class="mm-name">{{ section.settings.once_name }}</h3>
           <p class="mm-sub">{{ section.settings.once_sub }}</p>
         </div>
@@ -332,12 +352,19 @@
         {%- else -%}
           <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.once_name }}" loading="lazy">
         {%- endif -%}
+        {%- assign once_addons = section.blocks | where: 'type', 'once_addon' -%}
         <div class="mm-addons">
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>1 Bottle — 30-Day Supply</span></span><span class="val">$59</span></div>
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>$15 off your first order</span></span><span class="val free">Save $15</span></div>
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Capsule Case</span></span><span class="val free"></span></div>
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Testosterone Guide</span></span><span class="val free"></span></div>
-          <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>Free US shipping on your first order</span></span><span class="val"></span></div>
+          {%- if once_addons.size > 0 -%}
+            {%- for block in once_addons -%}{% render 'mm-addon-row', block: block %}{%- endfor -%}
+          {%- else -%}
+            {%- comment -%} Fallback: original hardcoded rows. Add "Benefit — monthly
+              card" blocks to take over. {%- endcomment -%}
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>1 Bottle — 30-Day Supply</span></span><span class="val">$59</span></div>
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>$15 off your first order</span></span><span class="val save">Save $15</span></div>
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Capsule Case</span></span><span class="val free"></span></div>
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span><span class="free">Free </span>UP MEN Testosterone Guide</span></span><span class="val free"></span></div>
+            <div class="mm-addon"><span class="left"><span class="ck">✓</span><span>Free US shipping on your first order</span></span><span class="val"></span></div>
+          {%- endif -%}
         </div>
         {%- if p1 != blank and p1.id != blank and p1.available -%}
           {%- assign v1 = p1.selected_or_first_available_variant -%}
@@ -355,7 +382,7 @@
             {%- endif -%}
             <input type="hidden" name="quantity" value="1">
             <div class="mm-qty-row">
-              <span class="mm-qty-label">Quantity</span>
+              <span class="mm-qty-label">{{ section.settings.qty_label }}</span>
               <div class="mm-stepper">
                 <button type="button" aria-label="Decrease">−</button>
                 <span class="num">1</span>
@@ -366,18 +393,25 @@
                 <span class="now">{{ v1.price | money }}</span>
               </div>
             </div>
-            <button type="submit" class="mm-cta">Try Up Men →</button>
+            <button type="submit" class="mm-cta">{{ section.settings.once_cta_label }}</button>
           </form>
         {%- else -%}
           <div class="mm-warn">⚙️ Select a product in the theme editor (Packages section → "Product") OR create a Shopify product with handle <code>up-men-try-once</code> (or <code>up-men</code>).</div>
-          <div class="mm-qty-row"><span class="mm-qty-label">Quantity</span><div class="mm-stepper"><button type="button" disabled>−</button><span class="num">1</span><button type="button" disabled>+</button></div><div class="mm-price"><span class="old">$59</span><span class="now">$44</span></div></div>
-          <button type="button" class="mm-cta" disabled>Try Up Men →</button>
+          <div class="mm-qty-row"><span class="mm-qty-label">{{ section.settings.qty_label }}</span><div class="mm-stepper"><button type="button" disabled>−</button><span class="num">1</span><button type="button" disabled>+</button></div><div class="mm-price"><span class="old">$59</span><span class="now">$44</span></div></div>
+          <button type="button" class="mm-cta" disabled>{{ section.settings.once_cta_label }}</button>
         {%- endif -%}
-        <ul class="mm-perks">
-          <li>Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime</li>
-          <li>90-day higher-T money-back guarantee</li>
-        </ul>
-        <div class="mm-ship"><strong>Ships in 24h</strong> if ordered today.</div>
+        {%- assign once_perks = section.settings.once_perks | strip | newline_to_br | split: '<br />' -%}
+        {%- if once_perks.size > 0 -%}
+          <ul class="mm-perks">
+            {%- for perk in once_perks -%}
+              {%- assign perk_t = perk | strip -%}
+              {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if section.settings.ship_strong != blank or section.settings.ship_rest != blank -%}
+          <div class="mm-ship"><strong>{{ section.settings.ship_strong }}</strong> {{ section.settings.ship_rest }}</div>
+        {%- endif -%}
       </div>
 
     </div>
@@ -437,15 +471,29 @@
     { "type": "text", "id": "scarcity_text_2", "label": "Scarcity text (after number)", "default": "purchases made today." },
     { "type": "header", "content": "Launch Kit (subscription)" },
     { "type": "product", "id": "product_kit", "label": "Product", "info": "Product sold in this card. If empty, the theme looks for the handle up-men-launch-kit (or up-men)." },
+    { "type": "text", "id": "kit_ribbon", "label": "Ribbon", "info": "Leave empty to hide the ribbon.", "default": "FLASH SALE · 1ST MONTH FREE" },
+    { "type": "text", "id": "kit_badge", "label": "Badge (above name)", "default": "3-MONTH AUTO-RENEW SUBSCRIPTION" },
     { "type": "text", "id": "kit_name", "label": "Package name", "default": "3-MONTH PLAN" },
     { "type": "text", "id": "kit_sub", "label": "Subtitle", "default": "The complete 90-day protocol" },
+    { "type": "text", "id": "kit_cta_label", "label": "Button label", "default": "Start My 90-Day Protocol →" },
+    { "type": "textarea", "id": "kit_perks", "label": "Perks below the button", "info": "One per line.", "default": "Just $39.33 per month\nAuto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
+    { "type": "paragraph", "content": "Add \"Benefit — subscription card\" blocks to control the ✓ rows. With no blocks the original hardcoded list is used." },
     { "type": "text", "id": "variant_id_kit", "label": "Variant ID (optional)", "info": "If empty, uses the product's first available variant." },
     { "type": "text", "id": "selling_plan_kit", "label": "Selling plan ID (optional)", "info": "Required for subscription pricing. Leave empty for one-time purchase." },
     { "type": "header", "content": "Try Once (one-time)" },
     { "type": "product", "id": "product_once", "label": "Product", "info": "Product sold in this card. If empty, the theme looks for the handle up-men-try-once (or up-men)." },
+    { "type": "text", "id": "once_badge", "label": "Badge (above name)", "default": "AUTO-SHIP & SAVE" },
     { "type": "text", "id": "once_name", "label": "Package name", "default": "MONTHLY PLAN" },
     { "type": "text", "id": "once_sub", "label": "Subtitle", "default": "1-month supply, delivered monthly" },
+    { "type": "text", "id": "once_cta_label", "label": "Button label", "default": "Try Up Men →" },
+    { "type": "textarea", "id": "once_perks", "label": "Perks below the button", "info": "One per line.", "default": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
+    { "type": "paragraph", "content": "Add \"Benefit — monthly card\" blocks to control the ✓ rows. With no blocks the original hardcoded list is used." },
     { "type": "text", "id": "variant_id_once", "label": "Variant ID (optional)" },
+
+    { "type": "header", "content": "Shared card labels" },
+    { "type": "text", "id": "qty_label", "label": "Quantity label", "default": "Quantity" },
+    { "type": "text", "id": "ship_strong", "label": "Shipping note — bold part", "default": "Ships in 24h" },
+    { "type": "text", "id": "ship_rest", "label": "Shipping note — rest", "default": "if ordered today." },
     { "type": "text", "id": "guarantee_note", "label": "Guarantee note", "default": "90-DAY HIGHER-T GUARANTEE · TRY IT RISK-FREE" },
     { "type": "header", "content": "Banner size" },
     {
@@ -478,11 +526,81 @@
     { "type": "image_picker", "id": "bg_mobile", "label": "Background (mobile)" },
     { "type": "image_picker", "id": "bg_desktop", "label": "Background (desktop)" },
     { "type": "image_picker", "id": "fallback_image", "label": "Fallback product image", "info": "Shown when no product is connected to the store yet." },
+    { "type": "header", "content": "Free gift images" },
+    { "type": "paragraph", "content": "Clicking any of these opens the enlarged lightbox. The caption is what the visitor reads there." },
+    { "type": "text", "id": "gifts_label", "label": "Group label (accessibility)", "default": "Free gifts included" },
     { "type": "image_picker", "id": "gift_1", "label": "Free gift image 1" },
+    { "type": "text", "id": "gift_1_alt", "label": "Caption 1", "default": "Free gift: metal storage case" },
     { "type": "image_picker", "id": "gift_2", "label": "Free gift image 2" },
+    { "type": "text", "id": "gift_2_alt", "label": "Caption 2", "default": "Free gift: testosterone cheat sheet" },
     { "type": "image_picker", "id": "gift_3", "label": "Free gift image 3" },
-    { "type": "image_picker", "id": "gift_4", "label": "Free gift image 4" }
+    { "type": "text", "id": "gift_3_alt", "label": "Caption 3", "default": "Free gift: high-T cookbook" },
+    { "type": "image_picker", "id": "gift_4", "label": "Free gift image 4" },
+    { "type": "text", "id": "gift_4_alt", "label": "Caption 4", "default": "Free gift: 90-day tracker" }
   ],
-  "presets": [{ "name": "Packages (Custom)" }]
+  "max_blocks": 24,
+  "blocks": [
+    {
+      "type": "kit_addon",
+      "name": "Benefit — subscription card",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Benefit", "default": "UP MEN Capsule Case" },
+        { "type": "checkbox", "id": "free_prefix", "label": "Prefix with a green \"Free\"", "default": true },
+        { "type": "text", "id": "old_value", "label": "Old value (struck through)", "info": "Shown to the left of the value." },
+        { "type": "text", "id": "value", "label": "Value (right side)", "default": "$10" },
+        {
+          "type": "select",
+          "id": "value_style",
+          "label": "Value style",
+          "options": [
+            { "value": "plain", "label": "White" },
+            { "value": "free", "label": "Green, struck through" },
+            { "value": "save", "label": "Green" }
+          ],
+          "default": "free"
+        }
+      ]
+    },
+    {
+      "type": "once_addon",
+      "name": "Benefit — monthly card",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Benefit", "default": "UP MEN Capsule Case" },
+        { "type": "checkbox", "id": "free_prefix", "label": "Prefix with a green \"Free\"", "default": true },
+        { "type": "text", "id": "old_value", "label": "Old value (struck through)", "info": "Shown to the left of the value." },
+        { "type": "text", "id": "value", "label": "Value (right side)" },
+        {
+          "type": "select",
+          "id": "value_style",
+          "label": "Value style",
+          "options": [
+            { "value": "plain", "label": "White" },
+            { "value": "free", "label": "Green, struck through" },
+            { "value": "save", "label": "Green" }
+          ],
+          "default": "free"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Packages (Custom)",
+      "blocks": [
+        { "type": "kit_addon", "settings": { "text": "90-Day Supply — 3 Bottles", "free_prefix": false, "old_value": "$177", "value": "$118", "value_style": "plain" } },
+        { "type": "kit_addon", "settings": { "text": "1st Bottle", "free_prefix": true, "value": "Save $59", "value_style": "save" } },
+        { "type": "kit_addon", "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "value": "$10", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "value": "$20", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "1 Month of Ladder Workout App", "free_prefix": true, "value": "$30", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "Surprise Gift", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } },
+        { "type": "once_addon", "settings": { "text": "1 Bottle — 30-Day Supply", "free_prefix": false, "value": "$59", "value_style": "plain" } },
+        { "type": "once_addon", "settings": { "text": "$15 off your first order", "free_prefix": false, "value": "Save $15", "value_style": "save" } },
+        { "type": "once_addon", "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "once_addon", "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "once_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

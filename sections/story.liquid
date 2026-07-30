@@ -211,19 +211,24 @@
         <p>{{ section.settings.decline_p2 }}</p>
         <p><strong>{{ section.settings.decline_p3 }}</strong></p>
       </div>
-      <div class="mm-stat{% if section.settings.stat_image != blank %} has-img{% endif %}" data-stat-chart role="img" aria-label="Average testosterone levels dropping 1% every year since 1980: 100% in 1980, around 80% in 2000, around 55% today">
-        <span class="big">-1%</span>
+      {%- assign stat_bars = section.settings.stat_bars | default: '100|80|55' | split: '|' -%}
+      {%- assign stat_years = section.settings.stat_years | default: '1980|2000|TODAY' | split: '|' -%}
+      <div class="mm-stat{% if section.settings.stat_image != blank %} has-img{% endif %}" data-stat-chart role="img" aria-label="{{ section.settings.stat_aria | escape }}">
+        <span class="big">{{ section.settings.stat_big }}</span>
         <span class="lbl">{{ section.settings.stat_label }}</span>
         <div class="mm-chart">
-          <div class="mm-col"><span class="pct">100%</span><div class="fill" style="height: 100%;"></div></div>
-          <div class="mm-col"><span class="pct">80%</span><div class="fill" style="height: 80%;"></div></div>
-          <div class="mm-col"><span class="pct">55%</span><div class="fill" style="height: 55%;"></div></div>
+          {%- for bar in stat_bars -%}
+            {%- assign bar_v = bar | strip -%}
+            <div class="mm-col"><span class="pct">{{ bar_v }}%</span><div class="fill" style="height: {{ bar_v }}%;"></div></div>
+          {%- endfor -%}
           <svg class="mm-arrow" viewBox="0 0 300 150" preserveAspectRatio="none" aria-hidden="true">
             <path d="M 30 22 Q 150 32 262 62" />
             <path class="head" d="M 248 50 L 263 62 L 244 68" />
           </svg>
         </div>
-        <div class="yrs"><span>1980</span><span>2000</span><span>TODAY</span></div>
+        <div class="yrs">
+          {%- for yr in stat_years -%}<span>{{ yr | strip }}</span>{%- endfor -%}
+        </div>
         <span class="cap">{{ section.settings.stat_caption }}</span>
       </div>
     </div>
@@ -329,7 +334,11 @@
       "default": "auto"
     },
     { "type": "header", "content": "Stat box (-1% chart)" },
+    { "type": "text", "id": "stat_big", "label": "Chart headline figure", "default": "-1%" },
     { "type": "text", "id": "stat_label", "label": "Chart label", "default": "AVERAGE TESTOSTERONE LEVELS SINCE 1980" },
+    { "type": "text", "id": "stat_bars", "label": "Chart bar heights %", "info": "Separate with |. Each value is both the bar height and its printed label.", "default": "100|80|55" },
+    { "type": "text", "id": "stat_years", "label": "Chart x-axis labels", "info": "Separate with |. Must match the number of bars.", "default": "1980|2000|TODAY" },
+    { "type": "text", "id": "stat_aria", "label": "Chart description (screen readers)", "default": "Average testosterone levels dropping 1% every year since 1980: 100% in 1980, around 80% in 2000, around 55% today" },
     { "type": "text", "id": "stat_caption", "label": "Chart caption (below years)", "default": "Men today have roughly half the testosterone their grandfathers had at the same age.*" },
     { "type": "image_picker", "id": "stat_image", "label": "Background image or GIF", "info": "Shown behind the -1% chart. GIFs are supported." },
     { "type": "checkbox", "id": "stat_overlay_enabled", "label": "Apply color gradient over image", "default": true },

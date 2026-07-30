@@ -60,6 +60,23 @@
   #mm-rv-{{ sid }} .mm-rphotos { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
   #mm-rv-{{ sid }} .mm-rphotos > div { width: 96px; height: 96px; overflow: hidden; border-radius: 4px; background: var(--mars-panel, #1a0e07); }
   #mm-rv-{{ sid }} .mm-rphotos img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Clickable photos (open the shared lightbox) */
+  #mm-rv-{{ sid }} .mm-photos .mm-lb-trigger,
+  #mm-rv-{{ sid }} .mm-rphotos .mm-lb-trigger { border-radius: 4px; }
+
+  /* "With photos" filter — a real control, not decoration */
+  #mm-rv-{{ sid }} .mm-tabs button.filter {
+    background: none; cursor: pointer; font-family: inherit; font-size: calc((13px) * var(--fs-b, 1));
+    transition: border-color .25s ease, color .25s ease;
+  }
+  #mm-rv-{{ sid }} .mm-tabs button.filter:hover { border-color: var(--brand, #ff5600); color: #fff; }
+  #mm-rv-{{ sid }} .mm-tabs button.filter svg { transition: transform .25s ease; }
+  #mm-rv-{{ sid }} .mm-tabs button.filter[aria-pressed="true"] { border-color: var(--brand, #ff5600); color: #fff; }
+  #mm-rv-{{ sid }} .mm-tabs button.filter[aria-pressed="true"] svg { transform: rotate(180deg); }
+  #mm-rv-{{ sid }} .mm-list[data-filter="photos"] > article:not([data-has-photo]) { display: none; }
+  #mm-rv-{{ sid }} .mm-empty { padding: 32px 0; text-align: center; color: rgba(255,255,255,0.5); font-size: calc((14px) * var(--fs-b, 1)); display: none; }
+  #mm-rv-{{ sid }} .mm-list[data-filter="photos"].is-empty + .mm-empty { display: block; }
 </style>
 
 <section id="mm-rv-{{ sid }}" class="reveal" data-testid="reviews">
@@ -76,7 +93,7 @@
             {%- endfor -%}
           </span>
         </div>
-        <p class="mm-total">Based on {{ section.settings.total_reviews }} reviews</p>
+        <p class="mm-total">{{ section.settings.total_prefix }} {{ section.settings.total_reviews }} {{ section.settings.total_suffix }}</p>
       </div>
 
       <div class="mm-dist">
@@ -102,13 +119,23 @@
         {%- assign pics = 'photo_1,photo_2,photo_3,photo_4' | split: ',' -%}
         {%- for pic_id in pics -%}
           {%- assign pic = section.settings[pic_id] -%}
+          {%- assign pic_alt = section.settings.photos_alt_prefix | append: ' ' | append: forloop.index -%}
+          {%- if pic != blank -%}
+            {%- assign pic_thumb = pic | image_url: width: 400 -%}
+            {%- assign pic_full = pic | image_url: width: 1600 -%}
+          {%- else -%}
+            {%- assign rv_preview = 'upmen-preview-review' | append: forloop.index | append: '.jpg' -%}
+            {%- assign pic_thumb = rv_preview | asset_url -%}
+            {%- assign pic_full = pic_thumb -%}
+          {%- endif -%}
           <div>
-            {%- if pic != blank -%}
-              <img src="{{ pic | image_url: width: 400 }}" alt="Customer photo {{ forloop.index }}" loading="lazy">
-            {%- else -%}
-              {%- assign rv_preview = 'upmen-preview-review' | append: forloop.index | append: '.jpg' -%}
-              <img src="{{ rv_preview | asset_url }}" alt="Customer photo {{ forloop.index }}" loading="lazy">
-            {%- endif -%}
+            <button type="button" class="mm-lb-trigger"
+              data-lightbox="rv-grid-{{ sid }}"
+              data-lightbox-src="{{ pic_full }}"
+              data-lightbox-alt="{{ pic_alt | escape }}"
+              aria-label="{{ 'Enlarge: ' | append: pic_alt | escape }}">
+              <img src="{{ pic_thumb }}" alt="{{ pic_alt | escape }}" loading="lazy">
+            </button>
           </div>
         {%- endfor -%}
       </div>
@@ -116,18 +143,23 @@
 
     <div class="mm-tabs">
       <div class="left">
-        <span class="active">Reviews</span>
+        <span class="active">{{ section.settings.tab_label }}</span>
         <span class="num">{{ section.settings.total_reviews }}</span>
       </div>
-      <div class="filter">
-        With Photos
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
+      <button type="button" class="filter" data-rv-filter aria-pressed="false" aria-controls="mm-rv-list-{{ sid }}">
+        <span data-rv-filter-label>{{ section.settings.filter_label }}</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
     </div>
 
-    <div class="mm-list">
+    <div class="mm-list" id="mm-rv-list-{{ sid }}" data-rv-list>
+      {%- assign rv_photo_keys = 'photo,photo_2,photo_3' | split: ',' -%}
       {%- for block in section.blocks -%}
-        <article {{ block.shopify_attributes }}>
+        {%- assign rv_has_photo = false -%}
+        {%- for pk in rv_photo_keys -%}
+          {%- if block.settings[pk] != blank -%}{%- assign rv_has_photo = true -%}{%- endif -%}
+        {%- endfor -%}
+        <article {% if rv_has_photo %}data-has-photo{% endif %} {{ block.shopify_attributes }}>
           <div class="mm-head">
             <div class="mm-who">
               <div class="mm-avatar">
@@ -137,7 +169,9 @@
               <div>
                 <div class="mm-name-line">
                   <span class="mm-name">{{ block.settings.name }}</span>
-                  <span class="mm-verified">Verified Purchase</span>
+                  {%- if section.settings.verified_label != blank -%}
+                    <span class="mm-verified">{{ section.settings.verified_label }}</span>
+                  {%- endif -%}
                 </div>
                 <div class="mm-country">
                   <span>{{ block.settings.flag }}</span>
@@ -157,16 +191,59 @@
             <h3 class="mm-rtitle">{{ block.settings.title }}</h3>
           </div>
           <p class="mm-body">{{ block.settings.body }}</p>
-          {%- if block.settings.photo != blank -%}
+          {%- if rv_has_photo -%}
             <div class="mm-rphotos">
-              <div><img src="{{ block.settings.photo | image_url: width: 300 }}" alt="Review photo — {{ block.settings.name }}" loading="lazy"></div>
+              {%- for pk in rv_photo_keys -%}
+                {%- assign rp = block.settings[pk] -%}
+                {%- if rp != blank -%}
+                  {%- assign rp_alt = section.settings.review_photo_label | append: ' — ' | append: block.settings.name -%}
+                  <div>
+                    <button type="button" class="mm-lb-trigger"
+                      data-lightbox="rv-{{ block.id }}"
+                      data-lightbox-src="{{ rp | image_url: width: 1600 }}"
+                      data-lightbox-alt="{{ rp_alt | escape }}"
+                      aria-label="{{ 'Enlarge: ' | append: rp_alt | escape }}">
+                      <img src="{{ rp | image_url: width: 300 }}" alt="{{ rp_alt | escape }}" loading="lazy">
+                    </button>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
             </div>
           {%- endif -%}
         </article>
       {%- endfor -%}
     </div>
+    <p class="mm-empty">{{ section.settings.empty_label }}</p>
   </div>
 </section>
+
+<script>
+(function () {
+  var root = document.getElementById('mm-rv-{{ sid }}');
+  if (!root) return;
+  var btn = root.querySelector('[data-rv-filter]');
+  var list = root.querySelector('[data-rv-list]');
+  var label = root.querySelector('[data-rv-filter-label]');
+  if (!btn || !list || btn.dataset.mmInit) return;
+  btn.dataset.mmInit = '1';
+
+  var labelOff = {{ section.settings.filter_label | default: 'With Photos' | json }};
+  var labelOn = {{ section.settings.filter_active_label | default: 'Showing photos only' | json }};
+
+  btn.addEventListener('click', function () {
+    var wasOn = list.getAttribute('data-filter') === 'photos';
+    if (wasOn) {
+      list.removeAttribute('data-filter');
+      list.classList.remove('is-empty');
+    } else {
+      list.setAttribute('data-filter', 'photos');
+      list.classList.toggle('is-empty', !list.querySelector('article[data-has-photo]'));
+    }
+    btn.setAttribute('aria-pressed', wasOn ? 'false' : 'true');
+    if (label) label.textContent = wasOn ? labelOff : labelOn;
+  });
+})();
+</script>
 
 {% schema %}
 {
@@ -177,9 +254,20 @@
     { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "SAYING" },
     { "type": "text", "id": "avg_rating", "label": "Average rating", "default": "4.8" },
     { "type": "text", "id": "total_reviews", "label": "Total reviews", "default": "4,548" },
+    { "type": "text", "id": "total_prefix", "label": "Total — text before the number", "default": "Based on" },
+    { "type": "text", "id": "total_suffix", "label": "Total — text after the number", "default": "reviews" },
     { "type": "text", "id": "dist_pcts", "label": "Star bar widths %, 5→1 (separate with |)", "default": "86|8|3|1|2" },
     { "type": "text", "id": "dist_counts", "label": "Star counts, 5→1 (separate with |)", "default": "3,911|364|136|46|91" },
+    { "type": "header", "content": "List labels" },
+    { "type": "text", "id": "tab_label", "label": "Tab label", "default": "Reviews" },
+    { "type": "text", "id": "filter_label", "label": "Photo filter — off", "info": "Clicking this hides reviews without photos.", "default": "With Photos" },
+    { "type": "text", "id": "filter_active_label", "label": "Photo filter — on", "default": "Showing photos only" },
+    { "type": "text", "id": "empty_label", "label": "Empty state (filter finds nothing)", "default": "No reviews with photos yet." },
+    { "type": "text", "id": "verified_label", "label": "Verified badge", "info": "Leave empty to hide.", "default": "Verified Purchase" },
+    { "type": "text", "id": "review_photo_label", "label": "Review photo caption prefix", "default": "Review photo" },
     { "type": "header", "content": "Customer photo grid" },
+    { "type": "paragraph", "content": "Clicking any photo opens the enlarged lightbox — drag or use the arrows to move between them." },
+    { "type": "text", "id": "photos_alt_prefix", "label": "Caption prefix", "default": "Customer photo" },
     { "type": "image_picker", "id": "photo_1", "label": "Customer photo 1" },
     { "type": "image_picker", "id": "photo_2", "label": "Customer photo 2" },
     { "type": "image_picker", "id": "photo_3", "label": "Customer photo 3" },
@@ -197,7 +285,9 @@
         { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
         { "type": "text", "id": "title", "label": "Review title", "default": "Real results" },
         { "type": "textarea", "id": "body", "label": "Review text", "default": "Great product, real difference in energy and focus." },
-        { "type": "image_picker", "id": "photo", "label": "Review photo" }
+        { "type": "image_picker", "id": "photo", "label": "Review photo 1" },
+        { "type": "image_picker", "id": "photo_2", "label": "Review photo 2" },
+        { "type": "image_picker", "id": "photo_3", "label": "Review photo 3" }
       ]
     }
   ],

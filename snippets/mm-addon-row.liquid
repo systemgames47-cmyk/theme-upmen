@@ -1,0 +1,27 @@
+{%- comment -%}
+  One benefit row inside a "Packages (Custom)" pricing card.
+  Usage: {% render 'mm-addon-row', block: block %}
+
+  Block settings consumed:
+    text         benefit copy
+    free_prefix  prepend a green "Free "
+    old_value    struck-through former price, shown before the value
+    value        right-hand value
+    value_style  plain | free (green, struck through) | save (green)
+{%- endcomment -%}
+{%- assign a = block.settings -%}
+{%- case a.value_style -%}
+  {%- when 'free' -%}{%- assign val_class = 'val free' -%}
+  {%- when 'save' -%}{%- assign val_class = 'val save' -%}
+  {%- else -%}{%- assign val_class = 'val' -%}
+{%- endcase -%}
+<div class="mm-addon" {{ block.shopify_attributes }}>
+  <span class="left">
+    <span class="ck" aria-hidden="true">✓</span>
+    <span>{% if a.free_prefix %}<span class="free">Free </span>{% endif %}{{ a.text }}</span>
+  </span>
+  <span class="{{ val_class }}">
+    {%- if a.old_value != blank -%}<s class="was">{{ a.old_value }}</s> {% endif -%}
+    {{ a.value }}
+  </span>
+</div>
