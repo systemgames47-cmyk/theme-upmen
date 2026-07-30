@@ -1,0 +1,480 @@
+{%- comment -%}
+  NHM Hero — full-viewport editorial hero:
+  wordmark SVG with letter-block reveal + sub-nav + background video + side panels.
+  Ported from the React/Motion reference; no Tailwind, no build step.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- assign s = section.settings -%}
+
+{%- comment -%} ---------- Fonts ---------- {%- endcomment -%}
+{%- if s.use_google_fonts -%}
+  {%- assign nhm_sans = "'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif" -%}
+  {%- assign nhm_mono = "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+{%- else -%}
+  {%- assign nhm_sans = 'var(--font-body)' -%}
+  {%- assign nhm_mono = 'ui-monospace, SFMono-Regular, Menlo, monospace' -%}
+{%- endif -%}
+
+{%- comment -%} ---------- Video source ---------- {%- endcomment -%}
+{%- assign nhm_has_video = false -%}
+{%- if s.bg_video != blank or s.bg_video_url != blank -%}
+  {%- assign nhm_has_video = true -%}
+{%- endif -%}
+
+<style>
+  #mm-nhmhero-{{ sid }} {
+    --nhm-bg: {{ s.bg_color | default: '#fcfcfc' }};
+    --nhm-ink: {{ s.text_color | default: '#111111' }};
+    --nhm-muted: {{ s.text_color | default: '#111111' | color_modify: 'alpha', 0.62 }};
+    --nhm-faint: {{ s.text_color | default: '#111111' | color_modify: 'alpha', 0.38 }};
+    --nhm-line: {{ s.text_color | default: '#111111' | color_modify: 'alpha', 0.2 }};
+    position: relative; width: 100%; min-height: 100svh;
+    display: flex; flex-direction: column; overflow: hidden;
+    background: var(--nhm-bg); color: var(--nhm-ink);
+    font-family: {{ nhm_sans }};
+  }
+  #mm-nhmhero-{{ sid }} *, #mm-nhmhero-{{ sid }} *::before, #mm-nhmhero-{{ sid }} *::after { box-sizing: border-box; }
+  #mm-nhmhero-{{ sid }} a { color: inherit; text-decoration: none; }
+  #mm-nhmhero-{{ sid }} ::selection { background: #000; color: #fff; }
+
+  /* ---------------- Header / wordmark ---------------- */
+  #mm-nhmhero-{{ sid }} .nhm-header { position: relative; z-index: 20; padding: 24px 24px 0; }
+  #mm-nhmhero-{{ sid }} .nhm-mark { margin: 0; width: 100%; display: block; transform-origin: left center; }
+  #mm-nhmhero-{{ sid }} .nhm-mark svg { width: 100%; height: auto; display: block; }
+  #mm-nhmhero-{{ sid }} .nhm-mark svg polygon { fill: var(--nhm-ink); }
+  #mm-nhmhero-{{ sid }} .nhm-mark img { width: 100%; height: auto; display: block; }
+
+  /* ---------------- Sub-nav ---------------- */
+  #mm-nhmhero-{{ sid }} .nhm-subnav {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-top: 32px;
+    font-family: {{ nhm_mono }}; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.7;
+  }
+  #mm-nhmhero-{{ sid }} .nhm-col-left { width: 15%; min-width: 90px; color: var(--nhm-ink); }
+  #mm-nhmhero-{{ sid }} .nhm-col-mid { flex: 1 1 auto; color: var(--nhm-muted); line-height: 1.75; }
+  #mm-nhmhero-{{ sid }} .nhm-col-right { display: none; width: 15%; }
+  #mm-nhmhero-{{ sid }} .nhm-col-right a { display: block; color: var(--nhm-muted); }
+  #mm-nhmhero-{{ sid }} .nhm-col-right a:hover { color: var(--nhm-ink); text-decoration: underline; }
+  #mm-nhmhero-{{ sid }} .nhm-arrow { display: none; width: 5%; justify-content: center; padding-top: 2px; color: var(--nhm-faint); }
+
+  /* Hamburger */
+  #mm-nhmhero-{{ sid }} .nhm-burger {
+    position: relative; z-index: 60; display: inline-flex; flex-direction: column; gap: 6px; align-items: flex-end;
+    background: none; border: 0; padding: 4px 0 4px 16px; cursor: pointer; flex: 0 0 auto;
+  }
+  #mm-nhmhero-{{ sid }} .nhm-burger span {
+    display: block; height: 1.5px; background: var(--nhm-ink); transition: all .3s ease; transform-origin: center;
+  }
+  #mm-nhmhero-{{ sid }} .nhm-burger span:nth-child(1) { width: 32px; }
+  #mm-nhmhero-{{ sid }} .nhm-burger span:nth-child(2) { width: 32px; }
+  #mm-nhmhero-{{ sid }} .nhm-burger:hover span:nth-child(1) { width: 24px; }
+  #mm-nhmhero-{{ sid }} .nhm-burger:hover span:nth-child(2) { width: 40px; }
+  #mm-nhmhero-{{ sid }} .nhm-burger.is-open span:nth-child(1) { width: 32px; transform: translateY(3.75px) rotate(45deg); }
+  #mm-nhmhero-{{ sid }} .nhm-burger.is-open span:nth-child(2) { width: 32px; transform: translateY(-3.75px) rotate(-45deg); }
+
+  /* ---------------- Mobile menu ---------------- */
+  #mm-nhmhero-{{ sid }} .nhm-menu {
+    position: absolute; left: 0; right: 0; z-index: 50; display: none; flex-direction: column; gap: 24px;
+    padding: 32px 24px; background: var(--nhm-bg);
+    border-bottom: 1px solid var(--nhm-line); box-shadow: 0 20px 40px rgba(0,0,0,.12);
+    font-family: {{ nhm_mono }}; font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0; transform: translateY(-20px); transition: opacity .3s ease, transform .3s ease;
+  }
+  #mm-nhmhero-{{ sid }} .nhm-menu.is-open { display: flex; opacity: 1; transform: translateY(0); }
+
+  /* ---------------- Background video ---------------- */
+  #mm-nhmhero-{{ sid }} .nhm-media {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    opacity: 0; transition: opacity 1.2s ease;
+  }
+  #mm-nhmhero-{{ sid }} .nhm-media.is-in { opacity: 1; }
+  #mm-nhmhero-{{ sid }} .nhm-media video,
+  #mm-nhmhero-{{ sid }} .nhm-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ---------------- Body ---------------- */
+  #mm-nhmhero-{{ sid }} .nhm-body {
+    position: relative; z-index: 10; flex: 1 1 auto;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 32px;
+    padding: 0 24px 96px;
+  }
+
+  /* Left panel */
+  #mm-nhmhero-{{ sid }} .nhm-left { width: 320px; max-width: 100%; margin-top: 80px; }
+  #mm-nhmhero-{{ sid }} .nhm-index {
+    display: flex; align-items: center; gap: 12px; margin: 0 0 20px;
+    font-family: {{ nhm_mono }}; font-size: 12px; letter-spacing: 0.1em; color: var(--nhm-ink);
+  }
+  #mm-nhmhero-{{ sid }} .nhm-index i { display: block; width: 64px; height: 1.5px; background: var(--nhm-line); font-style: normal; }
+  #mm-nhmhero-{{ sid }} .nhm-title {
+    margin: 0 0 20px; font-weight: 400; letter-spacing: -0.03em; line-height: 1;
+    font-size: calc(3.5rem * var(--fs-h, 1)); color: var(--nhm-ink);
+  }
+  #mm-nhmhero-{{ sid }} .nhm-desc {
+    margin: 0; width: 240px; max-width: 100%; color: var(--nhm-muted);
+    font-size: calc(13px * var(--fs-b, 1)); line-height: 1.6;
+  }
+
+  /* CTA */
+  #mm-nhmhero-{{ sid }} .nhm-cta {
+    position: relative; display: inline-flex; align-items: center; gap: 10px; overflow: hidden;
+    margin-top: 32px; padding: 14px 24px; border-radius: 6px;
+    background: {{ s.cta_bg | default: '#1a1a1a' }}; border: 1px solid {{ s.cta_bg | default: '#1a1a1a' }};
+    box-shadow: 0 1px 2px rgba(0,0,0,.06);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  #mm-nhmhero-{{ sid }} .nhm-cta:hover { transform: translateY(-0.5px); box-shadow: 3px 3px 0 rgba(17,17,17,0.5); }
+  #mm-nhmhero-{{ sid }} .nhm-cta:active { transform: translateY(0); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  #mm-nhmhero-{{ sid }} .nhm-cta .nhm-slide {
+    position: absolute; inset: 0; z-index: 0; background: var(--nhm-bg);
+    transform: translateX(-101%); transition: transform .7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #mm-nhmhero-{{ sid }} .nhm-cta:hover .nhm-slide { transform: translateX(0); }
+  #mm-nhmhero-{{ sid }} .nhm-cta svg,
+  #mm-nhmhero-{{ sid }} .nhm-cta span { position: relative; z-index: 1; transition: color .3s ease, transform .3s ease; }
+  #mm-nhmhero-{{ sid }} .nhm-cta svg { color: #fff; }
+  #mm-nhmhero-{{ sid }} .nhm-cta span { color: #fff; font-size: calc(15px * var(--fs-b, 1)); font-weight: 500; }
+  #mm-nhmhero-{{ sid }} .nhm-cta:hover svg { color: #111; transform: scale(1.1) rotate(-12deg) translateY(-4px); }
+  #mm-nhmhero-{{ sid }} .nhm-cta:hover span { color: #111; }
+
+  /* Right panel */
+  #mm-nhmhero-{{ sid }} .nhm-right { display: none; width: 200px; margin-top: 48px; }
+  #mm-nhmhero-{{ sid }} .nhm-spec-title {
+    margin: 0 0 8px; font-family: {{ nhm_mono }}; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--nhm-ink);
+  }
+  #mm-nhmhero-{{ sid }} .nhm-spec-text { margin: 0 0 32px; font-size: calc(12px * var(--fs-b, 1)); line-height: 1.6; color: var(--nhm-muted); }
+  #mm-nhmhero-{{ sid }} .nhm-stat { margin-bottom: 20px; }
+  #mm-nhmhero-{{ sid }} .nhm-stat dt {
+    font-family: {{ nhm_mono }}; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nhm-faint);
+  }
+  #mm-nhmhero-{{ sid }} .nhm-stat dd { margin: 2px 0 0; font-size: calc(13px * var(--fs-b, 1)); font-weight: 500; }
+  #mm-nhmhero-{{ sid }} .nhm-details { display: inline-flex; align-items: center; gap: 12px; margin-top: 12px; }
+  #mm-nhmhero-{{ sid }} .nhm-details .nhm-circle {
+    display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+    width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--nhm-line);
+    transition: background .3s ease, border-color .3s ease, color .3s ease;
+  }
+  #mm-nhmhero-{{ sid }} .nhm-details:hover .nhm-circle { background: #111; border-color: #111; color: #fff; }
+  #mm-nhmhero-{{ sid }} .nhm-details b {
+    font-family: {{ nhm_mono }}; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  }
+
+  /* Scroll cue */
+  #mm-nhmhero-{{ sid }} .nhm-scroll {
+    position: absolute; bottom: 40px; left: 40px; z-index: 10;
+    display: none; align-items: center; gap: 14px;
+  }
+  #mm-nhmhero-{{ sid }} .nhm-scroll .nhm-circle {
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+    width: 48px; height: 48px; border-radius: 999px; border: 1px solid var(--nhm-line);
+  }
+  #mm-nhmhero-{{ sid }} .nhm-scroll .nhm-circle i { display: block; width: 1px; height: 12px; background: var(--nhm-muted); }
+  #mm-nhmhero-{{ sid }} .nhm-scroll span {
+    font-family: {{ nhm_mono }}; font-size: 10px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--nhm-faint);
+  }
+
+  /* ---------------- Breakpoints ---------------- */
+  @media (min-width: 768px) {
+    #mm-nhmhero-{{ sid }} .nhm-header { padding: 24px 64px 0; }
+    #mm-nhmhero-{{ sid }} .nhm-subnav { font-size: 11px; }
+    #mm-nhmhero-{{ sid }} .nhm-arrow { display: flex; }
+    #mm-nhmhero-{{ sid }} .nhm-col-mid { width: 30%; flex: 0 0 30%; }
+    #mm-nhmhero-{{ sid }} .nhm-col-right { display: block; }
+    #mm-nhmhero-{{ sid }} .nhm-burger { display: none; }
+    #mm-nhmhero-{{ sid }} .nhm-menu { display: none !important; }
+    #mm-nhmhero-{{ sid }} .nhm-body { padding: 0 64px 96px; }
+    #mm-nhmhero-{{ sid }} .nhm-left { margin-top: 128px; }
+    #mm-nhmhero-{{ sid }} .nhm-title { font-size: calc(5rem * var(--fs-h, 1)); }
+    #mm-nhmhero-{{ sid }} .nhm-desc { font-size: calc(14px * var(--fs-b, 1)); }
+    #mm-nhmhero-{{ sid }} .nhm-right { display: block; margin-top: 80px; }
+    #mm-nhmhero-{{ sid }} .nhm-scroll { display: flex; left: 64px; }
+  }
+
+  /* ---------------- Entrance animations ---------------- */
+  @keyframes nhm-letter-{{ sid }} { from { transform: translateY(120px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  @keyframes nhm-mark-{{ sid }} { from { transform: scale(1.03); } to { transform: scale(1); } }
+  @keyframes nhm-up-{{ sid }} { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  #mm-nhmhero-{{ sid }} .nhm-mark { animation: nhm-mark-{{ sid }} 1.2s cubic-bezier(0.16,1,0.3,1) both; }
+  #mm-nhmhero-{{ sid }} .nhm-mark svg polygon {
+    animation: nhm-letter-{{ sid }} 1.2s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  #mm-nhmhero-{{ sid }} [data-nhm-up] { animation: nhm-up-{{ sid }} .8s ease-out both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #mm-nhmhero-{{ sid }} .nhm-mark,
+    #mm-nhmhero-{{ sid }} .nhm-mark svg polygon,
+    #mm-nhmhero-{{ sid }} [data-nhm-up] { animation: none !important; }
+    #mm-nhmhero-{{ sid }} .nhm-media { transition: none; }
+  }
+</style>
+
+<section id="mm-nhmhero-{{ sid }}" data-testid="nhm-hero" data-nhm-video-delay="{{ s.video_delay | default: 2800 }}">
+
+  {%- comment -%} ---------------- Background video ---------------- {%- endcomment -%}
+  {%- if nhm_has_video -%}
+    <div class="nhm-media" data-nhm-media>
+      <video autoplay loop muted playsinline
+        {% if s.video_poster != blank %}poster="{{ s.video_poster | image_url: width: 1920 }}"{% endif %}>
+        {%- if s.bg_video != blank -%}
+          {%- for source in s.bg_video.sources -%}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {%- endfor -%}
+        {%- else -%}
+          <source src="{{ s.bg_video_url }}" type="video/mp4">
+        {%- endif -%}
+      </video>
+    </div>
+  {%- elsif s.video_poster != blank -%}
+    <div class="nhm-media" data-nhm-media>
+      <img src="{{ s.video_poster | image_url: width: 1920 }}" alt="" loading="eager">
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ---------------- Header ---------------- {%- endcomment -%}
+  <header class="nhm-header">
+    <h1 class="nhm-mark">
+      <a href="{{ s.logo_link | default: routes.root_url }}" aria-label="{{ s.logo_alt | escape }}">
+        {%- if s.logo_image != blank -%}
+          <img src="{{ s.logo_image | image_url: width: 1680 }}" alt="{{ s.logo_alt | escape }}" loading="eager">
+        {%- else -%}
+          <svg viewBox="0 0 840 100" role="img" aria-label="{{ s.logo_alt | escape }}" preserveAspectRatio="xMidYMid meet">
+            <g transform="translate(0,0)">
+              <polygon points="0,0 14,0 14,100 0,100" style="animation-delay:100ms"></polygon>
+              <polygon points="200,0 214,0 214,100 200,100" style="animation-delay:160ms"></polygon>
+              <polygon points="0,0 33,0 214,100 181,100" style="animation-delay:220ms"></polygon>
+            </g>
+            <g transform="translate(280,0)">
+              <polygon points="0,0 14,0 14,100 0,100" style="animation-delay:280ms"></polygon>
+              <polygon points="200,0 214,0 214,100 200,100" style="animation-delay:340ms"></polygon>
+              <polygon points="14,43 200,43 200,57 14,57" style="animation-delay:400ms"></polygon>
+            </g>
+            <g transform="translate(560,0)">
+              <polygon points="0,0 14,0 14,100 0,100" style="animation-delay:460ms"></polygon>
+              <polygon points="266,0 280,0 280,100 266,100" style="animation-delay:520ms"></polygon>
+              <polygon points="0,0 26,0 153,100 127,100" style="animation-delay:580ms"></polygon>
+              <polygon points="254,0 280,0 153,100 127,100" style="animation-delay:640ms"></polygon>
+            </g>
+          </svg>
+        {%- endif -%}
+      </a>
+    </h1>
+
+    {%- assign nav_blocks = section.blocks | where: 'type', 'nav_link' -%}
+    <div class="nhm-subnav">
+      <div class="nhm-col-left" data-nhm-up style="animation-delay:200ms">
+        {%- if s.brand_line1 != blank -%}<div>{{ s.brand_line1 | escape }}</div>{%- endif -%}
+        {%- if s.brand_line2 != blank -%}<div>{{ s.brand_line2 | escape }}</div>{%- endif -%}
+        {%- if s.brand_line3 != blank -%}<div>{{ s.brand_line3 | escape }}</div>{%- endif -%}
+      </div>
+
+      <div class="nhm-arrow" data-nhm-up style="animation-delay:260ms" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+
+      <div class="nhm-col-mid" data-nhm-up style="animation-delay:320ms">{{ s.intro | escape | newline_to_br }}</div>
+
+      <div class="nhm-arrow" data-nhm-up style="animation-delay:380ms" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+
+      {%- if nav_blocks.size > 0 -%}
+        <nav class="nhm-col-right" data-nhm-up style="animation-delay:440ms">
+          {%- for block in nav_blocks -%}
+            <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+          {%- endfor -%}
+        </nav>
+        <button type="button" class="nhm-burger" data-nhm-burger aria-label="Menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      {%- endif -%}
+    </div>
+  </header>
+
+  {%- if nav_blocks.size > 0 -%}
+    <nav class="nhm-menu" data-nhm-menu>
+      {%- for block in nav_blocks -%}
+        <a href="{{ block.settings.link | default: '#' }}">{{ block.settings.label | escape }}</a>
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
+
+  {%- comment -%} ---------------- Body ---------------- {%- endcomment -%}
+  <div class="nhm-body">
+    <div class="nhm-left">
+      {%- if s.index_number != blank -%}
+        <p class="nhm-index" data-nhm-up style="animation-delay:600ms">{{ s.index_number | escape }}<i></i></p>
+      {%- endif -%}
+
+      <h2 class="nhm-title" data-nhm-up style="animation-delay:750ms">{{ s.headline | escape | newline_to_br }}</h2>
+
+      {%- if s.description != blank -%}
+        <p class="nhm-desc" data-nhm-up style="animation-delay:900ms">{{ s.description | escape | newline_to_br }}</p>
+      {%- endif -%}
+
+      {%- if s.cta_label != blank -%}
+        <a href="{{ s.cta_link | default: '#' }}" class="nhm-cta" data-nhm-up style="animation-delay:1050ms">
+          <span class="nhm-slide" aria-hidden="true"></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 21V9"/>
+            <path d="M12 13c4 0 7-3 7-8-5 0-7 3-7 8Z"/>
+            <path d="M12 17c-4 0-7-3-7-8 5 0 7 3 7 8Z"/>
+            <path d="M9 21h6"/>
+          </svg>
+          <span>{{ s.cta_label | escape }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if s.show_specimen -%}
+      <div class="nhm-right">
+        {%- if s.specimen_title != blank -%}
+          <p class="nhm-spec-title" data-nhm-up style="animation-delay:900ms">{{ s.specimen_title | escape }}</p>
+        {%- endif -%}
+        {%- if s.specimen_text != blank -%}
+          <p class="nhm-spec-text" data-nhm-up style="animation-delay:1050ms">{{ s.specimen_text | escape | newline_to_br }}</p>
+        {%- endif -%}
+
+        <dl style="margin:0">
+          {%- if s.stat1_label != blank -%}
+            <div class="nhm-stat" data-nhm-up style="animation-delay:1200ms">
+              <dt>{{ s.stat1_label | escape }}</dt>
+              <dd>{{ s.stat1_value | escape }}</dd>
+            </div>
+          {%- endif -%}
+          {%- if s.stat2_label != blank -%}
+            <div class="nhm-stat" data-nhm-up style="animation-delay:1350ms">
+              <dt>{{ s.stat2_label | escape }}</dt>
+              <dd>{{ s.stat2_value | escape }}</dd>
+            </div>
+          {%- endif -%}
+        </dl>
+
+        {%- if s.details_label != blank -%}
+          <a href="{{ s.details_link | default: '#' }}" class="nhm-details" data-nhm-up style="animation-delay:1500ms">
+            <span class="nhm-circle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </span>
+            <b>{{ s.details_label | escape }}</b>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if s.scroll_label != blank -%}
+    <div class="nhm-scroll" data-nhm-up style="animation-delay:1200ms" aria-hidden="true">
+      <span class="nhm-circle"><i></i><i></i></span>
+      <span>{{ s.scroll_label | escape }}</span>
+    </div>
+  {%- endif -%}
+</section>
+
+<script>
+(function () {
+  var root = document.getElementById('mm-nhmhero-{{ sid }}');
+  if (!root) return;
+
+  /* ---- Delayed background video ---- */
+  var media = root.querySelector('[data-nhm-media]');
+  if (media) {
+    var delay = parseInt(root.getAttribute('data-nhm-video-delay'), 10);
+    if (isNaN(delay)) delay = 2800;
+    setTimeout(function () { media.classList.add('is-in'); }, delay);
+  }
+
+  /* ---- Mobile menu ---- */
+  var burger = root.querySelector('[data-nhm-burger]');
+  var menu = root.querySelector('[data-nhm-menu]');
+  if (burger && menu) {
+    var setOpen = function (open) {
+      burger.classList.toggle('is-open', open);
+      menu.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    burger.addEventListener('click', function () { setOpen(!menu.classList.contains('is-open')); });
+    menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "NHM Hero",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "header", "content": "Wordmark" },
+    { "type": "paragraph", "content": "Leave the image empty to use the built-in NHM letter-block wordmark." },
+    { "type": "image_picker", "id": "logo_image", "label": "Logo image (optional)" },
+    { "type": "text", "id": "logo_alt", "label": "Logo text (accessibility)", "default": "NHM" },
+    { "type": "url", "id": "logo_link", "label": "Logo link" },
+
+    { "type": "header", "content": "Sub-nav" },
+    { "type": "text", "id": "brand_line1", "label": "Left line 1", "default": "Natura" },
+    { "type": "text", "id": "brand_line2", "label": "Left line 2", "default": "History" },
+    { "type": "text", "id": "brand_line3", "label": "Left line 3", "default": "Museum" },
+    { "type": "textarea", "id": "intro", "label": "Center paragraph", "default": "Exploring the story of life on\nearth through science,\ndiscovery and wonder." },
+    { "type": "paragraph", "content": "Add \"Nav link\" blocks below for the right-hand menu." },
+
+    { "type": "header", "content": "Background video" },
+    { "type": "video", "id": "bg_video", "label": "Video (uploaded)" },
+    { "type": "text", "id": "bg_video_url", "label": "Or external MP4 URL", "default": "https://res.cloudinary.com/dsdxaxkiz/video/upload/v1779624998/magnific_use-img-2-as-the-exact-ba_Piu3X0W42C_wnrc8f.mp4" },
+    { "type": "image_picker", "id": "video_poster", "label": "Poster / fallback image" },
+    { "type": "range", "id": "video_delay", "label": "Fade in after", "min": 0, "max": 6000, "step": 200, "unit": "ms", "default": 2800 },
+
+    { "type": "header", "content": "Left panel" },
+    { "type": "text", "id": "index_number", "label": "Section number", "default": "01" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "TIMELESS\nWONDERS" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Step into the natural world and discover the stories written millions of years ago." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Explore Now" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "color", "id": "cta_bg", "label": "Button background", "default": "#1a1a1a" },
+
+    { "type": "header", "content": "Right panel — specimen" },
+    { "type": "checkbox", "id": "show_specimen", "label": "Show specimen panel", "default": true },
+    { "type": "text", "id": "specimen_title", "label": "Specimen name", "default": "Tyrannosaurus Rex" },
+    { "type": "textarea", "id": "specimen_text", "label": "Specimen detail", "default": "Late Cretaceous period\n68-66 million years ago" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Length" },
+    { "type": "text", "id": "stat1_value", "label": "Stat 1 value", "default": "12.3 m" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Height" },
+    { "type": "text", "id": "stat2_value", "label": "Stat 2 value", "default": "4.0 m" },
+    { "type": "text", "id": "details_label", "label": "Details link label", "default": "View Details" },
+    { "type": "url", "id": "details_link", "label": "Details link" },
+
+    { "type": "header", "content": "Scroll cue" },
+    { "type": "text", "id": "scroll_label", "label": "Scroll label", "default": "Scroll to explore" },
+
+    { "type": "header", "content": "Colors & fonts" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#fcfcfc" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#111111" },
+    { "type": "checkbox", "id": "use_google_fonts", "label": "Use Inter + JetBrains Mono (Google Fonts)", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Nav link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Visit" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NHM Hero",
+      "blocks": [
+        { "type": "nav_link", "settings": { "label": "Visit" } },
+        { "type": "nav_link", "settings": { "label": "Exhibitions" } },
+        { "type": "nav_link", "settings": { "label": "Discover" } },
+        { "type": "nav_link", "settings": { "label": "Learn" } },
+        { "type": "nav_link", "settings": { "label": "About" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

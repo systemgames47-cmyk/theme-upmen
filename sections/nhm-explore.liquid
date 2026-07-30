@@ -1,0 +1,210 @@
+{%- comment -%}
+  NHM Explore — centered statement block with action pills and a reserved
+  overlap area so the following dark section's artwork can bleed upward.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- assign s = section.settings -%}
+
+{%- if s.use_google_fonts -%}
+  {%- assign nhm_sans = "'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif" -%}
+  {%- assign nhm_mono = "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+{%- else -%}
+  {%- assign nhm_sans = 'var(--font-body)' -%}
+  {%- assign nhm_mono = 'ui-monospace, SFMono-Regular, Menlo, monospace' -%}
+{%- endif -%}
+
+<style>
+  #mm-nhmexp-{{ sid }} {
+    --nhm-bg: {{ s.bg_color | default: '#fcfcfc' }};
+    --nhm-ink: {{ s.text_color | default: '#111111' }};
+    --nhm-muted: {{ s.text_color | default: '#111111' | color_modify: 'alpha', 0.62 }};
+    --nhm-faint: {{ s.text_color | default: '#111111' | color_modify: 'alpha', 0.42 }};
+    --nhm-line: {{ s.text_color | default: '#111111' | color_modify: 'alpha', 0.2 }};
+    position: relative; width: 100%; min-height: 75vh; z-index: 20;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 96px 24px 0; background: var(--nhm-bg); color: var(--nhm-ink);
+    font-family: {{ nhm_sans }};
+  }
+  #mm-nhmexp-{{ sid }} *, #mm-nhmexp-{{ sid }} *::before, #mm-nhmexp-{{ sid }} *::after { box-sizing: border-box; }
+  #mm-nhmexp-{{ sid }} ::selection { background: #000; color: #fff; }
+
+  #mm-nhmexp-{{ sid }} .nhm-label {
+    margin: 0 0 48px; font-family: {{ nhm_mono }}; font-size: 10px; letter-spacing: 0.2em;
+  }
+  #mm-nhmexp-{{ sid }} .nhm-label em { font-style: normal; color: var(--nhm-faint); }
+  #mm-nhmexp-{{ sid }} .nhm-label b { font-weight: 700; text-transform: uppercase; color: var(--nhm-ink); }
+
+  #mm-nhmexp-{{ sid }} .nhm-heading {
+    margin: 0; max-width: 1000px; text-align: center; color: var(--nhm-ink);
+    font-size: calc(2.2rem * var(--fs-h, 1)); line-height: 1.1; font-weight: 500; letter-spacing: -0.025em;
+  }
+
+  #mm-nhmexp-{{ sid }} .nhm-pills {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+    margin: 40px 0 40px; padding: 0; list-style: none;
+  }
+  #mm-nhmexp-{{ sid }} .nhm-pill {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 999px;
+    border: 1px solid var(--nhm-line); background: rgba(255,255,255,0.5); backdrop-filter: blur(4px);
+    color: var(--nhm-muted); text-decoration: none;
+    font-size: calc(11px * var(--fs-b, 1)); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    transition: background .3s ease, color .3s ease, border-color .3s ease;
+  }
+  #mm-nhmexp-{{ sid }} .nhm-pill:hover { background: #000; border-color: #000; color: #fff; }
+
+  /* Room for the next section's artwork to overlap upward */
+  #mm-nhmexp-{{ sid }} .nhm-spacer { width: 100%; min-height: {{ s.spacer_mobile | default: 220 }}px; }
+
+  #mm-nhmexp-{{ sid }} .nhm-foot {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; pointer-events: none;
+    display: none; justify-content: space-between; padding: 0 32px 32px;
+    font-family: {{ nhm_mono }}; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--nhm-faint);
+  }
+
+  @media (min-width: 768px) {
+    #mm-nhmexp-{{ sid }} { min-height: 100vh; padding-top: 128px; }
+    #mm-nhmexp-{{ sid }} .nhm-label { font-size: 11px; }
+    #mm-nhmexp-{{ sid }} .nhm-heading { font-size: calc(3.5rem * var(--fs-h, 1)); }
+    #mm-nhmexp-{{ sid }} .nhm-pills { gap: 16px; margin-bottom: 96px; }
+    #mm-nhmexp-{{ sid }} .nhm-spacer { min-height: {{ s.spacer_desktop | default: 450 }}px; }
+    #mm-nhmexp-{{ sid }} .nhm-foot { display: flex; padding: 0 64px 48px; }
+  }
+  @media (min-width: 1024px) {
+    #mm-nhmexp-{{ sid }} .nhm-heading { font-size: calc(4.2rem * var(--fs-h, 1)); }
+  }
+
+  /* Reveal on scroll */
+  #mm-nhmexp-{{ sid }} [data-nhm-rv] {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity .8s cubic-bezier(0.16,1,0.3,1), transform .8s cubic-bezier(0.16,1,0.3,1);
+  }
+  #mm-nhmexp-{{ sid }} [data-nhm-rv].is-in { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    #mm-nhmexp-{{ sid }} [data-nhm-rv] { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<section id="mm-nhmexp-{{ sid }}" data-testid="nhm-explore">
+  {%- if s.label_text != blank -%}
+    <p class="nhm-label" data-nhm-rv>
+      <em>[ {{ s.label_number | escape }} ]</em> <b>{{ s.label_text | escape }}</b>
+    </p>
+  {%- endif -%}
+
+  <h2 class="nhm-heading" data-nhm-rv style="transition-delay:80ms">{{ s.heading | escape | newline_to_br }}</h2>
+
+  {%- assign pills = section.blocks | where: 'type', 'pill' -%}
+  {%- if pills.size > 0 -%}
+    <div class="nhm-pills">
+      {%- for block in pills -%}
+        {%- assign pdelay = forloop.index0 | times: 100 | plus: 300 -%}
+        <a href="{{ block.settings.link | default: '#' }}" class="nhm-pill" data-nhm-rv style="transition-delay:{{ pdelay }}ms" {{ block.shopify_attributes }}>
+          {%- case block.settings.icon -%}
+            {%- when 'dna' -%}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 16 1.5 1.5"/><path d="m14 8-1.5-1.5"/><path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"/><path d="m16.5 10.5 1 1"/><path d="m17 6-2.891-2.891"/><path d="M2 15c6.667-6 13.333 0 20-6"/><path d="m20 9 .891.891"/><path d="M3.109 14.109 6 17"/><path d="m6.5 12.5 1 1"/><path d="M7 18c1.798-1.998 2.518-3.995 2.807-5.993"/><path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>
+            {%- when 'gem' -%}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+            {%- when 'leaf' -%}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            {%- when 'book' -%}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+            {%- else -%}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z"/></svg>
+          {%- endcase -%}
+          {{ block.settings.label | escape }}
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="nhm-spacer" aria-hidden="true"></div>
+
+  <div class="nhm-foot" aria-hidden="true">
+    <span>{{ s.foot_left | escape }}</span>
+    <span>{{ s.foot_right | escape }}</span>
+  </div>
+</section>
+
+<script>
+(function () {
+  var root = document.getElementById('mm-nhmexp-{{ sid }}');
+  if (!root) return;
+  var items = root.querySelectorAll('[data-nhm-rv]');
+  if (!('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(items, function (el) { el.classList.add('is-in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
+    });
+  }, { rootMargin: '-100px 0px' });
+  Array.prototype.forEach.call(items, function (el) { io.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "NHM Explore",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "label_number", "label": "Label number", "default": "02" },
+    { "type": "text", "id": "label_text", "label": "Label text", "default": "Explore Our World" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Unearth the stories of our planet's past\nthrough fossils, minerals, and ancient wonders." },
+
+    { "type": "header", "content": "Overlap spacer" },
+    { "type": "paragraph", "content": "Empty space at the bottom so the artwork of the next section can bleed up over this one." },
+    { "type": "range", "id": "spacer_mobile", "label": "Spacer (mobile)", "min": 0, "max": 500, "step": 20, "unit": "px", "default": 220 },
+    { "type": "range", "id": "spacer_desktop", "label": "Spacer (desktop)", "min": 0, "max": 800, "step": 25, "unit": "px", "default": 450 },
+
+    { "type": "header", "content": "Footer line" },
+    { "type": "text", "id": "foot_left", "label": "Bottom left", "default": "WE DON'T JUST TELL STORIES." },
+    { "type": "text", "id": "foot_right", "label": "Bottom right", "default": "PALEONTOLOGY (C) 2026" },
+
+    { "type": "header", "content": "Colors & fonts" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#fcfcfc" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#111111" },
+    { "type": "checkbox", "id": "use_google_fonts", "label": "Use Inter + JetBrains Mono (Google Fonts)", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Action pill",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "bone", "label": "Bone" },
+            { "value": "dna", "label": "DNA" },
+            { "value": "gem", "label": "Gem" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "book", "label": "Book" }
+          ],
+          "default": "bone"
+        },
+        { "type": "text", "id": "label", "label": "Label", "default": "Dinosaurs" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NHM Explore",
+      "blocks": [
+        { "type": "pill", "settings": { "icon": "bone", "label": "Dinosaurs" } },
+        { "type": "pill", "settings": { "icon": "dna", "label": "Ancient Life" } },
+        { "type": "pill", "settings": { "icon": "gem", "label": "Minerals" } },
+        { "type": "pill", "settings": { "icon": "leaf", "label": "Fossils" } },
+        { "type": "pill", "settings": { "icon": "book", "label": "Learn More" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

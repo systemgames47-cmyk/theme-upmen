@@ -1,0 +1,521 @@
+{%- comment -%}
+  NHM Collection — dark chapter browser:
+  artwork that bleeds up over the previous section, statement heading,
+  and a two-column panel whose image cross-fades with an SVG sand-dissolve filter.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- assign s = section.settings -%}
+
+{%- if s.use_google_fonts -%}
+  {%- assign nhm_sans = "'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif" -%}
+  {%- assign nhm_mono = "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+{%- else -%}
+  {%- assign nhm_sans = 'var(--font-body)' -%}
+  {%- assign nhm_mono = 'ui-monospace, SFMono-Regular, Menlo, monospace' -%}
+{%- endif -%}
+
+{%- if s.overlap_image != blank -%}
+  {%- assign nhm_overlap = s.overlap_image | image_url: width: 2200 -%}
+{%- else -%}
+  {%- assign nhm_overlap = s.overlap_image_url -%}
+{%- endif -%}
+
+{%- assign chapters = section.blocks | where: 'type', 'chapter' -%}
+{%- assign tags = section.blocks | where: 'type', 'tag' -%}
+
+<style>
+  #mm-nhmcol-{{ sid }} {
+    --nhm-bg: {{ s.bg_color | default: '#0a0a0a' }};
+    --nhm-ink: {{ s.text_color | default: '#ffffff' }};
+    --nhm-line: {{ s.text_color | default: '#ffffff' | color_modify: 'alpha', 0.14 }};
+    --nhm-muted: {{ s.text_color | default: '#ffffff' | color_modify: 'alpha', 0.62 }};
+    --nhm-faint: {{ s.text_color | default: '#ffffff' | color_modify: 'alpha', 0.38 }};
+    position: relative; width: 100%; z-index: 30;
+    display: flex; flex-direction: column;
+    background: var(--nhm-bg); color: var(--nhm-ink);
+    font-family: {{ nhm_sans }};
+  }
+  #mm-nhmcol-{{ sid }} *, #mm-nhmcol-{{ sid }} *::before, #mm-nhmcol-{{ sid }} *::after { box-sizing: border-box; }
+  #mm-nhmcol-{{ sid }} ::selection { background: #fff; color: #000; }
+
+  /* ---------------- Overlapping artwork ---------------- */
+  #mm-nhmcol-{{ sid }} .nhm-overlap {
+    position: absolute; top: 0; left: 50%; z-index: 0; pointer-events: none;
+    width: 160vw; max-width: none; height: auto;
+    transform: translateX(-50%) translateY(-65%); opacity: 0;
+    transition: transform 1.4s ease-out, opacity 1.4s ease-out;
+  }
+  #mm-nhmcol-{{ sid }} .nhm-overlap.is-in { transform: translateX(-50%) translateY(-78%); opacity: 1; }
+
+  /* ---------------- Heading area ---------------- */
+  #mm-nhmcol-{{ sid }} .nhm-head {
+    position: relative; z-index: 10;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
+    padding: 128px 32px 0; margin-bottom: 64px;
+  }
+  #mm-nhmcol-{{ sid }} .nhm-h2 {
+    margin: 0; font-weight: 500; letter-spacing: -0.025em; line-height: 1.15; color: var(--nhm-ink);
+    font-size: calc(1.8rem * var(--fs-h, 1));
+  }
+  #mm-nhmcol-{{ sid }} .nhm-icons {
+    display: inline-flex; gap: 8px; vertical-align: middle; margin: 0 8px; transform: translateY(-4px);
+  }
+  #mm-nhmcol-{{ sid }} .nhm-icons span {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 999px;
+    border: 1px solid var(--nhm-line); background: #000; color: var(--nhm-faint);
+    transition: background .3s ease, color .3s ease, border-color .3s ease;
+  }
+  #mm-nhmcol-{{ sid }} .nhm-icons span:hover { background: #fff; color: #000; border-color: #fff; }
+
+  #mm-nhmcol-{{ sid }} .nhm-tagline {
+    margin: 0 0 24px; font-family: {{ nhm_mono }}; font-size: 9px; line-height: 1.7;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--nhm-muted);
+  }
+  #mm-nhmcol-{{ sid }} .nhm-tags { display: flex; flex-wrap: wrap; gap: 12px; }
+  #mm-nhmcol-{{ sid }} .nhm-tags span {
+    display: inline-flex; padding: 8px 20px; border-radius: 999px; border: 1px solid var(--nhm-line);
+    font-family: {{ nhm_mono }}; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nhm-muted);
+    transition: background .3s ease, color .3s ease, border-color .3s ease;
+  }
+  #mm-nhmcol-{{ sid }} .nhm-tags span:hover { background: #fff; color: #000; border-color: #fff; }
+
+  /* ---------------- Panels ---------------- */
+  #mm-nhmcol-{{ sid }} .nhm-rule { height: 1px; background: var(--nhm-line); position: relative; z-index: 10; }
+  #mm-nhmcol-{{ sid }} .nhm-panels { position: relative; z-index: 10; display: flex; flex-direction: column; }
+
+  #mm-nhmcol-{{ sid }} .nhm-visual {
+    position: relative; display: flex; flex-direction: column; justify-content: space-between;
+    min-height: 400px; padding: 32px; border-bottom: 1px solid var(--nhm-line);
+  }
+  #mm-nhmcol-{{ sid }} .nhm-ast { font-size: 20px; letter-spacing: 0.3em; color: var(--nhm-faint); }
+  #mm-nhmcol-{{ sid }} .nhm-stage { position: relative; flex: 1 1 auto; margin: 24px 0; }
+  #mm-nhmcol-{{ sid }} .nhm-stage img {
+    position: absolute; inset: 0; width: 80%; height: 80%; margin: auto;
+    object-fit: contain; mix-blend-mode: lighten;
+    opacity: 0; visibility: hidden;
+  }
+  #mm-nhmcol-{{ sid }} .nhm-stage img.is-active { opacity: 1; visibility: visible; }
+  #mm-nhmcol-{{ sid }} .nhm-stage img.is-leaving { opacity: 1; visibility: visible; }
+  #mm-nhmcol-{{ sid }} .nhm-counter {
+    display: flex; align-items: center; gap: 6px;
+    font-family: {{ nhm_mono }}; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #888;
+  }
+  #mm-nhmcol-{{ sid }} .nhm-counter .nhm-num { display: inline-block; }
+  #mm-nhmcol-{{ sid }} .nhm-counter .nhm-num.is-swap { animation: nhm-swap-{{ sid }} .5s cubic-bezier(0.16,1,0.3,1); }
+  #mm-nhmcol-{{ sid }} .nhm-counter .nhm-sep { color: #333; }
+
+  #mm-nhmcol-{{ sid }} .nhm-list-wrap { display: flex; flex-direction: column; }
+  #mm-nhmcol-{{ sid }} .nhm-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 32px; border-bottom: 1px solid var(--nhm-line);
+    font-family: {{ nhm_mono }}; font-size: 10px; letter-spacing: 0.15em; color: var(--nhm-muted);
+  }
+  #mm-nhmcol-{{ sid }} .nhm-bar .nhm-chapno.is-swap { animation: nhm-swap-{{ sid }} .5s cubic-bezier(0.16,1,0.3,1); display: inline-block; }
+
+  #mm-nhmcol-{{ sid }} .nhm-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%;
+    padding: 32px; background: none; border: 0; border-bottom: 1px solid var(--nhm-line);
+    text-align: left; cursor: pointer; color: #444;
+    transition: color .4s ease;
+  }
+  #mm-nhmcol-{{ sid }} .nhm-item:hover { color: #999; }
+  #mm-nhmcol-{{ sid }} .nhm-item.is-active { color: var(--nhm-ink); }
+  #mm-nhmcol-{{ sid }} .nhm-item b {
+    font-family: {{ nhm_sans }}; font-weight: 500; letter-spacing: -0.025em;
+    font-size: calc(1.5rem * var(--fs-h, 1));
+  }
+  #mm-nhmcol-{{ sid }} .nhm-item svg {
+    flex: 0 0 auto; color: var(--nhm-faint);
+    opacity: 0; transform: translateX(-8px); transition: opacity .4s ease, transform .4s ease;
+  }
+  #mm-nhmcol-{{ sid }} .nhm-item.is-active svg { opacity: 1; transform: translateX(0); }
+
+  #mm-nhmcol-{{ sid }} .nhm-foot {
+    position: relative; z-index: 10; padding: 32px; background: var(--nhm-bg);
+    font-family: {{ nhm_mono }}; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nhm-faint);
+  }
+
+  @keyframes nhm-swap-{{ sid }} { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (min-width: 768px) {
+    #mm-nhmcol-{{ sid }} .nhm-overlap { width: {{ s.overlap_width | default: 1100 }}px; }
+    #mm-nhmcol-{{ sid }} .nhm-head { padding: 192px 64px 0; }
+    #mm-nhmcol-{{ sid }} .nhm-h2 { font-size: calc(3rem * var(--fs-h, 1)); }
+    #mm-nhmcol-{{ sid }} .nhm-icons { gap: 12px; margin: 0 16px; }
+    #mm-nhmcol-{{ sid }} .nhm-icons span { width: 56px; height: 56px; }
+    #mm-nhmcol-{{ sid }} .nhm-tagline { font-size: 10px; }
+    #mm-nhmcol-{{ sid }} .nhm-visual { min-height: 500px; }
+    #mm-nhmcol-{{ sid }} .nhm-item b { font-size: calc(2rem * var(--fs-h, 1)); }
+  }
+  @media (min-width: 1024px) {
+    #mm-nhmcol-{{ sid }} .nhm-h2 { font-size: calc(3.8rem * var(--fs-h, 1)); }
+    #mm-nhmcol-{{ sid }} .nhm-panels { flex-direction: row; }
+    #mm-nhmcol-{{ sid }} .nhm-visual {
+      width: 35%; flex: 0 0 35%; border-bottom: 0; border-right: 1px solid var(--nhm-line);
+    }
+    #mm-nhmcol-{{ sid }} .nhm-list-wrap { width: 65%; flex: 0 0 65%; }
+  }
+  @media (min-width: 1280px) {
+    #mm-nhmcol-{{ sid }} .nhm-head { flex-direction: row; align-items: flex-start; }
+    #mm-nhmcol-{{ sid }} .nhm-h2 { font-size: calc(4rem * var(--fs-h, 1)); max-width: 62%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #mm-nhmcol-{{ sid }} .nhm-overlap { transition: none; opacity: 1; transform: translateX(-50%) translateY(-78%); }
+    #mm-nhmcol-{{ sid }} .nhm-counter .nhm-num.is-swap,
+    #mm-nhmcol-{{ sid }} .nhm-bar .nhm-chapno.is-swap { animation: none; }
+  }
+</style>
+
+<section id="mm-nhmcol-{{ sid }}" data-testid="nhm-collection" data-nhm-interval="{{ s.interval | default: 3500 }}">
+
+  {%- comment -%} SVG sand-dissolve filters (one entering, one exiting) {%- endcomment -%}
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="nhm-sand-in-{{ sid }}" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="4" result="noise"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" result="disp"></feDisplacementMap>
+        <feOffset in="disp" dx="0" dy="0" result="off"></feOffset>
+        <feGaussianBlur in="off" stdDeviation="0" result="blur"></feGaussianBlur>
+        <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"></feColorMatrix>
+      </filter>
+      <filter id="nhm-sand-out-{{ sid }}" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="4" result="noise"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" result="disp"></feDisplacementMap>
+        <feOffset in="disp" dx="0" dy="0" result="off"></feOffset>
+        <feGaussianBlur in="off" stdDeviation="0" result="blur"></feGaussianBlur>
+        <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"></feColorMatrix>
+      </filter>
+    </defs>
+  </svg>
+
+  {%- if s.show_overlap and nhm_overlap != blank -%}
+    <img class="nhm-overlap" data-nhm-overlap src="{{ nhm_overlap }}" alt="{{ s.overlap_alt | escape }}" loading="eager">
+  {%- endif -%}
+
+  {%- comment -%} ---------------- Heading ---------------- {%- endcomment -%}
+  <div class="nhm-head">
+    <h2 class="nhm-h2">
+      {{ s.heading_pre | escape }}
+      {%- if s.show_head_icons -%}
+        <span class="nhm-icons" aria-hidden="true">
+          {%- assign head_icons = s.head_icons | default: 'bone,dna,leaf' | split: ',' -%}
+          {%- for ic in head_icons limit: 3 -%}
+            {%- assign icon = ic | strip -%}
+            <span>
+              {%- case icon -%}
+                {%- when 'dna' -%}
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m10 16 1.5 1.5"/><path d="m14 8-1.5-1.5"/><path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"/><path d="m16.5 10.5 1 1"/><path d="m17 6-2.891-2.891"/><path d="M2 15c6.667-6 13.333 0 20-6"/><path d="m20 9 .891.891"/><path d="M3.109 14.109 6 17"/><path d="m6.5 12.5 1 1"/><path d="M7 18c1.798-1.998 2.518-3.995 2.807-5.993"/><path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>
+                {%- when 'leaf' -%}
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                {%- when 'gem' -%}
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+                {%- else -%}
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z"/></svg>
+              {%- endcase -%}
+            </span>
+          {%- endfor -%}
+        </span>
+      {%- endif -%}
+      {{ s.heading_post | escape }}
+    </h2>
+
+    <div>
+      {%- if s.tagline != blank -%}
+        <p class="nhm-tagline">{{ s.tagline | escape | newline_to_br }}</p>
+      {%- endif -%}
+      {%- if tags.size > 0 -%}
+        <div class="nhm-tags">
+          {%- for block in tags -%}
+            <span {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="nhm-rule"></div>
+
+  {%- comment -%} ---------------- Two-column panel ---------------- {%- endcomment -%}
+  <div class="nhm-panels">
+    <div class="nhm-visual">
+      <div class="nhm-ast" aria-hidden="true">{{ s.asterisks | default: '***' }}</div>
+
+      <div class="nhm-stage" data-nhm-stage>
+        {%- for block in chapters -%}
+          {%- if block.settings.image != blank -%}
+            {%- assign chimg = block.settings.image | image_url: width: 1200 -%}
+          {%- else -%}
+            {%- assign chimg = block.settings.image_url -%}
+          {%- endif -%}
+          {%- if chimg != blank -%}
+            <img data-nhm-img class="{% if forloop.index0 == 0 %}is-active{% endif %}"
+              src="{{ chimg }}" alt="{{ block.settings.name | escape }}"
+              referrerpolicy="no-referrer" loading="lazy">
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="nhm-counter">
+        <span class="nhm-num" data-nhm-counter>01</span>
+        <span class="nhm-sep">/</span>
+        <span>{{ chapters.size | prepend: '0' | slice: -2, 2 }}</span>
+      </div>
+    </div>
+
+    <div class="nhm-list-wrap">
+      <div class="nhm-bar">
+        <span>{{ s.bar_text | escape }}</span>
+        <span class="nhm-chapno" data-nhm-chapno>{{ s.chapter_word | default: 'Chapter' }} 01</span>
+      </div>
+
+      {%- for block in chapters -%}
+        <button type="button" class="nhm-item{% if forloop.index0 == 0 %} is-active{% endif %}"
+          data-nhm-item="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <b>{{ block.settings.name | escape }}</b>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </button>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="nhm-rule"></div>
+
+  {%- if s.foot_text != blank -%}
+    <div class="nhm-foot">{{ s.foot_text | escape }}</div>
+  {%- endif -%}
+</section>
+
+<script>
+(function () {
+  var root = document.getElementById('mm-nhmcol-{{ sid }}');
+  if (!root) return;
+
+  window.__nhmColTimers = window.__nhmColTimers || {};
+  if (window.__nhmColTimers['{{ sid }}']) {
+    clearInterval(window.__nhmColTimers['{{ sid }}']);
+    delete window.__nhmColTimers['{{ sid }}'];
+  }
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Overlapping artwork reveal ---- */
+  var overlap = root.querySelector('[data-nhm-overlap]');
+  if (overlap) {
+    if (!('IntersectionObserver' in window)) {
+      overlap.classList.add('is-in');
+    } else {
+      var oio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { overlap.classList.add('is-in'); oio.disconnect(); }
+        });
+      }, { rootMargin: '100px 0px' });
+      oio.observe(overlap);
+    }
+  }
+
+  /* ---- Chapter switching ---- */
+  var imgs = Array.prototype.slice.call(root.querySelectorAll('[data-nhm-img]'));
+  var items = Array.prototype.slice.call(root.querySelectorAll('[data-nhm-item]'));
+  var counter = root.querySelector('[data-nhm-counter]');
+  var chapno = root.querySelector('[data-nhm-chapno]');
+  var chapterWord = {{ s.chapter_word | default: 'Chapter' | json }};
+  if (!items.length) return;
+
+  var DURATION = 900;
+  var index = 0;
+  var busy = false;
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  function primitives(which) {
+    var f = document.getElementById('nhm-sand-' + which + '-{{ sid }}');
+    if (!f) return null;
+    return {
+      disp: f.querySelector('feDisplacementMap'),
+      off: f.querySelector('feOffset'),
+      blur: f.querySelector('feGaussianBlur'),
+      cm: f.querySelector('feColorMatrix')
+    };
+  }
+
+  /* amount 0 = fully resolved image, 1 = fully dissolved */
+  function apply(p, amount, dyMax, dxMax) {
+    if (!p) return;
+    var op = Math.max(0, Math.min(1, 1 - amount * 1.2));
+    p.disp.setAttribute('scale', (150 * amount).toFixed(2));
+    p.off.setAttribute('dy', (dyMax * amount).toFixed(2));
+    p.off.setAttribute('dx', (dxMax * amount).toFixed(2));
+    p.blur.setAttribute('stdDeviation', (6 * amount).toFixed(2));
+    p.cm.setAttribute('values', '1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ' + op.toFixed(3) + ' 0');
+  }
+
+  var pIn = primitives('in');
+  var pOut = primitives('out');
+
+  function swapLabels(next) {
+    if (counter) {
+      counter.textContent = pad(next + 1);
+      counter.classList.remove('is-swap');
+      void counter.offsetWidth;
+      counter.classList.add('is-swap');
+    }
+    if (chapno) {
+      chapno.textContent = chapterWord + ' ' + pad(next + 1);
+      chapno.classList.remove('is-swap');
+      void chapno.offsetWidth;
+      chapno.classList.add('is-swap');
+    }
+  }
+
+  function show(next) {
+    next = (next + items.length) % items.length;
+    if (next === index || busy) return;
+
+    var prev = index;
+    index = next;
+
+    items.forEach(function (el, i) { el.classList.toggle('is-active', i === index); });
+    swapLabels(index);
+
+    var from = imgs[prev];
+    var to = imgs[index];
+    if (!to) return;
+
+    if (reduced || !pIn || !pOut) {
+      if (from) from.classList.remove('is-active');
+      to.classList.add('is-active');
+      return;
+    }
+
+    busy = true;
+    if (from) {
+      from.classList.remove('is-active');
+      from.classList.add('is-leaving');
+      from.style.filter = 'url(#nhm-sand-out-{{ sid }})';
+    }
+    to.classList.add('is-active');
+    to.style.filter = 'url(#nhm-sand-in-{{ sid }})';
+
+    var start = null;
+    function frame(ts) {
+      if (start === null) start = ts;
+      var t = Math.min(1, (ts - start) / DURATION);
+
+      /* exiting: cubic ease-in — dissolves away */
+      apply(pOut, Math.pow(t, 3), 120, 30);
+      /* entering: quartic ease-out — reassembles */
+      apply(pIn, 1 - (1 - Math.pow(1 - t, 4)), -80, -30);
+
+      if (t < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        if (from) { from.classList.remove('is-leaving'); from.style.filter = ''; }
+        to.style.filter = '';
+        busy = false;
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  items.forEach(function (el) {
+    el.addEventListener('click', function () {
+      show(parseInt(el.getAttribute('data-nhm-item'), 10));
+      start();
+    });
+  });
+
+  function start() {
+    if (window.__nhmColTimers['{{ sid }}']) clearInterval(window.__nhmColTimers['{{ sid }}']);
+    if (reduced || items.length < 2) return;
+    var delay = parseInt(root.getAttribute('data-nhm-interval'), 10) || 3500;
+    window.__nhmColTimers['{{ sid }}'] = setInterval(function () {
+      if (!document.body.contains(root)) {
+        clearInterval(window.__nhmColTimers['{{ sid }}']);
+        delete window.__nhmColTimers['{{ sid }}'];
+        return;
+      }
+      show(index + 1);
+    }, delay);
+  }
+  start();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "NHM Collection",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Overlapping artwork" },
+    { "type": "checkbox", "id": "show_overlap", "label": "Show artwork", "default": true },
+    { "type": "image_picker", "id": "overlap_image", "label": "Artwork (transparent PNG)" },
+    { "type": "text", "id": "overlap_image_url", "label": "Or external image URL", "default": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779625001/ChatGPT_Image_May_23_2026_12_24_44_PM_1_lv1dne.png" },
+    { "type": "text", "id": "overlap_alt", "label": "Artwork alt text", "default": "" },
+    { "type": "range", "id": "overlap_width", "label": "Artwork width (desktop)", "min": 600, "max": 1600, "step": 50, "unit": "px", "default": 1100 },
+
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading_pre", "label": "Heading — before icons", "default": "Curated from millions of years of wonder" },
+    { "type": "checkbox", "id": "show_head_icons", "label": "Show circle icons", "default": true },
+    { "type": "text", "id": "head_icons", "label": "Icons (comma separated: bone, dna, leaf, gem)", "default": "bone,dna,leaf" },
+    { "type": "text", "id": "heading_post", "label": "Heading — after icons", "default": "& discovery." },
+
+    { "type": "header", "content": "Tagline" },
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "WE DON'T JUST DISPLAY FOSSILS\nWE SHARE EARTH'S STORY" },
+    { "type": "paragraph", "content": "Add \"Tag pill\" blocks for the pills under the tagline." },
+
+    { "type": "header", "content": "Chapter browser" },
+    { "type": "text", "id": "bar_text", "label": "Top bar text", "default": "Explore the past. Understand the present." },
+    { "type": "text", "id": "chapter_word", "label": "Chapter label word", "default": "Chapter" },
+    { "type": "text", "id": "asterisks", "label": "Corner glyph", "default": "***" },
+    { "type": "range", "id": "interval", "label": "Auto-advance", "min": 1500, "max": 8000, "step": 500, "unit": "ms", "default": 3500 },
+    { "type": "paragraph", "content": "Add \"Chapter\" blocks below. The image cross-fades with a sand-dissolve effect." },
+
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "foot_text", "label": "Footer text", "default": "DIGGING INTO OUR PLANET'S PAST" },
+
+    { "type": "header", "content": "Colors & fonts" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#0a0a0a" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#ffffff" },
+    { "type": "checkbox", "id": "use_google_fonts", "label": "Use Inter + JetBrains Mono (Google Fonts)", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "chapter",
+      "name": "Chapter",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Chapter name", "default": "Age of Dinosaurs" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_url", "label": "Or external image URL" }
+      ]
+    },
+    {
+      "type": "tag",
+      "name": "Tag pill",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Educational" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NHM Collection",
+      "blocks": [
+        { "type": "tag", "settings": { "label": "Educational" } },
+        { "type": "tag", "settings": { "label": "Authentic" } },
+        { "type": "tag", "settings": { "label": "Inspiring" } },
+        { "type": "chapter", "settings": { "name": "Age of Dinosaurs", "image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779624247/01_udnber.png" } },
+        { "type": "chapter", "settings": { "name": "Fossils of Ancient Life", "image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779624374/02_pmvxxl.png" } },
+        { "type": "chapter", "settings": { "name": "Reptiles of the Mesozoic", "image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779624236/03_hcp3jc.png" } },
+        { "type": "chapter", "settings": { "name": "Marine Fossil Gallery", "image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779624256/04_get63z.png" } },
+        { "type": "chapter", "settings": { "name": "Prehistoric Giants", "image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779624251/05_kz1tyu.png" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
