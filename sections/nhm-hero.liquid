@@ -18,6 +18,10 @@
   {%- assign nhm_mono = 'ui-monospace, SFMono-Regular, Menlo, monospace' -%}
 {%- endif -%}
 
+{%- comment -%} ---------- Wordmark ---------- {%- endcomment -%}
+{%- assign logo_text = s.logo_alt | default: 'NHM' | strip -%}
+{%- assign logo_key = logo_text | upcase -%}
+
 {%- comment -%} ---------- Video source ---------- {%- endcomment -%}
 {%- assign nhm_has_video = false -%}
 {%- if s.bg_video != blank or s.bg_video_url != blank -%}
@@ -44,7 +48,11 @@
   #mm-nhmhero-{{ sid }} .nhm-header { position: relative; z-index: 20; padding: 24px 24px 0; }
   #mm-nhmhero-{{ sid }} .nhm-mark { margin: 0; width: 100%; display: block; transform-origin: left center; }
   #mm-nhmhero-{{ sid }} .nhm-mark svg { width: 100%; height: auto; display: block; }
-  #mm-nhmhero-{{ sid }} .nhm-mark svg polygon { fill: var(--nhm-ink); }
+  #mm-nhmhero-{{ sid }} .nhm-mark svg polygon,
+  #mm-nhmhero-{{ sid }} .nhm-mark svg text { fill: var(--nhm-ink); }
+  #mm-nhmhero-{{ sid }} .nhm-mark svg text {
+    font-family: {{ nhm_sans }}; font-weight: 600; letter-spacing: -0.04em;
+  }
   #mm-nhmhero-{{ sid }} .nhm-mark img { width: 100%; height: auto; display: block; }
 
   /* ---------------- Sub-nav ---------------- */
@@ -199,7 +207,8 @@
   @keyframes nhm-up-{{ sid }} { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
   #mm-nhmhero-{{ sid }} .nhm-mark { animation: nhm-mark-{{ sid }} 1.2s cubic-bezier(0.16,1,0.3,1) both; }
-  #mm-nhmhero-{{ sid }} .nhm-mark svg polygon {
+  #mm-nhmhero-{{ sid }} .nhm-mark svg polygon,
+  #mm-nhmhero-{{ sid }} .nhm-mark svg text {
     animation: nhm-letter-{{ sid }} 1.2s cubic-bezier(0.16,1,0.3,1) both;
   }
   #mm-nhmhero-{{ sid }} [data-nhm-up] { animation: nhm-up-{{ sid }} .8s ease-out both; }
@@ -207,6 +216,7 @@
   @media (prefers-reduced-motion: reduce) {
     #mm-nhmhero-{{ sid }} .nhm-mark,
     #mm-nhmhero-{{ sid }} .nhm-mark svg polygon,
+    #mm-nhmhero-{{ sid }} .nhm-mark svg text,
     #mm-nhmhero-{{ sid }} [data-nhm-up] { animation: none !important; }
     #mm-nhmhero-{{ sid }} .nhm-media { transition: none; }
   }
@@ -237,11 +247,33 @@
   {%- comment -%} ---------------- Header ---------------- {%- endcomment -%}
   <header class="nhm-header">
     <h1 class="nhm-mark">
-      <a href="{{ s.logo_link | default: routes.root_url }}" aria-label="{{ s.logo_alt | escape }}">
+      <a href="{{ s.logo_link | default: routes.root_url }}" aria-label="{{ logo_text | escape }}">
         {%- if s.logo_image != blank -%}
-          <img src="{{ s.logo_image | image_url: width: 1680 }}" alt="{{ s.logo_alt | escape }}" loading="eager">
+          <img src="{{ s.logo_image | image_url: width: 1680 }}" alt="{{ logo_text | escape }}" loading="eager">
+
+        {%- elsif logo_key != 'NHM' -%}
+          {%- comment -%}
+            Custom wordmark: one <text> per character, each stretched to its own
+            slot with textLength so any word fills the full width with the same
+            flat, extended geometry as the built-in NHM blocks.
+          {%- endcomment -%}
+          {%- assign chars = logo_key | split: '' -%}
+          {%- assign nchars = chars.size -%}
+          {%- assign slot = 840.0 | divided_by: nchars -%}
+          {%- assign tl = slot | times: 0.88 -%}
+          {%- assign pad = slot | times: 0.06 -%}
+          <svg viewBox="0 0 840 100" role="img" aria-label="{{ logo_text | escape }}" preserveAspectRatio="xMidYMid meet">
+            {%- for c in chars -%}
+              {%- unless c == ' ' -%}
+                {%- assign cx = forloop.index0 | times: slot | plus: pad -%}
+                {%- assign cdelay = forloop.index0 | times: 60 | plus: 100 -%}
+                <text x="{{ cx }}" y="100" font-size="138" textLength="{{ tl }}" lengthAdjust="spacingAndGlyphs" style="animation-delay:{{ cdelay }}ms">{{ c | escape }}</text>
+              {%- endunless -%}
+            {%- endfor -%}
+          </svg>
+
         {%- else -%}
-          <svg viewBox="0 0 840 100" role="img" aria-label="{{ s.logo_alt | escape }}" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="0 0 840 100" role="img" aria-label="{{ logo_text | escape }}" preserveAspectRatio="xMidYMid meet">
             <g transform="translate(0,0)">
               <polygon points="0,0 14,0 14,100 0,100" style="animation-delay:100ms"></polygon>
               <polygon points="200,0 214,0 214,100 200,100" style="animation-delay:160ms"></polygon>
@@ -409,9 +441,9 @@
   "max_blocks": 8,
   "settings": [
     { "type": "header", "content": "Wordmark" },
-    { "type": "paragraph", "content": "Leave the image empty to use the built-in NHM letter-block wordmark." },
-    { "type": "image_picker", "id": "logo_image", "label": "Logo image (optional)" },
-    { "type": "text", "id": "logo_alt", "label": "Logo text (accessibility)", "default": "NHM" },
+    { "type": "text", "id": "logo_alt", "label": "Wordmark text", "default": "NHM" },
+    { "type": "paragraph", "content": "Type any word — the letters stretch to fill the full width. Keep it at \"NHM\" to get the original hand-drawn block letters. Letters are shown uppercase; 3-8 characters looks best. Upload an image below to override the text entirely." },
+    { "type": "image_picker", "id": "logo_image", "label": "Logo image (overrides the text)" },
     { "type": "url", "id": "logo_link", "label": "Logo link" },
 
     { "type": "header", "content": "Sub-nav" },
