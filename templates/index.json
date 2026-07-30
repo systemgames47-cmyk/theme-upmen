@@ -82,8 +82,73 @@
         "details_label": "View Details",
         "details_link": "",
         "scroll_label": "Scroll to explore",
-        "bg_color": "#5B270F",
+        "bg_color": "#000000",
         "text_color": "#fafafa",
+        "use_google_fonts": true
+      }
+    },
+    "nhm_explore_jMJ9mF": {
+      "type": "nhm-explore",
+      "blocks": {
+        "pill_gAF4B9": {
+          "type": "pill",
+          "settings": {
+            "icon": "bone",
+            "label": "Dinosaurs",
+            "link": ""
+          }
+        },
+        "pill_HyhJyN": {
+          "type": "pill",
+          "settings": {
+            "icon": "dna",
+            "label": "Ancient Life",
+            "link": ""
+          }
+        },
+        "pill_iLViHL": {
+          "type": "pill",
+          "settings": {
+            "icon": "gem",
+            "label": "Minerals",
+            "link": ""
+          }
+        },
+        "pill_JQgxAx": {
+          "type": "pill",
+          "settings": {
+            "icon": "leaf",
+            "label": "Fossils",
+            "link": ""
+          }
+        },
+        "pill_FtKFPp": {
+          "type": "pill",
+          "settings": {
+            "icon": "book",
+            "label": "Learn More",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "pill_gAF4B9",
+        "pill_HyhJyN",
+        "pill_iLViHL",
+        "pill_JQgxAx",
+        "pill_FtKFPp"
+      ],
+      "name": "NHM Explore",
+      "settings": {
+        "label_number": "02",
+        "label_text": "Explore Our World",
+        "heading": "Unearth the stories of our planet's past\nthrough fossils, minerals, and ancient wonders.",
+        "spacer_mobile": 220,
+        "spacer_desktop": 450,
+        "foot_left": "WE DON'T JUST TELL STORIES.",
+        "foot_right": "PALEONTOLOGY (C) 2026",
+        "bg_color": "#fcfcfc",
+        "text_color": "#111111",
         "use_google_fonts": true
       }
     },
@@ -982,6 +1047,7 @@
   },
   "order": [
     "nhm_hero_eRUA93",
+    "nhm_explore_jMJ9mF",
     "terraelix_hero_RXt9kq",
     "hero",
     "marquee_intro",
