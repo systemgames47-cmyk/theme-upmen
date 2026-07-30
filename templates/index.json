@@ -9,6 +9,84 @@
  */
 {
   "sections": {
+    "nhm_hero_eRUA93": {
+      "type": "nhm-hero",
+      "blocks": {
+        "nav_link_jd6Akd": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Visit",
+            "link": ""
+          }
+        },
+        "nav_link_BAW7Qy": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Exhibitions",
+            "link": ""
+          }
+        },
+        "nav_link_zGfJeE": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Discover",
+            "link": ""
+          }
+        },
+        "nav_link_TErrRm": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Learn",
+            "link": ""
+          }
+        },
+        "nav_link_LFw3T4": {
+          "type": "nav_link",
+          "settings": {
+            "label": "About",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "nav_link_jd6Akd",
+        "nav_link_BAW7Qy",
+        "nav_link_zGfJeE",
+        "nav_link_TErrRm",
+        "nav_link_LFw3T4"
+      ],
+      "name": "NHM Hero",
+      "settings": {
+        "logo_alt": "UPMEN",
+        "logo_link": "",
+        "brand_line1": "Natura",
+        "brand_line2": "History",
+        "brand_line3": "Museum",
+        "intro": "Exploring the story of life on\nearth through science,\ndiscovery and wonder.",
+        "bg_video": "shopify://files/videos/film .mp4",
+        "bg_video_url": "",
+        "video_delay": 2800,
+        "index_number": "01",
+        "headline": "TIMELESS\nWONDERS",
+        "description": "Step into the natural world and discover the stories written millions of years ago.",
+        "cta_label": "Explore Now",
+        "cta_link": "",
+        "cta_bg": "#000000",
+        "show_specimen": true,
+        "specimen_title": "Tyrannosaurus Rex",
+        "specimen_text": "Late Cretaceous period\n68-66 million years ago",
+        "stat1_label": "Length",
+        "stat1_value": "12.3 m",
+        "stat2_label": "Height",
+        "stat2_value": "4.0 m",
+        "details_label": "View Details",
+        "details_link": "",
+        "scroll_label": "Scroll to explore",
+        "bg_color": "#5B270F",
+        "text_color": "#fafafa",
+        "use_google_fonts": true
+      }
+    },
     "terraelix_hero_RXt9kq": {
       "type": "terraelix-hero",
       "blocks": {
@@ -153,84 +231,6 @@
         "product_alt": "Up Men Natural Testosterone Support",
         "height_mobile": "auto",
         "height_desktop": "full"
-      }
-    },
-    "nhm_hero_eRUA93": {
-      "type": "nhm-hero",
-      "blocks": {
-        "nav_link_jd6Akd": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Visit",
-            "link": ""
-          }
-        },
-        "nav_link_BAW7Qy": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Exhibitions",
-            "link": ""
-          }
-        },
-        "nav_link_zGfJeE": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Discover",
-            "link": ""
-          }
-        },
-        "nav_link_TErrRm": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Learn",
-            "link": ""
-          }
-        },
-        "nav_link_LFw3T4": {
-          "type": "nav_link",
-          "settings": {
-            "label": "About",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "nav_link_jd6Akd",
-        "nav_link_BAW7Qy",
-        "nav_link_zGfJeE",
-        "nav_link_TErrRm",
-        "nav_link_LFw3T4"
-      ],
-      "name": "NHM Hero",
-      "settings": {
-        "logo_alt": "UPMEN",
-        "logo_link": "",
-        "brand_line1": "Natura",
-        "brand_line2": "History",
-        "brand_line3": "Museum",
-        "intro": "Exploring the story of life on\nearth through science,\ndiscovery and wonder.",
-        "bg_video": "shopify://files/videos/film .mp4",
-        "bg_video_url": "",
-        "video_delay": 2800,
-        "index_number": "01",
-        "headline": "TIMELESS\nWONDERS",
-        "description": "Step into the natural world and discover the stories written millions of years ago.",
-        "cta_label": "Explore Now",
-        "cta_link": "",
-        "cta_bg": "#000000",
-        "show_specimen": true,
-        "specimen_title": "Tyrannosaurus Rex",
-        "specimen_text": "Late Cretaceous period\n68-66 million years ago",
-        "stat1_label": "Length",
-        "stat1_value": "12.3 m",
-        "stat2_label": "Height",
-        "stat2_value": "4.0 m",
-        "details_label": "View Details",
-        "details_link": "",
-        "scroll_label": "Scroll to explore",
-        "bg_color": "#FFFFFF",
-        "text_color": "#FAFAFA",
-        "use_google_fonts": true
       }
     },
     "marquee_intro": {
@@ -978,77 +978,12 @@
         "text_color": "#111111",
         "use_google_fonts": true
       }
-    },
-    "nhm_explore_WVdr4R": {
-      "type": "nhm-explore",
-      "blocks": {
-        "pill_U8F7VE": {
-          "type": "pill",
-          "settings": {
-            "icon": "bone",
-            "label": "Dinosaurs",
-            "link": ""
-          }
-        },
-        "pill_E6VhPG": {
-          "type": "pill",
-          "settings": {
-            "icon": "dna",
-            "label": "Ancient Life",
-            "link": ""
-          }
-        },
-        "pill_4ncak3": {
-          "type": "pill",
-          "settings": {
-            "icon": "gem",
-            "label": "Minerals",
-            "link": ""
-          }
-        },
-        "pill_w3qLNj": {
-          "type": "pill",
-          "settings": {
-            "icon": "leaf",
-            "label": "Fossils",
-            "link": ""
-          }
-        },
-        "pill_bqMbi3": {
-          "type": "pill",
-          "settings": {
-            "icon": "book",
-            "label": "Learn More",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "pill_U8F7VE",
-        "pill_E6VhPG",
-        "pill_4ncak3",
-        "pill_w3qLNj",
-        "pill_bqMbi3"
-      ],
-      "name": "NHM Explore",
-      "settings": {
-        "label_number": "02",
-        "label_text": "Explore Our World",
-        "heading": "Unearth the stories of our planet's past\nthrough fossils, minerals, and ancient wonders.",
-        "spacer_mobile": 220,
-        "spacer_desktop": 450,
-        "foot_left": "WE DON'T JUST TELL STORIES.",
-        "foot_right": "PALEONTOLOGY (C) 2026",
-        "bg_color": "#fcfcfc",
-        "text_color": "#111111",
-        "use_google_fonts": true
-      }
     }
   },
   "order": [
+    "nhm_hero_eRUA93",
     "terraelix_hero_RXt9kq",
     "hero",
-    "nhm_hero_eRUA93",
     "marquee_intro",
     "story",
     "timeline",
@@ -1064,7 +999,6 @@
     "reviews",
     "how_it_works",
     "faq",
-    "nhm_explore_k339aF",
-    "nhm_explore_WVdr4R"
+    "nhm_explore_k339aF"
   ]
 }
