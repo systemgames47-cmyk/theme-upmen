@@ -9,6 +9,126 @@
  */
 {
   "sections": {
+    "terraelix_hero_6XteDh": {
+      "type": "terraelix-hero",
+      "blocks": {
+        "nav_link_QjMhkq": {
+          "type": "nav_link",
+          "settings": {
+            "label": "About",
+            "link": ""
+          }
+        },
+        "nav_link_PAbq64": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Products",
+            "link": ""
+          }
+        },
+        "nav_link_Cnxx9V": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Promotions",
+            "link": ""
+          }
+        },
+        "nav_link_YpK4R4": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Contact",
+            "link": ""
+          }
+        },
+        "card_d3hyBf": {
+          "type": "card",
+          "settings": {
+            "icon": "flask",
+            "icon_bg": "#000000",
+            "text": "Experience our newly enhanced natural formula"
+          }
+        },
+        "card_UxjQb4": {
+          "type": "card",
+          "settings": {
+            "icon": "leaf",
+            "icon_bg": "#065f46",
+            "text": "Pure organic ingredients sourced sustainably"
+          }
+        },
+        "card_q8wUtN": {
+          "type": "card",
+          "settings": {
+            "icon": "droplets",
+            "icon_bg": "#155e75",
+            "text": "Advanced bioavailability for maximum absorption"
+          }
+        },
+        "card_fGftQn": {
+          "type": "card",
+          "settings": {
+            "icon": "sun",
+            "icon_bg": "#b45309",
+            "text": "Clinically tested for daily energy & vitality"
+          }
+        }
+      },
+      "block_order": [
+        "nav_link_QjMhkq",
+        "nav_link_PAbq64",
+        "nav_link_Cnxx9V",
+        "nav_link_YpK4R4",
+        "card_d3hyBf",
+        "card_UxjQb4",
+        "card_q8wUtN",
+        "card_fGftQn"
+      ],
+      "name": "TerraElix Hero",
+      "settings": {
+        "brand_name": "TerraElix",
+        "brand_link": "",
+        "show_search": true,
+        "search_link": "",
+        "show_bag": true,
+        "bag_link": "",
+        "show_cart_count": true,
+        "show_return": true,
+        "return_link": "",
+        "return_label": "Returns",
+        "show_avatar": true,
+        "avatar_link": "",
+        "headline": "The Power [of]\n[Nature] [in] Every\nCapsule",
+        "dim_opacity": 45,
+        "show_inline_image": true,
+        "btn_label": "Explore Now",
+        "btn_link": "",
+        "lede": "Discover our new plant-based supplements for daily balance and clean energy.",
+        "show_product_image": true,
+        "product_alt": "TerraElix supplement bottle",
+        "show_panel1": true,
+        "panel1_title": "Start your personalized path to natural balance",
+        "panel1_link_label": "Personal Assessment",
+        "panel1_link": "",
+        "show_panel1_image": true,
+        "panel1_bg": "#ECEDEC",
+        "panel1_text": "#000000",
+        "panel2_bg": "#FEFDF9",
+        "card_interval": 3500,
+        "show_dots": true,
+        "show_panel3": true,
+        "show_panel3_image": true,
+        "panel3_stat": "+14K",
+        "panel3_text": "People have already optimized their wellness",
+        "panel3_bg": "#000000",
+        "overlay_opacity": 0,
+        "text_color": "#ffffff",
+        "btn_bg": "#000000",
+        "btn_text": "#ffffff",
+        "height_mobile": "auto",
+        "height_desktop": "full",
+        "use_google_fonts": true
+      }
+    },
     "nhm_hero_eRUA93": {
       "type": "nhm-hero",
       "blocks": {
@@ -55,9 +175,10 @@
         "nav_link_TErrRm",
         "nav_link_LFw3T4"
       ],
+      "disabled": true,
       "name": "NHM Hero",
       "settings": {
-        "logo_alt": "UPMEN",
+        "logo_alt": "UPMN",
         "logo_link": "",
         "brand_line1": "Natura",
         "brand_line2": "History",
@@ -1046,6 +1167,7 @@
     }
   },
   "order": [
+    "terraelix_hero_6XteDh",
     "nhm_hero_eRUA93",
     "nhm_explore_jMJ9mF",
     "terraelix_hero_RXt9kq",
