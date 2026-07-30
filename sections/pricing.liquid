@@ -311,14 +311,27 @@
           <div class="mm-qty-row"><span class="mm-qty-label">{{ section.settings.qty_label }}</span><div class="mm-stepper"><button type="button" disabled>−</button><span class="num">1</span><button type="button" disabled>+</button></div><div class="mm-price"><span class="old">$177</span><span class="now">$118</span></div></div>
           <button type="button" class="mm-cta" disabled>{{ section.settings.kit_cta_label }}</button>
         {%- endif -%}
-        {%- assign kit_perks = section.settings.kit_perks | strip | newline_to_br | split: '<br />' -%}
-        {%- if kit_perks.size > 0 -%}
+        {%- assign kit_perk_blocks = section.blocks | where: 'type', 'kit_perk' -%}
+        {%- if kit_perk_blocks.size > 0 -%}
           <ul class="mm-perks">
-            {%- for perk in kit_perks -%}
-              {%- assign perk_t = perk | strip -%}
-              {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+            {%- for block in kit_perk_blocks -%}
+              {%- if block.settings.text != blank -%}
+                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+              {%- endif -%}
             {%- endfor -%}
           </ul>
+        {%- else -%}
+          {%- comment -%} Fallback: the "one per line" textarea, used when no
+            "Perk — subscription card" blocks exist. {%- endcomment -%}
+          {%- assign kit_perks = section.settings.kit_perks | strip | newline_to_br | split: '<br />' -%}
+          {%- if kit_perks.size > 0 -%}
+            <ul class="mm-perks">
+              {%- for perk in kit_perks -%}
+                {%- assign perk_t = perk | strip -%}
+                {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
         {%- endif -%}
         {%- if section.settings.ship_strong != blank or section.settings.ship_rest != blank -%}
           <div class="mm-ship"><strong>{{ section.settings.ship_strong }}</strong> {{ section.settings.ship_rest }}</div>
@@ -400,14 +413,27 @@
           <div class="mm-qty-row"><span class="mm-qty-label">{{ section.settings.qty_label }}</span><div class="mm-stepper"><button type="button" disabled>−</button><span class="num">1</span><button type="button" disabled>+</button></div><div class="mm-price"><span class="old">$59</span><span class="now">$44</span></div></div>
           <button type="button" class="mm-cta" disabled>{{ section.settings.once_cta_label }}</button>
         {%- endif -%}
-        {%- assign once_perks = section.settings.once_perks | strip | newline_to_br | split: '<br />' -%}
-        {%- if once_perks.size > 0 -%}
+        {%- assign once_perk_blocks = section.blocks | where: 'type', 'once_perk' -%}
+        {%- if once_perk_blocks.size > 0 -%}
           <ul class="mm-perks">
-            {%- for perk in once_perks -%}
-              {%- assign perk_t = perk | strip -%}
-              {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+            {%- for block in once_perk_blocks -%}
+              {%- if block.settings.text != blank -%}
+                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+              {%- endif -%}
             {%- endfor -%}
           </ul>
+        {%- else -%}
+          {%- comment -%} Fallback: the "one per line" textarea, used when no
+            "Perk — monthly card" blocks exist. {%- endcomment -%}
+          {%- assign once_perks = section.settings.once_perks | strip | newline_to_br | split: '<br />' -%}
+          {%- if once_perks.size > 0 -%}
+            <ul class="mm-perks">
+              {%- for perk in once_perks -%}
+                {%- assign perk_t = perk | strip -%}
+                {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
         {%- endif -%}
         {%- if section.settings.ship_strong != blank or section.settings.ship_rest != blank -%}
           <div class="mm-ship"><strong>{{ section.settings.ship_strong }}</strong> {{ section.settings.ship_rest }}</div>
@@ -476,8 +502,8 @@
     { "type": "text", "id": "kit_name", "label": "Package name", "default": "3-MONTH PLAN" },
     { "type": "text", "id": "kit_sub", "label": "Subtitle", "default": "The complete 90-day protocol" },
     { "type": "text", "id": "kit_cta_label", "label": "Button label", "default": "Start My 90-Day Protocol →" },
-    { "type": "textarea", "id": "kit_perks", "label": "Perks below the button", "info": "One per line.", "default": "Just $39.33 per month\nAuto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
-    { "type": "paragraph", "content": "Add \"Benefit — subscription card\" blocks to control the ✓ rows. With no blocks the original hardcoded list is used." },
+    { "type": "textarea", "id": "kit_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — subscription card\" blocks.", "default": "Just $39.33 per month\nAuto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
+    { "type": "paragraph", "content": "Blocks for this card: \"Benefit — subscription card\" for the ✓ rows, \"Perk — subscription card\" for the list under the button. Without blocks the values above are used." },
     { "type": "text", "id": "variant_id_kit", "label": "Variant ID (optional)", "info": "If empty, uses the product's first available variant." },
     { "type": "text", "id": "selling_plan_kit", "label": "Selling plan ID (optional)", "info": "Required for subscription pricing. Leave empty for one-time purchase." },
     { "type": "header", "content": "Try Once (one-time)" },
@@ -486,8 +512,8 @@
     { "type": "text", "id": "once_name", "label": "Package name", "default": "MONTHLY PLAN" },
     { "type": "text", "id": "once_sub", "label": "Subtitle", "default": "1-month supply, delivered monthly" },
     { "type": "text", "id": "once_cta_label", "label": "Button label", "default": "Try Up Men →" },
-    { "type": "textarea", "id": "once_perks", "label": "Perks below the button", "info": "One per line.", "default": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
-    { "type": "paragraph", "content": "Add \"Benefit — monthly card\" blocks to control the ✓ rows. With no blocks the original hardcoded list is used." },
+    { "type": "textarea", "id": "once_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — monthly card\" blocks.", "default": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
+    { "type": "paragraph", "content": "Blocks for this card: \"Benefit — monthly card\" for the ✓ rows, \"Perk — monthly card\" for the list under the button. Without blocks the values above are used." },
     { "type": "text", "id": "variant_id_once", "label": "Variant ID (optional)" },
 
     { "type": "header", "content": "Shared card labels" },
@@ -538,8 +564,22 @@
     { "type": "image_picker", "id": "gift_4", "label": "Free gift image 4" },
     { "type": "text", "id": "gift_4_alt", "label": "Caption 4", "default": "Free gift: 90-day tracker" }
   ],
-  "max_blocks": 24,
+  "max_blocks": 40,
   "blocks": [
+    {
+      "type": "kit_perk",
+      "name": "Perk — subscription card",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Perk", "default": "90-day higher-T money-back guarantee" }
+      ]
+    },
+    {
+      "type": "once_perk",
+      "name": "Perk — monthly card",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Perk", "default": "90-day higher-T money-back guarantee" }
+      ]
+    },
     {
       "type": "kit_addon",
       "name": "Benefit — subscription card",
@@ -598,7 +638,12 @@
         { "type": "once_addon", "settings": { "text": "$15 off your first order", "free_prefix": false, "value": "Save $15", "value_style": "save" } },
         { "type": "once_addon", "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "value": "", "value_style": "free" } },
         { "type": "once_addon", "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "value": "", "value_style": "free" } },
-        { "type": "once_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } }
+        { "type": "once_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } },
+        { "type": "kit_perk", "settings": { "text": "Just $39.33 per month" } },
+        { "type": "kit_perk", "settings": { "text": "Auto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime" } },
+        { "type": "kit_perk", "settings": { "text": "90-day higher-T money-back guarantee" } },
+        { "type": "once_perk", "settings": { "text": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime" } },
+        { "type": "once_perk", "settings": { "text": "90-day higher-T money-back guarantee" } }
       ]
     }
   ]
