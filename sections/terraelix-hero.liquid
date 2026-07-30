@@ -1,0 +1,728 @@
+{%- comment -%}
+  TerraElix Hero — full-viewport hero landing:
+  navbar + word-by-word headline reveal + CTA + floating product + 3-panel footer strip.
+  Everything is editable from the theme editor.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- assign s = section.settings -%}
+
+{%- comment -%} ---------- Images (picker → fallback to design defaults) ---------- {%- endcomment -%}
+{%- assign bg_default = 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260624_110248_b62f758d-f68c-4045-a7b4-91771d6d0a0f.png&w=1280&q=85' -%}
+{%- if s.bg_desktop != blank -%}
+  {%- assign tx_bg_desktop = s.bg_desktop | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign tx_bg_desktop = bg_default -%}
+{%- endif -%}
+{%- if s.bg_mobile != blank -%}
+  {%- assign tx_bg_mobile = s.bg_mobile | image_url: width: 1200 -%}
+{%- else -%}
+  {%- assign tx_bg_mobile = tx_bg_desktop -%}
+{%- endif -%}
+
+{%- if s.avatar != blank -%}
+  {%- assign tx_avatar = s.avatar | image_url: width: 120 -%}
+{%- else -%}
+  {%- assign tx_avatar = 'https://polo-pecan-73837341.figma.site/_assets/v11/ca8093996e970200cbcf8bde8744175e52da5a79.png' -%}
+{%- endif -%}
+
+{%- if s.inline_image != blank -%}
+  {%- assign tx_inline = s.inline_image | image_url: width: 600 -%}
+{%- else -%}
+  {%- assign tx_inline = 'https://polo-pecan-73837341.figma.site/_assets/v11/6a7de4fbe9c9e2315040607320a9ff5e93117bf4.png' -%}
+{%- endif -%}
+
+{%- if s.product_image != blank -%}
+  {%- assign tx_product = s.product_image | image_url: width: 2000 -%}
+{%- else -%}
+  {%- assign tx_product = 'https://polo-pecan-73837341.figma.site/_assets/v11/50ad042b3cd48a2e120ea3ba17c8cfeaf3cc334c.png' -%}
+{%- endif -%}
+
+{%- if s.panel1_image != blank -%}
+  {%- assign tx_panel1_img = s.panel1_image | image_url: width: 800 -%}
+{%- else -%}
+  {%- assign tx_panel1_img = 'https://polo-pecan-73837341.figma.site/_assets/v11/6736cbe6e26afa2cd7c04a91892a79f7640785b5.png' -%}
+{%- endif -%}
+
+{%- if s.panel3_image != blank -%}
+  {%- assign tx_panel3_img = s.panel3_image | image_url: width: 600 -%}
+{%- else -%}
+  {%- assign tx_panel3_img = 'https://polo-pecan-73837341.figma.site/_assets/v11/30e8f38d1f993c357a3be2721557fc899d5640fc.png' -%}
+{%- endif -%}
+
+{%- comment -%} ---------- Fonts ---------- {%- endcomment -%}
+{%- if s.use_google_fonts -%}
+  {%- assign tx_font_display = "'DM Sans', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" -%}
+  {%- assign tx_font_body = "'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+{%- else -%}
+  {%- assign tx_font_display = 'var(--font-heading)' -%}
+  {%- assign tx_font_body = 'var(--font-body)' -%}
+{%- endif -%}
+
+{%- comment -%} ---------- Height ---------- {%- endcomment -%}
+{%- case s.height_mobile -%}
+  {%- when 'auto' -%}{%- assign minh_mobile = 'auto' -%}
+  {%- when 'medium' -%}{%- assign minh_mobile = '70svh' -%}
+  {%- when 'large' -%}{%- assign minh_mobile = '85svh' -%}
+  {%- else -%}{%- assign minh_mobile = '100svh' -%}
+{%- endcase -%}
+{%- case s.height_desktop -%}
+  {%- when 'auto' -%}{%- assign minh_desktop = 'auto' -%}
+  {%- when 'medium' -%}{%- assign minh_desktop = '720px' -%}
+  {%- when 'large' -%}{%- assign minh_desktop = '90vh' -%}
+  {%- else -%}{%- assign minh_desktop = '100vh' -%}
+{%- endcase -%}
+
+{%- assign dim_alpha = s.dim_opacity | divided_by: 100.0 -%}
+
+<style>
+  #mm-txhero-{{ sid }} {
+    --tx-text: {{ s.text_color | default: '#ffffff' }};
+    --tx-dim: {{ dim_alpha }};
+    --tx-btn-bg: {{ s.btn_bg | default: '#000000' }};
+    --tx-btn-text: {{ s.btn_text | default: '#ffffff' }};
+    --tx-hl-size: 48px;
+    --tx-hl-lh: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: {{ minh_mobile }};
+    background: #0a0503 url('{{ tx_bg_mobile }}') center / cover no-repeat;
+    color: var(--tx-text);
+    font-family: {{ tx_font_body }};
+    isolation: isolate;
+  }
+  #mm-txhero-{{ sid }} *, #mm-txhero-{{ sid }} *::before, #mm-txhero-{{ sid }} *::after { box-sizing: border-box; }
+  #mm-txhero-{{ sid }} img { max-width: 100%; }
+
+  {%- if s.overlay_opacity > 0 %}
+  #mm-txhero-{{ sid }}::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(0,0,0,{{ s.overlay_opacity | divided_by: 200.0 }}) 0%, rgba(0,0,0,{{ s.overlay_opacity | divided_by: 100.0 }}) 100%);
+  }
+  {%- endif %}
+
+  /* ---------------- Navbar ---------------- */
+  #mm-txhero-{{ sid }} .tx-nav {
+    position: relative; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 16px 20px;
+  }
+  #mm-txhero-{{ sid }} .tx-brand {
+    font-family: {{ tx_font_display }}; font-weight: 500; font-size: calc(24px * var(--fs-h, 1));
+    letter-spacing: -0.05em; color: var(--tx-text); text-decoration: none; line-height: 1; white-space: nowrap;
+  }
+  #mm-txhero-{{ sid }} .tx-links { display: none; align-items: center; gap: 28px; }
+  #mm-txhero-{{ sid }} .tx-links a {
+    font-family: {{ tx_font_display }}; font-weight: 500; font-size: calc(18px * var(--fs-b, 1));
+    color: {{ s.text_color | default: '#ffffff' | color_modify: 'alpha', 0.9 }}; text-decoration: none; transition: opacity .25s ease;
+  }
+  #mm-txhero-{{ sid }} .tx-links a:hover { opacity: .65; }
+  #mm-txhero-{{ sid }} .tx-actions { display: flex; align-items: center; gap: 14px; }
+  #mm-txhero-{{ sid }} .tx-icon {
+    display: inline-flex; align-items: center; justify-content: center; position: relative;
+    background: none; border: 0; padding: 0; cursor: pointer; color: var(--tx-text); transition: opacity .25s ease;
+  }
+  #mm-txhero-{{ sid }} .tx-icon:hover { opacity: .65; }
+  #mm-txhero-{{ sid }} .tx-count {
+    position: absolute; top: -6px; right: -8px; min-width: 16px; height: 16px; padding: 0 4px;
+    border-radius: 999px; background: var(--tx-text); color: #000;
+    font-size: 10px; font-weight: 500; line-height: 16px; text-align: center;
+  }
+  #mm-txhero-{{ sid }} .tx-avatar { width: 32px; height: 32px; border-radius: 999px; object-fit: cover; display: block; }
+  #mm-txhero-{{ sid }} .tx-burger { display: inline-flex; }
+
+  /* Mobile overlay menu */
+  #mm-txhero-{{ sid }} .tx-menu {
+    position: fixed; inset: 0; z-index: 30; display: none;
+    flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+    background: rgba(0,0,0,0.9); backdrop-filter: blur(2px);
+  }
+  #mm-txhero-{{ sid }} .tx-menu.is-open { display: flex; }
+  #mm-txhero-{{ sid }} .tx-menu a {
+    font-family: {{ tx_font_display }}; font-weight: 500; font-size: calc(24px * var(--fs-h, 1));
+    color: #fff; text-decoration: none; letter-spacing: -0.03em;
+  }
+  #mm-txhero-{{ sid }} .tx-menu-close { position: absolute; top: 18px; right: 20px; color: #fff; background: none; border: 0; cursor: pointer; }
+
+  /* ---------------- Hero ---------------- */
+  #mm-txhero-{{ sid }} .tx-hero {
+    position: relative; z-index: 5; flex: 1 1 auto;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 40px 20px;
+  }
+  #mm-txhero-{{ sid }} .tx-headline {
+    font-family: {{ tx_font_display }}; font-weight: 400; letter-spacing: -0.05em; margin: 0;
+    font-size: calc(var(--tx-hl-size) * var(--fs-h, 1));
+    line-height: calc(var(--tx-hl-lh) * var(--fs-h, 1));
+    color: var(--tx-text);
+  }
+  #mm-txhero-{{ sid }} .tx-line { display: block; }
+  #mm-txhero-{{ sid }} .tx-word {
+    display: inline-block; overflow: hidden; vertical-align: bottom;
+    margin-right: 0.22em; padding-bottom: 0.08em;
+  }
+  #mm-txhero-{{ sid }} .tx-word > span { display: inline-block; }
+  #mm-txhero-{{ sid }} .tx-word > span.is-dim { color: {{ s.text_color | default: '#ffffff' | color_modify: 'alpha', dim_alpha }}; }
+  #mm-txhero-{{ sid }} .tx-inline-img {
+    display: none; vertical-align: middle; margin-left: 8px;
+    height: clamp(60px, 10vw, 160px); width: auto;
+  }
+
+  /* CTA */
+  #mm-txhero-{{ sid }} .tx-cta {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 20px; margin-top: 32px;
+  }
+  #mm-txhero-{{ sid }} .tx-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; height: 56px; border-radius: 6px; text-decoration: none;
+    background: var(--tx-btn-bg); color: var(--tx-btn-text);
+    font-family: {{ tx_font_body }}; font-weight: 500; letter-spacing: -0.03em;
+    font-size: calc(16px * var(--fs-b, 1)); transition: transform .25s ease, filter .25s ease;
+  }
+  #mm-txhero-{{ sid }} .tx-btn:hover { filter: brightness(1.25); transform: translateY(-2px); }
+  #mm-txhero-{{ sid }} .tx-lede {
+    margin: 0; max-width: 310px; color: var(--tx-text);
+    font-family: {{ tx_font_body }}; font-weight: 400; letter-spacing: -0.03em; line-height: 1.45;
+    font-size: calc(14px * var(--fs-b, 1));
+  }
+
+  /* ---------------- Product images ---------------- */
+  #mm-txhero-{{ sid }} .tx-product-mobile {
+    position: relative; z-index: 1; display: block;
+    width: 180%; max-width: 1296px; height: auto; margin: 0 auto -180px;
+    object-fit: contain; filter: drop-shadow(0 25px 25px rgba(0,0,0,.35)); pointer-events: none;
+  }
+  #mm-txhero-{{ sid }} .tx-product-desktop {
+    display: none; position: absolute; z-index: 0; pointer-events: none;
+    width: clamp(600px, 80vw, 1412px); height: auto;
+    bottom: -10%; right: clamp(-400px, -20vw, -100px);
+  }
+
+  /* ---------------- Panels ---------------- */
+  #mm-txhero-{{ sid }} .tx-panels {
+    position: relative; z-index: 10; display: grid; grid-template-columns: 1fr;
+  }
+  #mm-txhero-{{ sid }} .tx-panel { position: relative; overflow: hidden; padding: 28px 24px; }
+
+  #mm-txhero-{{ sid }} .tx-p1 { background: {{ s.panel1_bg | default: '#ECEDEC' }}; color: {{ s.panel1_text | default: '#000000' }}; }
+  #mm-txhero-{{ sid }} .tx-p1 .tx-p1-inner { position: relative; z-index: 2; max-width: 350px; }
+  #mm-txhero-{{ sid }} .tx-p1 h2 {
+    margin: 0 0 16px; font-family: {{ tx_font_display }}; font-weight: 400;
+    font-size: calc(24px * var(--fs-h, 1)); line-height: 1.1; letter-spacing: -0.05em;
+  }
+  #mm-txhero-{{ sid }} .tx-p1 a {
+    color: inherit; text-decoration: underline; text-underline-offset: 3px;
+    font-family: {{ tx_font_body }}; font-weight: 400; letter-spacing: -0.03em; font-size: calc(16px * var(--fs-b, 1));
+  }
+  #mm-txhero-{{ sid }} .tx-p1 .tx-p1-deco {
+    position: absolute; right: 0; bottom: 0; z-index: 1; height: 100%; width: auto;
+    mix-blend-mode: multiply; pointer-events: none;
+  }
+
+  #mm-txhero-{{ sid }} .tx-p2 { background: {{ s.panel2_bg | default: '#FEFDF9' }}; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; }
+  #mm-txhero-{{ sid }} .tx-cards { position: relative; flex: 1 1 auto; }
+  #mm-txhero-{{ sid }} .tx-card {
+    display: flex; align-items: flex-start; gap: 14px;
+    transition: opacity .6s cubic-bezier(0.16,1,0.3,1), transform .6s cubic-bezier(0.16,1,0.3,1);
+  }
+  #mm-txhero-{{ sid }} .tx-card:not(.is-active) { position: absolute; inset: 0; opacity: 0; transform: translateY(16px); pointer-events: none; }
+  #mm-txhero-{{ sid }} .tx-card.is-active { position: relative; opacity: 1; transform: translateY(0); }
+  #mm-txhero-{{ sid }} .tx-card-icon {
+    flex: 0 0 auto; width: 40px; height: 40px; border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center; color: #fff;
+  }
+  #mm-txhero-{{ sid }} .tx-card p {
+    margin: 0; color: rgba(0,0,0,0.8);
+    font-family: {{ tx_font_body }}; font-weight: 400; line-height: 1.2; letter-spacing: -0.03em;
+    font-size: calc(14px * var(--fs-b, 1));
+  }
+  #mm-txhero-{{ sid }} .tx-dots { display: flex; gap: 6px; }
+  #mm-txhero-{{ sid }} .tx-dots button {
+    flex: 1 1 0; height: 2px; border: 0; padding: 0; border-radius: 999px; cursor: pointer;
+    background: rgba(0,0,0,0.2); transition: background .4s ease;
+  }
+  #mm-txhero-{{ sid }} .tx-dots button.is-active { background: #000; }
+
+  #mm-txhero-{{ sid }} .tx-p3 { background: {{ s.panel3_bg | default: '#000000' }}; display: flex; align-items: center; gap: 16px; }
+  #mm-txhero-{{ sid }} .tx-p3 img { width: 120px; height: 82px; object-fit: contain; flex: 0 0 auto; }
+  #mm-txhero-{{ sid }} .tx-p3 .tx-stat {
+    margin: 0 0 4px; color: #fff; font-family: {{ tx_font_body }}; font-weight: 400;
+    letter-spacing: -0.05em; font-size: calc(24px * var(--fs-h, 1)); line-height: 1.1;
+  }
+  #mm-txhero-{{ sid }} .tx-p3 .tx-stat-text {
+    margin: 0; color: rgba(255,255,255,0.6); font-family: {{ tx_font_body }}; font-weight: 400;
+    line-height: 1.2; font-size: calc(14px * var(--fs-b, 1));
+  }
+
+  /* ---------------- Breakpoints ---------------- */
+  @media (min-width: 640px) {
+    #mm-txhero-{{ sid }} { --tx-hl-size: 80px; --tx-hl-lh: 72px; }
+    #mm-txhero-{{ sid }} .tx-nav { padding: 16px 32px; }
+    #mm-txhero-{{ sid }} .tx-hero { padding: 48px 32px; }
+    #mm-txhero-{{ sid }} .tx-inline-img { display: inline-block; }
+    #mm-txhero-{{ sid }} .tx-cta { flex-direction: row; align-items: center; gap: 32px; margin-top: 48px; }
+    #mm-txhero-{{ sid }} .tx-btn { width: 240px; height: 64px; font-size: calc(18px * var(--fs-b, 1)); }
+    #mm-txhero-{{ sid }} .tx-lede { font-size: calc(16px * var(--fs-b, 1)); }
+    #mm-txhero-{{ sid }} .tx-product-mobile { width: 151%; margin-bottom: -220px; }
+    #mm-txhero-{{ sid }} .tx-panel { padding: 32px; }
+    #mm-txhero-{{ sid }} .tx-p1 h2 { font-size: calc(28px * var(--fs-h, 1)); }
+    #mm-txhero-{{ sid }} .tx-card-icon { width: 48px; height: 48px; }
+    #mm-txhero-{{ sid }} .tx-card p { font-size: calc(16px * var(--fs-b, 1)); }
+    #mm-txhero-{{ sid }} .tx-p3 img { width: 160px; height: 110px; }
+    #mm-txhero-{{ sid }} .tx-p3 .tx-stat { font-size: calc(30px * var(--fs-h, 1)); }
+    #mm-txhero-{{ sid }} .tx-p3 .tx-stat-text { font-size: calc(16px * var(--fs-b, 1)); }
+  }
+  @media (min-width: 768px) {
+    #mm-txhero-{{ sid }} { --tx-hl-size: 110px; --tx-hl-lh: 95px; }
+    #mm-txhero-{{ sid }} .tx-burger { display: none; }
+    #mm-txhero-{{ sid }} .tx-btn { width: 280px; }
+    #mm-txhero-{{ sid }} .tx-panels { grid-template-columns: 2fr 1fr 2fr; }
+  }
+  @media (min-width: 1024px) {
+    #mm-txhero-{{ sid }} { --tx-hl-size: 130px; --tx-hl-lh: 110px; min-height: {{ minh_desktop }}; background-image: url('{{ tx_bg_desktop }}'); }
+    #mm-txhero-{{ sid }} .tx-nav { padding: 20px 40px; }
+    #mm-txhero-{{ sid }} .tx-hero { padding: 56px 40px; }
+    #mm-txhero-{{ sid }} .tx-brand { font-size: calc(30px * var(--fs-h, 1)); }
+    #mm-txhero-{{ sid }} .tx-links { display: flex; gap: 40px; }
+    #mm-txhero-{{ sid }} .tx-avatar { width: 40px; height: 40px; }
+    #mm-txhero-{{ sid }} .tx-inline-img { margin-left: 16px; }
+    #mm-txhero-{{ sid }} .tx-cta { gap: 50px; margin-top: 75px; }
+    #mm-txhero-{{ sid }} .tx-btn { width: 310px; height: 72px; font-size: calc(24px * var(--fs-b, 1)); }
+    #mm-txhero-{{ sid }} .tx-lede { font-size: calc(18px * var(--fs-b, 1)); }
+    #mm-txhero-{{ sid }} .tx-product-mobile { display: none; }
+    #mm-txhero-{{ sid }} .tx-product-desktop { display: block; }
+    #mm-txhero-{{ sid }} .tx-panel { padding: 36px 40px; }
+    #mm-txhero-{{ sid }} .tx-p1 h2 { font-size: calc(35px * var(--fs-h, 1)); }
+    #mm-txhero-{{ sid }} .tx-p1 a, #mm-txhero-{{ sid }} .tx-card p, #mm-txhero-{{ sid }} .tx-p3 .tx-stat-text { font-size: calc(18px * var(--fs-b, 1)); }
+    #mm-txhero-{{ sid }} .tx-p3 img { width: 208px; height: 142px; }
+    #mm-txhero-{{ sid }} .tx-p3 .tx-stat { font-size: calc(35px * var(--fs-h, 1)); }
+  }
+  @media (min-width: 1280px) {
+    #mm-txhero-{{ sid }} { --tx-hl-size: 155px; --tx-hl-lh: 125px; }
+  }
+
+  /* ---------------- Animations ---------------- */
+  @keyframes tx-fade-up-{{ sid }} { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes tx-fade-in-{{ sid }} { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes tx-slide-left-{{ sid }} { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes tx-slide-right-{{ sid }} { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes tx-scale-in-{{ sid }} { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+  @keyframes tx-word-reveal-{{ sid }} { from { opacity: 0; transform: translateY(100%); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0px); } }
+
+  #mm-txhero-{{ sid }} [class*='tx-anim-'] { animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); animation-fill-mode: both; }
+  #mm-txhero-{{ sid }} .tx-anim-fade-up { animation-name: tx-fade-up-{{ sid }}; animation-duration: .8s; }
+  #mm-txhero-{{ sid }} .tx-anim-fade-in { animation-name: tx-fade-in-{{ sid }}; animation-duration: .7s; }
+  #mm-txhero-{{ sid }} .tx-anim-slide-left { animation-name: tx-slide-left-{{ sid }}; animation-duration: .8s; }
+  #mm-txhero-{{ sid }} .tx-anim-slide-right { animation-name: tx-slide-right-{{ sid }}; animation-duration: .8s; }
+  #mm-txhero-{{ sid }} .tx-anim-scale-in { animation-name: tx-scale-in-{{ sid }}; animation-duration: 1s; }
+  #mm-txhero-{{ sid }} .tx-word > span {
+    animation-name: tx-word-reveal-{{ sid }}; animation-duration: .7s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); animation-fill-mode: both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #mm-txhero-{{ sid }} [class*='tx-anim-'], #mm-txhero-{{ sid }} .tx-word > span { animation: none !important; }
+    #mm-txhero-{{ sid }} .tx-card { transition: none; }
+  }
+</style>
+
+<section id="mm-txhero-{{ sid }}" data-testid="terraelix-hero" data-tx-interval="{{ s.card_interval | default: 3500 }}">
+  {%- comment -%} ---------------- Navbar ---------------- {%- endcomment -%}
+  <nav class="tx-nav tx-anim-fade-in" style="animation-delay:0ms">
+    <a href="{{ s.brand_link | default: routes.root_url }}" class="tx-brand tx-anim-slide-left" style="animation-delay:200ms">
+      {{ s.brand_name | escape }}
+    </a>
+
+    {%- assign nav_blocks = section.blocks | where: 'type', 'nav_link' -%}
+    {%- if nav_blocks.size > 0 -%}
+      <div class="tx-links tx-anim-fade-in" style="animation-delay:400ms">
+        {%- for block in nav_blocks -%}
+          <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="tx-actions tx-anim-slide-right" style="animation-delay:300ms">
+      {%- if s.show_search -%}
+        <a href="{{ s.search_link | default: routes.search_url }}" class="tx-icon" aria-label="{{ 'general.search.search' | t | default: 'Search' }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </a>
+      {%- endif -%}
+      {%- if s.show_bag -%}
+        <a href="{{ s.bag_link | default: routes.cart_url }}" class="tx-icon" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          {%- if s.show_cart_count and cart.item_count > 0 -%}<span class="tx-count">{{ cart.item_count }}</span>{%- endif -%}
+        </a>
+      {%- endif -%}
+      {%- if s.show_return -%}
+        <a href="{{ s.return_link | default: '#' }}" class="tx-icon" aria-label="{{ s.return_label | escape }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>
+        </a>
+      {%- endif -%}
+      {%- if s.show_avatar -%}
+        <a href="{{ s.avatar_link | default: routes.account_url }}" class="tx-icon" aria-label="Account">
+          <img class="tx-avatar" src="{{ tx_avatar }}" alt="" loading="lazy" width="40" height="40">
+        </a>
+      {%- endif -%}
+      {%- if nav_blocks.size > 0 -%}
+        <button type="button" class="tx-icon tx-burger" data-tx-menu-open aria-label="Open menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+        </button>
+      {%- endif -%}
+    </div>
+  </nav>
+
+  {%- if nav_blocks.size > 0 -%}
+    <div class="tx-menu" data-tx-menu hidden>
+      <button type="button" class="tx-menu-close" data-tx-menu-close aria-label="Close menu">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+      </button>
+      {%- for block in nav_blocks -%}
+        <a href="{{ block.settings.link | default: '#' }}">{{ block.settings.label | escape }}</a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ---------------- Hero ---------------- {%- endcomment -%}
+  <div class="tx-hero">
+    <h1 class="tx-headline">
+      {%- assign word_index = 0 -%}
+      {%- assign headline_lines = s.headline | strip | newline_to_br | split: '<br />' -%}
+      {%- for line in headline_lines -%}
+        {%- assign line_words = line | strip | split: ' ' -%}
+        {%- if line_words.size > 0 -%}
+          <span class="tx-line">
+            {%- for word in line_words -%}
+              {%- assign raw = word | strip -%}
+              {%- if raw != blank -%}
+                {%- assign delay = word_index | times: 100 | plus: 300 -%}
+                {%- if raw contains '[' -%}
+                  {%- assign clean = raw | remove: '[' | remove: ']' -%}
+                  <span class="tx-word"><span class="is-dim" style="animation-delay:{{ delay }}ms">{{ clean | escape }}</span></span>
+                {%- else -%}
+                  <span class="tx-word"><span style="animation-delay:{{ delay }}ms">{{ raw | escape }}</span></span>
+                {%- endif -%}
+                {%- assign word_index = word_index | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if forloop.last and s.show_inline_image -%}
+              <img class="tx-inline-img tx-anim-scale-in" style="animation-delay:1000ms" src="{{ tx_inline }}" alt="" loading="eager">
+            {%- endif -%}
+          </span>
+        {%- endif -%}
+      {%- endfor -%}
+    </h1>
+
+    <div class="tx-cta tx-anim-fade-up" style="animation-delay:600ms">
+      {%- if s.btn_label != blank -%}
+        <a href="{{ s.btn_link | default: '#' }}" class="tx-btn">
+          {{ s.btn_label | escape }}
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </a>
+      {%- endif -%}
+      {%- if s.lede != blank -%}
+        <p class="tx-lede">{{ s.lede | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} ------------- Product image (mobile / tablet) ------------- {%- endcomment -%}
+  {%- if s.show_product_image -%}
+    <img class="tx-product-mobile tx-anim-scale-in" style="animation-delay:800ms" src="{{ tx_product }}" alt="{{ s.product_alt | escape }}" loading="eager">
+  {%- endif -%}
+
+  {%- comment -%} ---------------- Bottom panels ---------------- {%- endcomment -%}
+  <div class="tx-panels">
+    {%- if s.show_panel1 -%}
+      <div class="tx-panel tx-p1 tx-anim-fade-up" style="animation-delay:900ms">
+        <div class="tx-p1-inner">
+          {%- if s.panel1_title != blank -%}<h2>{{ s.panel1_title | escape }}</h2>{%- endif -%}
+          {%- if s.panel1_link_label != blank -%}
+            <a href="{{ s.panel1_link | default: '#' }}">{{ s.panel1_link_label | escape }}</a>
+          {%- endif -%}
+        </div>
+        {%- if s.show_panel1_image -%}
+          <img class="tx-p1-deco" src="{{ tx_panel1_img }}" alt="" loading="lazy">
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- assign card_blocks = section.blocks | where: 'type', 'card' -%}
+    {%- if card_blocks.size > 0 -%}
+      <div class="tx-panel tx-p2 tx-anim-fade-up" style="animation-delay:1000ms">
+        <div class="tx-cards" data-tx-cards>
+          {%- for block in card_blocks -%}
+            <div class="tx-card{% if forloop.first %} is-active{% endif %}" data-tx-card {{ block.shopify_attributes }}>
+              <span class="tx-card-icon" style="background:{{ block.settings.icon_bg | default: '#000000' }}">
+                {%- case block.settings.icon -%}
+                  {%- when 'leaf' -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                  {%- when 'droplets' -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>
+                  {%- when 'sun' -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                  {%- when 'sparkles' -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4"/><path d="M3 5h4"/></svg>
+                  {%- when 'shield' -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                  {%- when 'heart' -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                  {%- else -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>
+                {%- endcase -%}
+              </span>
+              <p>{{ block.settings.text | escape }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- if s.show_dots and card_blocks.size > 1 -%}
+          <div class="tx-dots" data-tx-dots>
+            {%- for block in card_blocks -%}
+              <button type="button" class="{% if forloop.first %}is-active{% endif %}" data-tx-dot="{{ forloop.index0 }}" aria-label="Show card {{ forloop.index }}"></button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if s.show_panel3 -%}
+      <div class="tx-panel tx-p3 tx-anim-fade-up" style="animation-delay:1100ms">
+        {%- if s.show_panel3_image -%}
+          <img src="{{ tx_panel3_img }}" alt="" loading="lazy">
+        {%- endif -%}
+        <div>
+          {%- if s.panel3_stat != blank -%}<p class="tx-stat">{{ s.panel3_stat | escape }}</p>{%- endif -%}
+          {%- if s.panel3_text != blank -%}<p class="tx-stat-text">{{ s.panel3_text | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} ------------- Floating product image (desktop) ------------- {%- endcomment -%}
+  {%- if s.show_product_image -%}
+    <img class="tx-product-desktop tx-anim-scale-in" style="animation-delay:700ms" src="{{ tx_product }}" alt="{{ s.product_alt | escape }}" loading="eager">
+  {%- endif -%}
+</section>
+
+<script>
+(function () {
+  var root = document.getElementById('mm-txhero-{{ sid }}');
+  if (!root) return;
+
+  window.__txHeroTimers = window.__txHeroTimers || {};
+  if (window.__txHeroTimers['{{ sid }}']) {
+    clearInterval(window.__txHeroTimers['{{ sid }}']);
+    delete window.__txHeroTimers['{{ sid }}'];
+  }
+
+  /* ---- Mobile menu ---- */
+  var menu = root.querySelector('[data-tx-menu]');
+  var openBtn = root.querySelector('[data-tx-menu-open]');
+  var closeBtn = root.querySelector('[data-tx-menu-close]');
+  function setMenu(open) {
+    if (!menu) return;
+    menu.classList.toggle('is-open', open);
+    menu.hidden = !open;
+    if (openBtn) openBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  if (openBtn) openBtn.addEventListener('click', function () { setMenu(true); });
+  if (closeBtn) closeBtn.addEventListener('click', function () { setMenu(false); });
+  if (menu) {
+    menu.addEventListener('click', function (e) { if (e.target.tagName === 'A' || e.target === menu) setMenu(false); });
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  /* ---- Panel 2 card carousel ---- */
+  var cards = Array.prototype.slice.call(root.querySelectorAll('[data-tx-card]'));
+  var dots = Array.prototype.slice.call(root.querySelectorAll('[data-tx-dot]'));
+  if (cards.length < 2) return;
+
+  var index = 0;
+  var delay = parseInt(root.getAttribute('data-tx-interval'), 10) || 3500;
+
+  function show(next) {
+    index = (next + cards.length) % cards.length;
+    cards.forEach(function (card, i) { card.classList.toggle('is-active', i === index); });
+    dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === index); });
+  }
+
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      show(parseInt(dot.getAttribute('data-tx-dot'), 10));
+      start();
+    });
+  });
+
+  function start() {
+    if (window.__txHeroTimers['{{ sid }}']) clearInterval(window.__txHeroTimers['{{ sid }}']);
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+    window.__txHeroTimers['{{ sid }}'] = setInterval(function () {
+      if (!document.body.contains(root)) {
+        clearInterval(window.__txHeroTimers['{{ sid }}']);
+        delete window.__txHeroTimers['{{ sid }}'];
+        return;
+      }
+      show(index + 1);
+    }, delay);
+  }
+  start();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "TerraElix Hero",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Navbar" },
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "TerraElix" },
+    { "type": "url", "id": "brand_link", "label": "Brand link" },
+    { "type": "checkbox", "id": "show_search", "label": "Show search icon", "default": true },
+    { "type": "url", "id": "search_link", "label": "Search link" },
+    { "type": "checkbox", "id": "show_bag", "label": "Show shopping bag icon", "default": true },
+    { "type": "url", "id": "bag_link", "label": "Bag link" },
+    { "type": "checkbox", "id": "show_cart_count", "label": "Show cart item count", "default": true },
+    { "type": "checkbox", "id": "show_return", "label": "Show return icon", "default": true },
+    { "type": "url", "id": "return_link", "label": "Return link" },
+    { "type": "text", "id": "return_label", "label": "Return icon label (accessibility)", "default": "Returns" },
+    { "type": "checkbox", "id": "show_avatar", "label": "Show avatar", "default": true },
+    { "type": "image_picker", "id": "avatar", "label": "Avatar image" },
+    { "type": "url", "id": "avatar_link", "label": "Avatar link" },
+
+    { "type": "header", "content": "Headline" },
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Headline (one line per row — wrap a word in [brackets] to dim it)",
+      "default": "The Power [of]\n[Nature] [in] Every\nCapsule"
+    },
+    { "type": "range", "id": "dim_opacity", "label": "Dimmed word opacity", "min": 10, "max": 90, "step": 5, "unit": "%", "default": 45 },
+    { "type": "checkbox", "id": "show_inline_image", "label": "Show inline image after last word", "default": true },
+    { "type": "image_picker", "id": "inline_image", "label": "Inline image" },
+
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "Explore Now" },
+    { "type": "url", "id": "btn_link", "label": "Button link" },
+    { "type": "textarea", "id": "lede", "label": "Paragraph", "default": "Discover our new plant-based supplements for daily balance and clean energy." },
+
+    { "type": "header", "content": "Product image" },
+    { "type": "checkbox", "id": "show_product_image", "label": "Show product image", "default": true },
+    { "type": "image_picker", "id": "product_image", "label": "Product image (transparent PNG)" },
+    { "type": "text", "id": "product_alt", "label": "Product image alt text", "default": "TerraElix supplement bottle" },
+
+    { "type": "header", "content": "Panel 1 — Assessment" },
+    { "type": "checkbox", "id": "show_panel1", "label": "Show panel 1", "default": true },
+    { "type": "text", "id": "panel1_title", "label": "Title", "default": "Start your personalized path to natural balance" },
+    { "type": "text", "id": "panel1_link_label", "label": "Link label", "default": "Personal Assessment" },
+    { "type": "url", "id": "panel1_link", "label": "Link" },
+    { "type": "checkbox", "id": "show_panel1_image", "label": "Show decorative image", "default": true },
+    { "type": "image_picker", "id": "panel1_image", "label": "Decorative image" },
+    { "type": "color", "id": "panel1_bg", "label": "Background", "default": "#ECEDEC" },
+    { "type": "color", "id": "panel1_text", "label": "Text", "default": "#000000" },
+
+    { "type": "header", "content": "Panel 2 — Rotating cards" },
+    { "type": "color", "id": "panel2_bg", "label": "Background", "default": "#FEFDF9" },
+    { "type": "range", "id": "card_interval", "label": "Rotation speed", "min": 1500, "max": 8000, "step": 500, "unit": "ms", "default": 3500 },
+    { "type": "checkbox", "id": "show_dots", "label": "Show progress dots", "default": true },
+    { "type": "paragraph", "content": "Add \"Card\" blocks below to fill this panel." },
+
+    { "type": "header", "content": "Panel 3 — Social proof" },
+    { "type": "checkbox", "id": "show_panel3", "label": "Show panel 3", "default": true },
+    { "type": "checkbox", "id": "show_panel3_image", "label": "Show image", "default": true },
+    { "type": "image_picker", "id": "panel3_image", "label": "Image" },
+    { "type": "text", "id": "panel3_stat", "label": "Stat", "default": "+14K" },
+    { "type": "text", "id": "panel3_text", "label": "Stat text", "default": "People have already optimized their wellness" },
+    { "type": "color", "id": "panel3_bg", "label": "Background", "default": "#000000" },
+
+    { "type": "header", "content": "Background & colors" },
+    { "type": "image_picker", "id": "bg_desktop", "label": "Background (desktop)" },
+    { "type": "image_picker", "id": "bg_mobile", "label": "Background (mobile)" },
+    { "type": "range", "id": "overlay_opacity", "label": "Background darkening", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 0 },
+    { "type": "color", "id": "text_color", "label": "Hero text", "default": "#ffffff" },
+    { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#000000" },
+    { "type": "color", "id": "btn_text", "label": "Button text", "default": "#ffffff" },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Height (mobile)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "medium", "label": "Medium (70% of screen)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Height (desktop)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "medium", "label": "Medium (720px)" },
+        { "value": "large", "label": "Large (90% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "full"
+    },
+    { "type": "checkbox", "id": "use_google_fonts", "label": "Use DM Sans + Inter (Google Fonts)", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Nav link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "About" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Card (panel 2)",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "flask", "label": "Flask" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "droplets", "label": "Droplets" },
+            { "value": "sun", "label": "Sun" },
+            { "value": "sparkles", "label": "Sparkles" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heart", "label": "Heart" }
+          ],
+          "default": "flask"
+        },
+        { "type": "color", "id": "icon_bg", "label": "Icon circle color", "default": "#000000" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Experience our newly enhanced natural formula" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TerraElix Hero",
+      "blocks": [
+        { "type": "nav_link", "settings": { "label": "About" } },
+        { "type": "nav_link", "settings": { "label": "Products" } },
+        { "type": "nav_link", "settings": { "label": "Promotions" } },
+        { "type": "nav_link", "settings": { "label": "Contact" } },
+        { "type": "card", "settings": { "icon": "flask", "icon_bg": "#000000", "text": "Experience our newly enhanced natural formula" } },
+        { "type": "card", "settings": { "icon": "leaf", "icon_bg": "#065f46", "text": "Pure organic ingredients sourced sustainably" } },
+        { "type": "card", "settings": { "icon": "droplets", "icon_bg": "#155e75", "text": "Advanced bioavailability for maximum absorption" } },
+        { "type": "card", "settings": { "icon": "sun", "icon_bg": "#b45309", "text": "Clinically tested for daily energy & vitality" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
