@@ -9,393 +9,8 @@
  */
 {
   "sections": {
-    "terraelix_hero_6XteDh": {
-      "type": "terraelix-hero",
-      "blocks": {
-        "nav_link_QjMhkq": {
-          "type": "nav_link",
-          "settings": {
-            "label": "About",
-            "link": ""
-          }
-        },
-        "nav_link_PAbq64": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Products",
-            "link": ""
-          }
-        },
-        "nav_link_Cnxx9V": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Promotions",
-            "link": ""
-          }
-        },
-        "nav_link_YpK4R4": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Contact",
-            "link": ""
-          }
-        },
-        "card_d3hyBf": {
-          "type": "card",
-          "settings": {
-            "icon": "flask",
-            "icon_bg": "#000000",
-            "text": "Experience our newly enhanced natural formula"
-          }
-        },
-        "card_UxjQb4": {
-          "type": "card",
-          "settings": {
-            "icon": "leaf",
-            "icon_bg": "#065f46",
-            "text": "Pure organic ingredients sourced sustainably"
-          }
-        },
-        "card_q8wUtN": {
-          "type": "card",
-          "settings": {
-            "icon": "droplets",
-            "icon_bg": "#155e75",
-            "text": "Advanced bioavailability for maximum absorption"
-          }
-        },
-        "card_fGftQn": {
-          "type": "card",
-          "settings": {
-            "icon": "sun",
-            "icon_bg": "#b45309",
-            "text": "Clinically tested for daily energy & vitality"
-          }
-        }
-      },
-      "block_order": [
-        "nav_link_QjMhkq",
-        "nav_link_PAbq64",
-        "nav_link_Cnxx9V",
-        "nav_link_YpK4R4",
-        "card_d3hyBf",
-        "card_UxjQb4",
-        "card_q8wUtN",
-        "card_fGftQn"
-      ],
-      "name": "TerraElix Hero",
-      "settings": {
-        "brand_name": "TerraElix",
-        "brand_link": "",
-        "show_search": true,
-        "search_link": "",
-        "show_bag": true,
-        "bag_link": "",
-        "show_cart_count": true,
-        "show_return": true,
-        "return_link": "",
-        "return_label": "Returns",
-        "show_avatar": true,
-        "avatar_link": "",
-        "headline": "The Power [of]\n[Nature] [in] Every\nCapsule",
-        "dim_opacity": 45,
-        "show_inline_image": true,
-        "btn_label": "Explore Now",
-        "btn_link": "",
-        "lede": "Discover our new plant-based supplements for daily balance and clean energy.",
-        "show_product_image": true,
-        "product_alt": "TerraElix supplement bottle",
-        "show_panel1": true,
-        "panel1_title": "Start your personalized path to natural balance",
-        "panel1_link_label": "Personal Assessment",
-        "panel1_link": "",
-        "show_panel1_image": true,
-        "panel1_bg": "#ECEDEC",
-        "panel1_text": "#000000",
-        "panel2_bg": "#FEFDF9",
-        "card_interval": 3500,
-        "show_dots": true,
-        "show_panel3": true,
-        "show_panel3_image": true,
-        "panel3_stat": "+14K",
-        "panel3_text": "People have already optimized their wellness",
-        "panel3_bg": "#000000",
-        "overlay_opacity": 0,
-        "text_color": "#ffffff",
-        "btn_bg": "#000000",
-        "btn_text": "#ffffff",
-        "height_mobile": "auto",
-        "height_desktop": "full",
-        "use_google_fonts": true
-      }
-    },
-    "nhm_hero_eRUA93": {
-      "type": "nhm-hero",
-      "blocks": {
-        "nav_link_jd6Akd": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Visit",
-            "link": ""
-          }
-        },
-        "nav_link_BAW7Qy": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Exhibitions",
-            "link": ""
-          }
-        },
-        "nav_link_zGfJeE": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Discover",
-            "link": ""
-          }
-        },
-        "nav_link_TErrRm": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Learn",
-            "link": ""
-          }
-        },
-        "nav_link_LFw3T4": {
-          "type": "nav_link",
-          "settings": {
-            "label": "About",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "nav_link_jd6Akd",
-        "nav_link_BAW7Qy",
-        "nav_link_zGfJeE",
-        "nav_link_TErrRm",
-        "nav_link_LFw3T4"
-      ],
-      "disabled": true,
-      "name": "NHM Hero",
-      "settings": {
-        "logo_alt": "UPMN",
-        "logo_link": "",
-        "brand_line1": "Natura",
-        "brand_line2": "History",
-        "brand_line3": "Museum",
-        "intro": "Exploring the story of life on\nearth through science,\ndiscovery and wonder.",
-        "bg_video": "shopify://files/videos/film .mp4",
-        "bg_video_url": "",
-        "video_delay": 2800,
-        "index_number": "01",
-        "headline": "TIMELESS\nWONDERS",
-        "description": "Step into the natural world and discover the stories written millions of years ago.",
-        "cta_label": "Explore Now",
-        "cta_link": "",
-        "cta_bg": "#000000",
-        "show_specimen": true,
-        "specimen_title": "Tyrannosaurus Rex",
-        "specimen_text": "Late Cretaceous period\n68-66 million years ago",
-        "stat1_label": "Length",
-        "stat1_value": "12.3 m",
-        "stat2_label": "Height",
-        "stat2_value": "4.0 m",
-        "details_label": "View Details",
-        "details_link": "",
-        "scroll_label": "Scroll to explore",
-        "bg_color": "#000000",
-        "text_color": "#fafafa",
-        "use_google_fonts": true
-      }
-    },
-    "nhm_explore_jMJ9mF": {
-      "type": "nhm-explore",
-      "blocks": {
-        "pill_gAF4B9": {
-          "type": "pill",
-          "settings": {
-            "icon": "bone",
-            "label": "Dinosaurs",
-            "link": ""
-          }
-        },
-        "pill_HyhJyN": {
-          "type": "pill",
-          "settings": {
-            "icon": "dna",
-            "label": "Ancient Life",
-            "link": ""
-          }
-        },
-        "pill_iLViHL": {
-          "type": "pill",
-          "settings": {
-            "icon": "gem",
-            "label": "Minerals",
-            "link": ""
-          }
-        },
-        "pill_JQgxAx": {
-          "type": "pill",
-          "settings": {
-            "icon": "leaf",
-            "label": "Fossils",
-            "link": ""
-          }
-        },
-        "pill_FtKFPp": {
-          "type": "pill",
-          "settings": {
-            "icon": "book",
-            "label": "Learn More",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "pill_gAF4B9",
-        "pill_HyhJyN",
-        "pill_iLViHL",
-        "pill_JQgxAx",
-        "pill_FtKFPp"
-      ],
-      "name": "NHM Explore",
-      "settings": {
-        "label_number": "02",
-        "label_text": "Explore Our World",
-        "heading": "Unearth the stories of our planet's past\nthrough fossils, minerals, and ancient wonders.",
-        "spacer_mobile": 220,
-        "spacer_desktop": 450,
-        "foot_left": "WE DON'T JUST TELL STORIES.",
-        "foot_right": "PALEONTOLOGY (C) 2026",
-        "bg_color": "#fcfcfc",
-        "text_color": "#111111",
-        "use_google_fonts": true
-      }
-    },
-    "terraelix_hero_RXt9kq": {
-      "type": "terraelix-hero",
-      "blocks": {
-        "nav_link_4BthkF": {
-          "type": "nav_link",
-          "settings": {
-            "label": "About",
-            "link": ""
-          }
-        },
-        "nav_link_UtbtTF": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Products",
-            "link": ""
-          }
-        },
-        "nav_link_MH3y3N": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Promotions",
-            "link": ""
-          }
-        },
-        "nav_link_xqqTzd": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Contact",
-            "link": ""
-          }
-        },
-        "card_bTP7bU": {
-          "type": "card",
-          "settings": {
-            "icon": "flask",
-            "icon_bg": "#000000",
-            "text": "Experience our newly enhanced natural formula"
-          }
-        },
-        "card_JrhDED": {
-          "type": "card",
-          "settings": {
-            "icon": "leaf",
-            "icon_bg": "#065f46",
-            "text": "Pure organic ingredients sourced sustainably"
-          }
-        },
-        "card_TKy3eX": {
-          "type": "card",
-          "settings": {
-            "icon": "droplets",
-            "icon_bg": "#155e75",
-            "text": "Advanced bioavailability for maximum absorption"
-          }
-        },
-        "card_rHhRdy": {
-          "type": "card",
-          "settings": {
-            "icon": "sun",
-            "icon_bg": "#b45309",
-            "text": "Clinically tested for daily energy & vitality"
-          }
-        }
-      },
-      "block_order": [
-        "nav_link_4BthkF",
-        "nav_link_UtbtTF",
-        "nav_link_MH3y3N",
-        "nav_link_xqqTzd",
-        "card_bTP7bU",
-        "card_JrhDED",
-        "card_TKy3eX",
-        "card_rHhRdy"
-      ],
-      "name": "TerraElix Hero",
-      "settings": {
-        "brand_name": "TerraElix",
-        "brand_link": "",
-        "show_search": true,
-        "search_link": "",
-        "show_bag": true,
-        "bag_link": "",
-        "show_cart_count": true,
-        "show_return": true,
-        "return_link": "",
-        "return_label": "Returns",
-        "show_avatar": true,
-        "avatar_link": "",
-        "headline": "The Power [of]\n[Nature] [in] Every\nCapsule",
-        "dim_opacity": 45,
-        "show_inline_image": true,
-        "btn_label": "Explore Now",
-        "btn_link": "",
-        "lede": "Discover our new plant-based supplements for daily balance and clean energy.",
-        "show_product_image": true,
-        "product_alt": "TerraElix supplement bottle",
-        "show_panel1": true,
-        "panel1_title": "Start your personalized path to natural balance",
-        "panel1_link_label": "Personal Assessment",
-        "panel1_link": "",
-        "show_panel1_image": true,
-        "panel1_bg": "#ecedec",
-        "panel1_text": "#000000",
-        "panel2_bg": "#fefdf9",
-        "card_interval": 3500,
-        "show_dots": true,
-        "show_panel3": true,
-        "show_panel3_image": true,
-        "panel3_stat": "+14K",
-        "panel3_text": "People have already optimized their wellness",
-        "panel3_bg": "#000000",
-        "overlay_opacity": 0,
-        "text_color": "#ffffff",
-        "btn_bg": "#000000",
-        "btn_text": "#ffffff",
-        "height_mobile": "auto",
-        "height_desktop": "full",
-        "use_google_fonts": true
-      }
-    },
     "hero": {
       "type": "hero",
-      "disabled": true,
       "settings": {
         "reviews_text": "4,548 REVIEWS",
         "title_line1": "UP MEN",
@@ -488,7 +103,11 @@
         "cta_link": "",
         "decline_height_mobile": "auto",
         "decline_height_desktop": "auto",
+        "stat_big": "-1%",
         "stat_label": "AVERAGE TESTOSTERONE LEVELS SINCE 1980",
+        "stat_bars": "100|80|55",
+        "stat_years": "1980|2000|TODAY",
+        "stat_aria": "Average testosterone levels dropping 1% every year since 1980: 100% in 1980, around 80% in 2000, around 55% today",
         "stat_caption": "Men today have roughly half the testosterone their grandfathers had at the same age.*",
         "stat_overlay_enabled": true,
         "stat_overlay_color": "#1a0e07",
@@ -889,32 +508,7 @@
         "guarantee_note": "90-DAY HIGHER-T GUARANTEE · TRY IT RISK-FREE",
         "height_mobile": "auto",
         "height_desktop": "auto"
-      },
-      "blocks": {
-        "kit_1": { "type": "kit_addon", "settings": { "text": "90-Day Supply — 3 Bottles", "free_prefix": false, "old_value": "$177", "value": "$118", "value_style": "plain" } },
-        "kit_2": { "type": "kit_addon", "settings": { "text": "1st Bottle", "free_prefix": true, "old_value": "", "value": "Save $59", "value_style": "save" } },
-        "kit_3": { "type": "kit_addon", "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "old_value": "", "value": "$10", "value_style": "free" } },
-        "kit_4": { "type": "kit_addon", "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "old_value": "", "value": "$20", "value_style": "free" } },
-        "kit_5": { "type": "kit_addon", "settings": { "text": "1 Month of Ladder Workout App", "free_prefix": true, "old_value": "", "value": "$30", "value_style": "free" } },
-        "kit_6": { "type": "kit_addon", "settings": { "text": "Surprise Gift", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" } },
-        "kit_7": { "type": "kit_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "old_value": "", "value": "", "value_style": "plain" } },
-        "once_1": { "type": "once_addon", "settings": { "text": "1 Bottle — 30-Day Supply", "free_prefix": false, "old_value": "", "value": "$59", "value_style": "plain" } },
-        "once_2": { "type": "once_addon", "settings": { "text": "$15 off your first order", "free_prefix": false, "old_value": "", "value": "Save $15", "value_style": "save" } },
-        "once_3": { "type": "once_addon", "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" } },
-        "once_4": { "type": "once_addon", "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" } },
-        "once_5": { "type": "once_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "old_value": "", "value": "", "value_style": "plain" } },
-        "kit_perk_1": { "type": "kit_perk", "settings": { "text": "Just $39.33 per month" } },
-        "kit_perk_2": { "type": "kit_perk", "settings": { "text": "Auto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime" } },
-        "kit_perk_3": { "type": "kit_perk", "settings": { "text": "90-day higher-T money-back guarantee" } },
-        "once_perk_1": { "type": "once_perk", "settings": { "text": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime" } },
-        "once_perk_2": { "type": "once_perk", "settings": { "text": "90-day higher-T money-back guarantee" } }
-      },
-      "block_order": [
-        "kit_1", "kit_2", "kit_3", "kit_4", "kit_5", "kit_6", "kit_7",
-        "kit_perk_1", "kit_perk_2", "kit_perk_3",
-        "once_1", "once_2", "once_3", "once_4", "once_5",
-        "once_perk_1", "once_perk_2"
-      ]
+      }
     },
     "marquee_fast": {
       "type": "marquee-fast",
@@ -985,8 +579,17 @@
         "title_highlight": "SAYING",
         "avg_rating": "4.8",
         "total_reviews": "4,548",
+        "total_prefix": "Based on",
+        "total_suffix": "reviews",
         "dist_pcts": "86|8|3|1|2",
-        "dist_counts": "3,911|364|136|46|91"
+        "dist_counts": "3,911|364|136|46|91",
+        "tab_label": "Reviews",
+        "filter_label": "With Photos",
+        "filter_active_label": "Showing photos only",
+        "empty_label": "No reviews with photos yet.",
+        "verified_label": "Verified Purchase",
+        "review_photo_label": "Review photo",
+        "photos_alt_prefix": "Customer photo"
       }
     },
     "how_it_works": {
@@ -1115,87 +718,9 @@
         "height_mobile": "auto",
         "height_desktop": "auto"
       }
-    },
-    "nhm_explore_k339aF": {
-      "type": "nhm-explore",
-      "blocks": {
-        "pill_FmXHpc": {
-          "type": "pill",
-          "settings": {
-            "icon": "bone",
-            "label": "Dinosaurs",
-            "link": ""
-          }
-        },
-        "pill_RgzPKQ": {
-          "type": "pill",
-          "settings": {
-            "icon": "bone",
-            "label": "Dinosaurs",
-            "link": ""
-          }
-        },
-        "pill_qiEf9r": {
-          "type": "pill",
-          "settings": {
-            "icon": "dna",
-            "label": "Ancient Life",
-            "link": ""
-          }
-        },
-        "pill_Y3yfMq": {
-          "type": "pill",
-          "settings": {
-            "icon": "gem",
-            "label": "Minerals",
-            "link": ""
-          }
-        },
-        "pill_cWxc3X": {
-          "type": "pill",
-          "settings": {
-            "icon": "leaf",
-            "label": "Fossils",
-            "link": ""
-          }
-        },
-        "pill_3PJDFC": {
-          "type": "pill",
-          "settings": {
-            "icon": "book",
-            "label": "Learn More",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "pill_FmXHpc",
-        "pill_RgzPKQ",
-        "pill_qiEf9r",
-        "pill_Y3yfMq",
-        "pill_cWxc3X",
-        "pill_3PJDFC"
-      ],
-      "name": "NHM Explore",
-      "settings": {
-        "label_number": "02",
-        "label_text": "Explore Our World",
-        "heading": "Unearth the stories of our planet's past\nthrough fossils, minerals, and ancient wonders.",
-        "spacer_mobile": 220,
-        "spacer_desktop": 450,
-        "foot_left": "WE DON'T JUST TELL STORIES.",
-        "foot_right": "PALEONTOLOGY (C) 2026",
-        "bg_color": "#fcfcfc",
-        "text_color": "#111111",
-        "use_google_fonts": true
-      }
     }
   },
   "order": [
-    "terraelix_hero_6XteDh",
-    "nhm_hero_eRUA93",
-    "nhm_explore_jMJ9mF",
-    "terraelix_hero_RXt9kq",
     "hero",
     "marquee_intro",
     "story",
@@ -1211,7 +736,6 @@
     "marquee_fast",
     "reviews",
     "how_it_works",
-    "faq",
-    "nhm_explore_k339aF"
+    "faq"
   ]
 }
