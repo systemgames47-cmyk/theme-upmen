@@ -1,1 +1,84 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Up Men",
+    "theme_version": "1.0.0",
+    "theme_author": "Up Men",
+    "theme_documentation_url": "https://shopify.dev",
+    "theme_support_url": "https://shopify.dev"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      {
+        "type": "range",
+        "id": "logo_height",
+        "label": "Logo height",
+        "min": 16,
+        "max": 80,
+        "step": 2,
+        "unit": "px",
+        "default": 32
+      },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "Square image, 32 x 32 px." }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_brand", "label": "Brand (orange)", "default": "#ff5600" },
+      { "type": "color", "id": "color_brand_dark", "label": "Brand dark", "default": "#120804" },
+      { "type": "color", "id": "color_brand_soft", "label": "Brand soft", "default": "#fff4ec" },
+      { "type": "color", "id": "color_brand_green", "label": "Success green", "default": "#39c46e" },
+      { "type": "color", "id": "color_brand_yellow", "label": "Accent yellow", "default": "#ff8a00" },
+      { "type": "color", "id": "color_text", "label": "Text", "default": "#ffffff" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "use_custom_fonts",
+        "label": "Use Shopify fonts",
+        "default": false,
+        "info": "Off keeps the theme's Martian Mono + Inter, loaded from Google Fonts. On uses the two pickers below."
+      },
+      { "type": "font_picker", "id": "font_heading", "label": "Heading font", "default": "assistant_n4" },
+      { "type": "font_picker", "id": "font_body", "label": "Body font", "default": "assistant_n4" },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "label": "Heading size",
+        "min": 80,
+        "max": 140,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "body_scale",
+        "label": "Body text size",
+        "min": 80,
+        "max": 140,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      }
+    ]
+  },
+  {
+    "name": "Contact",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Support email",
+        "default": "support@mengotomars.com",
+        "info": "Used by the footer when its own \"Support email\" field is empty."
+      }
+    ]
+  }
+]
