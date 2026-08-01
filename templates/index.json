@@ -478,6 +478,95 @@
     },
     "pricing": {
       "type": "pricing",
+      "blocks": {
+        "kit_1": {
+          "type": "kit_addon",
+          "settings": { "text": "90-Day Supply — 3 Bottles", "free_prefix": false, "old_value": "$177", "value": "$118", "value_style": "plain" }
+        },
+        "kit_2": {
+          "type": "kit_addon",
+          "settings": { "text": "1st Bottle", "free_prefix": true, "old_value": "", "value": "Save $59", "value_style": "save" }
+        },
+        "kit_3": {
+          "type": "kit_addon",
+          "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "old_value": "", "value": "$10", "value_style": "free" }
+        },
+        "kit_4": {
+          "type": "kit_addon",
+          "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "old_value": "", "value": "$20", "value_style": "free" }
+        },
+        "kit_5": {
+          "type": "kit_addon",
+          "settings": { "text": "1 Month of Ladder Workout App", "free_prefix": true, "old_value": "", "value": "$30", "value_style": "free" }
+        },
+        "kit_6": {
+          "type": "kit_addon",
+          "settings": { "text": "Surprise Gift", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" }
+        },
+        "kit_7": {
+          "type": "kit_addon",
+          "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "old_value": "", "value": "", "value_style": "plain" }
+        },
+        "kit_perk_1": {
+          "type": "kit_perk",
+          "settings": { "text": "Just $39.33 per month" }
+        },
+        "kit_perk_2": {
+          "type": "kit_perk",
+          "settings": { "text": "Auto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime" }
+        },
+        "kit_perk_3": {
+          "type": "kit_perk",
+          "settings": { "text": "90-day higher-T money-back guarantee" }
+        },
+        "once_1": {
+          "type": "once_addon",
+          "settings": { "text": "1 Bottle — 30-Day Supply", "free_prefix": false, "old_value": "", "value": "$59", "value_style": "plain" }
+        },
+        "once_2": {
+          "type": "once_addon",
+          "settings": { "text": "$15 off your first order", "free_prefix": false, "old_value": "", "value": "Save $15", "value_style": "save" }
+        },
+        "once_3": {
+          "type": "once_addon",
+          "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" }
+        },
+        "once_4": {
+          "type": "once_addon",
+          "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" }
+        },
+        "once_5": {
+          "type": "once_addon",
+          "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "old_value": "", "value": "", "value_style": "plain" }
+        },
+        "once_perk_1": {
+          "type": "once_perk",
+          "settings": { "text": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime" }
+        },
+        "once_perk_2": {
+          "type": "once_perk",
+          "settings": { "text": "90-day higher-T money-back guarantee" }
+        }
+      },
+      "block_order": [
+        "kit_1",
+        "kit_2",
+        "kit_3",
+        "kit_4",
+        "kit_5",
+        "kit_6",
+        "kit_7",
+        "kit_perk_1",
+        "kit_perk_2",
+        "kit_perk_3",
+        "once_1",
+        "once_2",
+        "once_3",
+        "once_4",
+        "once_5",
+        "once_perk_1",
+        "once_perk_2"
+      ],
       "settings": {
         "eyebrow": "FLASH SALE: 1ST MONTH FREE",
         "title": "<p>GET YOUR FIRST MONTH FREE</p>",
