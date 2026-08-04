@@ -1,0 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-help-center",
+      "blocks": {
+        "t1": { "type": "topic", "settings": { "icon": "📦", "title": "ORDERS & SHIPPING", "text": "Tracking, delivery times and changing an order.", "link": "" } },
+        "t2": { "type": "topic", "settings": { "icon": "🔁", "title": "SUBSCRIPTIONS", "text": "Skip a delivery, pause, or cancel at any time.", "link": "" } },
+        "t3": { "type": "topic", "settings": { "icon": "🛡️", "title": "RETURNS & GUARANTEE", "text": "How the 90-day higher-T guarantee works.", "link": "" } },
+        "t4": { "type": "topic", "settings": { "icon": "💊", "title": "USING UP MEN", "text": "Dosing, timing and what to expect month by month.", "link": "" } },
+        "q1": { "type": "qa", "settings": { "question": "When will my order arrive?", "answer": "<p>Orders placed before 2pm ship the same business day. Delivery inside the US takes 3 to 5 business days, and you get a tracking link by email as soon as the parcel leaves our facility.</p>" } },
+        "q2": { "type": "qa", "settings": { "question": "How do I skip, pause or cancel my subscription?", "answer": "<p>Open the link in any order confirmation email to reach your subscription portal. You can skip a single delivery, push the next shipment back, or cancel outright — no phone call, no retention script.</p>" } },
+        "q3": { "type": "qa", "settings": { "question": "How does the 90-day guarantee work?", "answer": "<p>Run the protocol for 90 days. If your testosterone has not moved and you do not feel the difference, contact support within 90 days of delivery and we refund your order.</p>" } },
+        "q4": { "type": "qa", "settings": { "question": "When should I take my daily serving?", "answer": "<p>Take your serving in the morning with food and water. Consistency matters far more than timing — the ingredients build up over weeks, not hours.</p>" } },
+        "q5": { "type": "qa", "settings": { "question": "Can I take UP MEN with other supplements or medication?", "answer": "<p>UP MEN is a food supplement, not a medicine. If you take prescription medication or have a medical condition, talk to your physician before starting.</p>" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4", "q1", "q2", "q3", "q4", "q5"],
+      "settings": {
+        "eyebrow": "HELP DESK",
+        "title": "HOW CAN WE HELP?",
+        "subtitle": "Answers to the questions we get most — orders, subscriptions, the guarantee and how to run the protocol.",
+        "qa_title": "COMMON QUESTIONS",
+        "foot_enabled": true,
+        "foot_title": "STILL STUCK?",
+        "foot_text": "Our support team answers within one business day.",
+        "foot_label": "Contact support",
+        "foot_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["main"]
+}

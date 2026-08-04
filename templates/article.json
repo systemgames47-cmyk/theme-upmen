@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {
+        "back_label": "Back to the journal",
+        "show_date": true,
+        "show_author": false,
+        "show_image": true,
+        "cta_enabled": true,
+        "cta_title": "READY TO FEEL THE DIFFERENCE?",
+        "cta_text": "Eight research-dosed ingredients in one daily protocol, backed by a 90-day higher-T guarantee.",
+        "cta_label": "See the packages",
+        "cta_link": "/#join_pkg"
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,58 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-legal",
+      "blocks": {
+        "p1": {
+          "type": "part",
+          "settings": {
+            "heading": "What we are working towards",
+            "body": "<p>We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA. That standard covers how the site reads to screen readers, how it behaves for keyboard-only visitors, and whether text stays legible when it is enlarged or the colours are inverted.</p><p>Accessibility is not a one-off project. Every time we add a page or change a template, it goes through the same checks.</p>"
+          }
+        },
+        "p2": {
+          "type": "part",
+          "settings": {
+            "heading": "What we check",
+            "body": "<ul><li>Every image that carries meaning has descriptive alternative text.</li><li>The whole store can be operated with a keyboard alone, and the focus outline is always visible.</li><li>Text and background colours are tested for contrast against the AA thresholds.</li><li>Headings follow a real hierarchy, so screen-reader users can skim the page structure.</li><li>Form fields have labels that are read out, and errors are announced rather than shown only in colour.</li><li>Motion is reduced automatically for visitors whose system asks for it.</li></ul>"
+          }
+        },
+        "p3": {
+          "type": "part",
+          "settings": {
+            "heading": "Where we fall short",
+            "body": "<p>Parts of the store rely on third-party services — payment, reviews, chat — whose interfaces we do not control. We test them and raise problems with the vendors, but we cannot guarantee their conformance.</p><p>If any part of this site blocks you, that is a defect on our side, and we want to hear about it.</p>"
+          }
+        },
+        "p4": {
+          "type": "part",
+          "settings": {
+            "heading": "Tell us about a barrier",
+            "body": "<p>Describe the page and what went wrong — the browser and any assistive technology you use helps us reproduce it faster. We aim to acknowledge every report within one business day and will tell you honestly how long a fix will take.</p><p>If you need information from this site in another format while we work on it, ask and we will send it to you directly.</p>"
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"],
+      "settings": {
+        "eyebrow": "LEGAL",
+        "title": "ACCESSIBILITY",
+        "updated_label": "Last updated:",
+        "updated": "",
+        "intro": "<p>UP MEN is for every man who wants his edge back — and that has to include men who browse with a screen reader, navigate by keyboard, or need larger text. This page sets out what we are doing about it and how to reach us when we get it wrong.</p>",
+        "contact_enabled": true,
+        "contact_title": "REPORT AN ACCESSIBILITY BARRIER",
+        "contact_text": "<p>Email <a href=\"mailto:support@upmen.com\">support@upmen.com</a> with the page address and what blocked you. We reply within one business day.</p>"
+      }
+    }
+  },
+  "order": ["main"]
+}

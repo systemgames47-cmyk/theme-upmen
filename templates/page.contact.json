@@ -1,0 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-contact",
+      "blocks": {
+        "info_1": { "type": "info", "settings": { "icon": "✉️", "title": "EMAIL US", "text": "support@upmen.com", "link": "mailto:support@upmen.com" } },
+        "info_2": { "type": "info", "settings": { "icon": "⏱️", "title": "RESPONSE TIME", "text": "Within one business day, Monday to Friday.", "link": "" } },
+        "info_3": { "type": "info", "settings": { "icon": "🛡️", "title": "GUARANTEE", "text": "90 days to try it. Higher T or your money back.", "link": "" } }
+      },
+      "block_order": ["info_1", "info_2", "info_3"],
+      "settings": {
+        "eyebrow": "SUPPORT",
+        "title": "TALK TO A REAL HUMAN",
+        "subtitle": "Questions about your order, your protocol or the guarantee? Send us a note and our team gets back to you.",
+        "form_title": "SEND US A MESSAGE",
+        "submit_label": "Send message"
+      }
+    }
+  },
+  "order": ["main"]
+}

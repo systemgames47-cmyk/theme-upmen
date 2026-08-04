@@ -1,0 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "eyebrow": "LEARN",
+        "title": "THE UP MEN JOURNAL",
+        "subtitle": "Straight answers on testosterone, training and recovery — written for men who want the mechanism, not the hype.",
+        "per_page": 9,
+        "show_date": true,
+        "show_excerpt": true,
+        "read_more": "Read the article",
+        "empty_text": "No articles published yet. Check back soon."
+      }
+    }
+  },
+  "order": ["main"]
+}
