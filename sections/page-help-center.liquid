@@ -1,0 +1,164 @@
+{%- comment -%} Help center — topic cards plus an answer accordion {%- endcomment -%}
+{%- assign sid = section.id -%}
+<section class="mm-help" data-section-id="{{ sid }}">
+  <style>
+    #shopify-section-{{ sid }} .mm-help { background: var(--mars-black, #0a0503); color: var(--text, #fff); padding: 64px 0; }
+    @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-help { padding: 88px 0; } }
+    #shopify-section-{{ sid }} .mm-wrap { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+    #shopify-section-{{ sid }} .mm-head { text-align: center; margin-bottom: 40px; }
+    #shopify-section-{{ sid }} .mm-eyebrow {
+      display: inline-block; font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700;
+      color: #fff; background: var(--brand, #ff5600); padding: 6px 14px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 14px;
+    }
+    #shopify-section-{{ sid }} h1 {
+      font-family: var(--font-heading); font-size: calc((clamp(26px, 4.6vw, 42px)) * var(--fs-h, 1));
+      font-weight: 800; text-transform: uppercase; line-height: 1.14; margin: 0 0 12px;
+    }
+    #shopify-section-{{ sid }} .mm-sub { font-size: calc((15px) * var(--fs-b, 1)); color: rgba(255,255,255,0.72); max-width: 620px; margin: 0 auto; }
+    #shopify-section-{{ sid }} .mm-topics { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 44px; }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-topics { grid-template-columns: 1fr 1fr; } }
+    #shopify-section-{{ sid }} .mm-topic {
+      display: block; text-decoration: none; color: inherit;
+      background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+      border-radius: 14px; padding: 20px 18px;
+    }
+    #shopify-section-{{ sid }} .mm-topic:hover { border-color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .mm-topic .ic { font-size: calc((22px) * var(--fs-b, 1)); line-height: 1; display: block; margin-bottom: 10px; }
+    #shopify-section-{{ sid }} .mm-topic h3 { font-family: var(--font-heading); font-size: calc((15px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 8px; }
+    #shopify-section-{{ sid }} .mm-topic p { font-size: calc((13.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6; }
+    #shopify-section-{{ sid }} .mm-sec-title { font-family: var(--font-heading); font-size: calc((20px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 0 0 18px; text-align: center; }
+    #shopify-section-{{ sid }} .mm-qa {
+      border: 1px solid var(--mars-line, rgba(255,255,255,0.12)); border-radius: 12px;
+      background: var(--mars-panel, #1a0e07); margin-bottom: 10px; overflow: hidden;
+    }
+    #shopify-section-{{ sid }} .mm-qa summary {
+      cursor: pointer; list-style: none; padding: 16px 18px; font-weight: 700;
+      font-size: calc((15px) * var(--fs-b, 1)); display: flex; justify-content: space-between; gap: 14px; align-items: center;
+    }
+    #shopify-section-{{ sid }} .mm-qa summary::-webkit-details-marker { display: none; }
+    #shopify-section-{{ sid }} .mm-qa summary::after { content: '+'; color: var(--brand, #ff5600); font-size: calc((22px) * var(--fs-b, 1)); font-weight: 800; line-height: 1; flex: 0 0 auto; }
+    #shopify-section-{{ sid }} .mm-qa[open] summary::after { content: '−'; }
+    #shopify-section-{{ sid }} .mm-qa .ans { padding: 0 18px 18px; font-size: calc((14px) * var(--fs-b, 1)); line-height: 1.7; color: rgba(255,255,255,0.75); }
+    #shopify-section-{{ sid }} .mm-qa .ans a { color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .mm-foot {
+      margin-top: 40px; text-align: center; padding: 26px 20px; border-radius: 14px;
+      background: var(--mars-panel, #1a0e07); border: 1px solid var(--brand, #ff5600);
+    }
+    #shopify-section-{{ sid }} .mm-foot h3 { font-family: var(--font-heading); font-size: calc((18px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 0 0 8px; }
+    #shopify-section-{{ sid }} .mm-foot p { font-size: calc((14px) * var(--fs-b, 1)); color: rgba(255,255,255,0.75); margin: 0 0 16px; }
+    #shopify-section-{{ sid }} .mm-foot a {
+      display: inline-block; background: var(--brand, #ff5600); color: #fff; text-decoration: none;
+      font-weight: 800; text-transform: uppercase; padding: 13px 28px; border-radius: 8px; font-size: calc((14px) * var(--fs-b, 1));
+    }
+    #shopify-section-{{ sid }} .mm-warn {
+      font-size: calc((12px) * var(--fs-b, 1)); color: #fecaca; background: rgba(185,28,28,0.25);
+      border: 1px solid rgba(185,28,28,0.5); padding: 10px; border-radius: 8px; margin-bottom: 12px;
+    }
+  </style>
+
+  <div class="mm-wrap">
+    <div class="mm-head">
+      {%- if section.settings.eyebrow != blank -%}<p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1>{{ section.settings.title }}</h1>
+      {%- if section.settings.subtitle != blank -%}<p class="mm-sub">{{ section.settings.subtitle }}</p>{%- endif -%}
+    </div>
+
+    {%- assign topic_blocks = section.blocks | where: 'type', 'topic' -%}
+    {%- if topic_blocks.size > 0 -%}
+      <div class="mm-topics">
+        {%- for block in topic_blocks -%}
+          {%- if block.settings.link != blank -%}
+            <a class="mm-topic" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          {%- else -%}
+            <div class="mm-topic" {{ block.shopify_attributes }}>
+          {%- endif -%}
+            {%- if block.settings.icon != blank -%}<span class="ic" aria-hidden="true">{{ block.settings.icon }}</span>{%- endif -%}
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          {%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- assign qa_blocks = section.blocks | where: 'type', 'qa' -%}
+    {%- if qa_blocks.size > 0 -%}
+      {%- if section.settings.qa_title != blank -%}
+        <h2 class="mm-sec-title">{{ section.settings.qa_title }}</h2>
+      {%- endif -%}
+      {%- for block in qa_blocks -%}
+        <details class="mm-qa" {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question }}</summary>
+          <div class="ans">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    {%- elsif request.design_mode -%}
+      <div class="mm-warn">⚙️ Add "Answer" blocks to fill the help accordion.</div>
+    {%- endif -%}
+
+    {%- if section.settings.foot_enabled -%}
+      <div class="mm-foot">
+        <h3>{{ section.settings.foot_title }}</h3>
+        <p>{{ section.settings.foot_text }}</p>
+        <a href="{{ section.settings.foot_link | default: '/pages/contact' }}">{{ section.settings.foot_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Help center",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "HELP DESK" },
+    { "type": "text", "id": "title", "label": "Title", "default": "HOW CAN WE HELP?" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Answers to the questions we get most — orders, subscriptions, the guarantee and how to run the protocol." },
+    { "type": "header", "content": "Answer accordion" },
+    { "type": "text", "id": "qa_title", "label": "Accordion title", "default": "COMMON QUESTIONS" },
+    { "type": "header", "content": "Closing box" },
+    { "type": "checkbox", "id": "foot_enabled", "label": "Show the closing box", "default": true },
+    { "type": "text", "id": "foot_title", "label": "Title", "default": "STILL STUCK?" },
+    { "type": "textarea", "id": "foot_text", "label": "Text", "default": "Our support team answers within one business day." },
+    { "type": "text", "id": "foot_label", "label": "Button label", "default": "Contact support" },
+    { "type": "url", "id": "foot_link", "label": "Button link" },
+    { "type": "paragraph", "content": "Use \"Topic card\" blocks for the shortcut grid and \"Answer\" blocks for the accordion." }
+  ],
+  "max_blocks": 40,
+  "blocks": [
+    {
+      "type": "topic",
+      "name": "Topic card",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "📦" },
+        { "type": "text", "id": "title", "label": "Title", "default": "ORDERS & SHIPPING" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Tracking, delivery times and changing an order." },
+        { "type": "text", "id": "link", "label": "Link (optional)", "info": "Leave empty to keep the card as plain text." }
+      ]
+    },
+    {
+      "type": "qa",
+      "name": "Answer",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "When will my order arrive?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Orders placed before 2pm ship the same business day. Delivery inside the US takes 3 to 5 business days.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Help center",
+      "blocks": [
+        { "type": "topic", "settings": { "icon": "📦", "title": "ORDERS & SHIPPING", "text": "Tracking, delivery times and changing an order." } },
+        { "type": "topic", "settings": { "icon": "🔁", "title": "SUBSCRIPTIONS", "text": "Skip a delivery, pause, or cancel at any time." } },
+        { "type": "topic", "settings": { "icon": "🛡️", "title": "RETURNS & GUARANTEE", "text": "How the 90-day higher-T guarantee works." } },
+        { "type": "topic", "settings": { "icon": "💊", "title": "USING UP MEN", "text": "Dosing, timing and what to expect month by month." } },
+        { "type": "qa", "settings": { "question": "When will my order arrive?", "answer": "<p>Orders placed before 2pm ship the same business day. Delivery inside the US takes 3 to 5 business days, and you get a tracking link by email as soon as the parcel leaves our facility.</p>" } },
+        { "type": "qa", "settings": { "question": "How do I skip, pause or cancel my subscription?", "answer": "<p>Open the link in any order confirmation email to reach your subscription portal. You can skip a single delivery, push the next shipment back, or cancel outright — no phone call, no retention script.</p>" } },
+        { "type": "qa", "settings": { "question": "How does the 90-day guarantee work?", "answer": "<p>Run the protocol for 90 days. If your testosterone has not moved and you do not feel the difference, contact support within 90 days of delivery and we refund your order.</p>" } },
+        { "type": "qa", "settings": { "question": "When should I take my daily serving?", "answer": "<p>Take your serving in the morning with food and water. Consistency matters far more than timing — the ingredients build up over weeks, not hours.</p>" } },
+        { "type": "qa", "settings": { "question": "Can I take UP MEN with other supplements or medication?", "answer": "<p>UP MEN is a food supplement, not a medicine. If you take prescription medication or have a medical condition, talk to your physician before starting.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

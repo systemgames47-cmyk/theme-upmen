@@ -1,0 +1,107 @@
+{%- comment -%} Blog listing — Learn hub with the article grid {%- endcomment -%}
+{%- assign sid = section.id -%}
+<section class="mm-blog" data-section-id="{{ sid }}">
+  <style>
+    #shopify-section-{{ sid }} .mm-blog { background: var(--mars-black, #0a0503); color: var(--text, #fff); padding: 64px 0; }
+    @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-blog { padding: 88px 0; } }
+    #shopify-section-{{ sid }} .mm-wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+    #shopify-section-{{ sid }} .mm-head { text-align: center; margin-bottom: 40px; }
+    #shopify-section-{{ sid }} .mm-eyebrow {
+      display: inline-block; font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700;
+      color: #fff; background: var(--brand, #ff5600); padding: 6px 14px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 14px;
+    }
+    #shopify-section-{{ sid }} .mm-title {
+      font-family: var(--font-heading); font-size: calc((clamp(26px, 4.6vw, 44px)) * var(--fs-h, 1)); line-height: 1.12;
+      font-weight: 800; text-transform: uppercase; margin: 0 0 12px;
+    }
+    #shopify-section-{{ sid }} .mm-sub { font-size: calc((15px) * var(--fs-b, 1)); color: rgba(255,255,255,0.72); max-width: 640px; margin: 0 auto; }
+    #shopify-section-{{ sid }} .mm-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { #shopify-section-{{ sid }} .mm-grid { grid-template-columns: repeat(3, 1fr); } }
+    #shopify-section-{{ sid }} .mm-card {
+      background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+      border-radius: 14px; overflow: hidden; display: flex; flex-direction: column;
+    }
+    #shopify-section-{{ sid }} .mm-card:hover { border-color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .mm-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    #shopify-section-{{ sid }} .mm-card-body { padding: 18px 18px 22px; display: flex; flex-direction: column; flex: 1; }
+    #shopify-section-{{ sid }} .mm-meta { font-size: calc((11.5px) * var(--fs-b, 1)); color: var(--brand, #ff5600); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 8px; }
+    #shopify-section-{{ sid }} .mm-card h3 { font-family: var(--font-heading); font-size: calc((18px) * var(--fs-h, 1)); font-weight: 800; margin: 0 0 10px; line-height: 1.25; }
+    #shopify-section-{{ sid }} .mm-card h3 a { color: #fff; text-decoration: none; }
+    #shopify-section-{{ sid }} .mm-card h3 a:hover { color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .mm-excerpt { font-size: calc((14px) * var(--fs-b, 1)); color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0 0 16px; flex: 1; }
+    #shopify-section-{{ sid }} .mm-more { font-weight: 800; font-size: calc((13px) * var(--fs-b, 1)); color: var(--brand, #ff5600); text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; }
+    #shopify-section-{{ sid }} .mm-empty {
+      text-align: center; padding: 48px 20px; border: 1px dashed rgba(255,255,255,0.25); border-radius: 14px;
+      color: rgba(255,255,255,0.7); font-size: calc((14px) * var(--fs-b, 1));
+    }
+    #shopify-section-{{ sid }} .mm-pager { display: flex; justify-content: center; gap: 10px; margin-top: 36px; }
+    #shopify-section-{{ sid }} .mm-pager a, #shopify-section-{{ sid }} .mm-pager span {
+      padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.8); text-decoration: none; font-size: calc((13px) * var(--fs-b, 1));
+    }
+    #shopify-section-{{ sid }} .mm-pager .current { background: var(--brand, #ff5600); border-color: var(--brand, #ff5600); color: #fff; font-weight: 800; }
+  </style>
+
+  <div class="mm-wrap">
+    <div class="mm-head">
+      {%- if section.settings.eyebrow != blank -%}<p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="mm-title">{{ section.settings.title | default: blog.title }}</h1>
+      {%- if section.settings.subtitle != blank -%}<p class="mm-sub">{{ section.settings.subtitle }}</p>{%- endif -%}
+    </div>
+
+    {%- paginate blog.articles by section.settings.per_page -%}
+      {%- if blog.articles.size > 0 -%}
+        <div class="mm-grid">
+          {%- for article in blog.articles -%}
+            <article class="mm-card">
+              {%- if article.image -%}
+                <a href="{{ article.url }}"><img src="{{ article.image | image_url: width: 800 }}" width="800" height="450" alt="{{ article.title | escape }}" loading="lazy"></a>
+              {%- endif -%}
+              <div class="mm-card-body">
+                {%- if section.settings.show_date -%}
+                  <p class="mm-meta">{{ article.published_at | date: format: 'date' }}</p>
+                {%- endif -%}
+                <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                {%- if section.settings.show_excerpt -%}
+                  <p class="mm-excerpt">{{ article.excerpt_or_content | strip_html | truncate: 140 }}</p>
+                {%- endif -%}
+                <a class="mm-more" href="{{ article.url }}">{{ section.settings.read_more }} →</a>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}
+          <nav class="mm-pager">
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}">{{ part.title }}</a>
+              {%- else -%}
+                <span class="current">{{ part.title }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+          </nav>
+        {%- endif -%}
+      {%- else -%}
+        <div class="mm-empty">{{ section.settings.empty_text }}</div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog listing",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "LEARN" },
+    { "type": "text", "id": "title", "label": "Title", "info": "Leave empty to use the blog's own title.", "default": "THE UP MEN JOURNAL" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Straight answers on testosterone, training and recovery — written for men who want the mechanism, not the hype." },
+    { "type": "range", "id": "per_page", "label": "Articles per page", "min": 3, "max": 24, "step": 3, "default": 9 },
+    { "type": "checkbox", "id": "show_date", "label": "Show publish date", "default": true },
+    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": true },
+    { "type": "text", "id": "read_more", "label": "Read more label", "default": "Read the article" },
+    { "type": "textarea", "id": "empty_text", "label": "Empty state text", "default": "No articles published yet. Check back soon." }
+  ]
+}
+{% endschema %}

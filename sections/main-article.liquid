@@ -1,0 +1,85 @@
+{%- comment -%} Article — a single Learn post, with an editable CTA under the body {%- endcomment -%}
+{%- assign sid = section.id -%}
+<section class="mm-article" data-section-id="{{ sid }}">
+  <style>
+    #shopify-section-{{ sid }} .mm-article { background: var(--mars-black, #0a0503); color: var(--text, #fff); padding: 48px 0 72px; }
+    #shopify-section-{{ sid }} .mm-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+    #shopify-section-{{ sid }} .mm-back { display: inline-block; font-size: calc((13px) * var(--fs-b, 1)); color: var(--brand, #ff5600); text-decoration: none; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 24px; }
+    #shopify-section-{{ sid }} .mm-meta { font-size: calc((12px) * var(--fs-b, 1)); color: var(--brand, #ff5600); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin: 0 0 12px; }
+    #shopify-section-{{ sid }} h1 {
+      font-family: var(--font-heading); font-size: calc((clamp(26px, 4.4vw, 40px)) * var(--fs-h, 1));
+      font-weight: 800; text-transform: uppercase; line-height: 1.15; margin: 0 0 20px;
+    }
+    #shopify-section-{{ sid }} .mm-hero { width: 100%; border-radius: 14px; border: 1px solid var(--mars-line, rgba(255,255,255,0.12)); margin-bottom: 28px; display: block; }
+    #shopify-section-{{ sid }} .mm-body { font-size: calc((16px) * var(--fs-b, 1)); line-height: 1.75; color: rgba(255,255,255,0.85); }
+    #shopify-section-{{ sid }} .mm-body h2 { font-family: var(--font-heading); font-size: calc((24px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 36px 0 14px; color: #fff; }
+    #shopify-section-{{ sid }} .mm-body h3 { font-family: var(--font-heading); font-size: calc((19px) * var(--fs-h, 1)); font-weight: 800; margin: 28px 0 12px; color: #fff; }
+    #shopify-section-{{ sid }} .mm-body p { margin: 0 0 18px; }
+    #shopify-section-{{ sid }} .mm-body a { color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .mm-body img { max-width: 100%; height: auto; border-radius: 12px; }
+    #shopify-section-{{ sid }} .mm-body ul, #shopify-section-{{ sid }} .mm-body ol { margin: 0 0 18px; padding-left: 22px; }
+    #shopify-section-{{ sid }} .mm-body li { margin-bottom: 8px; }
+    #shopify-section-{{ sid }} .mm-body blockquote {
+      border-left: 3px solid var(--brand, #ff5600); margin: 24px 0; padding: 4px 0 4px 18px; color: rgba(255,255,255,0.75); font-style: italic;
+    }
+    #shopify-section-{{ sid }} .mm-cta {
+      margin-top: 48px; padding: 28px 24px; border-radius: 16px; text-align: center;
+      background: var(--mars-panel, #1a0e07); border: 1px solid var(--brand, #ff5600);
+    }
+    #shopify-section-{{ sid }} .mm-cta h2 { font-family: var(--font-heading); font-size: calc((22px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 0 0 10px; }
+    #shopify-section-{{ sid }} .mm-cta p { font-size: calc((14px) * var(--fs-b, 1)); color: rgba(255,255,255,0.75); margin: 0 0 18px; }
+    #shopify-section-{{ sid }} .mm-cta a {
+      display: inline-block; background: var(--brand, #ff5600); color: #fff; text-decoration: none;
+      font-weight: 800; text-transform: uppercase; padding: 14px 32px; border-radius: 8px;
+      font-size: calc((15px) * var(--fs-b, 1)); box-shadow: 0 8px 24px rgba(255,86,0,0.35);
+    }
+    #shopify-section-{{ sid }} .mm-disc { margin-top: 28px; font-size: calc((11.5px) * var(--fs-b, 1)); line-height: 1.6; color: rgba(255,255,255,0.5); }
+  </style>
+
+  <div class="mm-wrap">
+    {%- if section.settings.back_label != blank -%}
+      <a class="mm-back" href="{{ blog.url | default: '/' }}">← {{ section.settings.back_label }}</a>
+    {%- endif -%}
+    <p class="mm-meta">
+      {%- if section.settings.show_date -%}{{ article.published_at | date: format: 'date' }}{%- endif -%}
+      {%- if section.settings.show_author and article.author != blank -%} · {{ article.author }}{%- endif -%}
+    </p>
+    <h1>{{ article.title }}</h1>
+    {%- if article.image and section.settings.show_image -%}
+      <img class="mm-hero" src="{{ article.image | image_url: width: 1200 }}" width="1200" height="675" alt="{{ article.title | escape }}" loading="eager">
+    {%- endif -%}
+    <div class="mm-body">{{ article.content }}</div>
+
+    {%- if section.settings.cta_enabled -%}
+      <div class="mm-cta">
+        <h2>{{ section.settings.cta_title }}</h2>
+        <p>{{ section.settings.cta_text }}</p>
+        <a href="{{ section.settings.cta_link | default: '/' }}">{{ section.settings.cta_label }}</a>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="mm-disc">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    { "type": "text", "id": "back_label", "label": "Back link label", "info": "Leave empty to hide the back link.", "default": "Back to the journal" },
+    { "type": "checkbox", "id": "show_date", "label": "Show publish date", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": false },
+    { "type": "checkbox", "id": "show_image", "label": "Show featured image", "default": true },
+    { "type": "header", "content": "Call to action under the article" },
+    { "type": "checkbox", "id": "cta_enabled", "label": "Show the CTA box", "default": true },
+    { "type": "text", "id": "cta_title", "label": "CTA title", "default": "READY TO FEEL THE DIFFERENCE?" },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Eight research-dosed ingredients in one daily protocol, backed by a 90-day higher-T guarantee." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "See the packages" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "header", "content": "Legal" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Results may vary." }
+  ]
+}
+{% endschema %}

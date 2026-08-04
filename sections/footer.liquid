@@ -53,7 +53,10 @@
     display: grid; grid-template-columns: 1fr; gap: 28px; text-align: center;
     padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.15); margin-bottom: 36px;
   }
-  @media (min-width: 768px) { #mm-footer-{{ sid }} .mm-cols { grid-template-columns: repeat(3, 1fr); text-align: left; } }
+  @media (min-width: 600px) { #mm-footer-{{ sid }} .mm-cols { grid-template-columns: 1fr 1fr; text-align: left; } }
+  @media (min-width: 900px) { #mm-footer-{{ sid }} .mm-cols { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { #mm-footer-{{ sid }} .mm-cols.cols-5 { grid-template-columns: repeat(5, 1fr); gap: 20px; } }
+  @media (min-width: 1024px) { #mm-footer-{{ sid }} .mm-cols.cols-6 { grid-template-columns: repeat(6, 1fr); gap: 18px; } }
   #mm-footer-{{ sid }} .mm-col h3 {
     font-family: var(--font-heading); font-size: calc((12px) * var(--fs-h, 1)); font-weight: 700; letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--brand, #ff5600); margin: 0 0 14px;
@@ -84,60 +87,80 @@
       <a href="{{ section.settings.cta_link | default: '#join_pkg' }}" class="mm-cta">{{ section.settings.cta_label }}</a>
     </div>
 
-    {%- assign explore_links = section.blocks | where: 'type', 'explore_link' -%}
-    {%- assign support_links = section.blocks | where: 'type', 'support_link' -%}
+    {%- comment -%}
+      Five link columns — shop, about, learn, support, legal — plus the social
+      column. Each one is driven by its own block type, so the whole footer map
+      is editable from the theme editor.
+    {%- endcomment -%}
     {%- assign social_links = section.blocks | where: 'type', 'social_link' -%}
-    <div class="mm-cols">
-      <div class="mm-col">
-        <h3>{{ section.settings.menu_title }}</h3>
-        {%- if explore_links.size > 0 -%}
-          {%- for block in explore_links -%}
-            {%- if block.settings.label != blank -%}
-              <a href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+    {%- assign col_keys = 'shop,about,learn,support,legal' | split: ',' -%}
+    <div class="mm-cols cols-6">
+      {%- for key in col_keys -%}
+        {%- assign title_key = key | append: '_title' -%}
+        {%- assign block_type = key | append: '_link' -%}
+        {%- assign col_title = section.settings[title_key] -%}
+        {%- assign col_links = section.blocks | where: 'type', block_type -%}
+        {%- comment -%} The original "Footer link — Explore" blocks live on under About. {%- endcomment -%}
+        {%- if key == 'about' -%}
+          {%- assign legacy_links = section.blocks | where: 'type', 'explore_link' -%}
+        {%- else -%}
+          {%- assign legacy_links = empty -%}
+        {%- endif -%}
+        {%- assign is_support = false -%}
+        {%- if key == 'support' -%}{%- assign is_support = true -%}{%- endif -%}
+        {%- if col_title != blank -%}
+          <div class="mm-col">
+            <h3>{{ col_title }}</h3>
+            {%- if is_support -%}
+              {%- assign email = section.settings.support_email | default: settings.contact_email -%}
+              {%- if email != blank -%}
+                <a href="mailto:{{ email }}">{{ section.settings.support_email_label | default: email }}</a>
+              {%- endif -%}
             {%- endif -%}
-          {%- endfor -%}
-        {%- elsif section.settings.menu != blank -%}
-          {%- comment -%} Fallback: a Shopify navigation menu, edited under Online Store → Navigation. {%- endcomment -%}
-          {%- for link in section.settings.menu.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- endfor -%}
-        {%- elsif request.design_mode -%}
-          <span>⚙️ Add "Footer link — Explore" blocks, or pick a navigation menu.</span>
-        {%- endif -%}
-      </div>
-      <div class="mm-col">
-        <h3>{{ section.settings.support_title }}</h3>
-        {%- assign email = section.settings.support_email | default: settings.contact_email -%}
-        {%- if email != blank -%}
-          <a href="mailto:{{ email }}">{{ section.settings.support_email_label | default: email }}</a>
-        {%- endif -%}
-        {%- for block in support_links -%}
-          {%- if block.settings.label != blank -%}
-            <a href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
-          {%- endif -%}
-        {%- endfor -%}
-        {%- if section.settings.support_menu != blank -%}
-          {%- for link in section.settings.support_menu.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- endfor -%}
-        {%- endif -%}
-      </div>
-      <div class="mm-col">
-        <h3>{{ section.settings.social_title }}</h3>
-        {%- if social_links.size > 0 -%}
-          <div class="mm-social">
-            {%- for block in social_links -%}
-              {%- if block.settings.url != blank -%}
-                {%- assign social_label = block.settings.label -%}
-                {%- if social_label == blank -%}{%- assign social_label = block.settings.network | capitalize -%}{%- endif -%}
-                <a href="{{ block.settings.url }}" aria-label="{{ social_label | escape }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>{% render 'mm-social-icon', network: block.settings.network %}</a>
+            {%- for block in col_links -%}
+              {%- if block.settings.label != blank -%}
+                <a href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
               {%- endif -%}
             {%- endfor -%}
+            {%- if legacy_links != empty -%}
+              {%- for block in legacy_links -%}
+                {%- if block.settings.label != blank -%}
+                  <a href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            {%- if is_support and section.settings.support_menu != blank -%}
+              {%- for link in section.settings.support_menu.links -%}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {%- endfor -%}
+            {%- endif -%}
+            {%- if key == 'about' and col_links.size == 0 and section.settings.menu != blank -%}
+              {%- comment -%} Fallback: a Shopify navigation menu, edited under Online Store → Navigation. {%- endcomment -%}
+              {%- for link in section.settings.menu.links -%}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {%- endfor -%}
+            {%- endif -%}
           </div>
-        {%- elsif request.design_mode -%}
-          <span>⚙️ Add "Social icon" blocks to this section.</span>
         {%- endif -%}
-      </div>
+      {%- endfor -%}
+      {%- if section.settings.social_title != blank -%}
+        <div class="mm-col">
+          <h3>{{ section.settings.social_title }}</h3>
+          {%- if social_links.size > 0 -%}
+            <div class="mm-social">
+              {%- for block in social_links -%}
+                {%- if block.settings.url != blank -%}
+                  {%- assign social_label = block.settings.label -%}
+                  {%- if social_label == blank -%}{%- assign social_label = block.settings.network | capitalize -%}{%- endif -%}
+                  <a href="{{ block.settings.url }}" aria-label="{{ social_label | escape }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>{% render 'mm-social-icon', network: block.settings.network %}</a>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- elsif request.design_mode -%}
+            <span>⚙️ Add "Social icon" blocks to this section.</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
 
     <div class="mm-legal">
@@ -186,36 +209,74 @@
     { "type": "text", "id": "tagline", "label": "Tagline", "default": "Natural testosterone support for the modern man." },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "CLAIM 50% OFF NOW" },
     { "type": "url", "id": "cta_link", "label": "CTA link" },
-    { "type": "header", "content": "Column 1 — Explore" },
-    { "type": "text", "id": "menu_title", "label": "Column title", "default": "EXPLORE" },
-    { "type": "link_list", "id": "menu", "label": "Navigation menu (optional)", "info": "Used only when there are no \"Footer link — Explore\" blocks." },
-    { "type": "header", "content": "Column 2 — Support" },
-    { "type": "text", "id": "support_title", "label": "Column title", "default": "SUPPORT" },
-    { "type": "text", "id": "support_email", "label": "Support email", "default": "support@mengotomars.com", "info": "Leave empty to hide the email line." },
+    { "type": "header", "content": "Column 1 — Shop" },
+    { "type": "text", "id": "shop_title", "label": "Column title", "info": "Leave empty to hide the whole column.", "default": "SHOP" },
+    { "type": "header", "content": "Column 2 — About" },
+    { "type": "text", "id": "about_title", "label": "Column title", "info": "Leave empty to hide the whole column.", "default": "ABOUT" },
+    { "type": "link_list", "id": "menu", "label": "Navigation menu (optional)", "info": "Used only when the About column has no link blocks." },
+    { "type": "header", "content": "Column 3 — Learn" },
+    { "type": "text", "id": "learn_title", "label": "Column title", "info": "Leave empty to hide the whole column.", "default": "LEARN" },
+    { "type": "header", "content": "Column 4 — Support" },
+    { "type": "text", "id": "support_title", "label": "Column title", "info": "Leave empty to hide the whole column.", "default": "SUPPORT" },
+    { "type": "text", "id": "support_email", "label": "Support email", "default": "support@upmen.com", "info": "Leave empty to hide the email line." },
     { "type": "text", "id": "support_email_label", "label": "Email link text (optional)", "info": "Defaults to the email address itself." },
     { "type": "link_list", "id": "support_menu", "label": "Navigation menu (optional)", "info": "Shown after the email and the \"Footer link — Support\" blocks." },
-    { "type": "header", "content": "Column 3 — Follow us" },
-    { "type": "text", "id": "social_title", "label": "Column title", "default": "FOLLOW US" },
+    { "type": "header", "content": "Column 5 — Legal" },
+    { "type": "text", "id": "legal_title", "label": "Column title", "info": "Leave empty to hide the whole column.", "default": "LEGAL" },
+    { "type": "header", "content": "Column 6 — Follow us" },
+    { "type": "text", "id": "social_title", "label": "Column title", "info": "Leave empty to hide the whole column.", "default": "FOLLOW US" },
     { "type": "paragraph", "content": "Add a \"Social icon\" block for each network. Without blocks the column shows only its title." },
     { "type": "header", "content": "Legal" },
     { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Results may vary. Consult your physician before use if you have a medical condition or take medication." }
   ],
-  "max_blocks": 30,
+  "max_blocks": 50,
   "blocks": [
     {
-      "type": "explore_link",
-      "name": "Footer link — Explore",
+      "type": "shop_link",
+      "name": "Link — Shop",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "3-Month Plan" },
+        { "type": "text", "id": "url", "label": "Link", "default": "/#join_pkg", "info": "Accepts a path (/pages/contact), an anchor (#faq) or mailto:someone@example.com." }
+      ]
+    },
+    {
+      "type": "about_link",
+      "name": "Link — About",
       "settings": [
         { "type": "text", "id": "label", "label": "Label", "default": "Ingredients" },
-        { "type": "text", "id": "url", "label": "Link", "default": "#ingredients", "info": "Accepts a path (/pages/faq), an anchor (#faq) or mailto:someone@example.com." }
+        { "type": "text", "id": "url", "label": "Link", "default": "/#ingredients", "info": "Accepts a path (/pages/contact), an anchor (#faq) or mailto:someone@example.com." }
+      ]
+    },
+    {
+      "type": "learn_link",
+      "name": "Link — Learn",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "The UP MEN Journal" },
+        { "type": "text", "id": "url", "label": "Link", "default": "/blogs/journal", "info": "Accepts a path (/pages/contact), an anchor (#faq) or mailto:someone@example.com." }
+      ]
+    },
+    {
+      "type": "legal_link",
+      "name": "Link — Legal",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Privacy Policy" },
+        { "type": "text", "id": "url", "label": "Link", "default": "/policies/privacy-policy", "info": "Accepts a path (/pages/contact), an anchor (#faq) or mailto:someone@example.com." }
+      ]
+    },
+    {
+      "type": "explore_link",
+      "name": "Link — Explore (old)",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Ingredients" },
+        { "type": "text", "id": "url", "label": "Link", "default": "#ingredients", "info": "Kept so existing footers do not lose links. These show under About — prefer \"Link — About\" for new ones." }
       ]
     },
     {
       "type": "support_link",
-      "name": "Footer link — Support",
+      "name": "Link — Support",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Shipping & returns" },
-        { "type": "text", "id": "url", "label": "Link", "default": "/policies/refund-policy", "info": "Accepts a path (/pages/faq), an anchor (#faq) or mailto:someone@example.com." }
+        { "type": "text", "id": "label", "label": "Label", "default": "Help desk" },
+        { "type": "text", "id": "url", "label": "Link", "default": "/pages/help-center", "info": "Accepts a path (/pages/contact), an anchor (#faq) or mailto:someone@example.com." }
       ]
     },
     {
@@ -243,9 +304,20 @@
   ],
   "default": {
     "blocks": [
-      { "type": "explore_link", "settings": { "label": "Ingredients", "url": "#ingredients" } },
-      { "type": "explore_link", "settings": { "label": "FAQ", "url": "#faq" } },
-      { "type": "explore_link", "settings": { "label": "Cart", "url": "/cart" } }
+      { "type": "shop_link", "settings": { "label": "3-Month Plan", "url": "/#join_pkg" } },
+      { "type": "shop_link", "settings": { "label": "Monthly Plan", "url": "/#join_pkg" } },
+      { "type": "shop_link", "settings": { "label": "Cart", "url": "/cart" } },
+      { "type": "about_link", "settings": { "label": "Ingredients", "url": "/#ingredients" } },
+      { "type": "about_link", "settings": { "label": "How it works", "url": "/#how-it-works" } },
+      { "type": "about_link", "settings": { "label": "FAQ", "url": "/#faq" } },
+      { "type": "about_link", "settings": { "label": "Subscription Policy", "url": "/policies/subscription-policy" } },
+      { "type": "learn_link", "settings": { "label": "The UP MEN Journal", "url": "/blogs/journal" } },
+      { "type": "support_link", "settings": { "label": "Contact us", "url": "/pages/contact" } },
+      { "type": "support_link", "settings": { "label": "Help desk", "url": "/pages/help-center" } },
+      { "type": "support_link", "settings": { "label": "Refund Policy", "url": "/policies/refund-policy" } },
+      { "type": "legal_link", "settings": { "label": "Terms + Conditions", "url": "/policies/terms-of-service" } },
+      { "type": "legal_link", "settings": { "label": "Privacy Policy", "url": "/policies/privacy-policy" } },
+      { "type": "legal_link", "settings": { "label": "Accessibility", "url": "/pages/accessibility" } }
     ]
   }
 }

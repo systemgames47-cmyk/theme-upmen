@@ -1,0 +1,98 @@
+{%- comment -%}
+  Shopify policy pages (/policies/refund-policy, /policies/privacy-policy,
+  /policies/terms-of-service, /policies/subscription-policy).
+
+  The text itself is NOT stored in the theme — it lives in the Shopify admin
+  under Settings → Policies, and arrives here as page_content. This section
+  only styles it and adds the surrounding, editable furniture.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+<section class="mm-policy" data-section-id="{{ sid }}">
+  <style>
+    #shopify-section-{{ sid }} .mm-policy { background: var(--mars-black, #0a0503); color: var(--text, #fff); padding: 56px 0 72px; }
+    @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-policy { padding: 80px 0 96px; } }
+    #shopify-section-{{ sid }} .mm-wrap { max-width: 780px; margin: 0 auto; padding: 0 16px; }
+    #shopify-section-{{ sid }} .mm-eyebrow {
+      display: inline-block; font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700;
+      color: #fff; background: var(--brand, #ff5600); padding: 6px 14px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 14px;
+    }
+    #shopify-section-{{ sid }} h1 {
+      font-family: var(--font-heading); font-size: calc((clamp(26px, 4.4vw, 40px)) * var(--fs-h, 1));
+      font-weight: 800; text-transform: uppercase; line-height: 1.14; margin: 0 0 24px;
+      padding-bottom: 22px; border-bottom: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    }
+    #shopify-section-{{ sid }} .rte { font-size: calc((15px) * var(--fs-b, 1)); line-height: 1.78; color: rgba(255,255,255,0.8); }
+    #shopify-section-{{ sid }} .rte h2 { font-family: var(--font-heading); font-size: calc((20px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 34px 0 12px; color: #fff; }
+    #shopify-section-{{ sid }} .rte h3 { font-family: var(--font-heading); font-size: calc((17px) * var(--fs-h, 1)); font-weight: 800; margin: 26px 0 10px; color: #fff; }
+    #shopify-section-{{ sid }} .rte p { margin: 0 0 14px; }
+    #shopify-section-{{ sid }} .rte a { color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .rte ul, #shopify-section-{{ sid }} .rte ol { margin: 0 0 14px; padding-left: 22px; }
+    #shopify-section-{{ sid }} .rte li { margin-bottom: 7px; }
+    #shopify-section-{{ sid }} .rte table { width: 100%; border-collapse: collapse; margin: 0 0 16px; }
+    #shopify-section-{{ sid }} .rte td, #shopify-section-{{ sid }} .rte th { border: 1px solid var(--mars-line, rgba(255,255,255,0.12)); padding: 8px 10px; text-align: left; }
+    #shopify-section-{{ sid }} .mm-empty {
+      padding: 26px 20px; border: 1px dashed rgba(255,255,255,0.28); border-radius: 12px;
+      color: rgba(255,255,255,0.7); font-size: calc((14px) * var(--fs-b, 1)); line-height: 1.7;
+    }
+    #shopify-section-{{ sid }} .mm-links { margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--mars-line, rgba(255,255,255,0.12)); }
+    #shopify-section-{{ sid }} .mm-links h3 { font-family: var(--font-heading); font-size: calc((13px) * var(--fs-h, 1)); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand, #ff5600); margin: 0 0 12px; }
+    #shopify-section-{{ sid }} .mm-links a { display: inline-block; margin: 0 16px 8px 0; color: rgba(255,255,255,0.75); text-decoration: none; font-size: calc((14px) * var(--fs-b, 1)); }
+    #shopify-section-{{ sid }} .mm-links a:hover { color: var(--brand, #ff5600); }
+  </style>
+
+  <div class="mm-wrap">
+    {%- if section.settings.eyebrow != blank -%}<p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h1>{{ page_title }}</h1>
+    {%- if page_content != blank -%}
+      <div class="rte">{{ page_content }}</div>
+    {%- else -%}
+      <div class="mm-empty">{{ section.settings.empty_text }}</div>
+    {%- endif -%}
+
+    {%- assign policy_links = section.blocks | where: 'type', 'policy_link' -%}
+    {%- if policy_links.size > 0 -%}
+      <div class="mm-links">
+        {%- if section.settings.links_title != blank -%}<h3>{{ section.settings.links_title }}</h3>{%- endif -%}
+        {%- for block in policy_links -%}
+          {%- if block.settings.label != blank -%}
+            <a href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Policy page",
+  "settings": [
+    { "type": "paragraph", "content": "The text of this page comes from Settings → Policies in the Shopify admin, not from the theme. Everything below controls only the surrounding layout." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "LEGAL" },
+    { "type": "textarea", "id": "empty_text", "label": "Text when the policy is empty", "default": "This policy has not been published yet. Add it under Settings → Policies in the Shopify admin." },
+    { "type": "header", "content": "Other policies" },
+    { "type": "text", "id": "links_title", "label": "Links title", "default": "OTHER POLICIES" },
+    { "type": "paragraph", "content": "Add a \"Policy link\" block for each of the other policies you want listed at the bottom." }
+  ],
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "policy_link",
+      "name": "Policy link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Privacy Policy" },
+        { "type": "text", "id": "url", "label": "Link", "default": "/policies/privacy-policy" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "policy_link", "settings": { "label": "Terms of Service", "url": "/policies/terms-of-service" } },
+      { "type": "policy_link", "settings": { "label": "Privacy Policy", "url": "/policies/privacy-policy" } },
+      { "type": "policy_link", "settings": { "label": "Refund Policy", "url": "/policies/refund-policy" } },
+      { "type": "policy_link", "settings": { "label": "Subscription Policy", "url": "/policies/subscription-policy" } }
+    ]
+  }
+}
+{% endschema %}

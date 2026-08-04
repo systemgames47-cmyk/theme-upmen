@@ -1,0 +1,104 @@
+{%- comment -%}
+  Legal / long-form text page. Built from blocks so any policy-style page
+  (accessibility, shipping terms, subscription terms) can be assembled and
+  edited without touching Liquid.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+<section class="mm-legal" data-section-id="{{ sid }}">
+  <style>
+    #shopify-section-{{ sid }} .mm-legal { background: var(--mars-black, #0a0503); color: var(--text, #fff); padding: 56px 0 72px; }
+    @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-legal { padding: 80px 0 96px; } }
+    #shopify-section-{{ sid }} .mm-wrap { max-width: 780px; margin: 0 auto; padding: 0 16px; }
+    #shopify-section-{{ sid }} .mm-eyebrow {
+      display: inline-block; font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700;
+      color: #fff; background: var(--brand, #ff5600); padding: 6px 14px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 14px;
+    }
+    #shopify-section-{{ sid }} h1 {
+      font-family: var(--font-heading); font-size: calc((clamp(26px, 4.4vw, 40px)) * var(--fs-h, 1));
+      font-weight: 800; text-transform: uppercase; line-height: 1.14; margin: 0 0 10px;
+    }
+    #shopify-section-{{ sid }} .mm-updated { font-size: calc((12.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.55); margin: 0 0 12px; }
+    #shopify-section-{{ sid }} .mm-intro { font-size: calc((15.5px) * var(--fs-b, 1)); line-height: 1.7; color: rgba(255,255,255,0.8); margin: 0 0 36px; padding-bottom: 28px; border-bottom: 1px solid var(--mars-line, rgba(255,255,255,0.12)); }
+    #shopify-section-{{ sid }} .mm-part { margin-bottom: 34px; }
+    #shopify-section-{{ sid }} .mm-part h2 { font-family: var(--font-heading); font-size: calc((20px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 0 0 12px; color: #fff; }
+    #shopify-section-{{ sid }} .mm-part .rte { font-size: calc((15px) * var(--fs-b, 1)); line-height: 1.75; color: rgba(255,255,255,0.78); }
+    #shopify-section-{{ sid }} .mm-part .rte p { margin: 0 0 14px; }
+    #shopify-section-{{ sid }} .mm-part .rte a { color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .mm-part .rte ul, #shopify-section-{{ sid }} .mm-part .rte ol { margin: 0 0 14px; padding-left: 22px; }
+    #shopify-section-{{ sid }} .mm-part .rte li { margin-bottom: 7px; }
+    #shopify-section-{{ sid }} .mm-contact-box {
+      margin-top: 40px; padding: 22px 20px; border-radius: 14px;
+      background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    }
+    #shopify-section-{{ sid }} .mm-contact-box h3 { font-family: var(--font-heading); font-size: calc((16px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 0 0 8px; }
+    #shopify-section-{{ sid }} .mm-contact-box p { font-size: calc((14px) * var(--fs-b, 1)); color: rgba(255,255,255,0.75); margin: 0; line-height: 1.7; }
+    #shopify-section-{{ sid }} .mm-contact-box a { color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .mm-warn {
+      font-size: calc((12px) * var(--fs-b, 1)); color: #fecaca; background: rgba(185,28,28,0.25);
+      border: 1px solid rgba(185,28,28,0.5); padding: 10px; border-radius: 8px;
+    }
+  </style>
+
+  <div class="mm-wrap">
+    {%- if section.settings.eyebrow != blank -%}<p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h1>{{ section.settings.title | default: page.title }}</h1>
+    {%- if section.settings.updated != blank -%}
+      <p class="mm-updated">{{ section.settings.updated_label }} {{ section.settings.updated }}</p>
+    {%- endif -%}
+    {%- if section.settings.intro != blank -%}
+      <div class="mm-intro">{{ section.settings.intro }}</div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        <div class="mm-part" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
+          <div class="rte">{{ block.settings.body }}</div>
+        </div>
+      {%- endfor -%}
+    {%- elsif page.content != blank -%}
+      {%- comment -%} Fallback: whatever was typed into the page body in the admin. {%- endcomment -%}
+      <div class="mm-part"><div class="rte">{{ page.content }}</div></div>
+    {%- elsif request.design_mode -%}
+      <div class="mm-warn">⚙️ Add "Section" blocks to build this page, or type the text into the page body in the Shopify admin.</div>
+    {%- endif -%}
+
+    {%- if section.settings.contact_enabled -%}
+      <div class="mm-contact-box">
+        <h3>{{ section.settings.contact_title }}</h3>
+        <p>{{ section.settings.contact_text }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Legal page",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "info": "Leave empty to hide." },
+    { "type": "text", "id": "title", "label": "Title", "info": "Leave empty to use the page title from the Shopify admin." },
+    { "type": "text", "id": "updated_label", "label": "Updated label", "default": "Last updated:" },
+    { "type": "text", "id": "updated", "label": "Last updated date", "info": "Leave empty to hide the line." },
+    { "type": "richtext", "id": "intro", "label": "Intro paragraph" },
+    { "type": "header", "content": "Contact box" },
+    { "type": "checkbox", "id": "contact_enabled", "label": "Show the contact box", "default": true },
+    { "type": "text", "id": "contact_title", "label": "Title", "default": "QUESTIONS ABOUT THIS PAGE?" },
+    { "type": "richtext", "id": "contact_text", "label": "Text", "default": "<p>Write to our team and we will get back to you within one business day.</p>" },
+    { "type": "paragraph", "content": "Add a \"Section\" block for each headed part of the text. With no blocks, the page body written in the Shopify admin is used instead." }
+  ],
+  "max_blocks": 30,
+  "blocks": [
+    {
+      "type": "part",
+      "name": "Section",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Our commitment" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Describe this part of the policy here.</p>" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Legal page" }]
+}
+{% endschema %}

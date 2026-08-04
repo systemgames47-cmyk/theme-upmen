@@ -1,0 +1,185 @@
+{%- comment -%} Contact — support form plus editable info cards {%- endcomment -%}
+{%- assign sid = section.id -%}
+<section class="mm-contact" data-section-id="{{ sid }}">
+  <style>
+    #shopify-section-{{ sid }} .mm-contact { background: var(--mars-black, #0a0503); color: var(--text, #fff); padding: 64px 0; }
+    @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-contact { padding: 88px 0; } }
+    #shopify-section-{{ sid }} .mm-wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+    #shopify-section-{{ sid }} .mm-head { text-align: center; margin-bottom: 40px; }
+    #shopify-section-{{ sid }} .mm-eyebrow {
+      display: inline-block; font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700;
+      color: #fff; background: var(--brand, #ff5600); padding: 6px 14px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 14px;
+    }
+    #shopify-section-{{ sid }} h1 {
+      font-family: var(--font-heading); font-size: calc((clamp(26px, 4.6vw, 42px)) * var(--fs-h, 1));
+      font-weight: 800; text-transform: uppercase; line-height: 1.14; margin: 0 0 12px;
+    }
+    #shopify-section-{{ sid }} .mm-sub { font-size: calc((15px) * var(--fs-b, 1)); color: rgba(255,255,255,0.72); max-width: 620px; margin: 0 auto; }
+    #shopify-section-{{ sid }} .mm-cards { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 44px; }
+    @media (min-width: 700px) { #shopify-section-{{ sid }} .mm-cards { grid-template-columns: repeat(3, 1fr); } }
+    #shopify-section-{{ sid }} .mm-info {
+      background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+      border-radius: 14px; padding: 22px 18px; text-align: center;
+    }
+    #shopify-section-{{ sid }} .mm-info .ic { font-size: calc((24px) * var(--fs-b, 1)); line-height: 1; margin-bottom: 10px; display: block; }
+    #shopify-section-{{ sid }} .mm-info h3 { font-family: var(--font-heading); font-size: calc((14px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 8px; }
+    #shopify-section-{{ sid }} .mm-info p { font-size: calc((13.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.72); margin: 0; line-height: 1.6; }
+    #shopify-section-{{ sid }} .mm-info a { color: var(--brand, #ff5600); text-decoration: none; }
+    #shopify-section-{{ sid }} .mm-form {
+      background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+      border-radius: 16px; padding: 28px 22px;
+    }
+    @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-form { padding: 36px 32px; } }
+    #shopify-section-{{ sid }} .mm-form h2 { font-family: var(--font-heading); font-size: calc((20px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 0 0 20px; }
+    #shopify-section-{{ sid }} .mm-row { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 14px; }
+    @media (min-width: 600px) { #shopify-section-{{ sid }} .mm-row.two { grid-template-columns: 1fr 1fr; } }
+    #shopify-section-{{ sid }} label { display: block; font-size: calc((12.5px) * var(--fs-b, 1)); font-weight: 700; margin-bottom: 6px; color: rgba(255,255,255,0.85); }
+    #shopify-section-{{ sid }} input, #shopify-section-{{ sid }} textarea, #shopify-section-{{ sid }} select {
+      width: 100%; background: #0a0503; border: 1px solid rgba(255,255,255,0.22); border-radius: 8px;
+      padding: 12px 14px; color: #fff; font-size: calc((14px) * var(--fs-b, 1)); font-family: inherit;
+    }
+    #shopify-section-{{ sid }} input:focus, #shopify-section-{{ sid }} textarea:focus, #shopify-section-{{ sid }} select:focus { outline: none; border-color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} textarea { min-height: 150px; resize: vertical; }
+    #shopify-section-{{ sid }} button {
+      background: var(--brand, #ff5600); color: #fff; border: none; border-radius: 8px; cursor: pointer;
+      font-weight: 800; text-transform: uppercase; padding: 15px 32px; font-size: calc((15px) * var(--fs-b, 1));
+      box-shadow: 0 8px 24px rgba(255,86,0,0.35);
+    }
+    #shopify-section-{{ sid }} button:hover { filter: brightness(1.1); }
+    #shopify-section-{{ sid }} .mm-ok {
+      background: rgba(57,196,110,0.16); border: 1px solid rgba(57,196,110,0.5); color: #b7f0cd;
+      padding: 14px 16px; border-radius: 10px; margin-bottom: 20px; font-size: calc((14px) * var(--fs-b, 1));
+    }
+    #shopify-section-{{ sid }} .mm-err {
+      background: rgba(185,28,28,0.25); border: 1px solid rgba(185,28,28,0.5); color: #fecaca;
+      padding: 14px 16px; border-radius: 10px; margin-bottom: 20px; font-size: calc((13.5px) * var(--fs-b, 1));
+    }
+    #shopify-section-{{ sid }} .mm-note { font-size: calc((12px) * var(--fs-b, 1)); color: rgba(255,255,255,0.55); margin-top: 14px; }
+  </style>
+
+  <div class="mm-wrap">
+    <div class="mm-head">
+      {%- if section.settings.eyebrow != blank -%}<p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1>{{ section.settings.title }}</h1>
+      {%- if section.settings.subtitle != blank -%}<p class="mm-sub">{{ section.settings.subtitle }}</p>{%- endif -%}
+    </div>
+
+    {%- assign info_blocks = section.blocks | where: 'type', 'info' -%}
+    {%- if info_blocks.size > 0 -%}
+      <div class="mm-cards">
+        {%- for block in info_blocks -%}
+          <div class="mm-info" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != blank -%}<span class="ic" aria-hidden="true">{{ block.settings.icon }}</span>{%- endif -%}
+            <h3>{{ block.settings.title }}</h3>
+            <p>
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+              {%- else -%}
+                {{ block.settings.text }}
+              {%- endif -%}
+            </p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="mm-form">
+      <h2>{{ section.settings.form_title }}</h2>
+      {%- form 'contact', id: 'mm-contact-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="mm-ok">{{ section.settings.success_text }}</div>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="mm-err">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <div class="mm-row two">
+          <div>
+            <label for="mm-name-{{ sid }}">{{ section.settings.label_name }}</label>
+            <input type="text" id="mm-name-{{ sid }}" name="contact[name]" value="{{ form.name }}" required>
+          </div>
+          <div>
+            <label for="mm-email-{{ sid }}">{{ section.settings.label_email }}</label>
+            <input type="email" id="mm-email-{{ sid }}" name="contact[email]" value="{{ form.email }}" required>
+          </div>
+        </div>
+        <div class="mm-row">
+          <div>
+            <label for="mm-order-{{ sid }}">{{ section.settings.label_order }}</label>
+            <input type="text" id="mm-order-{{ sid }}" name="contact[order number]">
+          </div>
+        </div>
+        {%- assign topics = section.settings.topics | strip | newline_to_br | split: '<br />' -%}
+        {%- if topics.size > 0 -%}
+          <div class="mm-row">
+            <div>
+              <label for="mm-topic-{{ sid }}">{{ section.settings.label_topic }}</label>
+              <select id="mm-topic-{{ sid }}" name="contact[topic]">
+                {%- for topic in topics -%}
+                  {%- assign topic_t = topic | strip -%}
+                  {%- if topic_t != blank -%}<option value="{{ topic_t | escape }}">{{ topic_t }}</option>{%- endif -%}
+                {%- endfor -%}
+              </select>
+            </div>
+          </div>
+        {%- endif -%}
+        <div class="mm-row">
+          <div>
+            <label for="mm-msg-{{ sid }}">{{ section.settings.label_message }}</label>
+            <textarea id="mm-msg-{{ sid }}" name="contact[body]" required>{{ form.body }}</textarea>
+          </div>
+        </div>
+        <button type="submit">{{ section.settings.submit_label }}</button>
+        {%- if section.settings.privacy_note != blank -%}
+          <p class="mm-note">{{ section.settings.privacy_note }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SUPPORT" },
+    { "type": "text", "id": "title", "label": "Title", "default": "TALK TO A REAL HUMAN" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Questions about your order, your protocol or the guarantee? Send us a note and our team gets back to you." },
+    { "type": "header", "content": "Form" },
+    { "type": "text", "id": "form_title", "label": "Form title", "default": "SEND US A MESSAGE" },
+    { "type": "text", "id": "label_name", "label": "Name label", "default": "Your name" },
+    { "type": "text", "id": "label_email", "label": "Email label", "default": "Email address" },
+    { "type": "text", "id": "label_order", "label": "Order number label", "default": "Order number (optional)" },
+    { "type": "text", "id": "label_topic", "label": "Topic label", "default": "What is this about?" },
+    { "type": "textarea", "id": "topics", "label": "Topic options", "info": "One per line. Leave empty to hide the dropdown.", "default": "Order status or tracking\nReturns and the 90-day guarantee\nSubscription: skip, pause or cancel\nProduct and ingredient questions\nSomething else" },
+    { "type": "text", "id": "label_message", "label": "Message label", "default": "How can we help?" },
+    { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "Send message" },
+    { "type": "textarea", "id": "success_text", "label": "Success message", "default": "Thanks — your message is in. Our team replies within one business day." },
+    { "type": "textarea", "id": "privacy_note", "label": "Note under the button", "default": "We use your details only to answer this request. Read our privacy policy for the full picture." },
+    { "type": "paragraph", "content": "Add \"Info card\" blocks for the row above the form (email, hours, response time)." }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "info",
+      "name": "Info card",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "✉️" },
+        { "type": "text", "id": "title", "label": "Title", "default": "EMAIL US" },
+        { "type": "text", "id": "text", "label": "Text", "default": "support@upmen.com" },
+        { "type": "text", "id": "link", "label": "Link (optional)", "info": "Turns the text into a link. Accepts mailto: or a path." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact page",
+      "blocks": [
+        { "type": "info", "settings": { "icon": "✉️", "title": "EMAIL US", "text": "support@upmen.com", "link": "mailto:support@upmen.com" } },
+        { "type": "info", "settings": { "icon": "⏱️", "title": "RESPONSE TIME", "text": "Within one business day, Monday to Friday." } },
+        { "type": "info", "settings": { "icon": "🛡️", "title": "GUARANTEE", "text": "90 days to try it. Higher T or your money back." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
