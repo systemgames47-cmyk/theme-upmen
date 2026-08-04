@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "about_hero": {
@@ -6,145 +15,107 @@
         "eyebrow": "OUR STORY",
         "title_pre": "BUILT FOR MEN WHO",
         "title_highlight": "REFUSE TO SETTLE",
-        "lede": "Up Men exists for one reason: too many men are running at half capacity and being told it's just age. We build clinically dosed formulas that give your body what it needs to perform the way it was designed to.",
+        "lede": "Up Men exists for one reason: too many men are running at half capacity and being told it's just age. We build clinically dosed formulas that give the body the raw materials it needs to do the job itself.",
+        "cta_label": "SEE THE FORMULA",
+        "cta_link": "/#ingredients",
+        "height_mobile": "medium",
         "height_desktop": "small"
       }
     },
     "marquee": {
       "type": "marquee",
-      "settings": {},
       "blocks": {
-        "item-1": { "type": "item", "settings": { "text": "Made In A CGMP Facility" } },
-        "item-2": { "type": "item", "settings": { "text": "Non-GMO" } },
-        "item-3": { "type": "item", "settings": { "text": "Vegan" } },
-        "item-4": { "type": "item", "settings": { "text": "Hormone-Free" } },
-        "item-5": { "type": "item", "settings": { "text": "Made in USA" } },
-        "item-6": { "type": "item", "settings": { "text": "Third Party Tested" } }
+        "m1": { "type": "item", "settings": { "text": "Made In A CGMP Facility" } },
+        "m2": { "type": "item", "settings": { "text": "Non-GMO" } },
+        "m3": { "type": "item", "settings": { "text": "Vegan" } },
+        "m4": { "type": "item", "settings": { "text": "Hormone-Free" } },
+        "m5": { "type": "item", "settings": { "text": "Made in USA" } },
+        "m6": { "type": "item", "settings": { "text": "Third Party Tested" } }
       },
-      "block_order": ["item-1", "item-2", "item-3", "item-4", "item-5", "item-6"]
+      "block_order": ["m1", "m2", "m3", "m4", "m5", "m6"],
+      "settings": {}
     },
     "about_mission": {
       "type": "about-mission",
-      "settings": {},
       "blocks": {
-        "value-1": {
-          "type": "value",
-          "settings": {
-            "icon": "🔬",
-            "title": "CLINICAL DOSES",
-            "text": "Every ingredient is dosed at the level used in published research — not a dusting for the label."
-          }
-        },
-        "value-2": {
-          "type": "value",
-          "settings": {
-            "icon": "📋",
-            "title": "FULL TRANSPARENCY",
-            "text": "No proprietary blends. You see exactly what's in every serving and how much of it."
-          }
-        },
-        "value-3": {
-          "type": "value",
-          "settings": {
-            "icon": "🇺🇸",
-            "title": "MADE IN THE USA",
-            "text": "Manufactured in a CGMP-certified facility and third-party tested batch by batch."
-          }
-        },
-        "value-4": {
-          "type": "value",
-          "settings": {
-            "icon": "🤝",
-            "title": "RISK ON US",
-            "text": "A 90-day guarantee, because you shouldn't have to gamble on your own health."
-          }
-        }
+        "v1": { "type": "value", "settings": { "icon": "🔬", "title": "CLINICAL DOSES", "text": "Every ingredient is dosed at the level used in published research — not a dusting for the label." } },
+        "v2": { "type": "value", "settings": { "icon": "📋", "title": "FULL TRANSPARENCY", "text": "No proprietary blends. You see exactly what's in every serving and how much of it." } },
+        "v3": { "type": "value", "settings": { "icon": "🇺🇸", "title": "MADE IN THE USA", "text": "Manufactured in a CGMP-certified facility and third-party tested batch by batch." } },
+        "v4": { "type": "value", "settings": { "icon": "🤝", "title": "RISK ON US", "text": "A 90-day guarantee, because you shouldn't have to gamble on your own health." } }
       },
-      "block_order": ["value-1", "value-2", "value-3", "value-4"]
-    },
-    "about_stats": {
-      "type": "about-stats",
-      "settings": {},
-      "blocks": {
-        "stat-1": { "type": "stat", "settings": { "number": "50K+", "label": "Men supported worldwide" } },
-        "stat-2": { "type": "stat", "settings": { "number": "4.8★", "label": "Average customer rating" } },
-        "stat-3": { "type": "stat", "settings": { "number": "8", "label": "Clinically dosed ingredients" } },
-        "stat-4": { "type": "stat", "settings": { "number": "90", "label": "Day money-back guarantee" } }
-      },
-      "block_order": ["stat-1", "stat-2", "stat-3", "stat-4"]
+      "block_order": ["v1", "v2", "v3", "v4"],
+      "settings": {
+        "eyebrow": "WHAT WE'RE FOR",
+        "title_pre": "WE DIDN'T SET OUT TO SELL",
+        "title_highlight": "ANOTHER T-BOOSTER",
+        "p1": "The shelf was already full of them. Bottles with impressive ingredient lists on the front and a proprietary blend on the back, so you could never work out how much of anything you were actually taking.",
+        "p2": "We started from the opposite end: find the compounds with real research behind them, use the amounts the research used, and print every number on the label. If a dose could not be justified, it did not go in.",
+        "p3": "That approach costs more per bottle and it rules out most of the marketing tricks this category runs on. It also means you can check our claims yourself — which is the only kind of trust worth having.",
+        "image_position": "right",
+        "values_title_pre": "WHAT WE",
+        "values_title_highlight": "STAND ON"
+      }
     },
     "founder_story": {
       "type": "founder-story",
-      "settings": {}
+      "settings": {
+        "founder_name": "The Founder",
+        "founder_role": "Founder of Up Men",
+        "intro_title_pre": "WHY I CREATED",
+        "intro_title_highlight": "UP MEN",
+        "intro_text": "A few years ago I was doing everything \"right\" — training, working hard, grinding — and still dealing with:",
+        "struggles": "Low Energy|Brain Fog|Slow Recovery|Low Drive",
+        "intro_footer": "And more things I won't bore you by listing…",
+        "story_p1": "Every day felt like a battle. I was running on caffeine and willpower, and it still wasn't enough.",
+        "story_p2": "I looked fine on the outside, but I knew I wasn't performing at my real level.",
+        "story_p3": "Then I got my testosterone tested — and everything made sense.",
+        "story_p4": "I went all-in on understanding what actually moves the needle for male hormones, naturally.",
+        "tried_title": "I TRIED EVERYTHING:",
+        "tried_list": "More caffeine|Generic multivitamins|Random T-boosters|Crash diets|Cold showers|Sleep hacks|Expensive clinics|And more",
+        "follow_title_pre": "THE ANSWER WAS",
+        "follow_title_highlight": "SIMPLER THAN I THOUGHT",
+        "follow_p1": "Don't get me wrong — some of those habits are good, and I still keep them today. But none of them were the game-changer I was looking for.",
+        "follow_p2": "What actually worked was giving my body the exact raw materials it needs to produce testosterone on its own: clinically dosed Tongkat Ali, Shilajit, Zinc, Boron, Fenugreek and more — all in one daily serving.",
+        "follow_p3": "That's Up Men. No hormones, no shortcuts — just your body working the way it was designed to."
+      }
+    },
+    "about_stats": {
+      "type": "about-stats",
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "number": "50K+", "label": "Men supported worldwide" } },
+        "s2": { "type": "stat", "settings": { "number": "4.8★", "label": "Average customer rating" } },
+        "s3": { "type": "stat", "settings": { "number": "8", "label": "Clinically dosed ingredients" } },
+        "s4": { "type": "stat", "settings": { "number": "90", "label": "Day money-back guarantee" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {
+        "title_pre": "WHERE WE",
+        "title_highlight": "STAND TODAY"
+      }
     },
     "facility": {
       "type": "facility",
-      "settings": {},
       "blocks": {
-        "badge-1": { "type": "badge", "settings": { "text": "CGMP Certified" } },
-        "badge-2": { "type": "badge", "settings": { "text": "Third-Party Tested" } },
-        "badge-3": { "type": "badge", "settings": { "text": "Made in the USA" } }
+        "b1": { "type": "badge", "settings": { "text": "CGMP Certified" } },
+        "b2": { "type": "badge", "settings": { "text": "Third-Party Tested" } },
+        "b3": { "type": "badge", "settings": { "text": "Made in the USA" } }
       },
-      "block_order": ["badge-1", "badge-2", "badge-3"]
-    },
-    "experts": {
-      "type": "testimonials",
-      "settings": {},
-      "blocks": {
-        "expert-1": {
-          "type": "expert",
-          "settings": {
-            "image_asset": "rdm-experts-1.jpg",
-            "name": "DR. ROBERT DORFMAN",
-            "role": "PLASTIC SURGEON · FOUNDER, DONE BY DORFMAN",
-            "bio": "Beverly Hills plastic surgeon trained at Northwestern, Oxford, and UCLA. Through his work with thousands of patients, he helps men take ownership of their health and show up more confidently."
-          }
-        },
-        "expert-2": {
-          "type": "expert",
-          "settings": {
-            "image_asset": "rdm-experts-2.jpg",
-            "name": "ERIC LEIJA",
-            "role": "PRIMAL SWOLEDIER",
-            "bio": "Eric Leija has dedicated his career to helping men build functional strength and train in ways that enhance everyday life — emphasizing longevity, athleticism, and resilience."
-          }
-        },
-        "expert-3": {
-          "type": "expert",
-          "settings": {
-            "image_asset": "Dr._Schilling.png",
-            "name": "DR. BLAINE SCHILLING",
-            "role": "HORMONAL HEALTH SPECIALIST",
-            "bio": "With over 30 years of experience in family medicine, Dr. Schilling has spent his career helping men navigate the realities of aging — a trusted voice on health, energy, and performance."
-          }
-        },
-        "expert-4": {
-          "type": "expert",
-          "settings": {
-            "image_asset": "rdm-experts-6.jpg",
-            "name": "DR. KYLE GILLETT",
-            "role": "DOUBLE BOARD-CERTIFIED PHYSICIAN",
-            "bio": "Specializes in hormone optimization, longevity, and men's health. He combines advanced testing, evidence-based medicine, and personalized plans to help men perform at their highest level."
-          }
-        },
-        "expert-5": {
-          "type": "expert",
-          "settings": {
-            "image_asset": "rdm-experts-13.jpg",
-            "name": "DANIEL CORMIER",
-            "role": "UFC HALL OF FAME · UFC CHAMPION · OLYMPIAN",
-            "bio": "Beyond his accomplishments in combat sports, Daniel embodies the values at the core of Up Men: consistency, accountability, and the belief that strong men are built through daily habits."
-          }
-        }
-      },
-      "block_order": ["expert-1", "expert-2", "expert-3", "expert-4", "expert-5"]
+      "block_order": ["b1", "b2", "b3"],
+      "settings": {
+        "title_pre": "MADE IN A CGMP",
+        "title_highlight": "FACILITY IN THE USA"
+      }
     },
     "guarantee": {
       "type": "scarcity-cta",
       "settings": {
         "title_pre": "READY TO FEEL LIKE",
         "title_highlight": "YOURSELF AGAIN?",
-        "text": "Try Up Men risk-free for 90 days. If you're not satisfied, we will refund you, no questions asked."
+        "text": "Try Up Men risk-free for 90 days. If you're not satisfied, we refund you — and you keep the bottles.",
+        "cta_label": "SEE THE PACKAGES",
+        "cta_link": "/#join_pkg",
+        "height_mobile": "auto",
+        "height_desktop": "auto"
       }
     }
   },
@@ -152,10 +123,9 @@
     "about_hero",
     "marquee",
     "about_mission",
-    "about_stats",
     "founder_story",
+    "about_stats",
     "facility",
-    "experts",
     "guarantee"
   ]
 }
