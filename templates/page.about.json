@@ -25,25 +25,95 @@
     "marquee": {
       "type": "marquee",
       "blocks": {
-        "m1": { "type": "item", "settings": { "text": "Made In A CGMP Facility" } },
-        "m2": { "type": "item", "settings": { "text": "Non-GMO" } },
-        "m3": { "type": "item", "settings": { "text": "Vegan" } },
-        "m4": { "type": "item", "settings": { "text": "Hormone-Free" } },
-        "m5": { "type": "item", "settings": { "text": "Made in USA" } },
-        "m6": { "type": "item", "settings": { "text": "Third Party Tested" } }
+        "m1": {
+          "type": "item",
+          "settings": {
+            "text": "Made In A CGMP Facility"
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "text": "Non-GMO"
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "text": "Vegan"
+          }
+        },
+        "m4": {
+          "type": "item",
+          "settings": {
+            "text": "Hormone-Free"
+          }
+        },
+        "m5": {
+          "type": "item",
+          "settings": {
+            "text": "Made in USA"
+          }
+        },
+        "m6": {
+          "type": "item",
+          "settings": {
+            "text": "Third Party Tested"
+          }
+        }
       },
-      "block_order": ["m1", "m2", "m3", "m4", "m5", "m6"],
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m5",
+        "m6"
+      ],
       "settings": {}
     },
     "about_mission": {
       "type": "about-mission",
       "blocks": {
-        "v1": { "type": "value", "settings": { "icon": "🔬", "title": "CLINICAL DOSES", "text": "Every ingredient is dosed at the level used in published research — not a dusting for the label." } },
-        "v2": { "type": "value", "settings": { "icon": "📋", "title": "FULL TRANSPARENCY", "text": "No proprietary blends. You see exactly what's in every serving and how much of it." } },
-        "v3": { "type": "value", "settings": { "icon": "🇺🇸", "title": "MADE IN THE USA", "text": "Manufactured in a CGMP-certified facility and third-party tested batch by batch." } },
-        "v4": { "type": "value", "settings": { "icon": "🤝", "title": "RISK ON US", "text": "A 90-day guarantee, because you shouldn't have to gamble on your own health." } }
+        "v1": {
+          "type": "value",
+          "settings": {
+            "icon": "🔬",
+            "title": "CLINICAL DOSES",
+            "text": "Every ingredient is dosed at the level used in published research — not a dusting for the label."
+          }
+        },
+        "v2": {
+          "type": "value",
+          "settings": {
+            "icon": "📋",
+            "title": "FULL TRANSPARENCY",
+            "text": "No proprietary blends. You see exactly what's in every serving and how much of it."
+          }
+        },
+        "v3": {
+          "type": "value",
+          "settings": {
+            "icon": "🇺🇸",
+            "title": "MADE IN THE USA",
+            "text": "Manufactured in a CGMP-certified facility and third-party tested batch by batch."
+          }
+        },
+        "v4": {
+          "type": "value",
+          "settings": {
+            "icon": "🤝",
+            "title": "RISK ON US",
+            "text": "A 90-day guarantee, because you shouldn't have to gamble on your own health."
+          }
+        }
       },
-      "block_order": ["v1", "v2", "v3", "v4"],
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
       "settings": {
         "eyebrow": "WHAT WE'RE FOR",
         "title_pre": "WE DIDN'T SET OUT TO SELL",
@@ -51,6 +121,7 @@
         "p1": "The shelf was already full of them. Bottles with impressive ingredient lists on the front and a proprietary blend on the back, so you could never work out how much of anything you were actually taking.",
         "p2": "We started from the opposite end: find the compounds with real research behind them, use the amounts the research used, and print every number on the label. If a dose could not be justified, it did not go in.",
         "p3": "That approach costs more per bottle and it rules out most of the marketing tricks this category runs on. It also means you can check our claims yourself — which is the only kind of trust worth having.",
+        "image": "shopify://shop_images/gen_2706_0_1784054542932_2.png",
         "image_position": "right",
         "values_title_pre": "WHAT WE",
         "values_title_highlight": "STAND ON"
@@ -59,6 +130,7 @@
     "founder_story": {
       "type": "founder-story",
       "settings": {
+        "founder_image": "shopify://shop_images/gen_2690_0_1784052247170_57f36954-c7cd-44f9-8889-8940d951a3e9.png",
         "founder_name": "James Carter",
         "founder_role": "Founder of Up Men",
         "intro_title_pre": "WHY I CREATED",
@@ -70,6 +142,7 @@
         "story_p2": "I looked fine on the outside, but I knew I wasn't performing at my real level.",
         "story_p3": "Then I got my testosterone tested — and everything made sense.",
         "story_p4": "I went all-in on understanding what actually moves the needle for male hormones, naturally.",
+        "before_after_image": "shopify://shop_images/9.jpg",
         "tried_title": "I TRIED EVERYTHING:",
         "tried_list": "More caffeine|Generic multivitamins|Random T-boosters|Crash diets|Cold showers|Sleep hacks|Expensive clinics|And more",
         "follow_title_pre": "THE ANSWER WAS",
@@ -82,12 +155,41 @@
     "about_stats": {
       "type": "about-stats",
       "blocks": {
-        "s1": { "type": "stat", "settings": { "number": "50K+", "label": "Men supported worldwide" } },
-        "s2": { "type": "stat", "settings": { "number": "4.8★", "label": "Average customer rating" } },
-        "s3": { "type": "stat", "settings": { "number": "8", "label": "Clinically dosed ingredients" } },
-        "s4": { "type": "stat", "settings": { "number": "90", "label": "Day money-back guarantee" } }
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "50K+",
+            "label": "Men supported worldwide"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "4.8★",
+            "label": "Average customer rating"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "8",
+            "label": "Clinically dosed ingredients"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": "90",
+            "label": "Day money-back guarantee"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3", "s4"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
       "settings": {
         "title_pre": "WHERE WE",
         "title_highlight": "STAND TODAY"
@@ -96,24 +198,72 @@
     "facility": {
       "type": "facility",
       "blocks": {
-        "b1": { "type": "badge", "settings": { "text": "CGMP Certified" } },
-        "b2": { "type": "badge", "settings": { "text": "Third-Party Tested" } },
-        "b3": { "type": "badge", "settings": { "text": "Made in the USA" } }
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "text": "CGMP Certified"
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "text": "Third-Party Tested"
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "text": "Made in the USA"
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3"],
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
       "settings": {
         "title_pre": "MADE IN A CGMP",
-        "title_highlight": "FACILITY IN THE USA"
+        "title_highlight": "FACILITY IN THE USA",
+        "autoplay_preview": true
       }
     },
     "experts": {
       "type": "testimonials",
       "blocks": {
-        "e1": { "type": "expert", "settings": { "name": "EXPERT NAME", "role": "CREDENTIAL · SPECIALTY", "bio": "Placeholder — replace with the advisor's name, credentials and a short bio once the partnership is confirmed. Pick their photo in the Image field." } },
-        "e2": { "type": "expert", "settings": { "name": "EXPERT NAME", "role": "CREDENTIAL · SPECIALTY", "bio": "Placeholder — replace with the advisor's name, credentials and a short bio once the partnership is confirmed. Pick their photo in the Image field." } },
-        "e3": { "type": "expert", "settings": { "name": "EXPERT NAME", "role": "CREDENTIAL · SPECIALTY", "bio": "Placeholder — replace with the advisor's name, credentials and a short bio once the partnership is confirmed. Pick their photo in the Image field." } }
+        "e1": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "",
+            "name": "EXPERT NAME",
+            "role": "CREDENTIAL · SPECIALTY",
+            "bio": "Placeholder — replace with the advisor's name, credentials and a short bio once the partnership is confirmed. Pick their photo in the Image field."
+          }
+        },
+        "e2": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "",
+            "name": "EXPERT NAME",
+            "role": "CREDENTIAL · SPECIALTY",
+            "bio": "Placeholder — replace with the advisor's name, credentials and a short bio once the partnership is confirmed. Pick their photo in the Image field."
+          }
+        },
+        "e3": {
+          "type": "expert",
+          "settings": {
+            "image_asset": "",
+            "name": "EXPERT NAME",
+            "role": "CREDENTIAL · SPECIALTY",
+            "bio": "Placeholder — replace with the advisor's name, credentials and a short bio once the partnership is confirmed. Pick their photo in the Image field."
+          }
+        }
       },
-      "block_order": ["e1", "e2", "e3"],
+      "block_order": [
+        "e1",
+        "e2",
+        "e3"
+      ],
       "settings": {
         "title_pre": "TRUSTED BY",
         "title_highlight": "THE PEOPLE WHO KNOW",
@@ -123,6 +273,7 @@
     "guarantee": {
       "type": "scarcity-cta",
       "settings": {
+        "badge": "90-DAY HIGHER-T GUARANTEE",
         "title_pre": "READY TO FEEL LIKE",
         "title_highlight": "YOURSELF AGAIN?",
         "text": "Try Up Men risk-free for 90 days. If you're not satisfied, we refund you — and you keep the bottles.",
