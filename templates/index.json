@@ -583,6 +583,7 @@
         },
         "kit_5": {
           "type": "kit_addon",
+          "disabled": true,
           "settings": {
             "text": "1 Month of Ladder Workout App",
             "free_prefix": true,
@@ -593,6 +594,7 @@
         },
         "kit_6": {
           "type": "kit_addon",
+          "disabled": true,
           "settings": {
             "text": "Surprise Gift",
             "free_prefix": true,
