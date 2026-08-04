@@ -834,9 +834,13 @@
         "height_mobile": "auto",
         "height_desktop": "auto",
         "gifts_label": "Free gifts included",
+        "gift_1": "shopify://shop_images/ChatGPT_Image_31_07_2026_16_09_18.png",
         "gift_1_alt": "Free gift: metal storage case",
+        "gift_2": "shopify://shop_images/up_men_wd_a4e50271-f530-4f1f-93ad-ac37d7682d06.png",
         "gift_2_alt": "Free gift: testosterone cheat sheet",
+        "gift_3": "shopify://shop_images/ChatGPT_Image_29_07_2026_07_38_59_76ebc455-9289-4127-8c39-02a092544b86.png",
         "gift_3_alt": "Free gift: high-T cookbook",
+        "gift_4": "shopify://shop_images/ChatGPT_Image_29_07_2026_06_13_07_2960dc6b-0f03-46d4-b6a5-27f19263842a.png",
         "gift_4_alt": "Free gift: 90-day tracker"
       }
     },
