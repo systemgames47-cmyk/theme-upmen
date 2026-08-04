@@ -23,17 +23,17 @@
     },
     "header": {
       "type": "header",
-      "disabled": true,
       "settings": {
+        "logo": "shopify://shop_images/blob_a51498af-230e-4eb2-b6ca-4583bcaeaf35.png",
         "logo_height": 32,
         "header_bg": "#0a0503",
         "header_text": "#ffffff",
         "show_cta": true,
         "cta_label": "50% OFF LAUNCH KIT",
         "cta_link": "",
-        "show_cart": true,
-        "show_cart_mobile": true,
-        "show_cart_desktop": true,
+        "show_cart": false,
+        "show_cart_mobile": false,
+        "show_cart_desktop": false,
         "menu": "main-menu",
         "show_mobile_menu_toggle": false
       }

@@ -9,13 +9,231 @@
  */
 {
   "current": {
+    "logo_height": 32,
     "color_brand": "#ff5600",
     "color_brand_dark": "#120804",
     "color_brand_soft": "#fff4ec",
     "color_brand_green": "#39c46e",
     "color_brand_yellow": "#ff8a00",
-    "logo_height": 32,
     "contact_email": "support@upmen.com",
+    "sections": {
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "social_link_WQBRjb": {
+            "type": "social_link",
+            "settings": {
+              "network": "instagram",
+              "url": "",
+              "label": ""
+            }
+          },
+          "footer-0": {
+            "type": "shop_link",
+            "settings": {
+              "label": "3-Month Plan",
+              "url": "/#join_pkg"
+            }
+          },
+          "footer-1": {
+            "type": "shop_link",
+            "settings": {
+              "label": "Monthly Plan",
+              "url": "/#join_pkg"
+            }
+          },
+          "footer-2": {
+            "type": "shop_link",
+            "settings": {
+              "label": "Cart",
+              "url": "/cart"
+            }
+          },
+          "footer-3": {
+            "type": "about_link",
+            "settings": {
+              "label": "About us",
+              "url": "/pages/about"
+            }
+          },
+          "footer-4": {
+            "type": "about_link",
+            "settings": {
+              "label": "Ingredients",
+              "url": "/#ingredients"
+            }
+          },
+          "footer-5": {
+            "type": "about_link",
+            "settings": {
+              "label": "How it works",
+              "url": "/#how-it-works"
+            }
+          },
+          "footer-6": {
+            "type": "about_link",
+            "settings": {
+              "label": "FAQ",
+              "url": "/#faq"
+            }
+          },
+          "footer-7": {
+            "type": "about_link",
+            "settings": {
+              "label": "Subscription Policy",
+              "url": "/policies/subscription-policy"
+            }
+          },
+          "footer-8": {
+            "type": "learn_link",
+            "settings": {
+              "label": "The UP MEN Journal",
+              "url": "/blogs/journal"
+            }
+          },
+          "footer-9": {
+            "type": "learn_link",
+            "settings": {
+              "label": "UP MEN vs TRT",
+              "url": "/blogs/journal/up-men-vs-trt"
+            }
+          },
+          "footer-10": {
+            "type": "learn_link",
+            "settings": {
+              "label": "UP MEN vs Nugenix",
+              "url": "/blogs/journal/up-men-vs-nugenix"
+            }
+          },
+          "footer-11": {
+            "type": "learn_link",
+            "settings": {
+              "label": "UP MEN vs Inno Supps",
+              "url": "/blogs/journal/up-men-vs-inno-supps-t-drive"
+            }
+          },
+          "footer-12": {
+            "type": "learn_link",
+            "settings": {
+              "label": "UP MEN vs Primal Viking",
+              "url": "/blogs/journal/up-men-vs-primal-viking"
+            }
+          },
+          "footer-13": {
+            "type": "learn_link",
+            "settings": {
+              "label": "How to read a label",
+              "url": "/blogs/journal/how-to-read-a-testosterone-label"
+            }
+          },
+          "footer-14": {
+            "type": "support_link",
+            "settings": {
+              "label": "Manage subscription",
+              "url": "/pages/manage-subscription"
+            }
+          },
+          "footer-15": {
+            "type": "support_link",
+            "settings": {
+              "label": "Contact us",
+              "url": "/pages/contact"
+            }
+          },
+          "footer-16": {
+            "type": "support_link",
+            "settings": {
+              "label": "Help desk",
+              "url": "/pages/help-center"
+            }
+          },
+          "footer-17": {
+            "type": "support_link",
+            "settings": {
+              "label": "Refund Policy",
+              "url": "/policies/refund-policy"
+            }
+          },
+          "footer-18": {
+            "type": "legal_link",
+            "settings": {
+              "label": "Terms + Conditions",
+              "url": "/policies/terms-of-service"
+            }
+          },
+          "footer-19": {
+            "type": "legal_link",
+            "settings": {
+              "label": "Privacy Policy",
+              "url": "/policies/privacy-policy"
+            }
+          },
+          "footer-20": {
+            "type": "legal_link",
+            "settings": {
+              "label": "Accessibility",
+              "url": "/pages/accessibility"
+            }
+          }
+        },
+        "block_order": [
+          "social_link_WQBRjb",
+          "footer-0",
+          "footer-1",
+          "footer-2",
+          "footer-3",
+          "footer-4",
+          "footer-5",
+          "footer-6",
+          "footer-7",
+          "footer-8",
+          "footer-9",
+          "footer-10",
+          "footer-11",
+          "footer-12",
+          "footer-13",
+          "footer-14",
+          "footer-15",
+          "footer-16",
+          "footer-17",
+          "footer-18",
+          "footer-19",
+          "footer-20"
+        ],
+        "settings": {
+          "height_mobile": "auto",
+          "height_desktop": "auto",
+          "slogan_pre": "ONE GIANT BOOST",
+          "slogan_highlight": "FOR MANKIND.",
+          "tagline": "Natural testosterone support for the modern man.",
+          "cta_label": "CLAIM 50% OFF NOW",
+          "cta_link": "",
+          "shop_title": "SHOP",
+          "about_title": "ABOUT",
+          "menu": "",
+          "learn_title": "LEARN",
+          "support_title": "SUPPORT",
+          "support_email": "support@upmen.com",
+          "support_email_label": "",
+          "support_menu": "",
+          "legal_title": "LEGAL",
+          "social_title": "FOLLOW US",
+          "disclaimer": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Results may vary. Consult your physician before use if you have a medical condition or take medication."
+        }
+      },
+      "sticky-footer": {
+        "type": "sticky-footer",
+        "settings": {
+          "enabled": true,
+          "line1": "LAUNCH OFFER ENDING SOON",
+          "line2": "SAVE UP TO 25% TODAY",
+          "button_label": "CLAIM NOW!",
+          "link": "#join_pkg",
+          "scroll_threshold": 600
+        }
+      }
+    },
+    "content_for_index": [],
     "blocks": {
       "18348123794867637515": {
         "type": "shopify://apps/wiz/blocks/app-embed/240b6bc0-e686-4c07-8fde-eb7ee1949893",

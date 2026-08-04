@@ -28,10 +28,12 @@
         "media_tag_top": "GET",
         "media_tag_main": "50% OFF TODAY",
         "media_tag_link": "",
-        "show_product_image": true,
+        "show_product_image": false,
         "product_alt": "Up Men Natural Testosterone Support",
-        "height_mobile": "auto",
-        "height_desktop": "full"
+        "height_mobile": "medium",
+        "height_desktop": "full",
+        "bg_mobile": "shopify://shop_images/gen_2690_0_1784052247170_57f36954-c7cd-44f9-8889-8940d951a3e9.png",
+        "bg_desktop": "shopify://shop_images/gen_2706_0_1784054542932_2.png"
       }
     },
     "marquee_intro": {
@@ -46,6 +48,7 @@
         "benefit-1": {
           "type": "benefit",
           "settings": {
+            "icon_image": "shopify://shop_images/rai.png",
             "icon": "⚡",
             "title": "SKYROCKET ENERGY & STAMINA",
             "text": "Increase energy & athletic performance"
@@ -54,6 +57,7 @@
         "benefit-2": {
           "type": "benefit",
           "settings": {
+            "icon_image": "shopify://shop_images/fog.png",
             "icon": "🔥",
             "title": "SUPPORT MALE VITALITY",
             "text": "Amplify passionate energy"
@@ -62,6 +66,7 @@
         "benefit-3": {
           "type": "benefit",
           "settings": {
+            "icon_image": "shopify://shop_images/set.png",
             "icon": "🎯",
             "title": "ENHANCE PRODUCTIVITY & FOCUS",
             "text": "Stay sharp & focused all day"
@@ -70,6 +75,7 @@
         "benefit-4": {
           "type": "benefit",
           "settings": {
+            "icon_image": "shopify://shop_images/brac.png",
             "icon": "💪",
             "title": "SUPERCHARGE STRENGTH",
             "text": "Build & maintain lean muscle mass"
@@ -78,6 +84,7 @@
         "benefit-5": {
           "type": "benefit",
           "settings": {
+            "icon_image": "shopify://shop_images/son.png",
             "icon": "😴",
             "title": "IMPROVE RECOVERY",
             "text": "Optimize sleep & muscle recovery"
@@ -122,6 +129,7 @@
         "step-1": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/y545.png",
             "day": "WEEK 1",
             "phase": "IGNITION",
             "items": "Tongkat Ali blocks stress hormones\nShilajit feeds starving testosterone cells\nMornings start to feel easier\nFirst hints of all-day energy"
@@ -130,6 +138,7 @@
         "step-2": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/03.png",
             "day": "MONTH 1",
             "phase": "SPARK",
             "items": "Boron helps free stuck T\nZinc provides T-making materials\nWorkouts feel intense again\nDrive and focus keep climbing"
@@ -138,6 +147,7 @@
         "step-3": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/04.png",
             "day": "MONTH 3",
             "phase": "LIFTOFF",
             "items": "All 8 ingredients working like a tuned engine\nBody looks leaner, stronger, more masculine\nRecovery between sessions speeds up\nPeople ask what you're doing differently"
@@ -146,6 +156,7 @@
         "step-4": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/05.png",
             "day": "MONTH 6",
             "phase": "ORBIT",
             "items": "T-production optimized fully\nStrength, sleep and mood at a new baseline\nNot temporary, this is your new normal\nWelcome to the man you're supposed to be"
@@ -174,6 +185,7 @@
         "step-1": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/responsive_video_1_3_024459fc-0af3-4b00-810a-c1e78973d89b.gif",
             "video_autoplay": true,
             "title": "Take your daily serving every morning.",
             "subtitle": "With water and food, for best absorption."
@@ -182,6 +194,7 @@
         "step-2": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/responsive_video_1_2__000_1_1_5332831b-abc1-41cf-a206-957b1be25abc.gif",
             "video_autoplay": true,
             "title": "Stay consistent — every single day.",
             "subtitle": "Use the free metal case to carry it anywhere."
@@ -190,6 +203,7 @@
         "step-3": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/gif_1.gif",
             "video_autoplay": true,
             "title": "Track your transformation for 90 days.",
             "subtitle": "Use the free 90-Day Transformation Tracker."
@@ -204,7 +218,7 @@
       "settings": {
         "title_pre": "HOW TO",
         "title_highlight": "USE IT",
-        "media_format": "square",
+        "media_format": "stories",
         "media_size_mobile": "full",
         "media_size_desktop": "full"
       }
@@ -356,6 +370,7 @@
         "expert-1": {
           "type": "expert",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_34_34.png",
             "image_asset": "rdm-experts-1.jpg",
             "name": "DR. ROBERT DORFMAN",
             "role": "PLASTIC SURGEON · FOUNDER, DONE BY DORFMAN",
@@ -365,6 +380,7 @@
         "expert-2": {
           "type": "expert",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_21_50.png",
             "image_asset": "rdm-experts-2.jpg",
             "name": "ERIC LEIJA",
             "role": "PRIMAL SWOLEDIER",
@@ -374,6 +390,7 @@
         "expert-3": {
           "type": "expert",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_41_33.png",
             "image_asset": "Dr._Schilling.png",
             "name": "DR. BLAINE SCHILLING",
             "role": "HORMONAL HEALTH SPECIALIST",
@@ -383,6 +400,7 @@
         "expert-4": {
           "type": "expert",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_32_16.png",
             "image_asset": "rdm-experts-6.jpg",
             "name": "DR. KYLE GILLETT",
             "role": "DOUBLE BOARD-CERTIFIED PHYSICIAN",
@@ -392,6 +410,7 @@
         "expert-5": {
           "type": "expert",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_29_47.png",
             "image_asset": "rdm-experts-13.jpg",
             "name": "DANIEL CORMIER",
             "role": "UFC HALL OF FAME · UFC CHAMPION · OLYMPIAN",
@@ -415,6 +434,7 @@
     "founder_story": {
       "type": "founder-story",
       "settings": {
+        "founder_image": "shopify://shop_images/12_11e23fa9-303a-4455-93c4-6412d7c7a6a5.jpg",
         "founder_name": "James Carter",
         "founder_role": "Founder of Up Men",
         "intro_title_pre": "WHY I CREATED",
@@ -426,8 +446,10 @@
         "story_p2": "I looked fine on the outside, but I knew I wasn't performing at my real level.",
         "story_p3": "Then I got my testosterone tested — and everything made sense.",
         "story_p4": "I went all-in on understanding what actually moves the needle for male hormones, naturally.",
+        "before_after_image": "shopify://shop_images/9_0ba2db66-ae20-41ea-b532-b04ba68d585c.jpg",
         "tried_title": "I TRIED EVERYTHING:",
         "tried_list": "More caffeine|Generic multivitamins|Random T-boosters|Crash diets|Cold showers|Sleep hacks|Expensive clinics|And more",
+        "tried_image": "shopify://shop_images/emagrecer-1920x1080.jpg",
         "follow_title_pre": "THE ANSWER WAS",
         "follow_title_highlight": "SIMPLER THAN I THOUGHT",
         "follow_p1": "Don't get me wrong — some of those habits are good, and I still keep them today. But none of them were the game-changer I was looking for.",
@@ -471,6 +493,7 @@
       "settings": {
         "heading": "Here's What's Inside Every Capsule",
         "use_text": "Suggested use: take 5 capsules daily with food.",
+        "label_image": "shopify://shop_images/gen_2656_0_1783841183087.png",
         "box_size": "medium",
         "box_size_mobile": "xl",
         "disclaimer": "* These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
@@ -481,111 +504,241 @@
       "blocks": {
         "kit_1": {
           "type": "kit_addon",
-          "settings": { "text": "90-Day Supply — 3 Bottles", "free_prefix": false, "old_value": "$177", "value": "$118", "value_style": "plain" }
+          "settings": {
+            "text": "90-Day Supply — 3 Bottles",
+            "free_prefix": false,
+            "old_value": "$177",
+            "value": "$118",
+            "value_style": "plain"
+          }
         },
         "kit_2": {
           "type": "kit_addon",
-          "settings": { "text": "1st Bottle", "free_prefix": true, "old_value": "", "value": "Save $59", "value_style": "save" }
+          "settings": {
+            "text": "1st Bottle",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "Save $59",
+            "value_style": "save"
+          }
         },
         "kit_3": {
           "type": "kit_addon",
-          "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "old_value": "", "value": "$10", "value_style": "free" }
+          "settings": {
+            "text": "UP MEN Capsule Case",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "$10",
+            "value_style": "free"
+          }
         },
         "kit_4": {
           "type": "kit_addon",
-          "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "old_value": "", "value": "$20", "value_style": "free" }
+          "settings": {
+            "text": "UP MEN Testosterone Guide",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "$20",
+            "value_style": "free"
+          }
         },
         "kit_5": {
           "type": "kit_addon",
-          "settings": { "text": "1 Month of Ladder Workout App", "free_prefix": true, "old_value": "", "value": "$30", "value_style": "free" }
+          "settings": {
+            "text": "1 Month of Ladder Workout App",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "$30",
+            "value_style": "free"
+          }
         },
         "kit_6": {
           "type": "kit_addon",
-          "settings": { "text": "Surprise Gift", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" }
+          "settings": {
+            "text": "Surprise Gift",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "",
+            "value_style": "free"
+          }
         },
         "kit_7": {
           "type": "kit_addon",
-          "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "old_value": "", "value": "", "value_style": "plain" }
+          "settings": {
+            "text": "Free US shipping on your first order",
+            "free_prefix": false,
+            "old_value": "",
+            "value": "",
+            "value_style": "plain"
+          }
         },
         "kit_perk_1": {
           "type": "kit_perk",
-          "settings": { "text": "Just $39.33 per month" }
+          "settings": {
+            "text": "Just $39.33 per month"
+          }
         },
         "kit_perk_2": {
           "type": "kit_perk",
-          "settings": { "text": "Auto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime" }
+          "settings": {
+            "text": "Auto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime"
+          }
         },
         "kit_perk_3": {
           "type": "kit_perk",
-          "settings": { "text": "90-day higher-T money-back guarantee" }
+          "settings": {
+            "text": "90-day higher-T money-back guarantee"
+          }
         },
         "once_1": {
           "type": "once_addon",
-          "settings": { "text": "1 Bottle — 30-Day Supply", "free_prefix": false, "old_value": "", "value": "$59", "value_style": "plain" }
+          "settings": {
+            "text": "1 Bottle — 30-Day Supply",
+            "free_prefix": false,
+            "old_value": "",
+            "value": "$59",
+            "value_style": "plain"
+          }
         },
         "once_2": {
           "type": "once_addon",
-          "settings": { "text": "$15 off your first order", "free_prefix": false, "old_value": "", "value": "Save $15", "value_style": "save" }
+          "settings": {
+            "text": "$15 off your first order",
+            "free_prefix": false,
+            "old_value": "",
+            "value": "Save $15",
+            "value_style": "save"
+          }
         },
         "once_3": {
           "type": "once_addon",
-          "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" }
+          "settings": {
+            "text": "UP MEN Capsule Case",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "",
+            "value_style": "free"
+          }
         },
         "once_4": {
           "type": "once_addon",
-          "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" }
+          "settings": {
+            "text": "UP MEN Testosterone Guide",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "",
+            "value_style": "free"
+          }
         },
         "once_5": {
           "type": "once_addon",
-          "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "old_value": "", "value": "", "value_style": "plain" }
+          "settings": {
+            "text": "Free US shipping on your first order",
+            "free_prefix": false,
+            "old_value": "",
+            "value": "",
+            "value_style": "plain"
+          }
         },
         "once_perk_1": {
           "type": "once_perk",
-          "settings": { "text": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime" }
+          "settings": {
+            "text": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime"
+          }
         },
         "once_perk_2": {
           "type": "once_perk",
-          "settings": { "text": "90-day higher-T money-back guarantee" }
+          "settings": {
+            "text": "90-day higher-T money-back guarantee"
+          }
         },
         "third_1": {
           "type": "third_addon",
-          "settings": { "text": "180-Day Supply — 6 Bottles", "free_prefix": false, "old_value": "$354", "value": "$199", "value_style": "plain" }
+          "settings": {
+            "text": "180-Day Supply — 6 Bottles",
+            "free_prefix": false,
+            "old_value": "$354",
+            "value": "$199",
+            "value_style": "plain"
+          }
         },
         "third_2": {
           "type": "third_addon",
-          "settings": { "text": "2 Bottles", "free_prefix": true, "old_value": "", "value": "Save $118", "value_style": "save" }
+          "settings": {
+            "text": "2 Bottles",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "Save $118",
+            "value_style": "save"
+          }
         },
         "third_3": {
           "type": "third_addon",
-          "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "old_value": "", "value": "$10", "value_style": "free" }
+          "settings": {
+            "text": "UP MEN Capsule Case",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "$10",
+            "value_style": "free"
+          }
         },
         "third_4": {
           "type": "third_addon",
-          "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "old_value": "", "value": "$20", "value_style": "free" }
+          "settings": {
+            "text": "UP MEN Testosterone Guide",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "$20",
+            "value_style": "free"
+          }
         },
         "third_5": {
           "type": "third_addon",
-          "settings": { "text": "3 Months of Ladder Workout App", "free_prefix": true, "old_value": "", "value": "$90", "value_style": "free" }
+          "settings": {
+            "text": "3 Months of Ladder Workout App",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "$90",
+            "value_style": "free"
+          }
         },
         "third_6": {
           "type": "third_addon",
-          "settings": { "text": "Surprise Gift", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" }
+          "settings": {
+            "text": "Surprise Gift",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "",
+            "value_style": "free"
+          }
         },
         "third_7": {
           "type": "third_addon",
-          "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "old_value": "", "value": "", "value_style": "plain" }
+          "settings": {
+            "text": "Free US shipping on your first order",
+            "free_prefix": false,
+            "old_value": "",
+            "value": "",
+            "value_style": "plain"
+          }
         },
         "third_perk_1": {
           "type": "third_perk",
-          "settings": { "text": "Just $33.16 per month" }
+          "settings": {
+            "text": "Just $33.16 per month"
+          }
         },
         "third_perk_2": {
           "type": "third_perk",
-          "settings": { "text": "Auto-renews every 180 days at $249 — skip a delivery, pause or cancel anytime" }
+          "settings": {
+            "text": "Auto-renews every 180 days at $249 — skip a delivery, pause or cancel anytime"
+          }
         },
         "third_perk_3": {
           "type": "third_perk",
-          "settings": { "text": "90-day higher-T money-back guarantee" }
+          "settings": {
+            "text": "90-day higher-T money-back guarantee"
+          }
         }
       },
       "block_order": [
@@ -618,7 +771,7 @@
         "third_perk_3"
       ],
       "settings": {
-        "eyebrow": "FLASH SALE: 1ST MONTH FREE",
+        "eyebrow": "",
         "title": "<p>GET YOUR FIRST MONTH FREE</p>",
         "offer_enabled": false,
         "offer_title": "JOIN UP MEN TODAY",
@@ -635,16 +788,31 @@
         "scarcity_text_1": "has a high risk of selling out —",
         "scarcity_number": "2140",
         "scarcity_text_2": "purchases made today.",
-        "product_kit": "",
+        "product_kit": "3-month-auto-renew-subscription",
+        "kit_ribbon": "FLASH SALE · 1ST MONTH FREE",
+        "kit_badge": "3-MONTH AUTO-RENEW SUBSCRIPTION",
         "kit_name": "3-MONTH PLAN",
         "kit_sub": "The complete 90-day protocol",
+        "kit_cta_label": "Start My 90-Day Protocol →",
+        "kit_price_compare": "$177",
+        "kit_price": "$118",
+        "kit_perks": "Just $39.33 per month\nAuto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee",
+        "kit_show_addons": true,
+        "kit_show_perks": true,
         "variant_id_kit": "",
         "selling_plan_kit": "",
-        "product_once": "",
+        "product_once": "monthly-plan",
+        "once_badge": "AUTO-SHIP & SAVE",
         "once_name": "MONTHLY PLAN",
         "once_sub": "1-month supply, delivered monthly",
+        "once_cta_label": "Try Up Men →",
+        "once_price_compare": "$59",
+        "once_price": "$44",
+        "once_perks": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee",
+        "once_show_addons": true,
+        "once_show_perks": true,
         "variant_id_once": "",
-        "third_enabled": true,
+        "third_enabled": false,
         "product_third": "",
         "third_highlight": false,
         "third_ribbon": "",
@@ -654,11 +822,22 @@
         "third_cta_label": "Start My 180-Day Protocol →",
         "third_price_compare": "$354",
         "third_price": "$199",
+        "third_perks": "Just $33.16 per month\nAuto-renews every 180 days at $249 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee",
+        "third_show_addons": true,
+        "third_show_perks": true,
         "variant_id_third": "",
         "selling_plan_third": "",
+        "qty_label": "Quantity",
+        "ship_strong": "Ships in 24h",
+        "ship_rest": "if ordered today.",
         "guarantee_note": "90-DAY HIGHER-T GUARANTEE · TRY IT RISK-FREE",
         "height_mobile": "auto",
-        "height_desktop": "auto"
+        "height_desktop": "auto",
+        "gifts_label": "Free gifts included",
+        "gift_1_alt": "Free gift: metal storage case",
+        "gift_2_alt": "Free gift: testosterone cheat sheet",
+        "gift_3_alt": "Free gift: high-T cookbook",
+        "gift_4_alt": "Free gift: 90-day tracker"
       }
     },
     "marquee_fast": {
@@ -740,7 +919,11 @@
         "empty_label": "No reviews with photos yet.",
         "verified_label": "Verified Purchase",
         "review_photo_label": "Review photo",
-        "photos_alt_prefix": "Customer photo"
+        "photos_alt_prefix": "Customer photo",
+        "photo_1": "shopify://shop_images/gen_2813_0_1784390330727.png",
+        "photo_2": "shopify://shop_images/gen_2817_0_1784391543403.png",
+        "photo_3": "shopify://shop_images/Gemini_Generated_Image_d5ckeyd5ckeyd5ck.jpg",
+        "photo_4": "shopify://shop_images/ourmzqg92r7ez5x9gwxc7503kfhx.jpg"
       }
     },
     "how_it_works": {
