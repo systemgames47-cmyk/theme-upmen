@@ -15,7 +15,14 @@
     "color_brand_green": "#39c46e",
     "color_brand_yellow": "#ff8a00",
     "logo_height": 32,
-    "contact_email": "support@upmen.com"
+    "contact_email": "support@upmen.com",
+    "blocks": {
+      "18348123794867637515": {
+        "type": "shopify://apps/wiz/blocks/app-embed/240b6bc0-e686-4c07-8fde-eb7ee1949893",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   },
   "presets": {
     "Default": {
