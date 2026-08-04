@@ -76,7 +76,7 @@
         "type": "text",
         "id": "contact_email",
         "label": "Support email",
-        "default": "support@mengotomars.com",
+        "default": "support@upmen.com",
         "info": "Used by the footer when its own \"Support email\" field is empty."
       }
     ]

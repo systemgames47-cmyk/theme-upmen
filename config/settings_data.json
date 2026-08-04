@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_brand": "#ff5600",
@@ -6,7 +15,7 @@
     "color_brand_green": "#39c46e",
     "color_brand_yellow": "#ff8a00",
     "logo_height": 32,
-    "contact_email": "support@mengotomars.com"
+    "contact_email": "support@upmen.com"
   },
   "presets": {
     "Default": {
@@ -16,7 +25,7 @@
       "color_brand_green": "#39c46e",
       "color_brand_yellow": "#ff8a00",
       "logo_height": 32,
-      "contact_email": "support@mengotomars.com"
+      "contact_email": "support@upmen.com"
     }
   }
 }
