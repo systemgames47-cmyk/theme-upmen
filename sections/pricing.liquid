@@ -50,6 +50,12 @@
     #shopify-section-{{ sid }} .mm-title strong { color: var(--brand, #ff5600); font-weight: 800; }
     #shopify-section-{{ sid }} .mm-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
     @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-grid { grid-template-columns: 1fr 1fr; } }
+    /* Three packages: wider shell and a 3-up row from desktop. */
+    #shopify-section-{{ sid }} .mm-wrap.is-3 { max-width: 1200px; }
+    @media (min-width: 1024px) {
+      #shopify-section-{{ sid }} .mm-grid.is-3 { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      #shopify-section-{{ sid }} .mm-grid.is-3 .mm-card { padding: 24px 18px; }
+    }
     #shopify-section-{{ sid }} .mm-card {
       position: relative; background: #17100b; border-radius: 16px; border: 1px solid rgba(255,255,255,0.14);
       padding: 24px 20px; display: flex; flex-direction: column;
@@ -154,7 +160,8 @@
     }
   </style>
 
-  <div class="mm-wrap">
+  {%- assign show_third = section.settings.third_enabled -%}
+  <div class="mm-wrap{% if show_third %} is-3{% endif %}">
     {%- if section.settings.offer_enabled -%}
     <div class="mm-offer">
       {%- if section.settings.offer_title != blank -%}
@@ -205,7 +212,7 @@
       <h2 class="mm-title">{{ section.settings.title | replace: '<p>', '' | replace: '</p>', '' }}</h2>
     </div>
 
-    <div class="mm-grid">
+    <div class="mm-grid{% if show_third %} is-3{% endif %}">
 
       {%- comment -%} Package 1: Launch Kit subscription (popular) {%- endcomment -%}
       {%- assign pk = section.settings.product_kit -%}
@@ -237,13 +244,15 @@
         {%- else -%}
           <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.kit_name }}" loading="lazy">
         {%- endif -%}
-        {%- assign kit_addons = section.blocks | where: 'type', 'kit_addon' -%}
-        {%- if kit_addons.size > 0 -%}
-          <div class="mm-addons">
-            {%- for block in kit_addons -%}{% render 'mm-addon-row', block: block %}{%- endfor -%}
-          </div>
-        {%- elsif request.design_mode -%}
-          <div class="mm-warn">⚙️ Add "Benefit — subscription" blocks to this section to fill the ✓ list.</div>
+        {%- if section.settings.kit_show_addons -%}
+          {%- assign kit_addons = section.blocks | where: 'type', 'kit_addon' -%}
+          {%- if kit_addons.size > 0 -%}
+            <div class="mm-addons">
+              {%- for block in kit_addons -%}{% render 'mm-addon-row', block: block %}{%- endfor -%}
+            </div>
+          {%- elsif request.design_mode -%}
+            <div class="mm-warn">⚙️ Add "Benefit — subscription" blocks to this section to fill the ✓ list.</div>
+          {%- endif -%}
         {%- endif -%}
         <div class="mm-gifts" aria-label="{{ section.settings.gifts_label | escape }}">
           {%- for i in (1..4) -%}
@@ -313,26 +322,28 @@
           </div>
           <button type="button" class="mm-cta" disabled>{{ section.settings.kit_cta_label }}</button>
         {%- endif -%}
-        {%- assign kit_perk_blocks = section.blocks | where: 'type', 'kit_perk' -%}
-        {%- if kit_perk_blocks.size > 0 -%}
-          <ul class="mm-perks">
-            {%- for block in kit_perk_blocks -%}
-              {%- if block.settings.text != blank -%}
-                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        {%- else -%}
-          {%- comment -%} Fallback: the "one per line" textarea, used when no
-            "Perk — subscription card" blocks exist. {%- endcomment -%}
-          {%- assign kit_perks = section.settings.kit_perks | strip | newline_to_br | split: '<br />' -%}
-          {%- if kit_perks.size > 0 -%}
+        {%- if section.settings.kit_show_perks -%}
+          {%- assign kit_perk_blocks = section.blocks | where: 'type', 'kit_perk' -%}
+          {%- if kit_perk_blocks.size > 0 -%}
             <ul class="mm-perks">
-              {%- for perk in kit_perks -%}
-                {%- assign perk_t = perk | strip -%}
-                {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+              {%- for block in kit_perk_blocks -%}
+                {%- if block.settings.text != blank -%}
+                  <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+                {%- endif -%}
               {%- endfor -%}
             </ul>
+          {%- else -%}
+            {%- comment -%} Fallback: the "one per line" textarea, used when no
+              "Perk — subscription card" blocks exist. {%- endcomment -%}
+            {%- assign kit_perks = section.settings.kit_perks | strip | newline_to_br | split: '<br />' -%}
+            {%- if kit_perks.size > 0 -%}
+              <ul class="mm-perks">
+                {%- for perk in kit_perks -%}
+                  {%- assign perk_t = perk | strip -%}
+                  {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
           {%- endif -%}
         {%- endif -%}
         {%- if section.settings.ship_strong != blank or section.settings.ship_rest != blank -%}
@@ -367,13 +378,15 @@
         {%- else -%}
           <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.once_name }}" loading="lazy">
         {%- endif -%}
-        {%- assign once_addons = section.blocks | where: 'type', 'once_addon' -%}
-        {%- if once_addons.size > 0 -%}
-          <div class="mm-addons">
-            {%- for block in once_addons -%}{% render 'mm-addon-row', block: block %}{%- endfor -%}
-          </div>
-        {%- elsif request.design_mode -%}
-          <div class="mm-warn">⚙️ Add "Benefit — monthly card" blocks to this section to fill the ✓ list.</div>
+        {%- if section.settings.once_show_addons -%}
+          {%- assign once_addons = section.blocks | where: 'type', 'once_addon' -%}
+          {%- if once_addons.size > 0 -%}
+            <div class="mm-addons">
+              {%- for block in once_addons -%}{% render 'mm-addon-row', block: block %}{%- endfor -%}
+            </div>
+          {%- elsif request.design_mode -%}
+            <div class="mm-warn">⚙️ Add "Benefit — monthly card" blocks to this section to fill the ✓ list.</div>
+          {%- endif -%}
         {%- endif -%}
         {%- if p1 != blank and p1.id != blank and p1.available -%}
           {%- assign v1 = p1.selected_or_first_available_variant -%}
@@ -418,32 +431,147 @@
           </div>
           <button type="button" class="mm-cta" disabled>{{ section.settings.once_cta_label }}</button>
         {%- endif -%}
-        {%- assign once_perk_blocks = section.blocks | where: 'type', 'once_perk' -%}
-        {%- if once_perk_blocks.size > 0 -%}
-          <ul class="mm-perks">
-            {%- for block in once_perk_blocks -%}
-              {%- if block.settings.text != blank -%}
-                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        {%- else -%}
-          {%- comment -%} Fallback: the "one per line" textarea, used when no
-            "Perk — monthly card" blocks exist. {%- endcomment -%}
-          {%- assign once_perks = section.settings.once_perks | strip | newline_to_br | split: '<br />' -%}
-          {%- if once_perks.size > 0 -%}
+        {%- if section.settings.once_show_perks -%}
+          {%- assign once_perk_blocks = section.blocks | where: 'type', 'once_perk' -%}
+          {%- if once_perk_blocks.size > 0 -%}
             <ul class="mm-perks">
-              {%- for perk in once_perks -%}
-                {%- assign perk_t = perk | strip -%}
-                {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+              {%- for block in once_perk_blocks -%}
+                {%- if block.settings.text != blank -%}
+                  <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+                {%- endif -%}
               {%- endfor -%}
             </ul>
+          {%- else -%}
+            {%- comment -%} Fallback: the "one per line" textarea, used when no
+              "Perk — monthly card" blocks exist. {%- endcomment -%}
+            {%- assign once_perks = section.settings.once_perks | strip | newline_to_br | split: '<br />' -%}
+            {%- if once_perks.size > 0 -%}
+              <ul class="mm-perks">
+                {%- for perk in once_perks -%}
+                  {%- assign perk_t = perk | strip -%}
+                  {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
           {%- endif -%}
         {%- endif -%}
         {%- if section.settings.ship_strong != blank or section.settings.ship_rest != blank -%}
           <div class="mm-ship"><strong>{{ section.settings.ship_strong }}</strong> {{ section.settings.ship_rest }}</div>
         {%- endif -%}
       </div>
+
+      {%- comment -%} Package 3: optional extra bundle {%- endcomment -%}
+      {%- if show_third -%}
+        {%- assign p3 = section.settings.product_third -%}
+        {%- if p3 == blank or p3.id == blank -%}{%- assign p3 = all_products['up-men-6-month'] -%}{%- endif -%}
+        {%- if p3 == blank or p3.id == blank -%}{%- assign p3 = all_products['up-men-bundle'] -%}{%- endif -%}
+        {%- if p3 == blank or p3.id == blank -%}{%- assign p3 = all_products['up-men'] -%}{%- endif -%}
+        {%- if p3 == blank or p3.id == blank -%}
+          {%- for prod in collections.all.products limit: 250 -%}
+            {%- if prod.tags contains 'up-men-6-month' or prod.tags contains 'up-men-bundle' -%}
+              {%- assign p3 = prod -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+        <div class="mm-card{% if section.settings.third_highlight %} popular{% endif %}">
+          {%- if section.settings.third_ribbon != blank -%}
+            <div class="mm-ribbon">{{ section.settings.third_ribbon }}</div>
+          {%- endif -%}
+          <div class="mm-card-head">
+            <p class="mm-badge">{{ section.settings.third_badge }}</p>
+            <h3 class="mm-name">{{ section.settings.third_name }}</h3>
+            <p class="mm-sub">{{ section.settings.third_sub }}</p>
+          </div>
+          {%- if p3 != blank and p3.id != blank and p3.featured_image -%}
+            <img class="mm-img" src="{{ p3.featured_image | image_url: width: 600 }}" alt="{{ p3.title }}" loading="lazy">
+          {%- elsif section.settings.fallback_image != blank -%}
+            <img class="mm-img" src="{{ section.settings.fallback_image | image_url: width: 600 }}" alt="{{ section.settings.third_name }}" loading="lazy">
+          {%- else -%}
+            <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.third_name }}" loading="lazy">
+          {%- endif -%}
+          {%- if section.settings.third_show_addons -%}
+            {%- assign third_addons = section.blocks | where: 'type', 'third_addon' -%}
+            {%- if third_addons.size > 0 -%}
+              <div class="mm-addons">
+                {%- for block in third_addons -%}{% render 'mm-addon-row', block: block %}{%- endfor -%}
+              </div>
+            {%- elsif request.design_mode -%}
+              <div class="mm-warn">⚙️ Add "Benefit — third card" blocks to this section to fill the ✓ list.</div>
+            {%- endif -%}
+          {%- endif -%}
+          {%- if p3 != blank and p3.id != blank and p3.available -%}
+            {%- assign v3 = p3.selected_or_first_available_variant -%}
+            {%- assign v3_id = section.settings.variant_id_third -%}
+            {%- if v3_id == blank -%}{%- assign v3_id = v3.id -%}{%- endif -%}
+            {%- assign sp3 = section.settings.selling_plan_third -%}
+            {%- if sp3 == blank and v3.requires_selling_plan and p3.selling_plan_groups.size > 0 -%}
+              {%- assign sp3 = p3.selling_plan_groups.first.selling_plans.first.id -%}
+            {%- endif -%}
+            <form action="{{ routes.cart_add_url }}" method="post">
+              <input type="hidden" name="return_to" value="/checkout">
+              <input type="hidden" name="id" value="{{ v3_id }}">
+              {%- if sp3 != blank -%}
+                <input type="hidden" name="selling_plan" value="{{ sp3 }}">
+              {%- endif -%}
+              <input type="hidden" name="quantity" value="1">
+              <div class="mm-qty-row">
+                <span class="mm-qty-label">{{ section.settings.qty_label }}</span>
+                <div class="mm-stepper">
+                  <button type="button" aria-label="Decrease">−</button>
+                  <span class="num">1</span>
+                  <button type="button" aria-label="Increase">+</button>
+                </div>
+                <div class="mm-price">
+                  {%- if v3.compare_at_price > v3.price -%}<span class="old">{{ v3.compare_at_price | money }}</span>{%- endif -%}
+                  <span class="now">{{ v3.price | money }}</span>
+                </div>
+              </div>
+              <button type="submit" class="mm-cta">{{ section.settings.third_cta_label }}</button>
+            </form>
+          {%- else -%}
+            {%- if request.design_mode -%}
+              <div class="mm-warn">⚙️ Select a product in the theme editor (Packages section → "Product") OR create a Shopify product with handle <code>up-men-6-month</code> (or <code>up-men</code>). Until then the prices below are the placeholders from "Placeholder price" and the button stays disabled.</div>
+            {%- endif -%}
+            <div class="mm-qty-row">
+              <span class="mm-qty-label">{{ section.settings.qty_label }}</span>
+              <div class="mm-stepper"><button type="button" disabled>−</button><span class="num">1</span><button type="button" disabled>+</button></div>
+              <div class="mm-price">
+                {%- if section.settings.third_price_compare != blank -%}<span class="old">{{ section.settings.third_price_compare }}</span>{%- endif -%}
+                <span class="now">{{ section.settings.third_price }}</span>
+              </div>
+            </div>
+            <button type="button" class="mm-cta" disabled>{{ section.settings.third_cta_label }}</button>
+          {%- endif -%}
+          {%- if section.settings.third_show_perks -%}
+            {%- assign third_perk_blocks = section.blocks | where: 'type', 'third_perk' -%}
+            {%- if third_perk_blocks.size > 0 -%}
+              <ul class="mm-perks">
+                {%- for block in third_perk_blocks -%}
+                  {%- if block.settings.text != blank -%}
+                    <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- else -%}
+              {%- comment -%} Fallback: the "one per line" textarea, used when no
+                "Perk — third card" blocks exist. {%- endcomment -%}
+              {%- assign third_perks = section.settings.third_perks | strip | newline_to_br | split: '<br />' -%}
+              {%- if third_perks.size > 0 -%}
+                <ul class="mm-perks">
+                  {%- for perk in third_perks -%}
+                    {%- assign perk_t = perk | strip -%}
+                    {%- if perk_t != blank -%}<li>{{ perk_t }}</li>{%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endif -%}
+          {%- if section.settings.ship_strong != blank or section.settings.ship_rest != blank -%}
+            <div class="mm-ship"><strong>{{ section.settings.ship_strong }}</strong> {{ section.settings.ship_rest }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
 
     </div>
 
@@ -510,6 +638,8 @@
     { "type": "text", "id": "kit_price_compare", "label": "Placeholder price — crossed out", "default": "$177", "info": "Shown only while no product is connected. With a product, the real Shopify price is used." },
     { "type": "text", "id": "kit_price", "label": "Placeholder price", "default": "$118" },
     { "type": "textarea", "id": "kit_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — subscription card\" blocks.", "default": "Just $39.33 per month\nAuto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
+    { "type": "checkbox", "id": "kit_show_addons", "label": "Show ✓ benefit rows", "info": "Uncheck to hide the whole ✓ list on this card.", "default": true },
+    { "type": "checkbox", "id": "kit_show_perks", "label": "Show perks under the button", "default": true },
     { "type": "paragraph", "content": "Blocks for this card: \"Benefit — subscription\" for the ✓ rows (blocks only — no blocks, no rows), \"Perk — subscription card\" for the list under the button (falls back to the textarea above)." },
     { "type": "text", "id": "variant_id_kit", "label": "Variant ID (optional)", "info": "If empty, uses the product's first available variant." },
     { "type": "text", "id": "selling_plan_kit", "label": "Selling plan ID (optional)", "info": "Required for subscription pricing. Leave empty for one-time purchase." },
@@ -522,8 +652,28 @@
     { "type": "text", "id": "once_price_compare", "label": "Placeholder price — crossed out", "default": "$59", "info": "Shown only while no product is connected. With a product, the real Shopify price is used." },
     { "type": "text", "id": "once_price", "label": "Placeholder price", "default": "$44" },
     { "type": "textarea", "id": "once_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — monthly card\" blocks.", "default": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
+    { "type": "checkbox", "id": "once_show_addons", "label": "Show ✓ benefit rows", "info": "Uncheck to hide the whole ✓ list on this card.", "default": true },
+    { "type": "checkbox", "id": "once_show_perks", "label": "Show perks under the button", "default": true },
     { "type": "paragraph", "content": "Blocks for this card: \"Benefit — monthly card\" for the ✓ rows (blocks only — no blocks, no rows), \"Perk — monthly card\" for the list under the button (falls back to the textarea above)." },
     { "type": "text", "id": "variant_id_once", "label": "Variant ID (optional)" },
+
+    { "type": "header", "content": "Third package" },
+    { "type": "checkbox", "id": "third_enabled", "label": "Show third package", "info": "Turns the section into a 3-card row.", "default": true },
+    { "type": "product", "id": "product_third", "label": "Product", "info": "Product sold in this card. If empty, the theme looks for the handle up-men-6-month (or up-men)." },
+    { "type": "checkbox", "id": "third_highlight", "label": "Highlight this card", "info": "Adds the orange border used on the popular card.", "default": false },
+    { "type": "text", "id": "third_ribbon", "label": "Ribbon", "info": "Leave empty to hide the ribbon." },
+    { "type": "text", "id": "third_badge", "label": "Badge (above name)", "default": "6-MONTH AUTO-RENEW SUBSCRIPTION" },
+    { "type": "text", "id": "third_name", "label": "Package name", "default": "6-MONTH PLAN" },
+    { "type": "text", "id": "third_sub", "label": "Subtitle", "default": "The full 180-day transformation" },
+    { "type": "text", "id": "third_cta_label", "label": "Button label", "default": "Start My 180-Day Protocol →" },
+    { "type": "text", "id": "third_price_compare", "label": "Placeholder price — crossed out", "default": "$354", "info": "Shown only while no product is connected. With a product, the real Shopify price is used." },
+    { "type": "text", "id": "third_price", "label": "Placeholder price", "default": "$199" },
+    { "type": "textarea", "id": "third_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — third card\" blocks.", "default": "Just $33.16 per month\nAuto-renews every 180 days at $249 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
+    { "type": "checkbox", "id": "third_show_addons", "label": "Show ✓ benefit rows", "info": "Uncheck to hide the whole ✓ list on this card.", "default": true },
+    { "type": "checkbox", "id": "third_show_perks", "label": "Show perks under the button", "default": true },
+    { "type": "paragraph", "content": "Blocks for this card: \"Benefit — third card\" for the ✓ rows (blocks only — no blocks, no rows), \"Perk — third card\" for the list under the button (falls back to the textarea above)." },
+    { "type": "text", "id": "variant_id_third", "label": "Variant ID (optional)" },
+    { "type": "text", "id": "selling_plan_third", "label": "Selling plan ID (optional)", "info": "Required for subscription pricing. Leave empty for one-time purchase." },
 
     { "type": "header", "content": "Shared card labels" },
     { "type": "text", "id": "qty_label", "label": "Quantity label", "default": "Quantity" },
@@ -573,7 +723,7 @@
     { "type": "image_picker", "id": "gift_4", "label": "Free gift image 4" },
     { "type": "text", "id": "gift_4_alt", "label": "Caption 4", "default": "Free gift: 90-day tracker" }
   ],
-  "max_blocks": 40,
+  "max_blocks": 50,
   "blocks": [
     {
       "type": "kit_perk",
@@ -592,6 +742,34 @@
     {
       "type": "kit_addon",
       "name": "Benefit — subscription",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Benefit", "default": "UP MEN Capsule Case" },
+        { "type": "checkbox", "id": "free_prefix", "label": "Prefix with a green \"Free\"", "default": true },
+        { "type": "text", "id": "old_value", "label": "Old value (struck through)", "info": "Shown to the left of the value." },
+        { "type": "text", "id": "value", "label": "Value (right side)", "default": "$10" },
+        {
+          "type": "select",
+          "id": "value_style",
+          "label": "Value style",
+          "options": [
+            { "value": "plain", "label": "White" },
+            { "value": "free", "label": "Green, struck through" },
+            { "value": "save", "label": "Green" }
+          ],
+          "default": "free"
+        }
+      ]
+    },
+    {
+      "type": "third_perk",
+      "name": "Perk — third card",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Perk", "default": "90-day higher-T money-back guarantee" }
+      ]
+    },
+    {
+      "type": "third_addon",
+      "name": "Benefit — third card",
       "settings": [
         { "type": "text", "id": "text", "label": "Benefit", "default": "UP MEN Capsule Case" },
         { "type": "checkbox", "id": "free_prefix", "label": "Prefix with a green \"Free\"", "default": true },
@@ -648,11 +826,21 @@
         { "type": "once_addon", "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "value": "", "value_style": "free" } },
         { "type": "once_addon", "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "value": "", "value_style": "free" } },
         { "type": "once_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } },
+        { "type": "third_addon", "settings": { "text": "180-Day Supply — 6 Bottles", "free_prefix": false, "old_value": "$354", "value": "$199", "value_style": "plain" } },
+        { "type": "third_addon", "settings": { "text": "2 Bottles", "free_prefix": true, "value": "Save $118", "value_style": "save" } },
+        { "type": "third_addon", "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "value": "$10", "value_style": "free" } },
+        { "type": "third_addon", "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "value": "$20", "value_style": "free" } },
+        { "type": "third_addon", "settings": { "text": "3 Months of Ladder Workout App", "free_prefix": true, "value": "$90", "value_style": "free" } },
+        { "type": "third_addon", "settings": { "text": "Surprise Gift", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "third_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } },
         { "type": "kit_perk", "settings": { "text": "Just $39.33 per month" } },
         { "type": "kit_perk", "settings": { "text": "Auto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime" } },
         { "type": "kit_perk", "settings": { "text": "90-day higher-T money-back guarantee" } },
         { "type": "once_perk", "settings": { "text": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime" } },
-        { "type": "once_perk", "settings": { "text": "90-day higher-T money-back guarantee" } }
+        { "type": "once_perk", "settings": { "text": "90-day higher-T money-back guarantee" } },
+        { "type": "third_perk", "settings": { "text": "Just $33.16 per month" } },
+        { "type": "third_perk", "settings": { "text": "Auto-renews every 180 days at $249 — skip a delivery, pause or cancel anytime" } },
+        { "type": "third_perk", "settings": { "text": "90-day higher-T money-back guarantee" } }
       ]
     }
   ]
