@@ -546,6 +546,46 @@
         "once_perk_2": {
           "type": "once_perk",
           "settings": { "text": "90-day higher-T money-back guarantee" }
+        },
+        "third_1": {
+          "type": "third_addon",
+          "settings": { "text": "180-Day Supply — 6 Bottles", "free_prefix": false, "old_value": "$354", "value": "$199", "value_style": "plain" }
+        },
+        "third_2": {
+          "type": "third_addon",
+          "settings": { "text": "2 Bottles", "free_prefix": true, "old_value": "", "value": "Save $118", "value_style": "save" }
+        },
+        "third_3": {
+          "type": "third_addon",
+          "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "old_value": "", "value": "$10", "value_style": "free" }
+        },
+        "third_4": {
+          "type": "third_addon",
+          "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "old_value": "", "value": "$20", "value_style": "free" }
+        },
+        "third_5": {
+          "type": "third_addon",
+          "settings": { "text": "3 Months of Ladder Workout App", "free_prefix": true, "old_value": "", "value": "$90", "value_style": "free" }
+        },
+        "third_6": {
+          "type": "third_addon",
+          "settings": { "text": "Surprise Gift", "free_prefix": true, "old_value": "", "value": "", "value_style": "free" }
+        },
+        "third_7": {
+          "type": "third_addon",
+          "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "old_value": "", "value": "", "value_style": "plain" }
+        },
+        "third_perk_1": {
+          "type": "third_perk",
+          "settings": { "text": "Just $33.16 per month" }
+        },
+        "third_perk_2": {
+          "type": "third_perk",
+          "settings": { "text": "Auto-renews every 180 days at $249 — skip a delivery, pause or cancel anytime" }
+        },
+        "third_perk_3": {
+          "type": "third_perk",
+          "settings": { "text": "90-day higher-T money-back guarantee" }
         }
       },
       "block_order": [
@@ -565,7 +605,17 @@
         "once_4",
         "once_5",
         "once_perk_1",
-        "once_perk_2"
+        "once_perk_2",
+        "third_1",
+        "third_2",
+        "third_3",
+        "third_4",
+        "third_5",
+        "third_6",
+        "third_7",
+        "third_perk_1",
+        "third_perk_2",
+        "third_perk_3"
       ],
       "settings": {
         "eyebrow": "FLASH SALE: 1ST MONTH FREE",
@@ -594,6 +644,18 @@
         "once_name": "MONTHLY PLAN",
         "once_sub": "1-month supply, delivered monthly",
         "variant_id_once": "",
+        "third_enabled": true,
+        "product_third": "",
+        "third_highlight": false,
+        "third_ribbon": "",
+        "third_badge": "6-MONTH AUTO-RENEW SUBSCRIPTION",
+        "third_name": "6-MONTH PLAN",
+        "third_sub": "The full 180-day transformation",
+        "third_cta_label": "Start My 180-Day Protocol →",
+        "third_price_compare": "$354",
+        "third_price": "$199",
+        "variant_id_third": "",
+        "selling_plan_third": "",
         "guarantee_note": "90-DAY HIGHER-T GUARANTEE · TRY IT RISK-FREE",
         "height_mobile": "auto",
         "height_desktop": "auto"
