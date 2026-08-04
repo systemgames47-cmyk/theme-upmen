@@ -2,7 +2,10 @@
   <div class="container">
     <h1>{{ section.settings.title }}</h1>
     {% if search.performed %}
-      <p class="lead">{{ section.settings.results_label | replace: '{count}', search.results_count }} "{{ search.terms | escape }}"</p>
+      {%- comment -%} The literal {count} token lives in an assign: Shopify's Liquid
+        parser rejects a brace inside an output tag. {%- endcomment -%}
+      {%- assign count_token = '{count}' -%}
+      <p class="lead">{{ section.settings.results_label | replace: count_token, search.results_count }} "{{ search.terms | escape }}"</p>
       {% if search.results_count > 0 %}
         <div class="grid">
           {% for item in search.results %}
