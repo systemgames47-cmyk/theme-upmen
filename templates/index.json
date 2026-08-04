@@ -431,14 +431,52 @@
         "hint": "SWIPE TO SEE MORE →"
       }
     },
+    "facility_8RXmCa": {
+      "type": "facility",
+      "blocks": {
+        "badge_RL3qYV": {
+          "type": "badge",
+          "disabled": true,
+          "settings": {
+            "text": "CGMP Certified"
+          }
+        },
+        "badge_AEciyn": {
+          "type": "badge",
+          "disabled": true,
+          "settings": {
+            "text": "Third-Party Tested"
+          }
+        },
+        "badge_HbMKNV": {
+          "type": "badge",
+          "disabled": true,
+          "settings": {
+            "text": "Made in the USA"
+          }
+        }
+      },
+      "block_order": [
+        "badge_RL3qYV",
+        "badge_AEciyn",
+        "badge_HbMKNV"
+      ],
+      "name": "Facility",
+      "settings": {
+        "title_pre": "WHY I",
+        "title_highlight": "CREATED UP MEN",
+        "video": "shopify://files/videos/up men institu (video-converter.com).mp4",
+        "autoplay_preview": true
+      }
+    },
     "founder_story": {
       "type": "founder-story",
       "settings": {
         "founder_image": "shopify://shop_images/12_11e23fa9-303a-4455-93c4-6412d7c7a6a5.jpg",
         "founder_name": "James Carter",
         "founder_role": "Founder of Up Men",
-        "intro_title_pre": "WHY I CREATED",
-        "intro_title_highlight": "UP MEN",
+        "intro_title_pre": "",
+        "intro_title_highlight": "",
         "intro_text": "A few years ago I was doing everything \"right\" — training, working hard, grinding — and still dealing with:",
         "struggles": "Low Energy|Brain Fog|Slow Recovery|Low Drive",
         "intro_footer": "And more things I won't bore you by listing…",
@@ -862,7 +900,8 @@
             "date": "06/28/2026",
             "rating": 5,
             "title": "MY ENERGY IS BACK — FOR REAL",
-            "body": "I'm 41 and had been feeling flat for a couple of years: dragging through the afternoon, no drive in the gym, short fuse at home. Six weeks into Up Men and my mornings feel completely different. I wake up before my alarm, my lifts are climbing again, and my wife noticed the difference before I even said anything. The 90-day guarantee is what got me to try it — I won't be needing it."
+            "body": "I'm 41 and had been feeling flat for a couple of years: dragging through the afternoon, no drive in the gym, short fuse at home. Six weeks into Up Men and my mornings feel completely different. I wake up before my alarm, my lifts are climbing again, and my wife noticed the difference before I even said anything. The 90-day guarantee is what got me to try it — I won't be needing it.",
+            "photo": "shopify://shop_images/gen_3988_0_1784840338469.png"
           }
         },
         "review-2": {
@@ -874,7 +913,8 @@
             "date": "06/11/2026",
             "rating": 5,
             "title": "Finally something that isn't hype",
-            "body": "I've tried at least four different T-boosters over the years and this is the first one where I can actually feel the difference. Sharper at work, better sleep, and recovery between training days is noticeably faster. The ingredient doses match what the studies use, which is why I picked it in the first place."
+            "body": "I've tried at least four different T-boosters over the years and this is the first one where I can actually feel the difference. Sharper at work, better sleep, and recovery between training days is noticeably faster. The ingredient doses match what the studies use, which is why I picked it in the first place.",
+            "photo": "shopify://shop_images/gen_3969_0_1784838830451.png"
           }
         },
         "review-3": {
@@ -886,7 +926,8 @@
             "date": "05/30/2026",
             "rating": 5,
             "title": "Third month, still impressed",
-            "body": "Ordered the Launch Kit, now on my third month. The focus improvement showed up first (around week two), then strength and drive followed. No jitters, no crash, nothing weird — just steady improvement. The free gifts were actually useful too, especially the tracker."
+            "body": "Ordered the Launch Kit, now on my third month. The focus improvement showed up first (around week two), then strength and drive followed. No jitters, no crash, nothing weird — just steady improvement. The free gifts were actually useful too, especially the tracker.",
+            "photo": "shopify://shop_images/gen_4000_0_1784841310117.png"
           }
         },
         "review-4": {
@@ -1068,6 +1109,7 @@
     "facility",
     "scarcity_cta",
     "testimonials",
+    "facility_8RXmCa",
     "founder_story",
     "product_label",
     "pricing",
