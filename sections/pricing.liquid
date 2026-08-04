@@ -243,7 +243,7 @@
             {%- for block in kit_addons -%}{% render 'mm-addon-row', block: block %}{%- endfor -%}
           </div>
         {%- elsif request.design_mode -%}
-          <div class="mm-warn">⚙️ Add "Benefit — subscription card" blocks to this section to fill the ✓ list.</div>
+          <div class="mm-warn">⚙️ Add "Benefit — subscription" blocks to this section to fill the ✓ list.</div>
         {%- endif -%}
         <div class="mm-gifts" aria-label="{{ section.settings.gifts_label | escape }}">
           {%- for i in (1..4) -%}
@@ -510,7 +510,7 @@
     { "type": "text", "id": "kit_price_compare", "label": "Placeholder price — crossed out", "default": "$177", "info": "Shown only while no product is connected. With a product, the real Shopify price is used." },
     { "type": "text", "id": "kit_price", "label": "Placeholder price", "default": "$118" },
     { "type": "textarea", "id": "kit_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — subscription card\" blocks.", "default": "Just $39.33 per month\nAuto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
-    { "type": "paragraph", "content": "Blocks for this card: \"Benefit — subscription card\" for the ✓ rows (blocks only — no blocks, no rows), \"Perk — subscription card\" for the list under the button (falls back to the textarea above)." },
+    { "type": "paragraph", "content": "Blocks for this card: \"Benefit — subscription\" for the ✓ rows (blocks only — no blocks, no rows), \"Perk — subscription card\" for the list under the button (falls back to the textarea above)." },
     { "type": "text", "id": "variant_id_kit", "label": "Variant ID (optional)", "info": "If empty, uses the product's first available variant." },
     { "type": "text", "id": "selling_plan_kit", "label": "Selling plan ID (optional)", "info": "Required for subscription pricing. Leave empty for one-time purchase." },
     { "type": "header", "content": "Try Once (one-time)" },
@@ -591,7 +591,7 @@
     },
     {
       "type": "kit_addon",
-      "name": "Benefit — subscription card",
+      "name": "Benefit — subscription",
       "settings": [
         { "type": "text", "id": "text", "label": "Benefit", "default": "UP MEN Capsule Case" },
         { "type": "checkbox", "id": "free_prefix", "label": "Prefix with a green \"Free\"", "default": true },
