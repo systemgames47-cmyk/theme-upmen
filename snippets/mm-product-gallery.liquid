@@ -1,0 +1,50 @@
+{%- comment -%}
+  Product gallery for a "Packages (Custom)" card.
+
+  Renders every image on the connected product as a swipeable carousel with
+  arrows and thumbnails. With a single image — or no product at all — it falls
+  back to a plain <img>, so nothing changes for cards without a product.
+
+  Usage:
+    {% render 'mm-product-gallery', product: pk, fallback: section.settings.fallback_image, alt: section.settings.kit_name %}
+
+  Parameters:
+    product   the product object (may be blank)
+    fallback  an image_picker value used when the product has no images
+    alt       alt text used for the fallback images
+{%- endcomment -%}
+{%- assign has_images = false -%}
+{%- if product != blank and product.id != blank and product.images.size > 0 -%}
+  {%- assign has_images = true -%}
+{%- endif -%}
+
+{%- if has_images -%}
+  {%- assign img_count = product.images.size -%}
+  <div class="mm-gal{% if img_count > 1 %} has-many{% endif %}" data-mm-gal>
+    <div class="mm-gal-track" data-mm-gal-track tabindex="0" role="group" aria-label="{{ product.title | escape }}">
+      {%- for image in product.images -%}
+        <div class="mm-gal-slide">
+          <img src="{{ image | image_url: width: 800 }}" width="800" height="800"
+            alt="{{ image.alt | default: product.title | escape }}"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if img_count > 1 -%}
+      <button type="button" class="mm-gal-nav prev" data-mm-gal-prev aria-label="Previous image">‹</button>
+      <button type="button" class="mm-gal-nav next" data-mm-gal-next aria-label="Next image">›</button>
+      <div class="mm-gal-thumbs" data-mm-gal-thumbs>
+        {%- for image in product.images -%}
+          <button type="button" class="mm-gal-thumb{% if forloop.first %} is-active{% endif %}"
+            data-mm-gal-thumb="{{ forloop.index0 }}" aria-label="{{ 'Image ' | append: forloop.index }}">
+            <img src="{{ image | image_url: width: 160 }}" width="160" height="160" alt="" loading="lazy">
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- elsif fallback != blank -%}
+  <img class="mm-img" src="{{ fallback | image_url: width: 600 }}" width="600" height="600" alt="{{ alt | escape }}" loading="lazy">
+{%- else -%}
+  <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" width="600" height="600" alt="{{ alt | escape }}" loading="lazy">
+{%- endif -%}

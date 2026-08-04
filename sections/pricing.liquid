@@ -73,6 +73,44 @@
     #shopify-section-{{ sid }} .mm-name { font-family: var(--font-heading); font-size: calc((22px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 4px 0; }
     #shopify-section-{{ sid }} .mm-sub { font-size: calc((14px) * var(--fs-b, 1)); color: rgba(255,255,255,0.7); font-weight: 600; margin: 0; }
     #shopify-section-{{ sid }} .mm-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: #0a0503; margin-bottom: 16px; display: block; }
+    /* ===== Product gallery (swipe + arrows + thumbnails) ===== */
+    #shopify-section-{{ sid }} .mm-gal { position: relative; margin-bottom: 16px; }
+    #shopify-section-{{ sid }} .mm-gal-track {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+      border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: #0a0503;
+      scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;
+    }
+    #shopify-section-{{ sid }} .mm-gal-track::-webkit-scrollbar { display: none; }
+    #shopify-section-{{ sid }} .mm-gal-track:focus-visible { outline: 2px solid var(--brand, #ff5600); outline-offset: 2px; }
+    #shopify-section-{{ sid }} .mm-gal-slide { flex: 0 0 100%; scroll-snap-align: center; }
+    #shopify-section-{{ sid }} .mm-gal-slide img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+    #shopify-section-{{ sid }} .mm-gal-nav {
+      position: absolute; top: calc(50% - 30px); transform: translateY(-50%);
+      width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+      background: rgba(10,5,3,0.72); border: 1px solid rgba(255,255,255,0.28); color: #fff;
+      font-size: calc((22px) * var(--fs-b, 1)); line-height: 1; padding: 0 0 3px;
+      display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .18s;
+    }
+    #shopify-section-{{ sid }} .mm-gal-nav.prev { left: 8px; }
+    #shopify-section-{{ sid }} .mm-gal-nav.next { right: 8px; }
+    #shopify-section-{{ sid }} .mm-gal:hover .mm-gal-nav,
+    #shopify-section-{{ sid }} .mm-gal-nav:focus-visible { opacity: 1; }
+    @media (hover: none) { #shopify-section-{{ sid }} .mm-gal-nav { opacity: 1; } }
+    #shopify-section-{{ sid }} .mm-gal-nav:hover { background: var(--brand, #ff5600); border-color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .mm-gal-nav[disabled] { opacity: 0 !important; pointer-events: none; }
+    #shopify-section-{{ sid }} .mm-gal-thumbs {
+      display: flex; gap: 8px; margin-top: 8px; overflow-x: auto;
+      scrollbar-width: none; -ms-overflow-style: none;
+    }
+    #shopify-section-{{ sid }} .mm-gal-thumbs::-webkit-scrollbar { display: none; }
+    #shopify-section-{{ sid }} .mm-gal-thumb {
+      flex: 0 0 58px; padding: 0; cursor: pointer; background: none;
+      border: 1px solid rgba(255,255,255,0.18); border-radius: 8px; overflow: hidden; opacity: 0.55; transition: opacity .18s, border-color .18s;
+    }
+    #shopify-section-{{ sid }} .mm-gal-thumb img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+    #shopify-section-{{ sid }} .mm-gal-thumb:hover { opacity: 0.85; }
+    #shopify-section-{{ sid }} .mm-gal-thumb.is-active { opacity: 1; border-color: var(--brand, #ff5600); }
+    @media (prefers-reduced-motion: reduce) { #shopify-section-{{ sid }} .mm-gal-track { scroll-behavior: auto; } }
     #shopify-section-{{ sid }} .mm-addons { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
     #shopify-section-{{ sid }} .mm-addon { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: calc((13px) * var(--fs-b, 1)); color: rgba(255,255,255,0.9); }
     #shopify-section-{{ sid }} .mm-addon .left { display: flex; align-items: center; gap: 7px; }
@@ -237,13 +275,7 @@
           <h3 class="mm-name">{{ section.settings.kit_name }}</h3>
           <p class="mm-sub">{{ section.settings.kit_sub }}</p>
         </div>
-        {%- if pk != blank and pk.id != blank and pk.featured_image -%}
-          <img class="mm-img" src="{{ pk.featured_image | image_url: width: 600 }}" alt="{{ pk.title }}" loading="lazy">
-        {%- elsif section.settings.fallback_image != blank -%}
-          <img class="mm-img" src="{{ section.settings.fallback_image | image_url: width: 600 }}" alt="{{ section.settings.kit_name }}" loading="lazy">
-        {%- else -%}
-          <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.kit_name }}" loading="lazy">
-        {%- endif -%}
+        {% render 'mm-product-gallery', product: pk, fallback: section.settings.fallback_image, alt: section.settings.kit_name %}
         {%- if section.settings.kit_show_addons -%}
           {%- assign kit_addons = section.blocks | where: 'type', 'kit_addon' -%}
           {%- if kit_addons.size > 0 -%}
@@ -371,13 +403,7 @@
           <h3 class="mm-name">{{ section.settings.once_name }}</h3>
           <p class="mm-sub">{{ section.settings.once_sub }}</p>
         </div>
-        {%- if p1 != blank and p1.id != blank and p1.featured_image -%}
-          <img class="mm-img" src="{{ p1.featured_image | image_url: width: 600 }}" alt="{{ p1.title }}" loading="lazy">
-        {%- elsif section.settings.fallback_image != blank -%}
-          <img class="mm-img" src="{{ section.settings.fallback_image | image_url: width: 600 }}" alt="{{ section.settings.once_name }}" loading="lazy">
-        {%- else -%}
-          <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.once_name }}" loading="lazy">
-        {%- endif -%}
+        {% render 'mm-product-gallery', product: p1, fallback: section.settings.fallback_image, alt: section.settings.once_name %}
         {%- if section.settings.once_show_addons -%}
           {%- assign once_addons = section.blocks | where: 'type', 'once_addon' -%}
           {%- if once_addons.size > 0 -%}
@@ -483,13 +509,7 @@
             <h3 class="mm-name">{{ section.settings.third_name }}</h3>
             <p class="mm-sub">{{ section.settings.third_sub }}</p>
           </div>
-          {%- if p3 != blank and p3.id != blank and p3.featured_image -%}
-            <img class="mm-img" src="{{ p3.featured_image | image_url: width: 600 }}" alt="{{ p3.title }}" loading="lazy">
-          {%- elsif section.settings.fallback_image != blank -%}
-            <img class="mm-img" src="{{ section.settings.fallback_image | image_url: width: 600 }}" alt="{{ section.settings.third_name }}" loading="lazy">
-          {%- else -%}
-            <img class="mm-img" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" alt="{{ section.settings.third_name }}" loading="lazy">
-          {%- endif -%}
+          {% render 'mm-product-gallery', product: p3, fallback: section.settings.fallback_image, alt: section.settings.third_name %}
           {%- if section.settings.third_show_addons -%}
             {%- assign third_addons = section.blocks | where: 'type', 'third_addon' -%}
             {%- if third_addons.size > 0 -%}
@@ -600,6 +620,52 @@
       numEl.textContent = n; if (form) form.querySelector('input[name="quantity"]').value = n;
     });
   });
+  /* Product galleries: horizontal drag comes free from overflow-x, so this only
+     wires the arrows, the thumbnails, and keeping the active thumb in sync. */
+  root.querySelectorAll('[data-mm-gal]').forEach(function(gal){
+    var track = gal.querySelector('[data-mm-gal-track]');
+    if (!track) return;
+    var slides = track.querySelectorAll('.mm-gal-slide');
+    if (slides.length < 2) return;
+    var prev = gal.querySelector('[data-mm-gal-prev]');
+    var next = gal.querySelector('[data-mm-gal-next]');
+    var thumbs = gal.querySelectorAll('[data-mm-gal-thumb]');
+
+    function current(){
+      var w = track.clientWidth;
+      return w ? Math.round(track.scrollLeft / w) : 0;
+    }
+    function goTo(i){
+      var max = slides.length - 1;
+      if (i < 0) i = 0; if (i > max) i = max;
+      track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    }
+    function sync(){
+      var i = current();
+      thumbs.forEach(function(t, n){ t.classList.toggle('is-active', n === i); });
+      if (prev) prev.disabled = i <= 0;
+      if (next) next.disabled = i >= slides.length - 1;
+    }
+
+    if (prev) prev.addEventListener('click', function(){ goTo(current() - 1); });
+    if (next) next.addEventListener('click', function(){ goTo(current() + 1); });
+    thumbs.forEach(function(t, n){
+      t.addEventListener('click', function(){ goTo(n); });
+    });
+    track.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current() + 1); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current() - 1); }
+    });
+
+    var raf;
+    track.addEventListener('scroll', function(){
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(sync);
+    }, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  });
+
   /* Add-to-cart submits are intercepted globally by the cart drawer
      (snippets/cart-drawer.liquid), which adds the item and opens the drawer. */
 })();
