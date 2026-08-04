@@ -1,0 +1,197 @@
+{%- comment -%}
+  Manage Subscription — sends the customer to the portal where they can skip,
+  pause or cancel.
+
+  Two modes, set in the theme editor:
+    account  — Shopify's own customer account login (passwordless email code).
+               Works with no app installed.
+    app      — a subscription app's proxy page, e.g.
+               /a/loop_subscriptions/get-subscription-link
+               Paste the path once the app is installed.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- assign mode = section.settings.portal_mode -%}
+{%- assign app_url = section.settings.app_url | strip -%}
+{%- if mode == 'app' and app_url != blank -%}
+  {%- assign portal_url = app_url -%}
+{%- else -%}
+  {%- assign portal_url = routes.account_login_url -%}
+  {%- assign mode = 'account' -%}
+{%- endif -%}
+<section class="mm-subs" data-section-id="{{ sid }}">
+  <style>
+    #shopify-section-{{ sid }} .mm-subs { background: var(--mars-black, #0a0503); color: var(--text, #fff); padding: 64px 0; }
+    @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-subs { padding: 88px 0; } }
+    #shopify-section-{{ sid }} .mm-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+    #shopify-section-{{ sid }} .mm-head { text-align: center; margin-bottom: 36px; }
+    #shopify-section-{{ sid }} .mm-eyebrow {
+      display: inline-block; font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700;
+      color: #fff; background: var(--brand, #ff5600); padding: 6px 14px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 14px;
+    }
+    #shopify-section-{{ sid }} h1 {
+      font-family: var(--font-heading); font-size: calc((clamp(26px, 4.6vw, 42px)) * var(--fs-h, 1));
+      font-weight: 800; text-transform: uppercase; line-height: 1.14; margin: 0 0 12px;
+    }
+    #shopify-section-{{ sid }} .mm-sub { font-size: calc((15px) * var(--fs-b, 1)); color: rgba(255,255,255,0.72); margin: 0; }
+    #shopify-section-{{ sid }} .mm-card {
+      background: var(--mars-panel, #1a0e07); border: 1px solid var(--brand, #ff5600);
+      border-radius: 16px; padding: 30px 22px; text-align: center; margin-bottom: 40px;
+    }
+    @media (min-width: 768px) { #shopify-section-{{ sid }} .mm-card { padding: 40px 36px; } }
+    #shopify-section-{{ sid }} .mm-card h2 { font-family: var(--font-heading); font-size: calc((21px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 0 0 10px; }
+    #shopify-section-{{ sid }} .mm-card p { font-size: calc((14.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.78); line-height: 1.7; margin: 0 0 22px; }
+    #shopify-section-{{ sid }} .mm-form { display: flex; flex-direction: column; gap: 12px; max-width: 420px; margin: 0 auto; }
+    @media (min-width: 560px) { #shopify-section-{{ sid }} .mm-form { flex-direction: row; } }
+    #shopify-section-{{ sid }} input[type="email"] {
+      flex: 1; background: #0a0503; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px;
+      padding: 14px 16px; color: #fff; font-size: calc((15px) * var(--fs-b, 1)); font-family: inherit;
+    }
+    #shopify-section-{{ sid }} input[type="email"]:focus { outline: none; border-color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .mm-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--brand, #ff5600); color: #fff; border: none; cursor: pointer; text-decoration: none;
+      font-weight: 800; text-transform: uppercase; padding: 15px 34px; border-radius: 8px;
+      font-size: calc((15px) * var(--fs-b, 1)); box-shadow: 0 8px 24px rgba(255,86,0,0.35); white-space: nowrap;
+    }
+    #shopify-section-{{ sid }} .mm-btn:hover { filter: brightness(1.1); }
+    #shopify-section-{{ sid }} .mm-note { font-size: calc((12.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.55); margin: 16px 0 0; }
+    #shopify-section-{{ sid }} .mm-sec-title { font-family: var(--font-heading); font-size: calc((19px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 0 0 18px; text-align: center; }
+    #shopify-section-{{ sid }} .mm-actions { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; }
+    @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-actions { grid-template-columns: 1fr 1fr; } }
+    #shopify-section-{{ sid }} .mm-action {
+      background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+      border-radius: 12px; padding: 18px;
+    }
+    #shopify-section-{{ sid }} .mm-action .ic { font-size: calc((20px) * var(--fs-b, 1)); line-height: 1; display: block; margin-bottom: 8px; }
+    #shopify-section-{{ sid }} .mm-action h3 { font-family: var(--font-heading); font-size: calc((14px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 6px; }
+    #shopify-section-{{ sid }} .mm-action p { font-size: calc((13.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6; }
+    #shopify-section-{{ sid }} .mm-help {
+      text-align: center; padding: 24px 20px; border-radius: 14px;
+      background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    }
+    #shopify-section-{{ sid }} .mm-help h3 { font-family: var(--font-heading); font-size: calc((16px) * var(--fs-h, 1)); font-weight: 800; text-transform: uppercase; margin: 0 0 8px; }
+    #shopify-section-{{ sid }} .mm-help p { font-size: calc((14px) * var(--fs-b, 1)); color: rgba(255,255,255,0.75); margin: 0; line-height: 1.7; }
+    #shopify-section-{{ sid }} .mm-help a { color: var(--brand, #ff5600); }
+    #shopify-section-{{ sid }} .mm-warn {
+      font-size: calc((12px) * var(--fs-b, 1)); color: #fecaca; background: rgba(185,28,28,0.25);
+      border: 1px solid rgba(185,28,28,0.5); padding: 10px; border-radius: 8px; margin-bottom: 16px; text-align: left;
+    }
+  </style>
+
+  <div class="mm-wrap">
+    <div class="mm-head">
+      {%- if section.settings.eyebrow != blank -%}<p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1>{{ section.settings.title }}</h1>
+      {%- if section.settings.subtitle != blank -%}<p class="mm-sub">{{ section.settings.subtitle }}</p>{%- endif -%}
+    </div>
+
+    <div class="mm-card">
+      {%- if request.design_mode and section.settings.portal_mode == 'app' and app_url == blank -%}
+        <div class="mm-warn">⚙️ "Subscription app" mode is selected but the app URL is empty, so this button falls back to the Shopify account login. Paste the app's proxy path (for example <code>/a/loop_subscriptions/get-subscription-link</code>) or switch back to Shopify accounts.</div>
+      {%- endif -%}
+      <h2>{{ section.settings.card_title }}</h2>
+      <p>{{ section.settings.card_text }}</p>
+
+      {%- if mode == 'app' and section.settings.show_email_field -%}
+        <form class="mm-form" method="get" action="{{ portal_url }}">
+          <label class="visually-hidden" for="mm-subs-email-{{ sid }}">{{ section.settings.email_label }}</label>
+          <input type="email" id="mm-subs-email-{{ sid }}" name="email" placeholder="{{ section.settings.email_label | escape }}" required>
+          <button type="submit" class="mm-btn">{{ section.settings.cta_label }}</button>
+        </form>
+      {%- else -%}
+        <a class="mm-btn" href="{{ portal_url }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+
+      {%- if section.settings.note != blank -%}
+        <p class="mm-note">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- assign actions = section.blocks | where: 'type', 'action' -%}
+    {%- if actions.size > 0 -%}
+      {%- if section.settings.actions_title != blank -%}
+        <h2 class="mm-sec-title">{{ section.settings.actions_title }}</h2>
+      {%- endif -%}
+      <div class="mm-actions">
+        {%- for block in actions -%}
+          <div class="mm-action" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != blank -%}<span class="ic" aria-hidden="true">{{ block.settings.icon }}</span>{%- endif -%}
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.help_enabled -%}
+      <div class="mm-help">
+        <h3>{{ section.settings.help_title }}</h3>
+        <p>{{ section.settings.help_text }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Manage subscription",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SUBSCRIPTIONS" },
+    { "type": "text", "id": "title", "label": "Title", "default": "MANAGE YOUR SUBSCRIPTION" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Skip a delivery, change the date, swap your plan or cancel — all from your own portal, without emailing anyone." },
+    { "type": "header", "content": "Where the button sends people" },
+    {
+      "type": "select",
+      "id": "portal_mode",
+      "label": "Portal",
+      "info": "Shopify accounts works with no app installed: the customer enters their email and receives a login code. Switch to the app option once a subscription app is live.",
+      "options": [
+        { "value": "account", "label": "Shopify customer account" },
+        { "value": "app", "label": "Subscription app (proxy URL)" }
+      ],
+      "default": "account"
+    },
+    { "type": "text", "id": "app_url", "label": "App proxy URL", "info": "Only used by the app option. Example: /a/loop_subscriptions/get-subscription-link" },
+    { "type": "checkbox", "id": "show_email_field", "label": "Ask for the email on this page", "info": "App option only. Off means the button just opens the app's own page.", "default": false },
+    { "type": "text", "id": "email_label", "label": "Email field label", "default": "The email you ordered with" },
+    { "type": "header", "content": "Card" },
+    { "type": "text", "id": "card_title", "label": "Card title", "default": "GET YOUR LOGIN LINK" },
+    { "type": "textarea", "id": "card_text", "label": "Card text", "default": "Enter the email address you used at checkout and we will send you a secure link. No password to remember — the link takes you straight into your subscription." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Send me the login link" },
+    { "type": "textarea", "id": "note", "label": "Note under the button", "default": "The link is valid for a short time and only works for the email on the order." },
+    { "type": "header", "content": "What they can do" },
+    { "type": "text", "id": "actions_title", "label": "Section title", "default": "WHAT YOU CAN DO IN THERE" },
+    { "type": "header", "content": "Help box" },
+    { "type": "checkbox", "id": "help_enabled", "label": "Show the help box", "default": true },
+    { "type": "text", "id": "help_title", "label": "Title", "default": "CANNOT GET IN?" },
+    { "type": "richtext", "id": "help_text", "label": "Text", "default": "<p>Write to <a href=\"mailto:support@upmen.com\">support@upmen.com</a> from any address and tell us the order number. We will sort it out within one business day — and we can skip, pause or cancel for you directly.</p>" },
+    { "type": "paragraph", "content": "Add an \"Action\" block for each thing the customer can do in the portal." }
+  ],
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "action",
+      "name": "Action",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "⏭️" },
+        { "type": "text", "id": "title", "label": "Title", "default": "SKIP A DELIVERY" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Push the next shipment without cancelling the plan." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Manage subscription",
+      "blocks": [
+        { "type": "action", "settings": { "icon": "⏭️", "title": "SKIP A DELIVERY", "text": "Push the next shipment without cancelling the plan." } },
+        { "type": "action", "settings": { "icon": "📅", "title": "CHANGE THE DATE", "text": "Move your renewal earlier or later to match how fast you go through a bottle." } },
+        { "type": "action", "settings": { "icon": "🔁", "title": "SWAP YOUR PLAN", "text": "Move between the Monthly, 3-Month and 6-Month plans at any time." } },
+        { "type": "action", "settings": { "icon": "💳", "title": "UPDATE CARD OR ADDRESS", "text": "Change the payment method or where the parcel goes." } },
+        { "type": "action", "settings": { "icon": "⏸️", "title": "PAUSE", "text": "Stop deliveries for a while and pick up where you left off." } },
+        { "type": "action", "settings": { "icon": "✕", "title": "CANCEL", "text": "End the subscription outright. No fee, no minimum term, no phone call." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
