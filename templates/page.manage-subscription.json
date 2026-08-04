@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-subscription",
+      "blocks": {
+        "a1": { "type": "action", "settings": { "icon": "⏭️", "title": "SKIP A DELIVERY", "text": "Push the next shipment without cancelling the plan." } },
+        "a2": { "type": "action", "settings": { "icon": "📅", "title": "CHANGE THE DATE", "text": "Move your renewal earlier or later to match how fast you go through a bottle." } },
+        "a3": { "type": "action", "settings": { "icon": "🔁", "title": "SWAP YOUR PLAN", "text": "Move between the Monthly, 3-Month and 6-Month plans at any time." } },
+        "a4": { "type": "action", "settings": { "icon": "💳", "title": "UPDATE CARD OR ADDRESS", "text": "Change the payment method or where the parcel goes." } },
+        "a5": { "type": "action", "settings": { "icon": "⏸️", "title": "PAUSE", "text": "Stop deliveries for a while and pick up where you left off." } },
+        "a6": { "type": "action", "settings": { "icon": "✕", "title": "CANCEL", "text": "End the subscription outright. No fee, no minimum term, no phone call." } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4", "a5", "a6"],
+      "settings": {
+        "eyebrow": "SUBSCRIPTIONS",
+        "title": "MANAGE YOUR SUBSCRIPTION",
+        "subtitle": "Skip a delivery, change the date, swap your plan or cancel — all from your own portal, without emailing anyone.",
+        "portal_mode": "account",
+        "app_url": "",
+        "show_email_field": false,
+        "email_label": "The email you ordered with",
+        "card_title": "GET YOUR LOGIN LINK",
+        "card_text": "Enter the email address you used at checkout and we will send you a secure link. No password to remember — the link takes you straight into your subscription.",
+        "cta_label": "Send me the login link",
+        "note": "The link is valid for a short time and only works for the email on the order.",
+        "actions_title": "WHAT YOU CAN DO IN THERE",
+        "help_enabled": true,
+        "help_title": "CANNOT GET IN?",
+        "help_text": "<p>Write to <a href=\"mailto:support@upmen.com\">support@upmen.com</a> from any address and tell us the order number. We will sort it out within one business day — and we can skip, pause or cancel for you directly.</p>"
+      }
+    }
+  },
+  "order": ["main"]
+}
