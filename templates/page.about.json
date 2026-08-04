@@ -106,6 +106,20 @@
         "title_highlight": "FACILITY IN THE USA"
       }
     },
+    "experts": {
+      "type": "testimonials",
+      "blocks": {
+        "e1": { "type": "expert", "settings": { "name": "EXPERT NAME", "role": "CREDENTIAL · SPECIALTY", "bio": "Placeholder — replace with the advisor's name, credentials and a short bio once the partnership is confirmed. Pick their photo in the Image field." } },
+        "e2": { "type": "expert", "settings": { "name": "EXPERT NAME", "role": "CREDENTIAL · SPECIALTY", "bio": "Placeholder — replace with the advisor's name, credentials and a short bio once the partnership is confirmed. Pick their photo in the Image field." } },
+        "e3": { "type": "expert", "settings": { "name": "EXPERT NAME", "role": "CREDENTIAL · SPECIALTY", "bio": "Placeholder — replace with the advisor's name, credentials and a short bio once the partnership is confirmed. Pick their photo in the Image field." } }
+      },
+      "block_order": ["e1", "e2", "e3"],
+      "settings": {
+        "title_pre": "TRUSTED BY",
+        "title_highlight": "THE PEOPLE WHO KNOW",
+        "hint": "Add an \"Expert\" block for each advisor."
+      }
+    },
     "guarantee": {
       "type": "scarcity-cta",
       "settings": {
@@ -126,6 +140,7 @@
     "founder_story",
     "about_stats",
     "facility",
+    "experts",
     "guarantee"
   ]
 }
