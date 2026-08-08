@@ -14,7 +14,7 @@
       "blocks": {
         "info_1": { "type": "info", "settings": { "icon": "✉️", "title": "EMAIL US", "text": "support@upmen.com", "link": "mailto:support@upmen.com" } },
         "info_2": { "type": "info", "settings": { "icon": "⏱️", "title": "RESPONSE TIME", "text": "Within one business day, Monday to Friday.", "link": "" } },
-        "info_3": { "type": "info", "settings": { "icon": "🛡️", "title": "GUARANTEE", "text": "90 days to try it. Higher T or your money back.", "link": "" } }
+        "info_3": { "type": "info", "settings": { "icon": "🛡️", "title": "GUARANTEE", "text": "90 days to try it, covered by our 90-day satisfaction guarantee.", "link": "" } }
       },
       "block_order": ["info_1", "info_2", "info_3"],
       "settings": {

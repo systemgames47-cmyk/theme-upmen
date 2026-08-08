@@ -172,8 +172,8 @@
         "s3": {
           "type": "stat",
           "settings": {
-            "number": "8",
-            "label": "Clinically dosed ingredients"
+            "number": "9",
+            "label": "Active ingredients per daily serving"
           }
         },
         "s4": {
@@ -273,10 +273,10 @@
     "guarantee": {
       "type": "scarcity-cta",
       "settings": {
-        "badge": "90-DAY HIGHER-T GUARANTEE",
+        "badge": "90-DAY SATISFACTION GUARANTEE",
         "title_pre": "READY TO FEEL LIKE",
         "title_highlight": "YOURSELF AGAIN?",
-        "text": "Try Up Men risk-free for 90 days. If you're not satisfied, we refund you — and you keep the bottles.",
+        "text": "Your purchase is covered by our 90-day satisfaction guarantee. If UP MEN is not the right fit for you, request a refund according to the published guarantee terms.",
         "cta_label": "SEE THE PACKAGES",
         "cta_link": "/#join_pkg",
         "height_mobile": "auto",

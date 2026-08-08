@@ -25,13 +25,21 @@
     font-weight: 800;
   }
   #mm-topbar-{{ sid }} .mm-count { font-variant-numeric: tabular-nums; color: var(--brand, #ff5600); font-weight: 800; }
-  @media (min-width: 768px) { #mm-topbar-{{ sid }} { font-size: calc((12px) * var(--fs-b, 1)); } }
+  /* Short copy below 768px so the strip stays on a single line on a 390px screen. */
+  #mm-topbar-{{ sid }} .mm-pre, #mm-topbar-{{ sid }} .mm-post-d { display: none; }
+  @media (min-width: 768px) {
+    #mm-topbar-{{ sid }} { font-size: calc((12px) * var(--fs-b, 1)); }
+    #mm-topbar-{{ sid }} .mm-pre, #mm-topbar-{{ sid }} .mm-post-d { display: inline; }
+    #mm-topbar-{{ sid }} .mm-post-m { display: none; }
+  }
 </style>
 
 <div id="mm-topbar-{{ sid }}" role="region" aria-label="Announcements">
-  <span>{{ section.settings.pre_text }}</span>
+  {%- if section.settings.pre_text != blank -%}<span class="mm-pre">{{ section.settings.pre_text }}</span>{%- endif -%}
   <span class="mm-pill">{{ section.settings.highlight }}</span>
-  <span>{{ section.settings.post_text }}</span>
+  {%- if section.settings.post_text != blank -%}<span class="mm-post-d">{{ section.settings.post_text }}</span>{%- endif -%}
+  {%- assign topbar_post_mobile = section.settings.post_text_mobile | default: section.settings.post_text -%}
+  {%- if topbar_post_mobile != blank -%}<span class="mm-post-m">{{ topbar_post_mobile }}</span>{%- endif -%}
   {%- if section.settings.show_countdown and section.settings.countdown_target != blank -%}
     <span class="mm-count" data-countdown-block data-target="{{ section.settings.countdown_target }}">
       <span data-unit="days">--</span>d :
@@ -46,10 +54,11 @@
 {
   "name": "Top Banner",
   "settings": [
-    { "type": "text", "id": "pre_text", "label": "Text before highlight", "default": "CLAIM YOUR OFFER" },
-    { "type": "text", "id": "highlight", "label": "Highlighted text", "default": "50% OFF" },
-    { "type": "text", "id": "post_text", "label": "Text after highlight", "default": "+ $70 FREE GIFTS" },
-    { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "default": false },
+    { "type": "text", "id": "pre_text", "label": "Text before highlight", "info": "Hidden below 768px to keep the strip on one line.", "default": "90-DAY PLAN:" },
+    { "type": "text", "id": "highlight", "label": "Highlighted text", "info": "Contains a price. Update it if the 90-day price changes — this section has no product context, so the value cannot be dynamic here.", "default": "3 BOTTLES FOR $118" },
+    { "type": "text", "id": "post_text", "label": "Text after highlight (desktop)", "default": "+ 5 WELCOME GIFTS" },
+    { "type": "text", "id": "post_text_mobile", "label": "Text after highlight (mobile)", "info": "Shown below 768px. Falls back to the desktop text when empty.", "default": "+ 5 WELCOME GIFTS" },
+    { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "info": "Only switch on when \"Deadline (ISO)\" holds a real, fixed end date. An expired date freezes the strip at 00d:00h:00m:00s.", "default": false },
     {
       "type": "text",
       "id": "countdown_target",

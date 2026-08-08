@@ -137,11 +137,13 @@
   <div class="mm-wrap">
     <div class="mm-inner">
       <p class="mm-stars"><span class="st" aria-hidden="true">★★★★★</span> {{ section.settings.reviews_text }}</p>
+      {%- comment -%} Each line only emits its own <br>, so an unused line does not
+        leave an empty row in the headline. {%- endcomment -%}
       <h1>
-        {{ section.settings.title_line1 }}<br>
-        {{ section.settings.title_line2 }}<br>
-        <span class="orange">{{ section.settings.title_highlight }}</span><br>
-        {{ section.settings.title_line3 }}
+        {%- if section.settings.title_line1 != blank -%}{{ section.settings.title_line1 }}{%- endif -%}
+        {%- if section.settings.title_line2 != blank -%}{% unless section.settings.title_line1 == blank %}<br>{% endunless %}{{ section.settings.title_line2 }}{%- endif -%}
+        {%- if section.settings.title_highlight != blank -%}{% unless section.settings.title_line1 == blank and section.settings.title_line2 == blank %}<br>{% endunless %}<span class="orange">{{ section.settings.title_highlight }}</span>{%- endif -%}
+        {%- if section.settings.title_line3 != blank -%}<br>{{ section.settings.title_line3 }}{%- endif -%}
       </h1>
       <p class="mm-sub">{{ section.settings.subtitle }}</p>
       {%- if section.settings.media_enabled -%}
@@ -216,15 +218,15 @@
 {
   "name": "Hero",
   "settings": [
-    { "type": "text", "id": "reviews_text", "label": "Reviews text", "default": "4,548 REVIEWS" },
-    { "type": "text", "id": "title_line1", "label": "Headline line 1", "default": "UP MEN" },
-    { "type": "text", "id": "title_line2", "label": "Headline line 2", "default": "THE MOST" },
-    { "type": "text", "id": "title_highlight", "label": "Headline highlight (orange)", "default": "POTENT & NATURAL" },
-    { "type": "text", "id": "title_line3", "label": "Headline line 3", "default": "TESTOSTERONE STACK ON EARTH" },
-    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "8 powerful ingredients packed into one daily male-vitality supplement." },
-    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "UNLOCK YOUR POWER TODAY" },
+    { "type": "text", "id": "reviews_text", "label": "Reviews text", "info": "Do not show a review count unless it comes from a live reviews app.", "default": "VERIFIED CUSTOMER FEEDBACK" },
+    { "type": "text", "id": "title_line1", "label": "Headline line 1", "default": "ONE DAILY FORMULA." },
+    { "type": "text", "id": "title_line2", "label": "Headline line 2" },
+    { "type": "text", "id": "title_highlight", "label": "Headline highlight (orange)", "default": "A STRONGER 90-DAY ROUTINE." },
+    { "type": "text", "id": "title_line3", "label": "Headline line 3" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "9 active ingredients in one daily men’s wellness formula, designed to simplify consistency around training, nutrition, sleep and everyday routines." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "SEE THE 90-DAY OFFER" },
     { "type": "url", "id": "cta_link", "label": "CTA link" },
-    { "type": "text", "id": "guarantee_text", "label": "Guarantee text", "default": "TRY IT FOR 90 DAYS. HIGHER T OR YOUR MONEY BACK." },
+    { "type": "text", "id": "guarantee_text", "label": "Microcopy under the CTA", "default": "3 BOTTLES FOR THE PRICE OF 2 · 5 WELCOME GIFTS · 90-DAY SATISFACTION GUARANTEE" },
     { "type": "header", "content": "Media box (video or GIF)" },
     { "type": "checkbox", "id": "media_enabled", "label": "Show media box", "default": false },
     { "type": "video", "id": "media_video", "label": "Video", "info": "Autoplays muted. Click toggles sound / pause." },
@@ -254,8 +256,8 @@
       "default": "medium"
     },
     { "type": "checkbox", "id": "media_tag_enabled", "label": "Show offer tag on media box", "default": true },
-    { "type": "text", "id": "media_tag_top", "label": "Tag small text", "default": "GET" },
-    { "type": "text", "id": "media_tag_main", "label": "Tag highlight text", "default": "50% OFF TODAY" },
+    { "type": "text", "id": "media_tag_top", "label": "Tag small text", "default": "90-DAY PLAN" },
+    { "type": "text", "id": "media_tag_main", "label": "Tag highlight text", "default": "3 FOR THE PRICE OF 2" },
     { "type": "image_picker", "id": "media_tag_image", "label": "Tag image (optional)", "info": "Transparent PNG replaces the default circle badge." },
     { "type": "url", "id": "media_tag_link", "label": "Tag link", "info": "Default: #join_pkg (pricing section)." },
     { "type": "checkbox", "id": "show_product_image", "label": "Show product image (desktop)", "default": true },

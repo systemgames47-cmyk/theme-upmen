@@ -8,6 +8,11 @@
     font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; text-align: center;
     font-size: calc((clamp(24px, 4.2vw, 38px)) * var(--fs-h, 1)); margin: 0 0 36px;
   }
+  #mm-rv-{{ sid }} h2.has-lede { margin-bottom: 10px; }
+  #mm-rv-{{ sid }} .mm-lede {
+    text-align: center; font-size: calc((15px) * var(--fs-b, 1)); line-height: 1.5;
+    color: rgba(255,255,255,0.7); margin: 0 auto 36px; max-width: 620px;
+  }
   #mm-rv-{{ sid }} h2 .orange { color: var(--brand, #ff5600); }
   #mm-rv-{{ sid }} .mm-summary { display: grid; grid-template-columns: 1fr; gap: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--mars-line, rgba(255,255,255,0.12)); align-items: start; }
   @media (min-width: 768px) { #mm-rv-{{ sid }} .mm-summary { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
@@ -81,7 +86,10 @@
 
 <section id="mm-rv-{{ sid }}" class="reveal" data-testid="reviews">
   <div class="mm-wrap">
-    <h2>{{ section.settings.title_pre }} <span class="orange">{{ section.settings.title_highlight }}</span></h2>
+    <h2{% if section.settings.subtitle != blank %} class="has-lede"{% endif %}>{{ section.settings.title_pre }} <span class="orange">{{ section.settings.title_highlight }}</span></h2>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="mm-lede">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
 
     <div class="mm-summary">
       <div class="mm-avg-row">
@@ -250,12 +258,13 @@
   "name": "Reviews",
   "max_blocks": 12,
   "settings": [
-    { "type": "text", "id": "title_pre", "label": "Title", "default": "WHAT MEN ARE" },
-    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "SAYING" },
+    { "type": "text", "id": "title_pre", "label": "Title", "default": "WHAT VERIFIED" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "CUSTOMERS SAY" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Real feedback on routine, delivery, value and support." },
     { "type": "text", "id": "avg_rating", "label": "Average rating", "default": "4.8" },
-    { "type": "text", "id": "total_reviews", "label": "Total reviews", "default": "4,548" },
-    { "type": "text", "id": "total_prefix", "label": "Total — text before the number", "default": "Based on" },
-    { "type": "text", "id": "total_suffix", "label": "Total — text after the number", "default": "reviews" },
+    { "type": "text", "id": "total_reviews", "label": "Total reviews", "info": "Leave empty unless the number comes from a live reviews app." },
+    { "type": "text", "id": "total_prefix", "label": "Total — text before the number", "default": "VERIFIED CUSTOMER FEEDBACK" },
+    { "type": "text", "id": "total_suffix", "label": "Total — text after the number" },
     { "type": "text", "id": "dist_pcts", "label": "Star bar widths %, 5→1 (separate with |)", "default": "86|8|3|1|2" },
     { "type": "text", "id": "dist_counts", "label": "Star counts, 5→1 (separate with |)", "default": "3,911|364|136|46|91" },
     { "type": "header", "content": "List labels" },

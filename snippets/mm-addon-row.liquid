@@ -7,9 +7,12 @@
     free_prefix  prepend a green "Free "
     old_value    struck-through former price, shown before the value
     value        right-hand value
-    value_style  plain | free (green, struck through) | save (green)
+    value_style  plain | free (green, struck through) | save (green) | heading (group title, no ✓)
 {%- endcomment -%}
 {%- assign a = block.settings -%}
+{%- if a.value_style == 'heading' -%}
+  <p class="mm-addon-heading" {{ block.shopify_attributes }}>{{ a.text }}</p>
+{%- else -%}
 {%- case a.value_style -%}
   {%- when 'free' -%}{%- assign val_class = 'val free' -%}
   {%- when 'save' -%}{%- assign val_class = 'val save' -%}
@@ -25,3 +28,4 @@
     {{ a.value }}
   </span>
 </div>
+{%- endif -%}
