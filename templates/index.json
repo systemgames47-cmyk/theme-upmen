@@ -219,7 +219,7 @@
       "settings": {
         "title_pre": "HOW TO",
         "title_highlight": "USE IT",
-        "media_format": "portrait",
+        "media_format": "square",
         "media_size_mobile": "full",
         "media_size_desktop": "full"
       }
