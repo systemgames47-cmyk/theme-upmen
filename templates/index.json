@@ -219,7 +219,7 @@
       "settings": {
         "title_pre": "HOW TO",
         "title_highlight": "USE IT",
-        "media_format": "stories",
+        "media_format": "portrait",
         "media_size_mobile": "full",
         "media_size_desktop": "full"
       }
@@ -851,6 +851,7 @@
       "settings": {
         "eyebrow": "",
         "title": "<p>CHOOSE YOUR UP MEN ROUTINE</p>",
+        "subtitle": "Start with 30 days, or take the 90-day routine and get 3 bottles for the price of 2 on every shipment.",
         "offer_enabled": true,
         "offer_title": "JOIN UP MEN TODAY",
         "offer_tag_enabled": true,
@@ -858,11 +859,14 @@
         "offer_tag_main": "3 FOR THE PRICE OF 2",
         "countdown_enabled": false,
         "countdown_target": "",
+        "countdown_fallback": "WELCOME KIT INCLUDED WITH YOUR FIRST SHIPMENT",
         "label_days": "DAYS",
         "label_hours": "HOURS",
         "label_min": "MIN",
         "label_sec": "SEC",
         "scarcity_enabled": true,
+        "scarcity_icon": "🎁",
+        "scarcity_show_month": false,
         "scarcity_text_1": "ALL PHYSICAL WELCOME GIFTS SHIP WITH YOUR FIRST ORDER · DIGITAL GUIDE BY EMAIL",
         "scarcity_number": "",
         "scarcity_text_2": "",
@@ -890,6 +894,7 @@
         "once_show_addons": true,
         "once_show_perks": true,
         "variant_id_once": "",
+        "selling_plan_once": "",
         "third_enabled": false,
         "product_third": "",
         "third_highlight": false,
@@ -906,6 +911,7 @@
         "variant_id_third": "",
         "selling_plan_third": "",
         "qty_label": "Quantity",
+        "price_suffix": "TODAY",
         "ship_strong": "",
         "ship_rest": "Order processing and delivery estimates are shown at checkout.",
         "guarantee_note": "COVERED BY OUR 90-DAY SATISFACTION GUARANTEE",
@@ -916,16 +922,8 @@
         "gift_1_alt": "Welcome gift: UP MEN Branded Thermal Bottle",
         "gift_2": "shopify://shop_images/ChatGPT_Image_29_07_2026_07_38_59_76ebc455-9289-4127-8c39-02a092544b86.png",
         "gift_2_alt": "Welcome gift: UP MEN Crossbody Pack",
-        "gift_3": "",
         "gift_3_alt": "Welcome gift: Keychain Pill Case",
-        "gift_4": "",
-        "gift_4_alt": "Welcome gift: Smart Activity Band",
-        "subtitle": "Start with 30 days, or take the 90-day routine and get 3 bottles for the price of 2 on every shipment.",
-        "countdown_fallback": "WELCOME KIT INCLUDED WITH YOUR FIRST SHIPMENT",
-        "scarcity_icon": "🎁",
-        "scarcity_show_month": false,
-        "selling_plan_once": "",
-        "price_suffix": "TODAY"
+        "gift_4_alt": "Welcome gift: Smart Activity Band"
       }
     },
     "marquee_fast": {
@@ -999,6 +997,7 @@
       "settings": {
         "title_pre": "WHAT VERIFIED",
         "title_highlight": "CUSTOMERS SAY",
+        "subtitle": "Real feedback on routine, delivery, value and support.",
         "avg_rating": "4.8",
         "total_reviews": "",
         "total_prefix": "VERIFIED CUSTOMER FEEDBACK",
@@ -1015,8 +1014,7 @@
         "photo_1": "shopify://shop_images/gen_2813_0_1784390330727.png",
         "photo_2": "shopify://shop_images/gen_2817_0_1784391543403.png",
         "photo_3": "shopify://shop_images/Gemini_Generated_Image_d5ckeyd5ckeyd5ck.jpg",
-        "photo_4": "shopify://shop_images/ourmzqg92r7ez5x9gwxc7503kfhx.jpg",
-        "subtitle": "Real feedback on routine, delivery, value and support."
+        "photo_4": "shopify://shop_images/ourmzqg92r7ez5x9gwxc7503kfhx.jpg"
       }
     },
     "how_it_works": {
