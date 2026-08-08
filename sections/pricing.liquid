@@ -1,4 +1,4 @@
-{%- comment -%} Pricing — Up Men launch kit packages with direct checkout {%- endcomment -%}
+{%- comment -%} Pricing — UP MEN subscription plans with direct checkout {%- endcomment -%}
 {%- assign sid = section.id -%}
 {%- if section.settings.bg_mobile != blank -%}
   {%- assign pr_bg_mobile = section.settings.bg_mobile | image_url: width: 1200 -%}
@@ -185,6 +185,31 @@
     @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-unit .num { font-size: calc((22px) * var(--fs-b, 1)); } }
     #shopify-section-{{ sid }} .mm-offer-unit .lbl { font-size: calc((10px) * var(--fs-b, 1)); color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.08em; }
     @media (min-width: 640px) { #shopify-section-{{ sid }} .mm-offer-unit .lbl { font-size: calc((13px) * var(--fs-b, 1)); } }
+    /* Stand-in for the timer while no real, fixed end date exists. Same box, same
+       footprint, so the offer row keeps its height either way. */
+    #shopify-section-{{ sid }} .mm-offer-static {
+      background: #1a0e07; border: 1px solid rgba(255,86,0,0.45); border-radius: 8px;
+      padding: 8px 14px; min-height: 52px; display: flex; align-items: center; justify-content: center;
+      text-align: center; font-family: var(--font-heading); font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #ffd44d;
+      font-size: calc((12px) * var(--fs-b, 1)); line-height: 1.25;
+    }
+    @media (min-width: 640px) {
+      #shopify-section-{{ sid }} .mm-offer-static { padding: 14px 22px; min-height: 74px; font-size: calc((16px) * var(--fs-b, 1)); }
+    }
+    #shopify-section-{{ sid }} .mm-sub-head {
+      font-size: calc((15px) * var(--fs-b, 1)); line-height: 1.55; color: rgba(255,255,255,0.75);
+      max-width: 620px; margin: 12px auto 0;
+    }
+    /* "Heading" rows inside a card's ✓ list — used to title the welcome-kit group. */
+    #shopify-section-{{ sid }} .mm-addon-heading {
+      font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand, #ff5600); margin: 5px 0 0;
+    }
+    #shopify-section-{{ sid }} .mm-price .suffix {
+      color: rgba(255,255,255,0.7); font-weight: 700; font-size: calc((12px) * var(--fs-b, 1));
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
     #shopify-section-{{ sid }} .mm-offer-scarcity {
       display: inline-block; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.14);
       border-radius: 999px; padding: 7px 16px; margin-top: 20px;
@@ -217,6 +242,9 @@
             <span class="t2">{{ section.settings.offer_tag_main }}</span>
           </div>
         {%- endif -%}
+        {%- comment -%} The countdown only runs against a real, fixed end date. With no date
+          set it falls back to a static label that occupies the same space, so the timer can
+          never be a per-visitor or self-restarting deadline. {%- endcomment -%}
         {%- if section.settings.countdown_enabled and section.settings.countdown_target != blank -%}
           <div class="mm-offer-timer" data-countdown-block data-target="{{ section.settings.countdown_target }}">
             <div class="mm-offer-unit"><div class="num" data-unit="days">0</div><div class="lbl">{{ section.settings.label_days }}</div></div>
@@ -224,6 +252,8 @@
             <div class="mm-offer-unit"><div class="num" data-unit="minutes">0</div><div class="lbl">{{ section.settings.label_min }}</div></div>
             <div class="mm-offer-unit"><div class="num" data-unit="seconds">0</div><div class="lbl">{{ section.settings.label_sec }}</div></div>
           </div>
+        {%- elsif section.settings.countdown_fallback != blank -%}
+          <div class="mm-offer-static">{{ section.settings.countdown_fallback }}</div>
         {%- endif -%}
         {%- if section.settings.offer_tag_enabled -%}
           <div class="mm-offer-tag right">
@@ -234,25 +264,31 @@
         {%- endif -%}
       </div>
       {%- if section.settings.scarcity_enabled -%}
-        {%- assign mm_month = 'now' | date: '%B' -%}
         <div class="mm-offer-scarcity">
-          <span aria-hidden="true">🚨</span>
-          <strong>{{ mm_month }}</strong>
-          {{ section.settings.scarcity_text_1 }}
-          <span class="u">{{ section.settings.scarcity_number }}</span>
-          {{ section.settings.scarcity_text_2 }}
+          {%- comment -%} &nbsp; keeps the separating spaces, which the whitespace-stripping
+            tags would otherwise swallow. {%- endcomment -%}
+          {%- if section.settings.scarcity_icon != blank -%}<span aria-hidden="true">{{ section.settings.scarcity_icon }}</span>&nbsp;{%- endif -%}
+          {%- if section.settings.scarcity_show_month -%}<strong>{{ 'now' | date: '%B' }}</strong>&nbsp;{%- endif -%}
+          {{- section.settings.scarcity_text_1 -}}
+          {%- if section.settings.scarcity_number != blank -%}&nbsp;<span class="u">{{ section.settings.scarcity_number }}</span>{%- endif -%}
+          {%- if section.settings.scarcity_text_2 != blank -%}&nbsp;{{ section.settings.scarcity_text_2 }}{%- endif -%}
         </div>
       {%- endif -%}
     </div>
     {%- endif -%}
     <div class="mm-head">
-      <p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="mm-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
       <h2 class="mm-title">{{ section.settings.title | replace: '<p>', '' | replace: '</p>', '' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="mm-sub-head">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
     </div>
 
     <div class="mm-grid{% if show_third %} is-3{% endif %}">
 
-      {%- comment -%} Package 1: Launch Kit subscription (popular) {%- endcomment -%}
+      {%- comment -%} Package 1: 90-day subscription (popular) {%- endcomment -%}
       {%- assign pk = section.settings.product_kit -%}
       {%- if pk == blank or pk.id == blank -%}{%- assign pk = all_products['up-men-launch-kit'] -%}{%- endif -%}
       {%- if pk == blank or pk.id == blank -%}{%- assign pk = all_products['up-men-subscription'] -%}{%- endif -%}
@@ -286,29 +322,39 @@
             <div class="mm-warn">⚙️ Add "Benefit — subscription" blocks to this section to fill the ✓ list.</div>
           {%- endif -%}
         {%- endif -%}
-        <div class="mm-gifts" aria-label="{{ section.settings.gifts_label | escape }}">
-          {%- for i in (1..4) -%}
-            {%- assign gift_key = 'gift_' | append: i -%}
-            {%- assign gift_alt_key = gift_key | append: '_alt' -%}
-            {%- assign gift_img = section.settings[gift_key] -%}
-            {%- assign gift_alt = section.settings[gift_alt_key] -%}
-            {%- if gift_img != blank -%}
-              {%- assign gift_thumb = gift_img | image_url: width: 400 -%}
-              {%- assign gift_full = gift_img | image_url: width: 1600 -%}
-            {%- else -%}
-              {%- assign gift_asset = 'free-gift-' | append: i | append: '.png' -%}
-              {%- assign gift_thumb = gift_asset | asset_url -%}
-              {%- assign gift_full = gift_thumb -%}
-            {%- endif -%}
-            <button type="button" class="mm-lb-trigger"
-              data-lightbox="gifts-{{ sid }}"
-              data-lightbox-src="{{ gift_full }}"
-              data-lightbox-alt="{{ gift_alt | escape }}"
-              aria-label="{{ 'Enlarge: ' | append: gift_alt | escape }}">
-              <img src="{{ gift_thumb }}" alt="{{ gift_alt | escape }}" loading="lazy">
-            </button>
-          {%- endfor -%}
-        </div>
+        {%- comment -%} Welcome-gift strip. This lives inside the 90-day card only — the
+          monthly card has no gift grid, so nothing here can imply the monthly plan
+          includes all four physical gifts.
+
+          The grid renders only once all four slots hold an approved image. The old
+          fallback to assets/free-gift-N.png was removed rather than repointed: those
+          files showed a competitor-branded e-book, a workout app on a phone and a
+          premium smartwatch, none of which match the items actually shipped. Showing
+          nothing is correct until real photography lands. {%- endcomment -%}
+        {%- assign gifts_ready = true -%}
+        {%- for i in (1..4) -%}
+          {%- assign gift_key = 'gift_' | append: i -%}
+          {%- if section.settings[gift_key] == blank -%}{%- assign gifts_ready = false -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if gifts_ready -%}
+          <div class="mm-gifts" aria-label="{{ section.settings.gifts_label | escape }}">
+            {%- for i in (1..4) -%}
+              {%- assign gift_key = 'gift_' | append: i -%}
+              {%- assign gift_alt_key = gift_key | append: '_alt' -%}
+              {%- assign gift_img = section.settings[gift_key] -%}
+              {%- assign gift_alt = section.settings[gift_alt_key] -%}
+              <button type="button" class="mm-lb-trigger"
+                data-lightbox="gifts-{{ sid }}"
+                data-lightbox-src="{{ gift_img | image_url: width: 1600 }}"
+                data-lightbox-alt="{{ gift_alt | escape }}"
+                aria-label="{{ 'Enlarge: ' | append: gift_alt | escape }}">
+                <img src="{{ gift_img | image_url: width: 400 }}" alt="{{ gift_alt | escape }}" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- elsif request.design_mode -%}
+          <div class="mm-warn">⚙️ The welcome-gift strip is hidden until all four images are uploaded (Free gift image 1–4). Each must show the real item that ships: Thermal Bottle, Crossbody Pack, Keychain Pill Case, Smart Activity Band.</div>
+        {%- endif -%}
         {%- if pk != blank and pk.id != blank and pk.available -%}
           {%- assign vk = pk.selected_or_first_available_variant -%}
           {%- assign vk_id = section.settings.variant_id_kit -%}
@@ -331,10 +377,7 @@
                 <span class="num">1</span>
                 <button type="button" aria-label="Increase">+</button>
               </div>
-              <div class="mm-price">
-                {%- if vk.compare_at_price > vk.price -%}<span class="old">{{ vk.compare_at_price | money }}</span>{%- endif -%}
-                <span class="now">{{ vk.price | money }}</span>
-              </div>
+              {% render 'mm-plan-price', variant: vk, selling_plan_id: spk, suffix: section.settings.price_suffix %}
             </div>
             <button type="submit" class="mm-cta">{{ section.settings.kit_cta_label }}</button>
           </form>
@@ -379,7 +422,7 @@
           {%- endif -%}
         {%- endif -%}
         {%- if section.settings.ship_strong != blank or section.settings.ship_rest != blank -%}
-          <div class="mm-ship"><strong>{{ section.settings.ship_strong }}</strong> {{ section.settings.ship_rest }}</div>
+          <div class="mm-ship">{% if section.settings.ship_strong != blank %}<strong>{{ section.settings.ship_strong }}</strong> {% endif %}{{ section.settings.ship_rest }}</div>
         {%- endif -%}
       </div>
 
@@ -418,8 +461,11 @@
           {%- assign v1 = p1.selected_or_first_available_variant -%}
           {%- assign v1_id = section.settings.variant_id_once -%}
           {%- if v1_id == blank -%}{%- assign v1_id = v1.id -%}{%- endif -%}
-          {%- assign sp1 = '' -%}
-          {%- if v1.requires_selling_plan and p1.selling_plan_groups.size > 0 -%}
+          {%- comment -%} Same rule as the subscription card: attach the selling plan whenever
+            the product has one. Gating this on requires_selling_plan silently turned the
+            monthly card into a one-time purchase while the copy promised a renewal. {%- endcomment -%}
+          {%- assign sp1 = section.settings.selling_plan_once -%}
+          {%- if sp1 == blank and p1.selling_plan_groups.size > 0 -%}
             {%- assign sp1 = p1.selling_plan_groups.first.selling_plans.first.id -%}
           {%- endif -%}
           <form action="{{ routes.cart_add_url }}" method="post">
@@ -436,10 +482,7 @@
                 <span class="num">1</span>
                 <button type="button" aria-label="Increase">+</button>
               </div>
-              <div class="mm-price">
-                {%- if v1.compare_at_price > v1.price -%}<span class="old">{{ v1.compare_at_price | money }}</span>{%- endif -%}
-                <span class="now">{{ v1.price | money }}</span>
-              </div>
+              {% render 'mm-plan-price', variant: v1, selling_plan_id: sp1, suffix: section.settings.price_suffix %}
             </div>
             <button type="submit" class="mm-cta">{{ section.settings.once_cta_label }}</button>
           </form>
@@ -482,7 +525,7 @@
           {%- endif -%}
         {%- endif -%}
         {%- if section.settings.ship_strong != blank or section.settings.ship_rest != blank -%}
-          <div class="mm-ship"><strong>{{ section.settings.ship_strong }}</strong> {{ section.settings.ship_rest }}</div>
+          <div class="mm-ship">{% if section.settings.ship_strong != blank %}<strong>{{ section.settings.ship_strong }}</strong> {% endif %}{{ section.settings.ship_rest }}</div>
         {%- endif -%}
       </div>
 
@@ -525,7 +568,7 @@
             {%- assign v3_id = section.settings.variant_id_third -%}
             {%- if v3_id == blank -%}{%- assign v3_id = v3.id -%}{%- endif -%}
             {%- assign sp3 = section.settings.selling_plan_third -%}
-            {%- if sp3 == blank and v3.requires_selling_plan and p3.selling_plan_groups.size > 0 -%}
+            {%- if sp3 == blank and p3.selling_plan_groups.size > 0 -%}
               {%- assign sp3 = p3.selling_plan_groups.first.selling_plans.first.id -%}
             {%- endif -%}
             <form action="{{ routes.cart_add_url }}" method="post">
@@ -542,10 +585,7 @@
                   <span class="num">1</span>
                   <button type="button" aria-label="Increase">+</button>
                 </div>
-                <div class="mm-price">
-                  {%- if v3.compare_at_price > v3.price -%}<span class="old">{{ v3.compare_at_price | money }}</span>{%- endif -%}
-                  <span class="now">{{ v3.price | money }}</span>
-                </div>
+                {% render 'mm-plan-price', variant: v3, selling_plan_id: sp3, suffix: section.settings.price_suffix %}
               </div>
               <button type="submit" class="mm-cta">{{ section.settings.third_cta_label }}</button>
             </form>
@@ -588,7 +628,7 @@
             {%- endif -%}
           {%- endif -%}
           {%- if section.settings.ship_strong != blank or section.settings.ship_rest != blank -%}
-            <div class="mm-ship"><strong>{{ section.settings.ship_strong }}</strong> {{ section.settings.ship_rest }}</div>
+            <div class="mm-ship">{% if section.settings.ship_strong != blank %}<strong>{{ section.settings.ship_strong }}</strong> {% endif %}{{ section.settings.ship_rest }}</div>
           {%- endif -%}
         </div>
       {%- endif -%}
@@ -675,53 +715,58 @@
 {
   "name": "Packages (Custom)",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FLASH SALE: 1ST MONTH FREE" },
-    { "type": "richtext", "id": "title", "label": "Title", "default": "<p>GET YOUR FIRST MONTH FREE</p>" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "info": "Leave empty to hide the orange pill." },
+    { "type": "richtext", "id": "title", "label": "Title", "default": "<p>CHOOSE YOUR UP MEN ROUTINE</p>" },
+    { "type": "textarea", "id": "subtitle", "label": "Section description", "default": "Start with 30 days, or take the 90-day routine and get 3 bottles for the price of 2 on every shipment." },
     { "type": "header", "content": "Offer header (top of section)" },
-    { "type": "checkbox", "id": "offer_enabled", "label": "Show offer header", "default": false },
+    { "type": "checkbox", "id": "offer_enabled", "label": "Show offer header", "default": true },
     { "type": "text", "id": "offer_title", "label": "Offer title", "default": "JOIN UP MEN TODAY" },
     { "type": "checkbox", "id": "offer_tag_enabled", "label": "Show offer tags", "default": true },
-    { "type": "text", "id": "offer_tag_top", "label": "Tag small text", "default": "GET" },
-    { "type": "text", "id": "offer_tag_main", "label": "Tag highlight text", "default": "50% OFF TODAY" },
+    { "type": "text", "id": "offer_tag_top", "label": "Tag small text", "default": "90-DAY PLAN" },
+    { "type": "text", "id": "offer_tag_main", "label": "Tag highlight text", "default": "3 FOR THE PRICE OF 2" },
     { "type": "image_picker", "id": "offer_tag_image", "label": "Tag image (optional)", "info": "Replaces the default circle badge. Use a transparent PNG (e.g. a starburst sticker)." },
-    { "type": "checkbox", "id": "countdown_enabled", "label": "Show countdown", "default": true },
-    { "type": "text", "id": "countdown_target", "label": "Countdown end date", "info": "Format: 2026-07-31T23:59:59", "default": "2026-07-31T23:59:59" },
+    { "type": "checkbox", "id": "countdown_enabled", "label": "Show countdown", "info": "Only switch on with a real, fixed end date below. An expired date freezes the timer at zero.", "default": false },
+    { "type": "text", "id": "countdown_target", "label": "Countdown end date", "info": "Format: 2026-07-31T23:59:59. Leave empty to show the static label instead." },
+    { "type": "text", "id": "countdown_fallback", "label": "Label shown when no countdown runs", "default": "WELCOME KIT INCLUDED WITH YOUR FIRST SHIPMENT" },
     { "type": "text", "id": "label_days", "label": "Days label", "default": "DAYS" },
     { "type": "text", "id": "label_hours", "label": "Hours label", "default": "HOURS" },
     { "type": "text", "id": "label_min", "label": "Minutes label", "default": "MIN" },
     { "type": "text", "id": "label_sec", "label": "Seconds label", "default": "SEC" },
-    { "type": "checkbox", "id": "scarcity_enabled", "label": "Show scarcity note", "default": true },
-    { "type": "text", "id": "scarcity_text_1", "label": "Scarcity text (after month)", "default": "has a high risk of selling out —" },
-    { "type": "text", "id": "scarcity_number", "label": "Scarcity number", "default": "2140" },
-    { "type": "text", "id": "scarcity_text_2", "label": "Scarcity text (after number)", "default": "purchases made today." },
-    { "type": "header", "content": "Launch Kit (subscription)" },
+    { "type": "checkbox", "id": "scarcity_enabled", "label": "Show note under the offer header", "default": true },
+    { "type": "text", "id": "scarcity_icon", "label": "Note icon", "default": "🎁" },
+    { "type": "checkbox", "id": "scarcity_show_month", "label": "Prefix the note with the current month", "default": false },
+    { "type": "text", "id": "scarcity_text_1", "label": "Note text", "default": "ALL PHYSICAL WELCOME GIFTS SHIP WITH YOUR FIRST ORDER · DIGITAL GUIDE BY EMAIL" },
+    { "type": "text", "id": "scarcity_number", "label": "Highlighted number", "info": "Leave empty unless it is a real, verifiable figure." },
+    { "type": "text", "id": "scarcity_text_2", "label": "Note text (after the number)" },
+    { "type": "header", "content": "90-day plan (subscription)" },
     { "type": "product", "id": "product_kit", "label": "Product", "info": "Product sold in this card. If empty, the theme looks for the handle up-men-launch-kit (or up-men)." },
-    { "type": "text", "id": "kit_ribbon", "label": "Ribbon", "info": "Leave empty to hide the ribbon.", "default": "FLASH SALE · 1ST MONTH FREE" },
-    { "type": "text", "id": "kit_badge", "label": "Badge (above name)", "default": "3-MONTH AUTO-RENEW SUBSCRIPTION" },
-    { "type": "text", "id": "kit_name", "label": "Package name", "default": "3-MONTH PLAN" },
-    { "type": "text", "id": "kit_sub", "label": "Subtitle", "default": "The complete 90-day protocol" },
-    { "type": "text", "id": "kit_cta_label", "label": "Button label", "default": "Start My 90-Day Protocol →" },
+    { "type": "text", "id": "kit_ribbon", "label": "Ribbon", "info": "Leave empty to hide the ribbon.", "default": "BEST VALUE · 3 BOTTLES FOR THE PRICE OF 2" },
+    { "type": "text", "id": "kit_badge", "label": "Badge (above name)", "default": "90-DAY SUBSCRIPTION" },
+    { "type": "text", "id": "kit_name", "label": "Package name", "default": "90-DAY ROUTINE" },
+    { "type": "text", "id": "kit_sub", "label": "Subtitle", "default": "3 bottles delivered together" },
+    { "type": "text", "id": "kit_cta_label", "label": "Button label", "default": "START MY 90-DAY ROUTINE" },
     { "type": "text", "id": "kit_price_compare", "label": "Placeholder price — crossed out", "default": "$177", "info": "Shown only while no product is connected. With a product, the real Shopify price is used." },
     { "type": "text", "id": "kit_price", "label": "Placeholder price", "default": "$118" },
-    { "type": "textarea", "id": "kit_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — subscription card\" blocks.", "default": "Just $39.33 per month\nAuto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
+    { "type": "textarea", "id": "kit_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — subscription card\" blocks.", "default": "$39.33/month at the 90-day subscriber rate\nSave $59 every 90-day shipment compared with three monthly shipments.\nCovered by our 90-day satisfaction guarantee." },
     { "type": "checkbox", "id": "kit_show_addons", "label": "Show ✓ benefit rows", "info": "Uncheck to hide the whole ✓ list on this card.", "default": true },
     { "type": "checkbox", "id": "kit_show_perks", "label": "Show perks under the button", "default": true },
     { "type": "paragraph", "content": "Blocks for this card: \"Benefit — subscription\" for the ✓ rows (blocks only — no blocks, no rows), \"Perk — subscription card\" for the list under the button (falls back to the textarea above)." },
     { "type": "text", "id": "variant_id_kit", "label": "Variant ID (optional)", "info": "If empty, uses the product's first available variant." },
     { "type": "text", "id": "selling_plan_kit", "label": "Selling plan ID (optional)", "info": "Required for subscription pricing. Leave empty for one-time purchase." },
-    { "type": "header", "content": "Try Once (one-time)" },
+    { "type": "header", "content": "Monthly plan (subscription)" },
     { "type": "product", "id": "product_once", "label": "Product", "info": "Product sold in this card. If empty, the theme looks for the handle up-men-try-once (or up-men)." },
-    { "type": "text", "id": "once_badge", "label": "Badge (above name)", "default": "AUTO-SHIP & SAVE" },
-    { "type": "text", "id": "once_name", "label": "Package name", "default": "MONTHLY PLAN" },
-    { "type": "text", "id": "once_sub", "label": "Subtitle", "default": "1-month supply, delivered monthly" },
-    { "type": "text", "id": "once_cta_label", "label": "Button label", "default": "Try Up Men →" },
-    { "type": "text", "id": "once_price_compare", "label": "Placeholder price — crossed out", "default": "$59", "info": "Shown only while no product is connected. With a product, the real Shopify price is used." },
-    { "type": "text", "id": "once_price", "label": "Placeholder price", "default": "$44" },
-    { "type": "textarea", "id": "once_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — monthly card\" blocks.", "default": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
+    { "type": "text", "id": "once_badge", "label": "Badge (above name)", "default": "FLEXIBLE START" },
+    { "type": "text", "id": "once_name", "label": "Package name", "default": "30-DAY ROUTINE" },
+    { "type": "text", "id": "once_sub", "label": "Subtitle", "default": "1 bottle delivered every 30 days" },
+    { "type": "text", "id": "once_cta_label", "label": "Button label", "default": "START WITH 30 DAYS" },
+    { "type": "text", "id": "once_price_compare", "label": "Placeholder price — crossed out", "info": "Shown only while no product is connected. With a product, the real Shopify price is used." },
+    { "type": "text", "id": "once_price", "label": "Placeholder price", "default": "$59" },
+    { "type": "textarea", "id": "once_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — monthly card\" blocks.", "default": "Covered by our 90-day satisfaction guarantee." },
     { "type": "checkbox", "id": "once_show_addons", "label": "Show ✓ benefit rows", "info": "Uncheck to hide the whole ✓ list on this card.", "default": true },
     { "type": "checkbox", "id": "once_show_perks", "label": "Show perks under the button", "default": true },
     { "type": "paragraph", "content": "Blocks for this card: \"Benefit — monthly card\" for the ✓ rows (blocks only — no blocks, no rows), \"Perk — monthly card\" for the list under the button (falls back to the textarea above)." },
     { "type": "text", "id": "variant_id_once", "label": "Variant ID (optional)" },
+    { "type": "text", "id": "selling_plan_once", "label": "Selling plan ID (optional)", "info": "Required for subscription pricing. If empty, the theme uses the product's first selling plan." },
 
     { "type": "header", "content": "Third package" },
     { "type": "checkbox", "id": "third_enabled", "label": "Show third package", "info": "Turns the section into a 3-card row.", "default": true },
@@ -734,7 +779,7 @@
     { "type": "text", "id": "third_cta_label", "label": "Button label", "default": "Start My 180-Day Protocol →" },
     { "type": "text", "id": "third_price_compare", "label": "Placeholder price — crossed out", "default": "$354", "info": "Shown only while no product is connected. With a product, the real Shopify price is used." },
     { "type": "text", "id": "third_price", "label": "Placeholder price", "default": "$199" },
-    { "type": "textarea", "id": "third_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — third card\" blocks.", "default": "Just $33.16 per month\nAuto-renews every 180 days at $249 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee" },
+    { "type": "textarea", "id": "third_perks", "label": "Perks below the button", "info": "One per line. Ignored once you add \"Perk — third card\" blocks.", "default": "$33.16/month at the 180-day subscriber rate\nCovered by our 90-day satisfaction guarantee." },
     { "type": "checkbox", "id": "third_show_addons", "label": "Show ✓ benefit rows", "info": "Uncheck to hide the whole ✓ list on this card.", "default": true },
     { "type": "checkbox", "id": "third_show_perks", "label": "Show perks under the button", "default": true },
     { "type": "paragraph", "content": "Blocks for this card: \"Benefit — third card\" for the ✓ rows (blocks only — no blocks, no rows), \"Perk — third card\" for the list under the button (falls back to the textarea above)." },
@@ -743,9 +788,10 @@
 
     { "type": "header", "content": "Shared card labels" },
     { "type": "text", "id": "qty_label", "label": "Quantity label", "default": "Quantity" },
-    { "type": "text", "id": "ship_strong", "label": "Shipping note — bold part", "default": "Ships in 24h" },
-    { "type": "text", "id": "ship_rest", "label": "Shipping note — rest", "default": "if ordered today." },
-    { "type": "text", "id": "guarantee_note", "label": "Guarantee note", "default": "90-DAY HIGHER-T GUARANTEE · TRY IT RISK-FREE" },
+    { "type": "text", "id": "price_suffix", "label": "Short label after the price", "info": "e.g. TODAY. Leave empty to hide.", "default": "TODAY" },
+    { "type": "text", "id": "ship_strong", "label": "Shipping note — bold part", "info": "Do not publish a processing time that the operation has not confirmed." },
+    { "type": "text", "id": "ship_rest", "label": "Shipping note — rest", "default": "Order processing and delivery estimates are shown at checkout." },
+    { "type": "text", "id": "guarantee_note", "label": "Guarantee note", "default": "COVERED BY OUR 90-DAY SATISFACTION GUARANTEE" },
     { "type": "header", "content": "Banner size" },
     {
       "type": "select",
@@ -779,15 +825,15 @@
     { "type": "image_picker", "id": "fallback_image", "label": "Fallback product image", "info": "Shown when no product is connected to the store yet." },
     { "type": "header", "content": "Free gift images" },
     { "type": "paragraph", "content": "Clicking any of these opens the enlarged lightbox. The caption is what the visitor reads there." },
-    { "type": "text", "id": "gifts_label", "label": "Group label (accessibility)", "default": "Free gifts included" },
+    { "type": "text", "id": "gifts_label", "label": "Group label (accessibility)", "default": "Welcome gifts included with your first order" },
     { "type": "image_picker", "id": "gift_1", "label": "Free gift image 1" },
-    { "type": "text", "id": "gift_1_alt", "label": "Caption 1", "default": "Free gift: metal storage case" },
+    { "type": "text", "id": "gift_1_alt", "label": "Caption 1", "default": "Welcome gift: UP MEN Branded Thermal Bottle" },
     { "type": "image_picker", "id": "gift_2", "label": "Free gift image 2" },
-    { "type": "text", "id": "gift_2_alt", "label": "Caption 2", "default": "Free gift: testosterone cheat sheet" },
+    { "type": "text", "id": "gift_2_alt", "label": "Caption 2", "default": "Welcome gift: UP MEN Crossbody Pack" },
     { "type": "image_picker", "id": "gift_3", "label": "Free gift image 3" },
-    { "type": "text", "id": "gift_3_alt", "label": "Caption 3", "default": "Free gift: high-T cookbook" },
+    { "type": "text", "id": "gift_3_alt", "label": "Caption 3", "default": "Welcome gift: Keychain Pill Case" },
     { "type": "image_picker", "id": "gift_4", "label": "Free gift image 4" },
-    { "type": "text", "id": "gift_4_alt", "label": "Caption 4", "default": "Free gift: 90-day tracker" }
+    { "type": "text", "id": "gift_4_alt", "label": "Caption 4", "default": "Welcome gift: Smart Activity Band" }
   ],
   "max_blocks": 50,
   "blocks": [
@@ -795,21 +841,21 @@
       "type": "kit_perk",
       "name": "Perk — subscription card",
       "settings": [
-        { "type": "text", "id": "text", "label": "Perk", "default": "90-day higher-T money-back guarantee" }
+        { "type": "text", "id": "text", "label": "Perk", "default": "Covered by our 90-day satisfaction guarantee." }
       ]
     },
     {
       "type": "once_perk",
       "name": "Perk — monthly card",
       "settings": [
-        { "type": "text", "id": "text", "label": "Perk", "default": "90-day higher-T money-back guarantee" }
+        { "type": "text", "id": "text", "label": "Perk", "default": "Covered by our 90-day satisfaction guarantee." }
       ]
     },
     {
       "type": "kit_addon",
       "name": "Benefit — subscription",
       "settings": [
-        { "type": "text", "id": "text", "label": "Benefit", "default": "UP MEN Capsule Case" },
+        { "type": "text", "id": "text", "label": "Benefit", "default": "Keychain Pill Case" },
         { "type": "checkbox", "id": "free_prefix", "label": "Prefix with a green \"Free\"", "default": true },
         { "type": "text", "id": "old_value", "label": "Old value (struck through)", "info": "Shown to the left of the value." },
         { "type": "text", "id": "value", "label": "Value (right side)", "default": "$10" },
@@ -820,7 +866,8 @@
           "options": [
             { "value": "plain", "label": "White" },
             { "value": "free", "label": "Green, struck through" },
-            { "value": "save", "label": "Green" }
+            { "value": "save", "label": "Green" },
+            { "value": "heading", "label": "Group heading (no checkmark)" }
           ],
           "default": "free"
         }
@@ -830,14 +877,14 @@
       "type": "third_perk",
       "name": "Perk — third card",
       "settings": [
-        { "type": "text", "id": "text", "label": "Perk", "default": "90-day higher-T money-back guarantee" }
+        { "type": "text", "id": "text", "label": "Perk", "default": "Covered by our 90-day satisfaction guarantee." }
       ]
     },
     {
       "type": "third_addon",
       "name": "Benefit — third card",
       "settings": [
-        { "type": "text", "id": "text", "label": "Benefit", "default": "UP MEN Capsule Case" },
+        { "type": "text", "id": "text", "label": "Benefit", "default": "Keychain Pill Case" },
         { "type": "checkbox", "id": "free_prefix", "label": "Prefix with a green \"Free\"", "default": true },
         { "type": "text", "id": "old_value", "label": "Old value (struck through)", "info": "Shown to the left of the value." },
         { "type": "text", "id": "value", "label": "Value (right side)", "default": "$10" },
@@ -848,7 +895,8 @@
           "options": [
             { "value": "plain", "label": "White" },
             { "value": "free", "label": "Green, struck through" },
-            { "value": "save", "label": "Green" }
+            { "value": "save", "label": "Green" },
+            { "value": "heading", "label": "Group heading (no checkmark)" }
           ],
           "default": "free"
         }
@@ -858,7 +906,7 @@
       "type": "once_addon",
       "name": "Benefit — monthly card",
       "settings": [
-        { "type": "text", "id": "text", "label": "Benefit", "default": "UP MEN Capsule Case" },
+        { "type": "text", "id": "text", "label": "Benefit", "default": "Keychain Pill Case" },
         { "type": "checkbox", "id": "free_prefix", "label": "Prefix with a green \"Free\"", "default": true },
         { "type": "text", "id": "old_value", "label": "Old value (struck through)", "info": "Shown to the left of the value." },
         { "type": "text", "id": "value", "label": "Value (right side)" },
@@ -869,7 +917,8 @@
           "options": [
             { "value": "plain", "label": "White" },
             { "value": "free", "label": "Green, struck through" },
-            { "value": "save", "label": "Green" }
+            { "value": "save", "label": "Green" },
+            { "value": "heading", "label": "Group heading (no checkmark)" }
           ],
           "default": "free"
         }
@@ -880,33 +929,30 @@
     {
       "name": "Packages (Custom)",
       "blocks": [
-        { "type": "kit_addon", "settings": { "text": "90-Day Supply — 3 Bottles", "free_prefix": false, "old_value": "$177", "value": "$118", "value_style": "plain" } },
-        { "type": "kit_addon", "settings": { "text": "1st Bottle", "free_prefix": true, "value": "Save $59", "value_style": "save" } },
-        { "type": "kit_addon", "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "value": "$10", "value_style": "free" } },
-        { "type": "kit_addon", "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "value": "$20", "value_style": "free" } },
-        { "type": "kit_addon", "settings": { "text": "1 Month of Ladder Workout App", "free_prefix": true, "value": "$30", "value_style": "free" } },
-        { "type": "kit_addon", "settings": { "text": "Surprise Gift", "free_prefix": true, "value": "", "value_style": "free" } },
-        { "type": "kit_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } },
-        { "type": "once_addon", "settings": { "text": "1 Bottle — 30-Day Supply", "free_prefix": false, "value": "$59", "value_style": "plain" } },
-        { "type": "once_addon", "settings": { "text": "$15 off your first order", "free_prefix": false, "value": "Save $15", "value_style": "save" } },
-        { "type": "once_addon", "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "value": "", "value_style": "free" } },
-        { "type": "once_addon", "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "value": "", "value_style": "free" } },
-        { "type": "once_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } },
-        { "type": "third_addon", "settings": { "text": "180-Day Supply — 6 Bottles", "free_prefix": false, "old_value": "$354", "value": "$199", "value_style": "plain" } },
-        { "type": "third_addon", "settings": { "text": "2 Bottles", "free_prefix": true, "value": "Save $118", "value_style": "save" } },
-        { "type": "third_addon", "settings": { "text": "UP MEN Capsule Case", "free_prefix": true, "value": "$10", "value_style": "free" } },
-        { "type": "third_addon", "settings": { "text": "UP MEN Testosterone Guide", "free_prefix": true, "value": "$20", "value_style": "free" } },
-        { "type": "third_addon", "settings": { "text": "3 Months of Ladder Workout App", "free_prefix": true, "value": "$90", "value_style": "free" } },
-        { "type": "third_addon", "settings": { "text": "Surprise Gift", "free_prefix": true, "value": "", "value_style": "free" } },
-        { "type": "third_addon", "settings": { "text": "Free US shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } },
-        { "type": "kit_perk", "settings": { "text": "Just $39.33 per month" } },
-        { "type": "kit_perk", "settings": { "text": "Auto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime" } },
-        { "type": "kit_perk", "settings": { "text": "90-day higher-T money-back guarantee" } },
-        { "type": "once_perk", "settings": { "text": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime" } },
-        { "type": "once_perk", "settings": { "text": "90-day higher-T money-back guarantee" } },
-        { "type": "third_perk", "settings": { "text": "Just $33.16 per month" } },
-        { "type": "third_perk", "settings": { "text": "Auto-renews every 180 days at $249 — skip a delivery, pause or cancel anytime" } },
-        { "type": "third_perk", "settings": { "text": "90-day higher-T money-back guarantee" } }
+        { "type": "kit_addon", "settings": { "text": "3 bottles · 90-day supply", "free_prefix": false, "old_value": "", "value": "", "value_style": "plain" } },
+        { "type": "kit_addon", "settings": { "text": "3 bottles for the price of 2, on every 90-day shipment", "free_prefix": false, "old_value": "", "value": "", "value_style": "plain" } },
+        { "type": "kit_addon", "settings": { "text": "Complete Welcome Kit with your first shipment", "free_prefix": false, "value": "", "value_style": "plain" } },
+        { "type": "kit_addon", "settings": { "text": "FREE U.S. shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } },
+        { "type": "kit_addon", "settings": { "text": "YOUR COMPLETE WELCOME KIT", "free_prefix": false, "value": "", "value_style": "heading" } },
+        { "type": "kit_addon", "settings": { "text": "UP MEN Branded Thermal Bottle", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "UP MEN Crossbody Pack", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "Keychain Pill Case", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "Smart Activity Band", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "Smart Activity Band", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "UP MEN Crossbody Pack", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "Keychain Pill Case", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "kit_addon", "settings": { "text": "UP MEN Men’s Wellness Guide (Digital — delivered by email)", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "once_addon", "settings": { "text": "1 bottle · 30-day supply", "free_prefix": false, "value": "", "value_style": "plain" } },
+        { "type": "once_addon", "settings": { "text": "Starter Welcome Kit with your first shipment", "free_prefix": false, "value": "", "value_style": "plain" } },
+        { "type": "once_addon", "settings": { "text": "FREE U.S. shipping on your first order", "free_prefix": false, "value": "", "value_style": "plain" } },
+        { "type": "once_addon", "settings": { "text": "YOUR STARTER WELCOME KIT", "free_prefix": false, "value": "", "value_style": "heading" } },
+        { "type": "once_addon", "settings": { "text": "UP MEN Branded Thermal Bottle", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "once_addon", "settings": { "text": "Keychain Pill Case", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "once_addon", "settings": { "text": "UP MEN Men’s Wellness Guide (Digital — delivered by email)", "free_prefix": true, "value": "", "value_style": "free" } },
+        { "type": "kit_perk", "settings": { "text": "$39.33/month at the 90-day subscriber rate" } },
+        { "type": "kit_perk", "settings": { "text": "Save $59 every 90-day shipment compared with three monthly shipments." } },
+        { "type": "kit_perk", "settings": { "text": "Covered by our 90-day satisfaction guarantee." } },
+        { "type": "once_perk", "settings": { "text": "Covered by our 90-day satisfaction guarantee." } }
       ]
     }
   ]

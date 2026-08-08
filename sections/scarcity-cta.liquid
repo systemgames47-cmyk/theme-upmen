@@ -1,4 +1,4 @@
-{%- comment -%} Guarantee banner — Boost your testosterone in 90 days, risk-free {%- endcomment -%}
+{%- comment -%} Guarantee banner — 90-day satisfaction guarantee, links to the published policy {%- endcomment -%}
 {%- assign sid = section.id -%}
 {%- if section.settings.bg_mobile != blank -%}
   {%- assign guar_bg_mobile = section.settings.bg_mobile | image_url: width: 1200 -%}
@@ -77,12 +77,12 @@
 {
   "name": "Guarantee Banner",
   "settings": [
-    { "type": "text", "id": "badge", "label": "Badge text", "default": "90-DAY HIGHER-T GUARANTEE" },
-    { "type": "text", "id": "title_pre", "label": "Title", "default": "BOOST YOUR TESTOSTERONE" },
-    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "IN 90 DAYS" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Try Up Men risk-free for 90 days. If you're not satisfied, we will refund you, no questions asked. Reclaim your masculinity, risk-free." },
-    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "TRY IT NOW" },
-    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "badge", "label": "Badge text", "default": "90-DAY SATISFACTION GUARANTEE" },
+    { "type": "text", "id": "title_pre", "label": "Title", "default": "TRY THE UP MEN ROUTINE" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "FOR 90 DAYS" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Your purchase is covered by our 90-day satisfaction guarantee. If UP MEN is not the right fit for you, request a refund according to the published guarantee terms." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "REVIEW THE 90-DAY GUARANTEE" },
+    { "type": "url", "id": "cta_link", "label": "CTA link", "info": "Point this at the published guarantee or refund policy, e.g. /policies/refund-policy." },
     { "type": "header", "content": "Banner size" },
     {
       "type": "select",

@@ -14,7 +14,7 @@
       "blocks": {
         "t1": { "type": "topic", "settings": { "icon": "📦", "title": "ORDERS & SHIPPING", "text": "Tracking, delivery times and changing an order.", "link": "" } },
         "t2": { "type": "topic", "settings": { "icon": "🔁", "title": "SUBSCRIPTIONS", "text": "Skip a delivery, pause, or cancel at any time.", "link": "" } },
-        "t3": { "type": "topic", "settings": { "icon": "🛡️", "title": "RETURNS & GUARANTEE", "text": "How the 90-day higher-T guarantee works.", "link": "" } },
+        "t3": { "type": "topic", "settings": { "icon": "🛡️", "title": "RETURNS & GUARANTEE", "text": "How the 90-day satisfaction guarantee works.", "link": "" } },
         "t4": { "type": "topic", "settings": { "icon": "💊", "title": "USING UP MEN", "text": "Dosing, timing and what to expect month by month.", "link": "" } },
         "q1": { "type": "qa", "settings": { "question": "When will my order arrive?", "answer": "<p>Orders placed before 2pm ship the same business day. Delivery inside the US takes 3 to 5 business days, and you get a tracking link by email as soon as the parcel leaves our facility.</p>" } },
         "q2": { "type": "qa", "settings": { "question": "How do I skip, pause or cancel my subscription?", "answer": "<p>Open the link in any order confirmation email to reach your subscription portal. You can skip a single delivery, push the next shipment back, or cancel outright — no phone call, no retention script.</p>" } },

@@ -1,0 +1,33 @@
+{%- comment -%}
+  Price shown on a "Packages (Custom)" card.
+
+  When the card adds the item with a selling plan, the visitor must see the price
+  that selling plan will actually charge — not the bare variant price. This looks
+  the allocation up by id and falls back to the variant price when there is no
+  match (no plan selected, or the plan is not available for that variant).
+
+  Usage: {% render 'mm-plan-price', variant: vk, selling_plan_id: spk, suffix: section.settings.price_suffix %}
+
+  Params:
+    variant          the variant object being added to cart
+    selling_plan_id  selling plan id being submitted (may be blank)
+    suffix           optional short label after the price, e.g. "TODAY"
+{%- endcomment -%}
+{%- assign mm_price = variant.price -%}
+{%- assign mm_compare = variant.compare_at_price -%}
+{%- if selling_plan_id != blank -%}
+  {%- assign mm_plan_id = selling_plan_id | append: '' -%}
+  {%- for allocation in variant.selling_plan_allocations -%}
+    {%- assign mm_alloc_id = allocation.selling_plan.id | append: '' -%}
+    {%- if mm_alloc_id == mm_plan_id -%}
+      {%- assign mm_price = allocation.per_delivery_price -%}
+      {%- assign mm_compare = allocation.compare_at_price -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+<div class="mm-price">
+  {%- if mm_compare > mm_price -%}<span class="old">{{ mm_compare | money }}</span>{%- endif -%}
+  <span class="now">{{ mm_price | money }}</span>
+  {%- if suffix != blank -%}<span class="suffix">{{ suffix }}</span>{%- endif -%}
+</div>

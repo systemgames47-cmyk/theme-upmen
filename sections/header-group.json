@@ -14,11 +14,12 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "pre_text": "CLAIM YOUR OFFER",
-        "highlight": "50% OFF",
-        "post_text": "+ $70 FREE GIFTS",
-        "show_countdown": true,
-        "countdown_target": "2026-08-05T23:59:59"
+        "pre_text": "90-DAY PLAN:",
+        "highlight": "3 BOTTLES FOR $118",
+        "post_text": "+ 5 WELCOME GIFTS",
+        "post_text_mobile": "+ 5 WELCOME GIFTS",
+        "show_countdown": false,
+        "countdown_target": ""
       }
     },
     "header": {
@@ -29,7 +30,7 @@
         "header_bg": "#0a0503",
         "header_text": "#ffffff",
         "show_cta": true,
-        "cta_label": "50% OFF LAUNCH KIT",
+        "cta_label": "VIEW 90-DAY OFFER",
         "cta_link": "",
         "show_cart": false,
         "show_cart_mobile": false,
