@@ -12,21 +12,21 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "reviews_text": "4,548 REVIEWS",
-        "title_line1": "UP MEN",
-        "title_line2": "THE MOST",
-        "title_highlight": "POTENT & NATURAL",
-        "title_line3": "TESTOSTERONE STACK ON EARTH",
-        "subtitle": "8 powerful ingredients packed into one daily male-vitality supplement.",
-        "cta_label": "UNLOCK YOUR POWER TODAY",
+        "reviews_text": "VERIFIED CUSTOMER FEEDBACK",
+        "title_line1": "ONE DAILY FORMULA.",
+        "title_line2": "",
+        "title_highlight": "A STRONGER 90-DAY ROUTINE.",
+        "title_line3": "",
+        "subtitle": "9 active ingredients in one daily men’s wellness formula, designed to simplify consistency around training, nutrition, sleep and everyday routines.",
+        "cta_label": "SEE THE 90-DAY OFFER",
         "cta_link": "",
-        "guarantee_text": "TRY IT FOR 90 DAYS. HIGHER T OR YOUR MONEY BACK.",
+        "guarantee_text": "3 BOTTLES FOR THE PRICE OF 2 · 5 WELCOME GIFTS · 90-DAY SATISFACTION GUARANTEE",
         "media_enabled": false,
         "media_size_mobile": "medium",
         "media_size_desktop": "medium",
         "media_tag_enabled": true,
-        "media_tag_top": "GET",
-        "media_tag_main": "50% OFF TODAY",
+        "media_tag_top": "90-DAY PLAN",
+        "media_tag_main": "3 FOR THE PRICE OF 2",
         "media_tag_link": "",
         "show_product_image": false,
         "product_alt": "Up Men Natural Testosterone Support",
@@ -50,8 +50,8 @@
           "settings": {
             "icon_image": "shopify://shop_images/rai.png",
             "icon": "⚡",
-            "title": "SKYROCKET ENERGY & STAMINA",
-            "text": "Increase energy & athletic performance"
+            "title": "ONE DAILY FORMULA",
+            "text": "Simplify the supplementation step."
           }
         },
         "benefit-2": {
@@ -59,8 +59,8 @@
           "settings": {
             "icon_image": "shopify://shop_images/fog.png",
             "icon": "🔥",
-            "title": "SUPPORT MALE VITALITY",
-            "text": "Amplify passionate energy"
+            "title": "BUILT FOR CONSISTENCY",
+            "text": "A routine designed to be repeated."
           }
         },
         "benefit-3": {
@@ -68,8 +68,8 @@
           "settings": {
             "icon_image": "shopify://shop_images/set.png",
             "icon": "🎯",
-            "title": "ENHANCE PRODUCTIVITY & FOCUS",
-            "text": "Stay sharp & focused all day"
+            "title": "MADE FOR REAL SCHEDULES",
+            "text": "Easy to take at home or on the go."
           }
         },
         "benefit-4": {
@@ -77,8 +77,8 @@
           "settings": {
             "icon_image": "shopify://shop_images/brac.png",
             "icon": "💪",
-            "title": "SUPERCHARGE STRENGTH",
-            "text": "Build & maintain lean muscle mass"
+            "title": "90-DAY STRUCTURE",
+            "text": "A clear routine with fewer daily decisions."
           }
         },
         "benefit-5": {
@@ -86,8 +86,8 @@
           "settings": {
             "icon_image": "shopify://shop_images/son.png",
             "icon": "😴",
-            "title": "IMPROVE RECOVERY",
-            "text": "Optimize sleep & muscle recovery"
+            "title": "TRANSPARENT FORMULA",
+            "text": "Exact amounts shown on the Supplement Facts."
           }
         }
       },
@@ -104,8 +104,8 @@
         "decline_p1": "Testosterone levels have been dropping by 1% every year since 1980. Stress, poor sleep, processed diets, and toxins are destroying natural hormone production.",
         "decline_p2": "The impact? Low testosterone drains energy, strength, and focus — making it harder to perform at your best in life and the gym.",
         "decline_p3": "The good news: Up Men helps you reclaim your edge with natural testosterone support for energy, focus, and strength.",
-        "solution_title": "THE SOLUTION?",
-        "solution_lede": "Maintaining balanced testosterone levels is pivotal for contributing to an overall sense of well-being. Encouraging our body's natural hormonal function can help us men:",
+        "solution_title": "THE SIMPLER WAY TO STAY CONSISTENT",
+        "solution_lede": "UP MEN brings 9 active ingredients into one daily men’s wellness formula, designed to fit alongside training, nutrition, sleep and the routines that already matter.",
         "cta_label": "TRY IT NOW",
         "cta_link": "",
         "decline_height_mobile": "auto",
@@ -150,7 +150,7 @@
             "image": "shopify://shop_images/04.png",
             "day": "MONTH 3",
             "phase": "LIFTOFF",
-            "items": "All 8 ingredients working like a tuned engine\nBody looks leaner, stronger, more masculine\nRecovery between sessions speeds up\nPeople ask what you're doing differently"
+            "items": "All 9 active ingredients working together in one daily serving\nBody looks leaner, stronger, more masculine\nRecovery between sessions speeds up\nPeople ask what you're doing differently"
           }
         },
         "step-4": {
@@ -159,7 +159,7 @@
             "image": "shopify://shop_images/05.png",
             "day": "MONTH 6",
             "phase": "ORBIT",
-            "items": "T-production optimized fully\nStrength, sleep and mood at a new baseline\nNot temporary, this is your new normal\nWelcome to the man you're supposed to be"
+            "items": "The daily serving is fully part of your routine\nStrength, sleep and mood at a new baseline\nA routine you can keep repeating\nWelcome to the man you're supposed to be"
           }
         }
       },
@@ -230,7 +230,7 @@
           "type": "ingredient",
           "settings": {
             "name": "Tongkat Ali",
-            "dose": "1000 mg",
+            "dose": "1,000 mg",
             "description": "Boosts testosterone, enhances libido, improves fertility & supports muscle growth",
             "image_asset": "ing-1.png"
           }
@@ -247,8 +247,8 @@
         "ingredient-3": {
           "type": "ingredient",
           "settings": {
-            "name": "K1 & K2",
-            "dose": "100 mcg",
+            "name": "Vitamin K1 + K2",
+            "dose": "100 mcg K1 + 100 mcg K2",
             "description": "Supports bone health and density, improves mood, and encourages T production",
             "image_asset": "ing-3.png"
           }
@@ -257,7 +257,7 @@
           "type": "ingredient",
           "settings": {
             "name": "Vitamin D",
-            "dose": "4000 IU",
+            "dose": "100 mcg (4,000 IU)",
             "description": "Essential for maintaining cellular health and helping regulate testosterone",
             "image_asset": "ing-4.png"
           }
@@ -284,7 +284,7 @@
           "type": "ingredient",
           "settings": {
             "name": "Fenugreek",
-            "dose": "675 mg",
+            "dose": "1,000 mg",
             "description": "Supports testosterone production, DHT levels, and male vitality",
             "image_asset": "ing-7.png"
           }
@@ -310,8 +310,8 @@
         "ingredient-8"
       ],
       "settings": {
-        "title": "8 INGREDIENTS IN 1 POWERFUL FORMULA",
-        "subtitle": "CLINICALLY DOSED + EFFECTIVE",
+        "title": "9 ACTIVE INGREDIENTS IN 1 DAILY FORMULA",
+        "subtitle": "EXACT AMOUNTS SHOWN ON THE SUPPLEMENT FACTS",
         "cta_label": "TRY IT NOW",
         "cta_link": "",
         "height_mobile": "auto",
@@ -354,12 +354,12 @@
     "scarcity_cta": {
       "type": "scarcity-cta",
       "settings": {
-        "badge": "90-DAY HIGHER-T GUARANTEE",
-        "title_pre": "BOOST YOUR TESTOSTERONE",
-        "title_highlight": "IN 90 DAYS",
-        "text": "Try Up Men risk-free for 90 days. If you're not satisfied, we will refund you, no questions asked. Reclaim your masculinity, risk-free.",
-        "cta_label": "TRY IT NOW",
-        "cta_link": "",
+        "badge": "90-DAY SATISFACTION GUARANTEE",
+        "title_pre": "TRY THE UP MEN ROUTINE",
+        "title_highlight": "FOR 90 DAYS",
+        "text": "Your purchase is covered by our 90-day satisfaction guarantee. If UP MEN is not the right fit for you, request a refund according to the published guarantee terms.",
+        "cta_label": "REVIEW THE 90-DAY GUARANTEE",
+        "cta_link": "/policies/refund-policy",
         "height_mobile": "auto",
         "height_desktop": "auto"
       }
@@ -491,7 +491,7 @@
         "badge-3"
       ],
       "settings": {
-        "heading": "Here's What's Inside Every Capsule",
+        "heading": "Here's What's Inside Each Daily Serving",
         "use_text": "Suggested use: take 5 capsules daily with food.",
         "label_image": "shopify://shop_images/gen_2656_0_1783841183087.png",
         "box_size": "medium",
@@ -505,57 +505,57 @@
         "kit_1": {
           "type": "kit_addon",
           "settings": {
-            "text": "90-Day Supply — 3 Bottles",
+            "text": "3 bottles · 90-day supply",
             "free_prefix": false,
-            "old_value": "$177",
-            "value": "$118",
+            "old_value": "",
+            "value": "",
             "value_style": "plain"
           }
         },
         "kit_2": {
           "type": "kit_addon",
           "settings": {
-            "text": "1st Bottle",
-            "free_prefix": true,
+            "text": "3 bottles for the price of 2, on every 90-day shipment",
+            "free_prefix": false,
             "old_value": "",
-            "value": "Save $59",
-            "value_style": "save"
+            "value": "",
+            "value_style": "plain"
           }
         },
         "kit_3": {
           "type": "kit_addon",
           "settings": {
-            "text": "UP MEN Capsule Case",
-            "free_prefix": true,
+            "text": "Complete Welcome Kit with your first shipment",
+            "free_prefix": false,
             "old_value": "",
-            "value": "$10",
-            "value_style": "free"
+            "value": "",
+            "value_style": "plain"
           }
         },
         "kit_4": {
           "type": "kit_addon",
           "settings": {
-            "text": "UP MEN Testosterone Guide",
-            "free_prefix": true,
+            "text": "FREE U.S. shipping on your first order",
+            "free_prefix": false,
             "old_value": "",
-            "value": "$20",
-            "value_style": "free"
+            "value": "",
+            "value_style": "plain"
           }
         },
         "kit_5": {
           "type": "kit_addon",
           "settings": {
-            "text": "1 Month of Ladder Workout App",
-            "free_prefix": true,
+            "text": "YOUR COMPLETE WELCOME KIT",
+            "free_prefix": false,
             "old_value": "",
-            "value": "$30",
-            "value_style": "free"
+            "value": "",
+            "value_style": "heading"
           }
         },
         "kit_6": {
           "type": "kit_addon",
           "settings": {
-            "text": "Surprise Gift",
+            "text": "UP MEN Branded Thermal Bottle",
             "free_prefix": true,
             "old_value": "",
             "value": "",
@@ -565,157 +565,197 @@
         "kit_7": {
           "type": "kit_addon",
           "settings": {
-            "text": "Free US shipping on your first order",
-            "free_prefix": false,
+            "text": "UP MEN Crossbody Pack",
+            "free_prefix": true,
             "old_value": "",
             "value": "",
-            "value_style": "plain"
+            "value_style": "free"
+          }
+        },
+        "kit_8": {
+          "type": "kit_addon",
+          "settings": {
+            "text": "Keychain Pill Case",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "",
+            "value_style": "free"
+          }
+        },
+        "kit_9": {
+          "type": "kit_addon",
+          "settings": {
+            "text": "Smart Activity Band",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "",
+            "value_style": "free"
+          }
+        },
+        "kit_10": {
+          "type": "kit_addon",
+          "settings": {
+            "text": "UP MEN Men’s Wellness Guide (Digital — delivered by email)",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "",
+            "value_style": "free"
           }
         },
         "kit_perk_1": {
           "type": "kit_perk",
           "settings": {
-            "text": "Just $39.33 per month"
+            "text": "$39.33/month at the 90-day subscriber rate"
           }
         },
         "kit_perk_2": {
           "type": "kit_perk",
           "settings": {
-            "text": "Auto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime"
+            "text": "Save $59 every 90-day shipment compared with three monthly shipments."
           }
         },
         "kit_perk_3": {
           "type": "kit_perk",
           "settings": {
-            "text": "90-day higher-T money-back guarantee"
+            "text": "Then $118 every 90 days"
+          }
+        },
+        "kit_perk_4": {
+          "type": "kit_perk",
+          "settings": {
+            "text": "Your 90-day subscription renews at the same $118 subscriber rate every 90 days unless you skip, pause or cancel before renewal. Welcome gifts are included only with your first shipment."
+          }
+        },
+        "kit_perk_5": {
+          "type": "kit_perk",
+          "settings": {
+            "text": "All 3 bottles and all physical welcome gifts ship together in your first order. The digital guide is delivered by email. Welcome gifts are included once and are not repeated on renewals."
+          }
+        },
+        "kit_perk_6": {
+          "type": "kit_perk",
+          "settings": {
+            "text": "Covered by our 90-day satisfaction guarantee."
           }
         },
         "once_1": {
           "type": "once_addon",
           "settings": {
-            "text": "1 Bottle — 30-Day Supply",
+            "text": "1 bottle · 30-day supply",
             "free_prefix": false,
             "old_value": "",
-            "value": "$59",
+            "value": "",
             "value_style": "plain"
           }
         },
         "once_2": {
           "type": "once_addon",
           "settings": {
-            "text": "$15 off your first order",
-            "free_prefix": false,
-            "old_value": "",
-            "value": "Save $15",
-            "value_style": "save"
-          }
-        },
-        "once_3": {
-          "type": "once_addon",
-          "settings": {
-            "text": "UP MEN Capsule Case",
-            "free_prefix": true,
-            "old_value": "",
-            "value": "",
-            "value_style": "free"
-          }
-        },
-        "once_4": {
-          "type": "once_addon",
-          "settings": {
-            "text": "UP MEN Testosterone Guide",
-            "free_prefix": true,
-            "old_value": "",
-            "value": "",
-            "value_style": "free"
-          }
-        },
-        "once_5": {
-          "type": "once_addon",
-          "settings": {
-            "text": "Free US shipping on your first order",
+            "text": "Starter Welcome Kit with your first shipment",
             "free_prefix": false,
             "old_value": "",
             "value": "",
             "value_style": "plain"
           }
         },
+        "once_3": {
+          "type": "once_addon",
+          "settings": {
+            "text": "FREE U.S. shipping on your first order",
+            "free_prefix": false,
+            "old_value": "",
+            "value": "",
+            "value_style": "plain"
+          }
+        },
+        "once_4": {
+          "type": "once_addon",
+          "settings": {
+            "text": "YOUR STARTER WELCOME KIT",
+            "free_prefix": false,
+            "old_value": "",
+            "value": "",
+            "value_style": "heading"
+          }
+        },
+        "once_5": {
+          "type": "once_addon",
+          "settings": {
+            "text": "UP MEN Branded Thermal Bottle",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "",
+            "value_style": "free"
+          }
+        },
+        "once_6": {
+          "type": "once_addon",
+          "settings": {
+            "text": "Keychain Pill Case",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "",
+            "value_style": "free"
+          }
+        },
+        "once_7": {
+          "type": "once_addon",
+          "settings": {
+            "text": "UP MEN Men’s Wellness Guide (Digital — delivered by email)",
+            "free_prefix": true,
+            "old_value": "",
+            "value": "",
+            "value_style": "free"
+          }
+        },
         "once_perk_1": {
           "type": "once_perk",
           "settings": {
-            "text": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime"
+            "text": "Then $59 every 30 days"
           }
         },
         "once_perk_2": {
           "type": "once_perk",
           "settings": {
-            "text": "90-day higher-T money-back guarantee"
+            "text": "You’ll pay $59 today. Your next charge is $59 in 30 days unless you skip, pause or cancel before renewal."
+          }
+        },
+        "once_perk_3": {
+          "type": "once_perk",
+          "settings": {
+            "text": "Your bottle and physical starter gifts ship together in your first order. The digital guide is delivered by email. Welcome gifts are included once and are not repeated on renewals."
+          }
+        },
+        "once_perk_4": {
+          "type": "once_perk",
+          "settings": {
+            "text": "Covered by our 90-day satisfaction guarantee."
           }
         },
         "third_1": {
           "type": "third_addon",
           "settings": {
-            "text": "180-Day Supply — 6 Bottles",
+            "text": "6 bottles · 180-day supply",
             "free_prefix": false,
-            "old_value": "$354",
-            "value": "$199",
+            "old_value": "",
+            "value": "",
             "value_style": "plain"
           }
         },
         "third_2": {
           "type": "third_addon",
           "settings": {
-            "text": "2 Bottles",
-            "free_prefix": true,
+            "text": "Complete Welcome Kit with your first shipment",
+            "free_prefix": false,
             "old_value": "",
-            "value": "Save $118",
-            "value_style": "save"
+            "value": "",
+            "value_style": "plain"
           }
         },
         "third_3": {
           "type": "third_addon",
           "settings": {
-            "text": "UP MEN Capsule Case",
-            "free_prefix": true,
-            "old_value": "",
-            "value": "$10",
-            "value_style": "free"
-          }
-        },
-        "third_4": {
-          "type": "third_addon",
-          "settings": {
-            "text": "UP MEN Testosterone Guide",
-            "free_prefix": true,
-            "old_value": "",
-            "value": "$20",
-            "value_style": "free"
-          }
-        },
-        "third_5": {
-          "type": "third_addon",
-          "settings": {
-            "text": "3 Months of Ladder Workout App",
-            "free_prefix": true,
-            "old_value": "",
-            "value": "$90",
-            "value_style": "free"
-          }
-        },
-        "third_6": {
-          "type": "third_addon",
-          "settings": {
-            "text": "Surprise Gift",
-            "free_prefix": true,
-            "old_value": "",
-            "value": "",
-            "value_style": "free"
-          }
-        },
-        "third_7": {
-          "type": "third_addon",
-          "settings": {
-            "text": "Free US shipping on your first order",
+            "text": "FREE U.S. shipping on your first order",
             "free_prefix": false,
             "old_value": "",
             "value": "",
@@ -725,19 +765,13 @@
         "third_perk_1": {
           "type": "third_perk",
           "settings": {
-            "text": "Just $33.16 per month"
+            "text": "$33.16/month at the 180-day subscriber rate"
           }
         },
         "third_perk_2": {
           "type": "third_perk",
           "settings": {
-            "text": "Auto-renews every 180 days at $249 — skip a delivery, pause or cancel anytime"
-          }
-        },
-        "third_perk_3": {
-          "type": "third_perk",
-          "settings": {
-            "text": "90-day higher-T money-back guarantee"
+            "text": "Covered by our 90-day satisfaction guarantee."
           }
         }
       },
@@ -749,95 +783,106 @@
         "kit_5",
         "kit_6",
         "kit_7",
+        "kit_8",
+        "kit_9",
+        "kit_10",
         "kit_perk_1",
         "kit_perk_2",
         "kit_perk_3",
+        "kit_perk_4",
+        "kit_perk_5",
+        "kit_perk_6",
         "once_1",
         "once_2",
         "once_3",
         "once_4",
         "once_5",
+        "once_6",
+        "once_7",
         "once_perk_1",
         "once_perk_2",
+        "once_perk_3",
+        "once_perk_4",
         "third_1",
         "third_2",
         "third_3",
-        "third_4",
-        "third_5",
-        "third_6",
-        "third_7",
         "third_perk_1",
-        "third_perk_2",
-        "third_perk_3"
+        "third_perk_2"
       ],
       "settings": {
         "eyebrow": "",
-        "title": "<p>GET YOUR FIRST MONTH FREE</p>",
-        "offer_enabled": false,
+        "title": "<p>CHOOSE YOUR UP MEN ROUTINE</p>",
+        "subtitle": "Start with 30 days, or take the 90-day routine and get 3 bottles for the price of 2 on every shipment.",
+        "offer_enabled": true,
         "offer_title": "JOIN UP MEN TODAY",
         "offer_tag_enabled": true,
-        "offer_tag_top": "GET",
-        "offer_tag_main": "50% OFF TODAY",
-        "countdown_enabled": true,
-        "countdown_target": "2026-07-31T23:59:59",
+        "offer_tag_top": "90-DAY PLAN",
+        "offer_tag_main": "3 FOR THE PRICE OF 2",
+        "countdown_enabled": false,
+        "countdown_target": "",
+        "countdown_fallback": "WELCOME KIT INCLUDED WITH YOUR FIRST SHIPMENT",
         "label_days": "DAYS",
         "label_hours": "HOURS",
         "label_min": "MIN",
         "label_sec": "SEC",
         "scarcity_enabled": true,
-        "scarcity_text_1": "has a high risk of selling out —",
-        "scarcity_number": "2140",
-        "scarcity_text_2": "purchases made today.",
+        "scarcity_icon": "🎁",
+        "scarcity_show_month": false,
+        "scarcity_text_1": "ALL PHYSICAL WELCOME GIFTS SHIP WITH YOUR FIRST ORDER · DIGITAL GUIDE BY EMAIL",
+        "scarcity_number": "",
+        "scarcity_text_2": "",
         "product_kit": "3-month-auto-renew-subscription",
-        "kit_ribbon": "FLASH SALE · 1ST MONTH FREE",
-        "kit_badge": "3-MONTH AUTO-RENEW SUBSCRIPTION",
-        "kit_name": "3-MONTH PLAN",
-        "kit_sub": "The complete 90-day protocol",
-        "kit_cta_label": "Start My 90-Day Protocol →",
+        "kit_ribbon": "BEST VALUE · 3 BOTTLES FOR THE PRICE OF 2",
+        "kit_badge": "90-DAY SUBSCRIPTION",
+        "kit_name": "90-DAY ROUTINE",
+        "kit_sub": "3 bottles delivered together",
+        "kit_cta_label": "START MY 90-DAY ROUTINE",
         "kit_price_compare": "$177",
         "kit_price": "$118",
-        "kit_perks": "Just $39.33 per month\nAuto-renews every 90 days at $141 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee",
+        "kit_perks": "$39.33/month on your first order\nYou save $59 today\nCovered by our 90-day satisfaction guarantee.",
         "kit_show_addons": true,
         "kit_show_perks": true,
         "variant_id_kit": "",
         "selling_plan_kit": "",
         "product_once": "monthly-plan",
-        "once_badge": "AUTO-SHIP & SAVE",
-        "once_name": "MONTHLY PLAN",
-        "once_sub": "1-month supply, delivered monthly",
-        "once_cta_label": "Try Up Men →",
-        "once_price_compare": "$59",
-        "once_price": "$44",
-        "once_perks": "Auto-renews every 30 days at $59 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee",
+        "once_badge": "FLEXIBLE START",
+        "once_name": "30-DAY ROUTINE",
+        "once_sub": "1 bottle delivered every 30 days",
+        "once_cta_label": "START WITH 30 DAYS",
+        "once_price_compare": "",
+        "once_price": "$59",
+        "once_perks": "Covered by our 90-day satisfaction guarantee.",
         "once_show_addons": true,
         "once_show_perks": true,
         "variant_id_once": "",
+        "selling_plan_once": "",
         "third_enabled": false,
         "product_third": "",
         "third_highlight": false,
         "third_ribbon": "",
-        "third_badge": "6-MONTH AUTO-RENEW SUBSCRIPTION",
-        "third_name": "6-MONTH PLAN",
-        "third_sub": "The full 180-day transformation",
-        "third_cta_label": "Start My 180-Day Protocol →",
+        "third_badge": "180-DAY SUBSCRIPTION",
+        "third_name": "180-DAY ROUTINE",
+        "third_sub": "6 bottles delivered together",
+        "third_cta_label": "START MY 180-DAY ROUTINE",
         "third_price_compare": "$354",
         "third_price": "$199",
-        "third_perks": "Just $33.16 per month\nAuto-renews every 180 days at $249 — skip a delivery, pause or cancel anytime\n90-day higher-T money-back guarantee",
+        "third_perks": "$33.16/month on your first order\nCovered by our 90-day satisfaction guarantee.",
         "third_show_addons": true,
         "third_show_perks": true,
         "variant_id_third": "",
         "selling_plan_third": "",
         "qty_label": "Quantity",
-        "ship_strong": "Ships in 24h",
-        "ship_rest": "if ordered today.",
-        "guarantee_note": "90-DAY HIGHER-T GUARANTEE · TRY IT RISK-FREE",
+        "price_suffix": "TODAY",
+        "ship_strong": "",
+        "ship_rest": "Order processing and delivery estimates are shown at checkout.",
+        "guarantee_note": "COVERED BY OUR 90-DAY SATISFACTION GUARANTEE",
         "height_mobile": "auto",
         "height_desktop": "auto",
-        "gifts_label": "Free gifts included",
-        "gift_1_alt": "Free gift: metal storage case",
-        "gift_2_alt": "Free gift: testosterone cheat sheet",
-        "gift_3_alt": "Free gift: high-T cookbook",
-        "gift_4_alt": "Free gift: 90-day tracker"
+        "gifts_label": "Welcome gifts included with your first order",
+        "gift_1_alt": "Welcome gift: UP MEN Branded Thermal Bottle",
+        "gift_2_alt": "Welcome gift: UP MEN Crossbody Pack",
+        "gift_3_alt": "Welcome gift: Keychain Pill Case",
+        "gift_4_alt": "Welcome gift: Smart Activity Band"
       }
     },
     "marquee_fast": {
@@ -905,12 +950,13 @@
         "review-4"
       ],
       "settings": {
-        "title_pre": "WHAT MEN ARE",
-        "title_highlight": "SAYING",
+        "title_pre": "WHAT VERIFIED",
+        "title_highlight": "CUSTOMERS SAY",
+        "subtitle": "Real feedback on routine, delivery, value and support.",
         "avg_rating": "4.8",
-        "total_reviews": "4,548",
-        "total_prefix": "Based on",
-        "total_suffix": "reviews",
+        "total_reviews": "",
+        "total_prefix": "VERIFIED CUSTOMER FEEDBACK",
+        "total_suffix": "",
         "dist_pcts": "86|8|3|1|2",
         "dist_counts": "3,911|364|136|46|91",
         "tab_label": "Reviews",
@@ -932,22 +978,22 @@
         "stat-1": {
           "type": "stat",
           "settings": {
-            "number": "90%",
-            "text": "rated Up Men effective at improving testosterone levels*"
+            "number": "9",
+            "text": "ACTIVE INGREDIENTS WITH EXACT AMOUNTS SHOWN"
           }
         },
         "stat-2": {
           "type": "stat",
           "settings": {
-            "number": "64%",
-            "text": "saw better results with Up Men than competing T support*"
+            "number": "90 DAYS",
+            "text": "3 BOTTLES DELIVERED TOGETHER"
           }
         },
         "stat-3": {
           "type": "stat",
           "settings": {
-            "number": "93%",
-            "text": "reported trusting the quality & transparency of Up Men's ingredients*"
+            "number": "FLEXIBLE",
+            "text": "SKIP, PAUSE OR CANCEL BEFORE RENEWAL"
           }
         }
       },
@@ -957,7 +1003,7 @@
         "stat-3"
       ],
       "settings": {
-        "note": "*Based on a survey of past and current Up Men customers in 2026."
+        "note": ""
       }
     },
     "faq": {
@@ -966,71 +1012,71 @@
         "faq-1": {
           "type": "faq",
           "settings": {
-            "question": "What is Up Men and how does it work?",
-            "answer": "Up Men is a natural testosterone support supplement made with 8 clinically dosed ingredients — including Tongkat Ali, Shilajit, Fenugreek, Zinc and Boron — that work together to support your body's own testosterone production, energy, strength and focus."
+            "question": "WHAT IS UP MEN?",
+            "answer": "UP MEN is a men's dietary supplement with 9 active ingredients in each daily serving. It is designed to simplify the supplementation step inside a broader routine that can include nutrition, movement, training, sleep and consistent self-care."
           }
         },
         "faq-2": {
           "type": "faq",
           "settings": {
-            "question": "How do I take Up Men?",
-            "answer": "Take the daily serving with water, ideally in the morning with food. Consistency is key — take it every day for at least 90 days for full results."
+            "question": "WHAT DO I RECEIVE WITH THE 30-DAY PLAN?",
+            "answer": "You receive 1 bottle with a 30-day supply, an UP MEN Branded Thermal Bottle, a Keychain Pill Case and the UP MEN Men's Wellness Guide (Digital). The physical gifts ship with your first order, and the digital guide is delivered by email."
           }
         },
         "faq-3": {
           "type": "faq",
           "settings": {
-            "question": "When will I feel the results?",
-            "answer": "Most men start noticing improved energy and workout intensity within the first 7 days. By day 30 you should see visible changes, and by day 90 your T-production is fully optimized. That's why we back it with a 90-day guarantee."
+            "question": "WHAT DO I RECEIVE WITH THE 90-DAY PLAN?",
+            "answer": "You receive 3 bottles delivered together for a complete 90-day supply, plus the Complete Welcome Kit: an UP MEN Branded Thermal Bottle, UP MEN Crossbody Pack, Keychain Pill Case, Smart Activity Band and the UP MEN Men's Wellness Guide (Digital — delivered by email)."
           }
         },
         "faq-4": {
           "type": "faq",
           "settings": {
-            "question": "Is Up Men a hormone or a steroid?",
-            "answer": "No. Up Men is 100% hormone-free. It doesn't put synthetic testosterone in your body — it supports your body's own natural ability to produce testosterone."
+            "question": "WHY IS THE 90-DAY PLAN THE BEST VALUE?",
+            "answer": "The 90-day plan includes 3 bottles for $118, the same product cost as 2 monthly bottles at $59 each. Compared with three separate monthly shipments totaling $177, the 90-day subscriber rate saves $59 every 90 days. Welcome gifts are included once with the first shipment and are not repeated on renewals."
           }
         },
         "faq-5": {
           "type": "faq",
           "settings": {
-            "question": "Are there any side effects?",
-            "answer": "Up Men is made with natural ingredients at clinically studied doses and is generally well tolerated. If you have a medical condition or take medication, consult your doctor before use."
+            "question": "WHEN WILL MY WELCOME GIFTS ARRIVE?",
+            "answer": "All physical welcome gifts ship with your first order. The digital guide is delivered by email after purchase. Welcome gifts are included once and are not repeated on subscription renewals."
           }
         },
         "faq-6": {
           "type": "faq",
           "settings": {
-            "question": "Is it third-party tested?",
-            "answer": "Yes. Every batch is manufactured in a CGMP facility in the USA and third-party tested for purity and potency. Non-GMO, vegan and hormone-free."
+            "question": "HOW DOES THE 90-DAY SUBSCRIPTION RENEW?",
+            "answer": "Your 90-day subscription is charged at the $118 subscriber rate shown at checkout, and it renews at that same rate every 90 days unless you skip, pause or cancel before renewal. Each renewal contains 3 bottles of UP MEN only — welcome gifts are included once with the first shipment."
           }
         },
         "faq-7": {
           "type": "faq",
           "settings": {
-            "question": "How does the 90-day guarantee work?",
-            "answer": "Try Up Men for 90 days. If you don't feel a difference, contact our support and we'll refund your purchase — no questions asked."
+            "question": "CAN I SKIP, PAUSE OR CANCEL?",
+            "answer": "To change or cancel a future renewal, contact UP MEN support before your next billing date. Changes must be requested before the next order is processed. Review the Subscription Policy for complete terms."
           }
         },
         "faq-8": {
           "type": "faq",
           "settings": {
-            "question": "How does the subscription work? Can I cancel?",
-            "answer": "Your Launch Kit ships every 30 days at 50% off the one-time price. You can cancel, skip or pause your subscription anytime through the customer portal — no phone calls, no hassle."
+            "question": "HOW DOES THE 90-DAY SATISFACTION GUARANTEE WORK?",
+            "answer": "Your purchase is protected according to the terms of the published 90-day satisfaction guarantee. Review the Refund Policy for eligibility, deadlines, required steps and any conditions before ordering."
           }
         },
         "faq-9": {
           "type": "faq",
           "settings": {
-            "question": "How long does shipping take?",
-            "answer": "Orders placed today ship within 24 hours. Delivery typically takes 2–5 business days within the continental USA."
+            "question": "WHEN WILL MY ORDER SHIP?",
+            "answer": "Shipping estimates and tracking information are shown during checkout and sent by email when available."
           }
         },
         "faq-10": {
           "type": "faq",
           "settings": {
-            "question": "Who should use Up Men?",
-            "answer": "Up Men was designed for men 18+ who want to support healthy testosterone levels, energy, strength and drive — whether you're in your 20s and want an edge, or 40+ and want to feel like yourself again."
+            "question": "WHO SHOULD SPEAK WITH A HEALTHCARE PROFESSIONAL BEFORE USE?",
+            "answer": "Consult a qualified healthcare professional before use if you take medication, particularly anticoagulants, have a medical condition, are preparing for surgery or use other supplements containing vitamin D, vitamin K, zinc or boron."
           }
         }
       },

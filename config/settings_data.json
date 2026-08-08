@@ -206,7 +206,7 @@
           "slogan_pre": "ONE GIANT BOOST",
           "slogan_highlight": "FOR MANKIND.",
           "tagline": "Natural testosterone support for the modern man.",
-          "cta_label": "CLAIM 50% OFF NOW",
+          "cta_label": "VIEW THE 90-DAY OFFER",
           "cta_link": "",
           "shop_title": "SHOP",
           "about_title": "ABOUT",
@@ -225,9 +225,9 @@
         "type": "sticky-footer",
         "settings": {
           "enabled": true,
-          "line1": "LAUNCH OFFER ENDING SOON",
-          "line2": "SAVE UP TO 25% TODAY",
-          "button_label": "CLAIM NOW!",
+          "line1": "90-DAY PLAN · 3 BOTTLES FOR THE PRICE OF 2",
+          "line2": "3 BOTTLES + 5 WELCOME GIFTS",
+          "button_label": "VIEW OFFER",
           "link": "#join_pkg",
           "scroll_threshold": 600
         }

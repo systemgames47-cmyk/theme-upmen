@@ -1,4 +1,4 @@
-{%- comment -%} Ingredients — 8 ingredients in 1 powerful formula {%- endcomment -%}
+{%- comment -%} Ingredients — 9 active ingredients in 1 daily formula (K1 and K2 share one card) {%- endcomment -%}
 {%- assign sid = section.id -%}
 {%- if section.settings.bg_mobile != blank -%}
   {%- assign ing_bg_mobile = section.settings.bg_mobile | image_url: width: 1200 -%}
@@ -55,6 +55,8 @@
   #mm-ing-{{ sid }} .mm-dose {
     font-family: var(--font-heading); font-size: calc((11px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.1em;
     color: var(--brand, #ff5600); text-transform: uppercase; display: block; margin-bottom: 2px;
+    /* The K1 + K2 card carries two amounts, so let it wrap to a second line cleanly. */
+    line-height: 1.25;
   }
   #mm-ing-{{ sid }} .mm-name { font-family: var(--font-body); font-weight: 800; font-size: calc((18px) * var(--fs-h, 1)); margin: 0; }
   #mm-ing-{{ sid }} .mm-desc { font-size: calc((13.5px) * var(--fs-b, 1)); line-height: 1.5; color: rgba(255,255,255,0.8); margin: 0; }
@@ -103,8 +105,8 @@
 {
   "name": "Ingredients",
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "8 INGREDIENTS IN 1 POWERFUL FORMULA" },
-    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "CLINICALLY DOSED + EFFECTIVE" },
+    { "type": "text", "id": "title", "label": "Title", "default": "9 ACTIVE INGREDIENTS IN 1 DAILY FORMULA" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "EXACT AMOUNTS SHOWN ON THE SUPPLEMENT FACTS" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "TRY IT NOW" },
     { "type": "url", "id": "cta_link", "label": "CTA link" },
     { "type": "header", "content": "Banner size" },
@@ -155,13 +157,13 @@
     {
       "name": "Ingredients",
       "blocks": [
-        { "type": "ingredient", "settings": { "name": "Tongkat Ali", "dose": "1000 mg", "description": "Boosts testosterone, enhances libido, improves fertility & supports muscle growth", "image_asset": "ing-1.png" } },
+        { "type": "ingredient", "settings": { "name": "Tongkat Ali", "dose": "1,000 mg", "description": "Boosts testosterone, enhances libido, improves fertility & supports muscle growth", "image_asset": "ing-1.png" } },
         { "type": "ingredient", "settings": { "name": "Shilajit", "dose": "400 mg", "description": "Improves fertility and boosts testosterone levels", "image_asset": "ing-2.png" } },
-        { "type": "ingredient", "settings": { "name": "K1 & K2", "dose": "100 mcg", "description": "Supports bone health and density, improves mood, and encourages T production", "image_asset": "ing-3.png" } },
-        { "type": "ingredient", "settings": { "name": "Vitamin D", "dose": "4000 IU", "description": "Essential for maintaining cellular health and helping regulate testosterone", "image_asset": "ing-4.png" } },
+        { "type": "ingredient", "settings": { "name": "Vitamin K1 + K2", "dose": "100 mcg K1 + 100 mcg K2", "description": "Supports bone health and density, improves mood, and encourages T production", "image_asset": "ing-3.png" } },
+        { "type": "ingredient", "settings": { "name": "Vitamin D", "dose": "100 mcg (4,000 IU)", "description": "Essential for maintaining cellular health and helping regulate testosterone", "image_asset": "ing-4.png" } },
         { "type": "ingredient", "settings": { "name": "Zinc", "dose": "30 mg", "description": "An essential trace mineral that plays a role in testosterone metabolism and immune function", "image_asset": "ing-5.png" } },
         { "type": "ingredient", "settings": { "name": "Taurine", "dose": "675 mg", "description": "Reduces oxidative stress, improves blood flow, and supports increased testosterone levels", "image_asset": "ing-6.png" } },
-        { "type": "ingredient", "settings": { "name": "Fenugreek", "dose": "675 mg", "description": "Supports testosterone production, DHT levels, and male vitality", "image_asset": "ing-7.png" } },
+        { "type": "ingredient", "settings": { "name": "Fenugreek", "dose": "1,000 mg", "description": "Supports testosterone production, DHT levels, and male vitality", "image_asset": "ing-7.png" } },
         { "type": "ingredient", "settings": { "name": "Boron", "dose": "4 mg", "description": "Trace mineral with the potential to increase free T and regulate estrogen levels", "image_asset": "ing-8.png" } }
       ]
     }

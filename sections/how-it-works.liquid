@@ -1,4 +1,5 @@
-{%- comment -%} Stats strip — customer survey numbers {%- endcomment -%}
+{%- comment -%} Stats strip — objective offer facts. Do not put survey percentages here
+  unless a documented, verifiable survey backs them. {%- endcomment -%}
 {%- assign sid = section.id -%}
 <style>
   #mm-stats-{{ sid }} { background: #1a0e07; color: var(--text, #fff); padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -35,14 +36,14 @@
 {
   "name": "Stats",
   "settings": [
-    { "type": "text", "id": "note", "label": "Footnote", "default": "*Based on a survey of past and current Up Men customers in 2026." }
+    { "type": "text", "id": "note", "label": "Footnote", "info": "Leave empty unless a documented source backs the numbers above.", "default": "" }
   ],
   "blocks": [
     {
       "type": "stat",
       "name": "Stat",
       "settings": [
-        { "type": "text", "id": "number", "label": "Number", "default": "90%" },
+        { "type": "text", "id": "number", "label": "Number", "default": "9" },
         { "type": "textarea", "id": "text", "label": "Text" }
       ]
     }
@@ -51,9 +52,9 @@
     {
       "name": "Stats",
       "blocks": [
-        { "type": "stat", "settings": { "number": "90%", "text": "rated Up Men effective at improving testosterone levels*" } },
-        { "type": "stat", "settings": { "number": "64%", "text": "saw better results with Up Men than competing T support*" } },
-        { "type": "stat", "settings": { "number": "93%", "text": "reported trusting the quality & transparency of Up Men's ingredients*" } }
+        { "type": "stat", "settings": { "number": "9", "text": "ACTIVE INGREDIENTS WITH EXACT AMOUNTS SHOWN" } },
+        { "type": "stat", "settings": { "number": "90 DAYS", "text": "3 BOTTLES DELIVERED TOGETHER" } },
+        { "type": "stat", "settings": { "number": "FLEXIBLE", "text": "SKIP, PAUSE OR CANCEL BEFORE RENEWAL" } }
       ]
     }
   ]
