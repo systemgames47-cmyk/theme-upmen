@@ -68,9 +68,14 @@ each slot actually contained:
 No image of the Keychain Pill Case exists anywhere in the store or the repo.
 
 Applied: slots reassigned so the four slots hold the four physical gifts in caption
-order, with the two rejected slots emptied. The gift strip renders only when all
-four slots are filled, so it is currently hidden. Nothing was invented or
-substituted with generic art.
+order, and the two rejected images were cleared.
+
+An empty slot now renders a dashed placeholder tile carrying the gift name and
+"Photo coming soon", at the same size as a real tile. This was requested so the
+strip keeps its shape while the photography is produced. It is deliberately not a
+stock product shot: a placeholder cannot imply an item that does not ship, which is
+what the rule against generic substitutes protects against. Uploading an image to a
+slot replaces its placeholder automatically — no code change needed.
 
 **Two files still required** (square, product on a plain light background, gift
 shown smaller than the bottles, no medical UI):
@@ -846,7 +851,7 @@ Everything else auto-merged: all `sections/*.liquid`, both snippets, `config/set
 | 90-day form | `id=55350470902051` + `selling_plan=9573695779` |
 | Monthly form | `id=55350471033123` + `selling_plan=9574056227` — the fix, confirmed in a real Shopify render |
 | Price display | `$118.00 TODAY` / `$59.00 TODAY`, both dynamic |
-| Gift strip | 0 tiles rendered — correctly gated off pending assets |
+| Gift strip | 4 tiles: 2 real photos + 2 "Photo coming soon" placeholders |
 | Sections | 17, `facility_8RXmCa` intact |
 | Countdown | No `data-countdown-block` in the offer header; static box in its place |
 | Banned strings | none, except the two noted in section 15 |

@@ -36,6 +36,26 @@
     }
     #shopify-section-{{ sid }} .mm-gifts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
     #shopify-section-{{ sid }} .mm-gifts img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); display: block; }
+    /* Empty gift slot. Same box as a real tile so the row keeps its rhythm, but
+       obviously a placeholder rather than a product photo. */
+    #shopify-section-{{ sid }} .mm-gifts .mm-gift-ph {
+      width: 100%; aspect-ratio: 1/1; border-radius: 8px; box-sizing: border-box;
+      border: 1px dashed rgba(255,255,255,0.28); background: rgba(255,255,255,0.04);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 3px; padding: 6px; text-align: center;
+    }
+    #shopify-section-{{ sid }} .mm-gifts .mm-gift-ph .ph-name {
+      font-family: var(--font-heading); font-weight: 700; line-height: 1.15;
+      font-size: calc((8.5px) * var(--fs-b, 1)); letter-spacing: 0.04em;
+      text-transform: uppercase; color: rgba(255,255,255,0.82);
+    }
+    #shopify-section-{{ sid }} .mm-gifts .mm-gift-ph .ph-note {
+      font-size: calc((7.5px) * var(--fs-b, 1)); line-height: 1.1; color: rgba(255,255,255,0.42);
+    }
+    @media (min-width: 768px) {
+      #shopify-section-{{ sid }} .mm-gifts .mm-gift-ph .ph-name { font-size: calc((10px) * var(--fs-b, 1)); }
+      #shopify-section-{{ sid }} .mm-gifts .mm-gift-ph .ph-note { font-size: calc((9px) * var(--fs-b, 1)); }
+    }
     #shopify-section-{{ sid }} .mm-wrap { max-width: 1024px; margin: 0 auto; padding: 0 16px; }
     #shopify-section-{{ sid }} .mm-head { text-align: center; margin-bottom: 36px; }
     #shopify-section-{{ sid }} .mm-eyebrow {
@@ -331,18 +351,14 @@
           files showed a competitor-branded e-book, a workout app on a phone and a
           premium smartwatch, none of which match the items actually shipped. Showing
           nothing is correct until real photography lands. {%- endcomment -%}
-        {%- assign gifts_ready = true -%}
-        {%- for i in (1..4) -%}
-          {%- assign gift_key = 'gift_' | append: i -%}
-          {%- if section.settings[gift_key] == blank -%}{%- assign gifts_ready = false -%}{%- endif -%}
-        {%- endfor -%}
-        {%- if gifts_ready -%}
-          <div class="mm-gifts" aria-label="{{ section.settings.gifts_label | escape }}">
-            {%- for i in (1..4) -%}
-              {%- assign gift_key = 'gift_' | append: i -%}
-              {%- assign gift_alt_key = gift_key | append: '_alt' -%}
-              {%- assign gift_img = section.settings[gift_key] -%}
-              {%- assign gift_alt = section.settings[gift_alt_key] -%}
+        <div class="mm-gifts" aria-label="{{ section.settings.gifts_label | escape }}">
+          {%- for i in (1..4) -%}
+            {%- assign gift_key = 'gift_' | append: i -%}
+            {%- assign gift_alt_key = gift_key | append: '_alt' -%}
+            {%- assign gift_img = section.settings[gift_key] -%}
+            {%- assign gift_alt = section.settings[gift_alt_key] -%}
+            {%- assign gift_name = gift_alt | remove: 'Welcome gift: ' -%}
+            {%- if gift_img != blank -%}
               <button type="button" class="mm-lb-trigger"
                 data-lightbox="gifts-{{ sid }}"
                 data-lightbox-src="{{ gift_img | image_url: width: 1600 }}"
@@ -350,10 +366,26 @@
                 aria-label="{{ 'Enlarge: ' | append: gift_alt | escape }}">
                 <img src="{{ gift_img | image_url: width: 400 }}" alt="{{ gift_alt | escape }}" loading="lazy">
               </button>
-            {%- endfor -%}
-          </div>
-        {%- elsif request.design_mode -%}
-          <div class="mm-warn">⚙️ The welcome-gift strip is hidden until all four images are uploaded (Free gift image 1–4). Each must show the real item that ships: Thermal Bottle, Crossbody Pack, Keychain Pill Case, Smart Activity Band.</div>
+            {%- else -%}
+              {%- comment -%} Deliberately reads as a placeholder rather than a product shot,
+                so an empty slot never implies an item that does not ship. Upload an image
+                to this slot in the theme editor and it replaces this automatically. {%- endcomment -%}
+              <div class="mm-gift-ph" role="img" aria-label="{{ gift_name | escape }} — photo coming soon">
+                <span class="ph-name">{{ gift_name }}</span>
+                <span class="ph-note">Photo coming soon</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if request.design_mode -%}
+          {%- assign gifts_missing = 0 -%}
+          {%- for i in (1..4) -%}
+            {%- assign gift_key = 'gift_' | append: i -%}
+            {%- if section.settings[gift_key] == blank -%}{%- assign gifts_missing = gifts_missing | plus: 1 -%}{%- endif -%}
+          {%- endfor -%}
+          {%- if gifts_missing > 0 -%}
+            <div class="mm-warn">⚙️ {{ gifts_missing }} welcome-gift slot(s) still show a placeholder. Upload the real item photo under "Free gift images" — each slot must match its caption, and the activity band must not show heart rate, blood pressure, ECG or glucose readouts.</div>
+          {%- endif -%}
         {%- endif -%}
         {%- if pk != blank and pk.id != blank and pk.available -%}
           {%- assign vk = pk.selected_or_first_available_variant -%}
