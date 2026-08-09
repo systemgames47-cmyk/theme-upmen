@@ -22,7 +22,7 @@
         "cta_link": "",
         "guarantee_text": "3 BOTTLES FOR THE PRICE OF 2 · 5 WELCOME GIFTS · 90-DAY SATISFACTION GUARANTEE",
         "media_enabled": false,
-        "media_video": "shopify://files/videos/vid home (video-converter.com).mp4",
+        "media_image": "shopify://shop_images/ChatGPT_Image_31_de_jul._de_2026_16_06_06.png",
         "media_size_mobile": "large",
         "media_size_desktop": "xl",
         "media_tag_enabled": true,
@@ -157,7 +157,7 @@
         "step-4": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/d4db9b3c-7e53-49be-81db-1710074d0e12.png",
+            "image": "shopify://shop_images/52b575df-1867-4f63-9b27-c008306f8088.png",
             "day": "3 MONTH WITH UP MEN",
             "phase": "ORBIT",
             "items": "The daily serving is fully part of your routine\nStrength, sleep and mood at a new baseline\nA routine you can keep repeating\nWelcome to the man you're supposed to be"
@@ -171,7 +171,7 @@
         "step-4"
       ],
       "settings": {
-        "title": "YOUR RESULTS CALENDAR",
+        "title": "What Should i expect from consistent Use of UP MEN",
         "subtitle": "What to expect from week 1 to month 6 — as your natural testosterone production is optimized.",
         "cta_label": "TRY IT NOW",
         "cta_link": "",
