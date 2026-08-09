@@ -131,16 +131,16 @@
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/a6bac833-2f7e-4bf4-b326-e29a4fbad397.png",
-            "day": "WEEK 1",
-            "phase": "IGNITION",
-            "items": "Tongkat Ali blocks stress hormones\nShilajit feeds starving testosterone cells\nMornings start to feel easier\nFirst hints of all-day energy"
+            "day": "BEFORE",
+            "phase": "NThis was me before I discovered Up Men.",
+            "items": ""
           }
         },
         "step-2": {
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/03.png",
-            "day": "MONTH 1",
+            "day": "1 MONTH WITH UP MEN",
             "phase": "SPARK",
             "items": "Boron helps free stuck T\nZinc provides T-making materials\nWorkouts feel intense again\nDrive and focus keep climbing"
           }
@@ -149,7 +149,7 @@
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/04.png",
-            "day": "MONTH 3",
+            "day": "2 MONTH WITH UP MEN",
             "phase": "LIFTOFF",
             "items": "All 9 active ingredients working together in one daily serving\nBody looks leaner, stronger, more masculine\nRecovery between sessions speeds up\nPeople ask what you're doing differently"
           }
@@ -158,7 +158,7 @@
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/05.png",
-            "day": "MONTH 6",
+            "day": "3 MONTH WITH UP MEN",
             "phase": "ORBIT",
             "items": "The daily serving is fully part of your routine\nStrength, sleep and mood at a new baseline\nA routine you can keep repeating\nWelcome to the man you're supposed to be"
           }
