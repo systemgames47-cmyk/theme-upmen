@@ -12,6 +12,13 @@
     "pdp_hero": {
       "type": "pdp-hero",
       "blocks": {
+        "kaching_bundles_app_block_DPN8Ra": {
+          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+          "settings": {
+            "product": "{{section.settings.gallery_product}}",
+            "manual_deal_block_id": ""
+          }
+        },
         "plan_Be86UP": {
           "type": "plan",
           "settings": {
@@ -91,6 +98,7 @@
         }
       },
       "block_order": [
+        "kaching_bundles_app_block_DPN8Ra",
         "plan_Be86UP",
         "benefit_1",
         "benefit_2",
@@ -118,6 +126,7 @@
         "plans_title": "CHOOSE YOUR UP MEN ROUTINE",
         "cta_label": "ADD TO CART",
         "after_add": "drawer",
+        "drawer_owner": "theme",
         "sold_out_label": "CURRENTLY UNAVAILABLE",
         "cta_note": "Order processing and delivery estimates are shown at checkout.",
         "guarantee_text": "COVERED BY OUR 90-DAY SATISFACTION GUARANTEE"
@@ -981,6 +990,7 @@
         "meta": "Rated 4.8 by verified customers",
         "cta_label": "ADD TO CART",
         "after_add": "drawer",
+        "drawer_owner": "theme",
         "sold_out_label": "UNAVAILABLE",
         "aria_label": "Add to cart",
         "product": "",
