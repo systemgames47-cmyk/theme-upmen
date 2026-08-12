@@ -48,6 +48,13 @@
             "text": "CGMP-certified facility"
           }
         },
+        "kaching_bundles_app_block_EJTUdb": {
+          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+          "settings": {
+            "product": "{{product}}",
+            "manual_deal_block_id": ""
+          }
+        },
         "trust_1": {
           "type": "trust",
           "settings": {
@@ -78,6 +85,7 @@
         "benefit_2",
         "benefit_3",
         "benefit_4",
+        "kaching_bundles_app_block_EJTUdb",
         "trust_1",
         "trust_2",
         "trust_3"
@@ -954,7 +962,7 @@
     "pdp_sticky_atc": {
       "type": "pdp-sticky-atc",
       "settings": {
-        "enabled": true,
+        "enabled": false,
         "title": "UP MEN — 9 Actives, One Daily Formula",
         "show_stars": true,
         "meta": "Rated 4.8 by verified customers",
@@ -966,22 +974,6 @@
         "selling_plan_id": "",
         "scroll_offset": 600
       }
-    },
-    "178655498345332146": {
-      "type": "apps",
-      "blocks": {
-        "kaching_bundles_app_block_EJTUdb": {
-          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
-          "settings": {
-            "product": "{{product}}",
-            "manual_deal_block_id": ""
-          }
-        }
-      },
-      "block_order": [
-        "kaching_bundles_app_block_EJTUdb"
-      ],
-      "settings": {}
     }
   },
   "order": [
@@ -1001,7 +993,6 @@
     "marquee_fast",
     "reviews",
     "faq",
-    "pdp_sticky_atc",
-    "178655498345332146"
+    "pdp_sticky_atc"
   ]
 }
