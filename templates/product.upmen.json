@@ -117,6 +117,7 @@
         "qty_label": "Quantity",
         "plans_title": "CHOOSE YOUR UP MEN ROUTINE",
         "cta_label": "ADD TO CART",
+        "after_add": "drawer",
         "sold_out_label": "CURRENTLY UNAVAILABLE",
         "cta_note": "Order processing and delivery estimates are shown at checkout.",
         "guarantee_text": "COVERED BY OUR 90-DAY SATISFACTION GUARANTEE"
@@ -979,6 +980,7 @@
         "show_stars": true,
         "meta": "Rated 4.8 by verified customers",
         "cta_label": "ADD TO CART",
+        "after_add": "drawer",
         "sold_out_label": "UNAVAILABLE",
         "aria_label": "Add to cart",
         "product": "",
