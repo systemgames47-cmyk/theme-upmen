@@ -36,7 +36,7 @@
         "show_cart_mobile": true,
         "show_cart_desktop": true,
         "menu": "main-menu",
-        "show_mobile_menu_toggle": true
+        "show_mobile_menu_toggle": false
       }
     }
   },
