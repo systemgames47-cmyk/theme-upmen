@@ -985,6 +985,7 @@
     },
     "pdp_sticky_atc": {
       "type": "pdp-sticky-atc",
+      "disabled": true,
       "settings": {
         "enabled": true,
         "title": "UP MEN — 9 Actives, One Daily Formula",
