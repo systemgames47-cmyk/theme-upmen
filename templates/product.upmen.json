@@ -109,12 +109,12 @@
         "trust_3"
       ],
       "settings": {
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "heading_color": "#000000",
         "text_color": "#000000",
         "accent_color": "",
         "accent_on": "#000000",
-        "panel_color": "#FFFFFF",
+        "panel_color": "#ffffff",
         "border_color": "#000000",
         "title": "",
         "title_highlight": "",
@@ -156,7 +156,7 @@
         "cta_label": "REVIEW THE 90-DAY GUARANTEE",
         "cta_link": "/policies/refund-policy",
         "height_mobile": "auto",
-        "height_desktop": "auto"
+        "height_desktop": "full"
       }
     },
     "pdp_expert_quote": {
