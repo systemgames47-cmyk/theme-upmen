@@ -74,6 +74,7 @@
         },
         "trust_1": {
           "type": "trust",
+          "disabled": true,
           "settings": {
             "icon": "🎁",
             "strong": "Welcome gifts",
@@ -82,6 +83,7 @@
         },
         "trust_2": {
           "type": "trust",
+          "disabled": true,
           "settings": {
             "icon": "🔁",
             "strong": "Skip, pause or cancel",
@@ -90,6 +92,7 @@
         },
         "trust_3": {
           "type": "trust",
+          "disabled": true,
           "settings": {
             "icon": "🚚",
             "strong": "FREE U.S. shipping",
