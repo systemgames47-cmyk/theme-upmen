@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "pdp_hero": {
@@ -42,6 +51,7 @@
         "plan_kit": {
           "type": "plan",
           "settings": {
+            "product": "",
             "product_handle": "3-month-auto-renew-subscription",
             "variant_id": "",
             "selling_plan_id": "",
@@ -58,6 +68,7 @@
         "plan_once": {
           "type": "plan",
           "settings": {
+            "product": "",
             "product_handle": "monthly-plan",
             "variant_id": "",
             "selling_plan_id": "",
@@ -114,8 +125,8 @@
         "show_stars": true,
         "rating_value": 5,
         "rating_text": "RATED 4.8 · VERIFIED CUSTOMER FEEDBACK",
+        "gallery_product": "",
         "fallback_image": "shopify://shop_images/ChatGPT_Image_31_de_jul._de_2026_16_06_06.png",
-        "facts_image": "shopify://shop_images/gen_2656_0_1783841183087.png",
         "facts_alt": "UP MEN Supplement Facts panel",
         "facts_caption": "Suggested use: take 5 capsules daily with food. Exact amounts are shown on the Supplement Facts panel.",
         "plans_title": "CHOOSE YOUR UP MEN ROUTINE",
@@ -214,6 +225,7 @@
         "quote": "",
         "name": "",
         "role": "",
+        "photo_asset": "",
         "disclosure": ""
       }
     },
@@ -649,8 +661,8 @@
         "overlay_enabled": true,
         "overlay_color": "#0a0503",
         "overlay_opacity": 60,
-        "height_mobile": "auto",
-        "height_desktop": "auto"
+        "height_mobile": "large",
+        "height_desktop": "large"
       }
     },
     "ingredients": {
@@ -982,6 +994,7 @@
         "cta_label": "ADD TO CART",
         "sold_out_label": "UNAVAILABLE",
         "aria_label": "Add to cart",
+        "product": "",
         "product_handle": "3-month-auto-renew-subscription",
         "selling_plan_id": "",
         "scroll_offset": 600
