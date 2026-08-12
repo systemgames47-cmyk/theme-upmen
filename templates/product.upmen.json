@@ -48,40 +48,6 @@
             "text": "CGMP-certified facility"
           }
         },
-        "plan_kit": {
-          "type": "plan",
-          "settings": {
-            "product": "",
-            "product_handle": "3-month-auto-renew-subscription",
-            "variant_id": "",
-            "selling_plan_id": "",
-            "is_default": true,
-            "name": "90-DAY ROUTINE",
-            "sub": "3 bottles delivered together · renews every 90 days",
-            "save_text": "3 bottles for the price of 2 · save $59",
-            "ribbon": "BEST VALUE",
-            "ribbon_style": "green",
-            "price_text": "$118",
-            "compare_text": "$177"
-          }
-        },
-        "plan_once": {
-          "type": "plan",
-          "settings": {
-            "product": "",
-            "product_handle": "monthly-plan",
-            "variant_id": "",
-            "selling_plan_id": "",
-            "is_default": false,
-            "name": "30-DAY ROUTINE",
-            "sub": "1 bottle delivered every 30 days",
-            "save_text": "",
-            "ribbon": "FLEXIBLE START",
-            "ribbon_style": "orange",
-            "price_text": "$59",
-            "compare_text": ""
-          }
-        },
         "trust_1": {
           "type": "trust",
           "settings": {
@@ -112,8 +78,6 @@
         "benefit_2",
         "benefit_3",
         "benefit_4",
-        "plan_kit",
-        "plan_once",
         "trust_1",
         "trust_2",
         "trust_3"
@@ -999,6 +963,22 @@
         "selling_plan_id": "",
         "scroll_offset": 600
       }
+    },
+    "178655498345332146": {
+      "type": "apps",
+      "blocks": {
+        "kaching_bundles_app_block_EJTUdb": {
+          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+          "settings": {
+            "product": "{{product}}",
+            "manual_deal_block_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "kaching_bundles_app_block_EJTUdb"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -1018,6 +998,7 @@
     "marquee_fast",
     "reviews",
     "faq",
-    "pdp_sticky_atc"
+    "pdp_sticky_atc",
+    "178655498345332146"
   ]
 }
