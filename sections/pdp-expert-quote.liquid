@@ -1,0 +1,121 @@
+{%- comment -%}
+  PDP Expert quote — the single pull-quote the reference places under the buy box.
+
+  Deliberately ships empty. docs/review-collection-brief.md sets the rule for this
+  theme: only words a real, identified person actually said go on the storefront,
+  and nothing published here may claim a medical outcome. So this section renders
+  nothing at all until a merchant pastes an approved quote, and it shows a setup
+  note in the theme editor instead of a plausible-looking placeholder that could
+  be shipped by accident.
+
+  sections/testimonials.liquid already carries the multi-expert carousel with the
+  named specialists. This is the single-quote variant for the top of the page.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- assign s = section.settings -%}
+{%- assign has_quote = false -%}
+{%- if s.quote != blank and s.name != blank -%}{%- assign has_quote = true -%}{%- endif -%}
+
+{%- if has_quote or request.design_mode -%}
+<style>
+  #mm-pdp-quote-{{ sid }} {
+    background: var(--mars-black, #0a0503); color: var(--text, #fff);
+    padding: 40px 0;
+  }
+  @media (min-width: 768px) { #mm-pdp-quote-{{ sid }} { padding: 64px 0; } }
+  #mm-pdp-quote-{{ sid }} .mm-wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+  #mm-pdp-quote-{{ sid }} .mm-card {
+    background: rgba(26,14,7,0.72); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    border-radius: 16px; padding: 24px 20px;
+    display: grid; grid-template-columns: 1fr; gap: 18px; text-align: center;
+  }
+  @media (min-width: 700px) {
+    #mm-pdp-quote-{{ sid }} .mm-card {
+      grid-template-columns: 120px minmax(0, 1fr); gap: 28px; text-align: left;
+      padding: 32px; align-items: center;
+    }
+  }
+  #mm-pdp-quote-{{ sid }} .mm-photo {
+    width: 96px; height: 96px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;
+    border: 2px solid var(--brand, #ff5600);
+  }
+  @media (min-width: 700px) { #mm-pdp-quote-{{ sid }} .mm-photo { width: 120px; height: 120px; } }
+  #mm-pdp-quote-{{ sid }} .mm-badge {
+    display: inline-block; margin: 0 0 10px;
+    background: rgba(255,86,0,0.14); color: var(--brand, #ff5600);
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((10px) * var(--fs-b, 1)); letter-spacing: .06em;
+    padding: 5px 11px; border-radius: 999px;
+  }
+  #mm-pdp-quote-{{ sid }} blockquote {
+    margin: 0 0 14px; font-family: var(--font-body); font-weight: 300;
+    font-size: calc((15px) * var(--fs-b, 1)); line-height: 1.7; color: rgba(255,255,255,0.86);
+  }
+  @media (min-width: 768px) { #mm-pdp-quote-{{ sid }} blockquote { font-size: calc((16.5px) * var(--fs-b, 1)); } }
+  #mm-pdp-quote-{{ sid }} .mm-name {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((12.5px) * var(--fs-b, 1)); margin: 0; line-height: 1.3;
+  }
+  #mm-pdp-quote-{{ sid }} .mm-role {
+    font-size: calc((11.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.6);
+    margin: 4px 0 0; line-height: 1.45; font-weight: 300;
+  }
+  #mm-pdp-quote-{{ sid }} .mm-disclosure {
+    font-size: calc((11px) * var(--fs-b, 1)); color: rgba(255,255,255,0.45);
+    margin: 12px 0 0; line-height: 1.55;
+  }
+  #mm-pdp-quote-{{ sid }} .mm-warn {
+    padding: 14px 16px; border-radius: 12px; line-height: 1.6;
+    background: rgba(255,138,0,0.12); border: 1px solid rgba(255,138,0,0.45);
+    font-size: calc((12.5px) * var(--fs-b, 1)); color: #ffd9b0;
+  }
+</style>
+
+<section id="mm-pdp-quote-{{ sid }}" class="reveal" data-testid="pdp-expert-quote">
+  <div class="mm-wrap">
+    {%- if has_quote -%}
+      <figure class="mm-card">
+        {%- if s.photo != blank -%}
+          <img class="mm-photo" src="{{ s.photo | image_url: width: 240 }}" width="240" height="240"
+            alt="{{ s.name | escape }}" loading="lazy">
+        {%- elsif s.photo_asset != blank -%}
+          <img class="mm-photo" src="{{ s.photo_asset | asset_url }}" width="240" height="240"
+            alt="{{ s.name | escape }}" loading="lazy">
+        {%- endif -%}
+        <div>
+          {%- if s.badge != blank -%}<span class="mm-badge">{{ s.badge }}</span>{%- endif -%}
+          <blockquote>{{ s.quote }}</blockquote>
+          <figcaption>
+            <p class="mm-name">{{ s.name }}</p>
+            {%- if s.role != blank -%}<p class="mm-role">{{ s.role }}</p>{%- endif -%}
+          </figcaption>
+          {%- if s.disclosure != blank -%}<p class="mm-disclosure">{{ s.disclosure }}</p>{%- endif -%}
+        </div>
+      </figure>
+    {%- else -%}
+      <div class="mm-warn">
+        ⚙️ <strong>This section is hidden on the live storefront until it is filled in.</strong><br>
+        Paste a quote that a real, named person actually gave you, and their real credentials. Per <code>docs/review-collection-brief.md</code>, do not publish a quote nobody said, and do not publish claims about testosterone levels, hormones, bloodwork or any medical outcome. If the person is paid or has any commercial relationship with UP MEN, say so in the “Disclosure” field.
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PDP Expert Quote",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Hidden on the storefront until both a quote and a name are filled in. Only publish words a real, identified person actually said." },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "EXPERT PERSPECTIVE" },
+    { "type": "textarea", "id": "quote", "label": "Quote" },
+    { "type": "text", "id": "name", "label": "Name" },
+    { "type": "text", "id": "role", "label": "Credentials" },
+    { "type": "image_picker", "id": "photo", "label": "Photo" },
+    { "type": "text", "id": "photo_asset", "label": "Or asset filename", "info": "For images already in the theme, e.g. Dr._Schilling.png" },
+    { "type": "textarea", "id": "disclosure", "label": "Disclosure", "info": "Required if the person is paid or otherwise connected to UP MEN." }
+  ],
+  "presets": [{ "name": "PDP Expert Quote" }]
+}
+{% endschema %}

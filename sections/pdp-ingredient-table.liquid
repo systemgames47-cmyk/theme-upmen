@@ -1,0 +1,204 @@
+{%- comment -%}
+  PDP Ingredient table — name / amount / what it is, one row per block.
+
+  The reference renders this as a three-column table. That holds up on a phone
+  only if the amount column stays narrow and the description is allowed to wrap,
+  which is what the widths below do; nothing is hidden or truncated on mobile.
+
+  Amounts here are label copy. Whatever is typed in these blocks has to match the
+  Supplement Facts panel on the bottle — the section does not derive them.
+
+  Anchor: #ingredient-table — the tab strip in "PDP Tabs" links here.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- assign s = section.settings -%}
+
+<style>
+  #mm-pdp-ing-{{ sid }} {
+    background: var(--mars-black, #0a0503); color: var(--text, #fff);
+    padding: 48px 0;
+  }
+  @media (min-width: 768px) { #mm-pdp-ing-{{ sid }} { padding: 80px 0; } }
+  #mm-pdp-ing-{{ sid }} .mm-wrap { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+  #mm-pdp-ing-{{ sid }} h2 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; text-align: center;
+    font-size: calc((clamp(22px, 4.4vw, 36px)) * var(--fs-h, 1)); margin: 0 0 10px; line-height: 1.2;
+  }
+  #mm-pdp-ing-{{ sid }} h2 .orange { color: var(--brand, #ff5600); }
+  #mm-pdp-ing-{{ sid }} .mm-sub {
+    text-align: center; font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;
+    font-size: calc((11px) * var(--fs-b, 1)); letter-spacing: .06em;
+    color: var(--brand, #ff5600); margin: 0 0 26px;
+  }
+  #mm-pdp-ing-{{ sid }} .mm-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    background: rgba(26,14,7,0.72); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    border-radius: 16px; overflow: hidden;
+  }
+  #mm-pdp-ing-{{ sid }} th, #mm-pdp-ing-{{ sid }} td {
+    padding: 12px 9px; text-align: left; vertical-align: top;
+    border-bottom: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+  }
+  @media (min-width: 768px) { #mm-pdp-ing-{{ sid }} th, #mm-pdp-ing-{{ sid }} td { padding: 16px 18px; } }
+  #mm-pdp-ing-{{ sid }} tr:last-child td, #mm-pdp-ing-{{ sid }} tr:last-child th { border-bottom: 0; }
+  #mm-pdp-ing-{{ sid }} thead th {
+    background: rgba(255,86,0,0.10);
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((10px) * var(--fs-b, 1)); letter-spacing: .05em;
+    color: rgba(255,255,255,0.75);
+  }
+  @media (min-width: 768px) { #mm-pdp-ing-{{ sid }} thead th { font-size: calc((11.5px) * var(--fs-b, 1)); } }
+  #mm-pdp-ing-{{ sid }} .mm-c-img { width: 44px; }
+  @media (min-width: 768px) { #mm-pdp-ing-{{ sid }} .mm-c-img { width: 72px; } }
+  #mm-pdp-ing-{{ sid }} .mm-c-name { width: 30%; }
+  #mm-pdp-ing-{{ sid }} .mm-c-dose { width: 74px; white-space: nowrap; }
+  @media (min-width: 768px) { #mm-pdp-ing-{{ sid }} .mm-c-dose { width: 110px; } }
+  #mm-pdp-ing-{{ sid }} td img {
+    display: block; width: 36px; height: 36px; object-fit: contain; border-radius: 8px;
+  }
+  @media (min-width: 768px) { #mm-pdp-ing-{{ sid }} td img { width: 56px; height: 56px; } }
+  #mm-pdp-ing-{{ sid }} .mm-name {
+    font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;
+    font-size: calc((11.5px) * var(--fs-b, 1)); line-height: 1.3; color: #fff;
+  }
+  @media (min-width: 768px) { #mm-pdp-ing-{{ sid }} .mm-name { font-size: calc((13.5px) * var(--fs-b, 1)); } }
+  #mm-pdp-ing-{{ sid }} .mm-dose {
+    font-family: var(--font-heading); font-weight: 800;
+    font-size: calc((11.5px) * var(--fs-b, 1)); color: var(--brand, #ff5600); line-height: 1.3;
+  }
+  @media (min-width: 768px) { #mm-pdp-ing-{{ sid }} .mm-dose { font-size: calc((13.5px) * var(--fs-b, 1)); } }
+  #mm-pdp-ing-{{ sid }} .mm-desc {
+    font-family: var(--font-body); font-weight: 300; line-height: 1.55;
+    font-size: calc((12px) * var(--fs-b, 1)); color: rgba(255,255,255,0.72);
+  }
+  @media (min-width: 768px) { #mm-pdp-ing-{{ sid }} .mm-desc { font-size: calc((13.5px) * var(--fs-b, 1)); } }
+  #mm-pdp-ing-{{ sid }} .mm-disclaimer {
+    font-size: calc((11px) * var(--fs-b, 1)); line-height: 1.6;
+    color: rgba(255,255,255,0.45); margin: 16px auto 0; max-width: 700px; text-align: center;
+  }
+  #mm-pdp-ing-{{ sid }} .mm-cta-row { text-align: center; margin-top: 26px; }
+  #mm-pdp-ing-{{ sid }} .mm-cta {
+    display: inline-block; text-decoration: none;
+    background: var(--brand, #ff5600); color: #fff;
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((13px) * var(--fs-b, 1)); letter-spacing: .05em;
+    padding: 16px 34px; border-radius: 999px;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.35); transition: background .16s ease, transform .12s ease;
+  }
+  #mm-pdp-ing-{{ sid }} .mm-cta:hover { background: #ff6a1f; }
+  #mm-pdp-ing-{{ sid }} .mm-cta:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.35); }
+  #mm-pdp-ing-{{ sid }} .mm-warn {
+    margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; line-height: 1.5;
+    background: rgba(255,138,0,0.12); border: 1px solid rgba(255,138,0,0.45);
+    font-size: calc((12px) * var(--fs-b, 1)); color: #ffd9b0;
+  }
+</style>
+
+<section id="mm-pdp-ing-{{ sid }}" class="reveal" data-testid="pdp-ingredient-table">
+  {%- comment -%} Not "#ingredients": sections/ingredients.liquid already owns that
+    anchor, and the product template renders both. {%- endcomment -%}
+  <a id="ingredient-table" aria-hidden="true"></a>
+  <div class="mm-wrap">
+    {%- if s.title != blank or s.title_highlight != blank -%}
+      <h2>{{ s.title }} {%- if s.title_highlight != blank %} <span class="orange">{{ s.title_highlight }}</span>{% endif -%}</h2>
+    {%- endif -%}
+    {%- if s.subtitle != blank -%}<p class="mm-sub">{{ s.subtitle }}</p>{%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      {%- assign show_images = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank or block.settings.image_asset != blank -%}
+          {%- assign show_images = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <table class="mm-table">
+        <thead>
+          <tr>
+            {%- if show_images -%}<th class="mm-c-img" scope="col"><span class="sr-only">Image</span></th>{%- endif -%}
+            <th class="mm-c-name" scope="col">{{ s.col_name }}</th>
+            <th class="mm-c-dose" scope="col">{{ s.col_dose }}</th>
+            <th scope="col">{{ s.col_desc }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr {{ block.shopify_attributes }}>
+              {%- if show_images -%}
+                <td>
+                  {%- if block.settings.image != blank -%}
+                    <img src="{{ block.settings.image | image_url: width: 140 }}" width="140" height="140" alt="" loading="lazy">
+                  {%- elsif block.settings.image_asset != blank -%}
+                    <img src="{{ block.settings.image_asset | asset_url }}" width="140" height="140" alt="" loading="lazy">
+                  {%- endif -%}
+                </td>
+              {%- endif -%}
+              <th class="mm-name" scope="row">{{ block.settings.name }}</th>
+              <td class="mm-dose">{{ block.settings.dose }}</td>
+              <td class="mm-desc">{{ block.settings.description }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    {%- elsif request.design_mode -%}
+      <div class="mm-warn">⚙️ Add “Ingredient” blocks. Every amount typed here must match the Supplement Facts panel printed on the bottle.</div>
+    {%- endif -%}
+
+    {%- if s.disclaimer != blank -%}<p class="mm-disclaimer">{{ s.disclaimer }}</p>{%- endif -%}
+
+    {%- if s.cta_label != blank -%}
+      <div class="mm-cta-row">
+        <a class="mm-cta" href="{{ s.cta_link | default: '#buy' }}">{{ s.cta_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PDP Ingredient Table",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "WHAT'S IN EACH" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "DAILY SERVING" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "EXACT AMOUNTS SHOWN ON THE SUPPLEMENT FACTS" },
+    { "type": "header", "content": "Column headings" },
+    { "type": "text", "id": "col_name", "label": "Name column", "default": "Ingredient" },
+    { "type": "text", "id": "col_dose", "label": "Amount column", "default": "Amount" },
+    { "type": "text", "id": "col_desc", "label": "Description column", "default": "What it is" },
+    { "type": "header", "content": "Footer" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "* These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "TRY IT NOW" },
+    { "type": "url", "id": "cta_link", "label": "Button link", "info": "Defaults to the buy box on this page (#buy)." }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "dose", "label": "Amount", "info": "Must match the Supplement Facts panel." },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_asset", "label": "Or asset filename", "info": "For images already in the theme, e.g. ing-1.png" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PDP Ingredient Table",
+      "blocks": [
+        { "type": "ingredient", "settings": { "name": "Tongkat Ali", "dose": "1,000 mg", "description": "A root extract traditionally used in men's wellness formulas.", "image_asset": "ing-1.png" } },
+        { "type": "ingredient", "settings": { "name": "Shilajit", "dose": "400 mg", "description": "A mineral-rich resin used in traditional preparations.", "image_asset": "ing-2.png" } },
+        { "type": "ingredient", "settings": { "name": "Vitamin K1 + K2", "dose": "100 mcg + 100 mcg", "description": "Two forms of vitamin K, an essential nutrient.", "image_asset": "ing-3.png" } },
+        { "type": "ingredient", "settings": { "name": "Vitamin D", "dose": "100 mcg (4,000 IU)", "description": "An essential vitamin many men do not get enough of from diet alone.", "image_asset": "ing-4.png" } },
+        { "type": "ingredient", "settings": { "name": "Zinc", "dose": "30 mg", "description": "An essential trace mineral.", "image_asset": "ing-5.png" } },
+        { "type": "ingredient", "settings": { "name": "Taurine", "dose": "675 mg", "description": "An amino acid found naturally in the body.", "image_asset": "ing-6.png" } },
+        { "type": "ingredient", "settings": { "name": "Fenugreek", "dose": "1,000 mg", "description": "A seed extract long used in men's supplement formulas.", "image_asset": "ing-7.png" } },
+        { "type": "ingredient", "settings": { "name": "Boron", "dose": "4 mg", "description": "A trace mineral included at a low daily amount.", "image_asset": "ing-8.png" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
