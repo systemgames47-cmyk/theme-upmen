@@ -224,7 +224,7 @@
       "sticky-footer": {
         "type": "sticky-footer",
         "settings": {
-          "enabled": true,
+          "enabled": false,
           "line1": "90-DAY PLAN · 3 BOTTLES FOR THE PRICE OF 2",
           "line2": "3 BOTTLES + 5 WELCOME GIFTS",
           "button_label": "VIEW OFFER",
