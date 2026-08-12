@@ -128,6 +128,7 @@
         "stars_color": "",
         "rating_text": "RATED 4.8 · VERIFIED CUSTOMER FEEDBACK",
         "rating_text_size": 13,
+        "rating_text_color": "",
         "gallery_product": "",
         "fallback_image": "shopify://shop_images/ChatGPT_Image_31_de_jul._de_2026_16_06_06.png",
         "facts_alt": "UP MEN Supplement Facts panel",
@@ -140,6 +141,8 @@
         "benefit_icon_size": 20,
         "benefit_title_size": 10,
         "benefit_text_size": 11,
+        "benefit_title_color": "",
+        "benefit_text_color": "",
         "trust_style": "plain",
         "trust_align": "start",
         "trust_icon_size": 15,
@@ -159,8 +162,22 @@
         "guarantee_text": "COVERED BY OUR 90-DAY SATISFACTION GUARANTEE"
       }
     },
+    "marquee_intro": {
+      "type": "marquee-intro",
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "label": "FEATURED IN"
+      }
+    },
     "scarcity_cta": {
       "type": "scarcity-cta",
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -517,6 +534,7 @@
         "step_2",
         "step_3"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -889,19 +907,6 @@
         "autoplay_preview": true
       }
     },
-    "marquee_intro": {
-      "type": "marquee-intro",
-      "settings": {
-        "bg_color": "",
-        "heading_color": "",
-        "text_color": "",
-        "accent_color": "",
-        "accent_on": "",
-        "panel_color": "",
-        "border_color": "",
-        "label": "FEATURED IN"
-      }
-    },
     "reviews": {
       "type": "reviews",
       "blocks": {
@@ -1147,6 +1152,7 @@
   },
   "order": [
     "pdp_hero",
+    "marquee_intro",
     "scarcity_cta",
     "pdp_expert_quote",
     "pdp_comparison",
@@ -1158,7 +1164,6 @@
     "pdp_right_for_you",
     "ingredients",
     "facility",
-    "marquee_intro",
     "reviews",
     "faq",
     "marquee_fast",
