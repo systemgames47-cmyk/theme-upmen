@@ -71,6 +71,9 @@
   }
 </style>
 
+{%- capture mm_sel -%}mm-pdp-quote-{{ section.id }}{%- endcapture -%}
+{% render 'mm-section-colors', sel: mm_sel, s: section.settings %}
+
 <section id="mm-pdp-quote-{{ sid }}" class="reveal" data-testid="pdp-expert-quote">
   <div class="mm-wrap">
     {%- if has_quote -%}
@@ -107,6 +110,15 @@
   "name": "PDP Expert Quote",
   "tag": "section",
   "settings": [
+    { "type": "header", "content": "Colours" },
+    { "type": "paragraph", "content": "Leave a colour empty to keep the section's built-in styling." },
+    { "type": "color", "id": "bg_color", "label": "Background" },
+    { "type": "color", "id": "heading_color", "label": "Headings" },
+    { "type": "color", "id": "text_color", "label": "Body text" },
+    { "type": "color", "id": "accent_color", "label": "Accent" },
+    { "type": "color", "id": "accent_on", "label": "Text on accent" },
+    { "type": "color", "id": "panel_color", "label": "Cards and panels" },
+    { "type": "color", "id": "border_color", "label": "Borders" },
     { "type": "paragraph", "content": "Hidden on the storefront until both a quote and a name are filled in. Only publish words a real, identified person actually said." },
     { "type": "text", "id": "badge", "label": "Badge", "default": "EXPERT PERSPECTIVE" },
     { "type": "textarea", "id": "quote", "label": "Quote" },

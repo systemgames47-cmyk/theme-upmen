@@ -282,6 +282,9 @@
   #mm-pdp-hero-{{ sid }} .mm-warn code { background: rgba(0,0,0,0.35); padding: 1px 5px; border-radius: 4px; }
 </style>
 
+{%- capture mm_sel -%}mm-pdp-hero-{{ section.id }}{%- endcapture -%}
+{% render 'mm-section-colors', sel: mm_sel, s: section.settings %}
+
 <section id="mm-pdp-hero-{{ sid }}" class="reveal" data-testid="pdp-hero">
   <a id="buy" aria-hidden="true"></a>
   <div class="mm-wrap">
@@ -853,6 +856,15 @@
   "name": "PDP Hero",
   "tag": "section",
   "settings": [
+    { "type": "header", "content": "Colours" },
+    { "type": "paragraph", "content": "Leave a colour empty to keep the section's built-in styling." },
+    { "type": "color", "id": "bg_color", "label": "Background" },
+    { "type": "color", "id": "heading_color", "label": "Headings" },
+    { "type": "color", "id": "text_color", "label": "Body text" },
+    { "type": "color", "id": "accent_color", "label": "Accent" },
+    { "type": "color", "id": "accent_on", "label": "Text on accent" },
+    { "type": "color", "id": "panel_color", "label": "Cards and panels" },
+    { "type": "color", "id": "border_color", "label": "Borders" },
     { "type": "header", "content": "Heading" },
     { "type": "text", "id": "title", "label": "Product title", "info": "Leave empty to use the product's own title." },
     { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)" },

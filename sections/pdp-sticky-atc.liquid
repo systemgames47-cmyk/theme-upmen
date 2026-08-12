@@ -100,6 +100,9 @@
   #mm-pdp-sticky-{{ sid }} .mm-cta[disabled] { background: #4a3629; cursor: not-allowed; }
 </style>
 
+{%- capture mm_sel -%}mm-pdp-sticky-{{ section.id }}{%- endcapture -%}
+{% render 'mm-section-colors', sel: mm_sel, s: section.settings %}
+
 <div id="mm-pdp-sticky-{{ sid }}" data-sticky-bar role="region" aria-label="{{ s.aria_label | default: 'Add to cart' | escape }}">
   <form class="mm-wrap" action="{{ routes.cart_add_url }}" method="post" data-sticky-form
     {% if s.drawer_owner == 'app' %}data-no-theme-drawer{% endif %}>
@@ -208,6 +211,15 @@
   "name": "PDP Sticky Cart",
   "tag": "div",
   "settings": [
+    { "type": "header", "content": "Colours" },
+    { "type": "paragraph", "content": "Leave a colour empty to keep the section's built-in styling." },
+    { "type": "color", "id": "bg_color", "label": "Background" },
+    { "type": "color", "id": "heading_color", "label": "Headings" },
+    { "type": "color", "id": "text_color", "label": "Body text" },
+    { "type": "color", "id": "accent_color", "label": "Accent" },
+    { "type": "color", "id": "accent_on", "label": "Text on accent" },
+    { "type": "color", "id": "panel_color", "label": "Cards and panels" },
+    { "type": "color", "id": "border_color", "label": "Borders" },
     { "type": "paragraph", "content": "Mirrors the plan selected in the PDP Hero section. Appears once the buy box scrolls out of view." },
     { "type": "checkbox", "id": "enabled", "label": "Show the sticky bar", "info": "Turn this off when a bundle app owns the offer, so the bar cannot add a plain variant behind the app's back.", "default": true },
     { "type": "text", "id": "title", "label": "Product name", "info": "Leave empty to use the product's title." },

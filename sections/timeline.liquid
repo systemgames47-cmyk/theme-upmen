@@ -113,6 +113,9 @@
   #mm-tl-{{ sid }} .mm-cta:hover { filter: brightness(1.1); }
 </style>
 
+{%- capture mm_sel -%}mm-tl-{{ section.id }}{%- endcapture -%}
+{% render 'mm-section-colors', sel: mm_sel, s: section.settings %}
+
 <section id="mm-tl-{{ sid }}" class="reveal" data-testid="timeline">
   <div class="mm-wrap">
     <div class="mm-head">
@@ -210,6 +213,15 @@
   "name": "Timeline",
   "max_blocks": 8,
   "settings": [
+    { "type": "header", "content": "Colours" },
+    { "type": "paragraph", "content": "Leave a colour empty to keep the section's built-in styling." },
+    { "type": "color", "id": "bg_color", "label": "Background" },
+    { "type": "color", "id": "heading_color", "label": "Headings" },
+    { "type": "color", "id": "text_color", "label": "Body text" },
+    { "type": "color", "id": "accent_color", "label": "Accent" },
+    { "type": "color", "id": "accent_on", "label": "Text on accent" },
+    { "type": "color", "id": "panel_color", "label": "Cards and panels" },
+    { "type": "color", "id": "border_color", "label": "Borders" },
     { "type": "text", "id": "title", "label": "Title", "default": "YOUR RESULTS CALENDAR" },
     { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "What to expect from week 1 to month 6 — as your natural testosterone production is optimized." },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "TRY IT NOW" },

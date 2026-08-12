@@ -18,6 +18,9 @@
   }
 </style>
 
+{%- capture mm_sel -%}mm-press-{{ section.id }}{%- endcapture -%}
+{% render 'mm-section-colors', sel: mm_sel, s: section.settings %}
+
 <section id="mm-press-{{ sid }}" class="reveal" aria-label="Featured in">
   <div class="mm-row">
     <span class="mm-label">{{ section.settings.label }}</span>
@@ -40,6 +43,15 @@
   "name": "Featured In",
   "max_blocks": 8,
   "settings": [
+    { "type": "header", "content": "Colours" },
+    { "type": "paragraph", "content": "Leave a colour empty to keep the section's built-in styling." },
+    { "type": "color", "id": "bg_color", "label": "Background" },
+    { "type": "color", "id": "heading_color", "label": "Headings" },
+    { "type": "color", "id": "text_color", "label": "Body text" },
+    { "type": "color", "id": "accent_color", "label": "Accent" },
+    { "type": "color", "id": "accent_on", "label": "Text on accent" },
+    { "type": "color", "id": "panel_color", "label": "Cards and panels" },
+    { "type": "color", "id": "border_color", "label": "Borders" },
     { "type": "text", "id": "label", "label": "Label", "default": "FEATURED IN" }
   ],
   "blocks": [

@@ -1,0 +1,136 @@
+{%- comment -%}
+  Per-section colour overrides.
+
+  Every section that renders this gains a "Colours" group in the theme editor:
+  background, heading, body text, accent and panel colour. Leaving a field empty
+  keeps whatever the section already paints, so adding this to a section changes
+  nothing until a merchant actually picks a colour.
+
+  This exists so a single section can be flipped to a light background without
+  touching the rest of the page — the product page mixes dark and light sections
+  the way the reference layout does.
+
+  Usage — the selector is the section's own root id:
+
+    {%- capture sec_sel -%}mm-faq-{{ section.id }}{%- endcapture -%}
+    {% render 'mm-section-colors', sel: sec_sel, s: section.settings %}
+
+  Render it AFTER the section's own <style> block so these rules win on equal
+  specificity.
+
+  Params:
+    sel  the root element id, without the leading '#'
+    s    section.settings
+
+  Backgrounds set as a shorthand with an image (background: #000 url(...)) keep
+  their image here: only the background-color longhand is overridden, and it is
+  declared later, so the image survives.
+
+  The paired schema settings live in snippets/mm-section-colors-schema.txt.
+{%- endcomment -%}
+
+{%- assign has_any = false -%}
+{%- if s.bg_color != blank or s.heading_color != blank or s.text_color != blank or s.accent_color != blank or s.panel_color != blank or s.border_color != blank -%}
+  {%- assign has_any = true -%}
+{%- endif -%}
+
+{%- if has_any -%}
+<style>
+  {%- if s.bg_color != blank or s.text_color != blank %}
+  #{{ sel }} {
+    {%- if s.bg_color != blank %} background-color: {{ s.bg_color }};{% endif %}
+    {%- if s.text_color != blank %} color: {{ s.text_color }};{% endif %}
+  }
+  {%- endif %}
+
+  {%- comment -%} Kill a decorative overlay when the merchant repaints the
+    background, otherwise a dark scrim sits on top of a light colour. {%- endcomment -%}
+  {%- if s.bg_color != blank %}
+  #{{ sel }}::before { background: transparent !important; }
+  {%- endif %}
+
+  {%- if s.heading_color != blank %}
+  #{{ sel }} h1,
+  #{{ sel }} h2,
+  #{{ sel }} h3,
+  #{{ sel }} h4,
+  #{{ sel }} .mm-name,
+  #{{ sel }} .mm-panel-title,
+  #{{ sel }} .mm-plan-name,
+  #{{ sel }} thead th { color: {{ s.heading_color }}; }
+  {%- endif %}
+
+  {%- if s.text_color != blank %}
+  #{{ sel }} p,
+  #{{ sel }} li,
+  #{{ sel }} td,
+  #{{ sel }} summary,
+  #{{ sel }} .mm-body,
+  #{{ sel }} .mm-lede,
+  #{{ sel }} .mm-sub,
+  #{{ sel }} .mm-desc,
+  #{{ sel }} .mm-a,
+  #{{ sel }} .mm-plan-sub,
+  #{{ sel }} .mm-note,
+  #{{ sel }} .mm-cta-note,
+  #{{ sel }} .mm-trust li,
+  #{{ sel }} .mm-benefit .tx,
+  #{{ sel }} figcaption { color: {{ s.text_color }}; }
+  {%- endif %}
+
+  {%- if s.accent_color != blank %}
+  #{{ sel }} .orange,
+  #{{ sel }} .mm-dose,
+  #{{ sel }} .mm-badge,
+  #{{ sel }} summary::after,
+  #{{ sel }} .mm-tab[aria-selected="true"],
+  #{{ sel }} .mm-cta,
+  #{{ sel }} .mm-ribbon { color: {{ s.accent_color }}; }
+  #{{ sel }} .mm-cta,
+  #{{ sel }} .mm-ribbon,
+  #{{ sel }} .mm-tab[aria-selected="true"] {
+    background-color: {{ s.accent_color }};
+    border-color: {{ s.accent_color }};
+    color: {{ s.accent_on | default: '#ffffff' }};
+  }
+  #{{ sel }} .mm-plan input:checked ~ .mm-plan-box { border-color: {{ s.accent_color }}; }
+  #{{ sel }} .mm-plan input:checked ~ .mm-plan-box .mm-dot { border-color: {{ s.accent_color }}; }
+  #{{ sel }} .mm-plan input:checked ~ .mm-plan-box .mm-dot::after { background: {{ s.accent_color }}; }
+  #{{ sel }} .mm-gal-thumb.is-active { border-color: {{ s.accent_color }}; }
+  {%- endif %}
+
+  {%- comment -%} Panels: the cards, tables and accordion rows that sit on the
+    section background. Without this they stay dark on a light section. {%- endcomment -%}
+  {%- if s.panel_color != blank %}
+  #{{ sel }} .mm-panel,
+  #{{ sel }} .mm-card,
+  #{{ sel }} .mm-table,
+  #{{ sel }} .mm-benefit,
+  #{{ sel }} .mm-plan-box,
+  #{{ sel }} .mm-tab,
+  #{{ sel }} .mm-option select,
+  #{{ sel }} .mm-stepper,
+  #{{ sel }} .mm-list li,
+  #{{ sel }} .mm-gal-track,
+  #{{ sel }} .mm-gal-thumb,
+  #{{ sel }} details { background-color: {{ s.panel_color }}; }
+  {%- endif %}
+
+  {%- if s.border_color != blank %}
+  #{{ sel }} .mm-panel,
+  #{{ sel }} .mm-card,
+  #{{ sel }} .mm-table,
+  #{{ sel }} .mm-table th,
+  #{{ sel }} .mm-table td,
+  #{{ sel }} .mm-benefit,
+  #{{ sel }} .mm-plan-box,
+  #{{ sel }} .mm-tab,
+  #{{ sel }} .mm-option select,
+  #{{ sel }} .mm-stepper,
+  #{{ sel }} .mm-list li,
+  #{{ sel }} .mm-gal-track,
+  #{{ sel }} .mm-gal-thumb,
+  #{{ sel }} details { border-color: {{ s.border_color }}; }
+  {%- endif %}
+</style>
+{%- endif -%}
