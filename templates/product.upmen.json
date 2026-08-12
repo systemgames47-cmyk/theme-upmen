@@ -406,6 +406,7 @@
         "ing_7",
         "ing_8"
       ],
+      "disabled": true,
       "settings": {
         "title": "WHAT'S IN EACH",
         "title_highlight": "DAILY SERVING",
@@ -514,6 +515,7 @@
         "step_3",
         "step_4"
       ],
+      "disabled": true,
       "settings": {
         "title": "What should I expect from consistent use of UP MEN",
         "subtitle": "What to expect from week 1 to month 3 — as the daily serving becomes part of your routine.",
