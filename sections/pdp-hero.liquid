@@ -423,7 +423,10 @@
         {%- case buy_mode -%}
 
         {%- when 'standard' -%}
-          {%- assign std_product = s.standard_product -%}
+          {%- assign std_product = blank -%}
+          {%- if s.standard_product_handle != blank -%}
+            {%- assign std_product = all_products[s.standard_product_handle] -%}
+          {%- endif -%}
           {%- if std_product == blank or std_product.id == blank -%}{%- assign std_product = product -%}{%- endif -%}
           {%- if std_product != blank and std_product.id != blank -%}
             {%- assign std_variant = std_product.selected_or_first_available_variant -%}
@@ -829,7 +832,7 @@
       ],
       "default": "plans"
     },
-    { "type": "product", "id": "standard_product", "label": "Standard form product", "info": "Standard mode only. Leave empty to use the product this page is showing." },
+    { "type": "text", "id": "standard_product_handle", "label": "Standard form product handle", "info": "Standard mode only. Leave empty to use the product this page is showing. A handle rather than a picker because Shopify allows only one product picker per section, and the gallery already uses it." },
     { "type": "text", "id": "qty_label", "label": "Quantity label", "default": "Quantity" },
     { "type": "text", "id": "plans_title", "label": "Selector heading", "default": "CHOOSE YOUR ROUTINE" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "ADD TO CART" },
