@@ -15,7 +15,7 @@
         "kaching_bundles_app_block_DPN8Ra": {
           "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
           "settings": {
-            "product": "{{section.settings.gallery_product}}",
+            "product": "{{product}}",
             "manual_deal_block_id": ""
           }
         },
@@ -985,7 +985,6 @@
     },
     "pdp_sticky_atc": {
       "type": "pdp-sticky-atc",
-      "disabled": true,
       "settings": {
         "enabled": true,
         "title": "UP MEN — 9 Actives, One Daily Formula",
