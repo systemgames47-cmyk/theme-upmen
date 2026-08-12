@@ -199,6 +199,49 @@
   }
   #mm-pdp-hero-{{ sid }} .mm-ribbon.alt { background: var(--brand-green, #39c46e); color: #06210f; }
 
+  /* ---------- app block slot (Kaching Bundles and similar) ---------- */
+  #mm-pdp-hero-{{ sid }} .mm-app-slot { margin: 0 0 16px; }
+  #mm-pdp-hero-{{ sid }} .mm-app-slot:empty { display: none; }
+
+  /* ---------- standard product form ---------- */
+  #mm-pdp-hero-{{ sid }} .mm-options { display: grid; gap: 12px; margin: 0 0 16px; }
+  #mm-pdp-hero-{{ sid }} .mm-option-label {
+    display: block; margin-bottom: 6px;
+    font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;
+    font-size: calc((11px) * var(--fs-b, 1)); letter-spacing: .05em; color: rgba(255,255,255,0.72);
+  }
+  #mm-pdp-hero-{{ sid }} .mm-option select {
+    width: 100%; padding: 13px 14px; border-radius: 12px; cursor: pointer;
+    background: rgba(26,14,7,0.72); color: #fff;
+    border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    font-family: var(--font-body); font-size: calc((14px) * var(--fs-b, 1));
+  }
+  #mm-pdp-hero-{{ sid }} .mm-option select:focus-visible { outline: 2px solid var(--brand-yellow, #ff8a00); outline-offset: 2px; }
+  #mm-pdp-hero-{{ sid }} .mm-qty-row {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 0 0 16px;
+  }
+  #mm-pdp-hero-{{ sid }} .mm-qty-label {
+    font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;
+    font-size: calc((11px) * var(--fs-b, 1)); letter-spacing: .05em; color: rgba(255,255,255,0.72);
+  }
+  #mm-pdp-hero-{{ sid }} .mm-stepper {
+    display: flex; align-items: center; gap: 2px; border-radius: 999px; overflow: hidden;
+    background: rgba(26,14,7,0.72); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+  }
+  #mm-pdp-hero-{{ sid }} .mm-stepper button {
+    width: 38px; height: 38px; border: 0; cursor: pointer; background: transparent; color: #fff;
+    font-size: 17px; line-height: 1;
+  }
+  #mm-pdp-hero-{{ sid }} .mm-stepper button:hover { background: rgba(255,255,255,0.08); }
+  #mm-pdp-hero-{{ sid }} .mm-stepper .num {
+    min-width: 30px; text-align: center;
+    font-family: var(--font-heading); font-weight: 700; font-size: calc((14px) * var(--fs-b, 1));
+  }
+  #mm-pdp-hero-{{ sid }} .mm-std-price {
+    margin-left: auto; font-family: var(--font-heading); font-weight: 800;
+    font-size: calc((19px) * var(--fs-b, 1));
+  }
+
   /* ---------- CTA ---------- */
   #mm-pdp-hero-{{ sid }} .mm-cta {
     display: block; width: 100%; cursor: pointer; border: 0;
@@ -351,7 +394,108 @@
           </figure>
         {%- endif -%}
 
-        {%- comment -%} ---------------- plan selector + cart ---------------- {%- endcomment -%}
+        {%- comment -%} ---------------- buy area ----------------
+
+          Three modes, set by "Buy box mode":
+
+            plans     the theme's own plan selector (below)
+            standard  a plain variant + quantity + add-to-cart form, which is the
+                      shape bundle apps such as Kaching Bundles look for
+            app       no theme form at all; an app block provides the whole offer
+
+          App blocks render in their own slot above the form in every mode, so a
+          bundle app can sit over the standard form or replace it entirely.
+        {%- endcomment -%}
+        {%- assign buy_mode = s.buy_mode | default: 'plans' -%}
+
+        {%- assign has_app_block = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}{%- assign has_app_block = true -%}{%- break -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if has_app_block -%}
+          <div class="mm-app-slot">
+            {%- for block in section.blocks -%}
+              {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- case buy_mode -%}
+
+        {%- when 'standard' -%}
+          {%- assign std_product = s.standard_product -%}
+          {%- if std_product == blank or std_product.id == blank -%}{%- assign std_product = product -%}{%- endif -%}
+          {%- if std_product != blank and std_product.id != blank -%}
+            {%- assign std_variant = std_product.selected_or_first_available_variant -%}
+            <form action="{{ routes.cart_add_url }}" method="post" data-buy-form data-standard-form>
+              <input type="hidden" name="return_to" value="/checkout">
+              <input type="hidden" name="id" value="{{ std_variant.id }}" data-variant-input>
+
+              {%- unless std_product.has_only_default_variant -%}
+                <div class="mm-options">
+                  {%- for option in std_product.options_with_values -%}
+                    {%- comment -%} No name attribute on purpose: the submitted variant is
+                      carried by the hidden id above, so the POST stays unambiguous when a
+                      bundle app rewrites it. {%- endcomment -%}
+                    <label class="mm-option">
+                      <span class="mm-option-label">{{ option.name }}</span>
+                      <select data-option-select data-option-index="{{ forloop.index0 }}">
+                        {%- for value in option.values -%}
+                          <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                        {%- endfor -%}
+                      </select>
+                    </label>
+                  {%- endfor -%}
+                </div>
+              {%- endunless -%}
+
+              <div class="mm-qty-row">
+                <span class="mm-qty-label">{{ s.qty_label }}</span>
+                <div class="mm-stepper" data-stepper>
+                  <button type="button" aria-label="Decrease quantity">−</button>
+                  <span class="num">1</span>
+                  <button type="button" aria-label="Increase quantity">+</button>
+                </div>
+                <input type="hidden" name="quantity" value="1">
+                <span class="mm-std-price" data-std-price>{{ std_variant.price | money }}</span>
+              </div>
+
+              <button type="submit" class="mm-cta" data-buy-submit
+                data-label-available="{{ s.cta_label | escape }}"
+                data-label-soldout="{{ s.sold_out_label | escape }}"
+                {% unless std_variant.available %}disabled{% endunless %}>
+                {%- if std_variant.available -%}{{ s.cta_label }}{%- else -%}{{ s.sold_out_label }}{%- endif -%}
+              </button>
+
+              {%- comment -%} Pre-formatted money strings so the client never has to guess
+                the shop's currency format. {%- endcomment -%}
+              <script type="application/json" data-variant-json>
+                [
+                  {%- for v in std_product.variants -%}
+                    {
+                      "id": {{ v.id }},
+                      "available": {{ v.available }},
+                      "price": {{ v.price | money | json }},
+                      "options": {{ v.options | json }}
+                    }{% unless forloop.last %},{% endunless %}
+                  {%- endfor -%}
+                ]
+              </script>
+            </form>
+
+            {%- if s.cta_note != blank -%}
+              <p class="mm-cta-note">{{ s.cta_note }}</p>
+            {%- endif -%}
+          {%- elsif request.design_mode -%}
+            <div class="mm-warn">⚙️ Buy box mode is “Standard product form”, but no product is connected. Assign this template to a product, or pick one under “Standard form product”.</div>
+          {%- endif -%}
+
+        {%- when 'app' -%}
+          {%- if request.design_mode and has_app_block == false -%}
+            <div class="mm-warn">⚙️ Buy box mode is “App block only”, so the theme renders no cart form here. Add your bundle app's block to this section (Add block → under Apps), or switch the mode back.</div>
+          {%- endif -%}
+
+        {%- else -%}
         {%- if plan_blocks.size > 0 -%}
           {%- assign any_buyable = false -%}
 
@@ -473,8 +617,10 @@
             {%- endif -%}
           </form>
         {%- elsif request.design_mode -%}
-          <div class="mm-warn">⚙️ Add at least one “Plan” block to this section so the page has something to sell.</div>
+          <div class="mm-warn">⚙️ Add at least one “Plan” block to this section so the page has something to sell — or switch “Buy box mode” to use a bundle app instead.</div>
         {%- endif -%}
+
+        {%- endcase -%}
 
         {%- if trust_blocks.size > 0 -%}
           <ul class="mm-trust">
@@ -547,12 +693,68 @@
     sync();
   });
 
+  /* ---- quantity stepper (standard mode) ---- */
+  root.querySelectorAll('[data-stepper]').forEach(function (st) {
+    var btns = st.querySelectorAll('button');
+    var numEl = st.querySelector('.num');
+    var owner = st.closest('form');
+    if (btns.length < 2 || !numEl || !owner) return;
+    function set(n) {
+      if (n < 1) n = 1;
+      numEl.textContent = n;
+      var q = owner.querySelector('input[name="quantity"]');
+      if (q) q.value = n;
+    }
+    btns[0].addEventListener('click', function () { set((parseInt(numEl.textContent, 10) || 1) - 1); });
+    btns[1].addEventListener('click', function () { set((parseInt(numEl.textContent, 10) || 1) + 1); });
+  });
+
+  /* ---- standard mode: keep the hidden variant id in step with the selects ---- */
+  var stdForm = root.querySelector('[data-standard-form]');
+  if (stdForm) {
+    var dataEl = stdForm.querySelector('[data-variant-json]');
+    var variants = [];
+    try { variants = JSON.parse(dataEl.textContent); } catch (e) { variants = []; }
+    var selects = stdForm.querySelectorAll('[data-option-select]');
+    var stdId = stdForm.querySelector('[data-variant-input]');
+    var stdPrice = stdForm.querySelector('[data-std-price]');
+    var stdBtn = stdForm.querySelector('[data-buy-submit]');
+
+    function updateVariant() {
+      var chosen = Array.prototype.map.call(selects, function (sel) { return sel.value; });
+      var match = null;
+      for (var i = 0; i < variants.length; i++) {
+        var v = variants[i];
+        var ok = true;
+        for (var j = 0; j < chosen.length; j++) { if (v.options[j] !== chosen[j]) { ok = false; break; } }
+        if (ok) { match = v; break; }
+      }
+      if (!match) return;
+      if (stdId) stdId.value = match.id;
+      if (stdPrice) stdPrice.textContent = match.price;
+      if (stdBtn) {
+        stdBtn.disabled = !match.available;
+        /* Labels come from the section settings, so they are read back off the
+           button rather than hard-coded here. */
+        stdBtn.textContent = match.available
+          ? stdBtn.getAttribute('data-label-available')
+          : stdBtn.getAttribute('data-label-soldout');
+      }
+      document.dispatchEvent(new CustomEvent('mm:plan-change', {
+        detail: { variant: String(match.id), sellingPlan: '' }
+      }));
+    }
+
+    selects.forEach(function (sel) { sel.addEventListener('change', updateVariant); });
+  }
+
   /* ---- plan selector: point the single form at the selected plan ---- */
   var form = root.querySelector('[data-buy-form]');
   if (!form) return;
   var variantInput = form.querySelector('[data-variant-input]');
   var planInput = form.querySelector('[data-plan-input]');
   var radios = form.querySelectorAll('[data-plan-radio]');
+  if (!radios.length) return;
 
   function apply(radio) {
     if (!radio) return;
@@ -614,7 +816,21 @@
     { "type": "image_picker", "id": "facts_image", "label": "Supplement Facts image" },
     { "type": "text", "id": "facts_alt", "label": "Image alt text", "default": "UP MEN Supplement Facts" },
     { "type": "textarea", "id": "facts_caption", "label": "Caption", "default": "Suggested use: take 5 capsules daily with food." },
-    { "type": "header", "content": "Plans and cart" },
+    { "type": "header", "content": "Buy box" },
+    {
+      "type": "select",
+      "id": "buy_mode",
+      "label": "Buy box mode",
+      "info": "Switch to a standard form or an app block to sell with a bundle app such as Kaching Bundles instead of the theme's own plan selector.",
+      "options": [
+        { "value": "plans", "label": "Theme plan selector" },
+        { "value": "standard", "label": "Standard product form (for bundle apps)" },
+        { "value": "app", "label": "App block only (no theme cart form)" }
+      ],
+      "default": "plans"
+    },
+    { "type": "product", "id": "standard_product", "label": "Standard form product", "info": "Standard mode only. Leave empty to use the product this page is showing." },
+    { "type": "text", "id": "qty_label", "label": "Quantity label", "default": "Quantity" },
     { "type": "text", "id": "plans_title", "label": "Selector heading", "default": "CHOOSE YOUR ROUTINE" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "ADD TO CART" },
     { "type": "text", "id": "sold_out_label", "label": "Button label when unavailable", "default": "CURRENTLY UNAVAILABLE" },
@@ -622,6 +838,7 @@
     { "type": "text", "id": "guarantee_text", "label": "Guarantee strip", "default": "COVERED BY OUR 90-DAY SATISFACTION GUARANTEE" }
   ],
   "blocks": [
+    { "type": "@app" },
     {
       "type": "plan",
       "name": "Plan",

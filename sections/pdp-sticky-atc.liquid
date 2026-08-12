@@ -44,6 +44,10 @@
   {%- assign bar_image = sp.featured_image -%}
 {%- endif -%}
 
+{%- comment -%} Turned off when the offer is owned by a bundle app, so the bar
+  cannot add a plain variant behind the app's back. {%- endcomment -%}
+{%- if s.enabled -%}
+
 <style>
   #mm-pdp-sticky-{{ sid }} {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
@@ -192,12 +196,15 @@
 })();
 </script>
 
+{%- endif -%}
+
 {% schema %}
 {
   "name": "PDP Sticky Cart",
   "tag": "div",
   "settings": [
     { "type": "paragraph", "content": "Mirrors the plan selected in the PDP Hero section. Appears once the buy box scrolls out of view." },
+    { "type": "checkbox", "id": "enabled", "label": "Show the sticky bar", "info": "Turn this off when a bundle app owns the offer, so the bar cannot add a plain variant behind the app's back.", "default": true },
     { "type": "text", "id": "title", "label": "Product name", "info": "Leave empty to use the product's title." },
     { "type": "checkbox", "id": "show_stars", "label": "Show stars", "default": true },
     { "type": "text", "id": "meta", "label": "Line under the name", "default": "Rated 4.8 by verified customers" },
