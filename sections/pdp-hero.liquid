@@ -327,6 +327,23 @@
 {%- capture mm_sel -%}mm-pdp-hero-{{ section.id }}{%- endcapture -%}
 {% render 'mm-section-colors', sel: mm_sel, s: section.settings %}
 
+{%- comment -%} Per-element colours, emitted after the section-wide ones so a
+  specific pick wins over the general "Body text" colour. Left unset, each of
+  these falls through to that colour instead. {%- endcomment -%}
+{%- if s.rating_text_color != blank or s.benefit_title_color != blank or s.benefit_text_color != blank -%}
+<style>
+  {%- if s.rating_text_color != blank %}
+  #mm-pdp-hero-{{ sid }} .mm-rating-text { color: {{ s.rating_text_color }}; }
+  {%- endif %}
+  {%- if s.benefit_title_color != blank %}
+  #mm-pdp-hero-{{ sid }} .mm-benefit .tt { color: {{ s.benefit_title_color }}; }
+  {%- endif %}
+  {%- if s.benefit_text_color != blank %}
+  #mm-pdp-hero-{{ sid }} .mm-benefit .tx { color: {{ s.benefit_text_color }}; }
+  {%- endif %}
+</style>
+{%- endif -%}
+
 <section id="mm-pdp-hero-{{ sid }}" class="reveal" data-testid="pdp-hero">
   <a id="buy" aria-hidden="true"></a>
   <div class="mm-wrap">
@@ -927,6 +944,7 @@
     { "type": "color", "id": "stars_color", "label": "Star colour" },
     { "type": "text", "id": "rating_text", "label": "Rating text", "default": "RATED 4.8 · VERIFIED CUSTOMER FEEDBACK" },
     { "type": "range", "id": "rating_text_size", "label": "Rating text size (px)", "min": 9, "max": 24, "step": 1, "default": 13 },
+    { "type": "color", "id": "rating_text_color", "label": "Rating text colour", "info": "Leave empty to follow the section's body text colour." },
     { "type": "header", "content": "Gallery" },
     { "type": "product", "id": "gallery_product", "label": "Gallery product", "info": "Leave empty to use the product this page is showing." },
     { "type": "image_picker", "id": "fallback_image", "label": "Fallback image", "info": "Used when the product has no images." },
@@ -955,6 +973,8 @@
     { "type": "range", "id": "benefit_icon_size", "label": "Icon size (px)", "min": 12, "max": 64, "step": 2, "default": 20 },
     { "type": "range", "id": "benefit_title_size", "label": "Title size (px)", "min": 8, "max": 20, "step": 1, "default": 10 },
     { "type": "range", "id": "benefit_text_size", "label": "Text size (px)", "min": 8, "max": 20, "step": 1, "default": 11 },
+    { "type": "color", "id": "benefit_title_color", "label": "Title colour", "info": "Leave empty to follow the section's colours." },
+    { "type": "color", "id": "benefit_text_color", "label": "Text colour", "info": "Leave empty to follow the section's colours." },
     { "type": "header", "content": "Trust rows" },
     {
       "type": "select",
