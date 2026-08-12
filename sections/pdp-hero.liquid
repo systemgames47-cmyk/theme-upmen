@@ -430,9 +430,36 @@
           {%- if std_product == blank or std_product.id == blank -%}{%- assign std_product = product -%}{%- endif -%}
           {%- if std_product != blank and std_product.id != blank -%}
             {%- assign std_variant = std_product.selected_or_first_available_variant -%}
-            <form action="{{ routes.cart_add_url }}" method="post" data-buy-form data-standard-form>
+
+            {%- comment -%} A subscription-only product is rejected by /cart/add unless a
+              selling plan travels with it, so attach one whenever the product demands it.
+              This is the same rule sections/pricing.liquid applies. {%- endcomment -%}
+            {%- assign std_plan = s.standard_selling_plan_id -%}
+            {%- if std_plan == blank and std_product.requires_selling_plan and std_product.selling_plan_groups.size > 0 -%}
+              {%- assign std_plan = std_product.selling_plan_groups.first.selling_plans.first.id -%}
+            {%- endif -%}
+            {%- assign std_plan_s = std_plan | append: '' -%}
+
+            {%- comment -%} Show what the shopper is actually charged: the plan's
+              per-delivery price when a plan is attached, not the bare variant price. {%- endcomment -%}
+            {%- assign std_price = std_variant.price -%}
+            {%- if std_plan != blank -%}
+              {%- for allocation in std_variant.selling_plan_allocations -%}
+                {%- assign alloc_s = allocation.selling_plan.id | append: '' -%}
+                {%- if alloc_s == std_plan_s -%}
+                  {%- assign std_price = allocation.per_delivery_price -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            <form action="{{ routes.cart_add_url }}" method="post" data-buy-form data-standard-form
+              data-selling-plan="{{ std_plan }}">
               <input type="hidden" name="return_to" value="/checkout">
               <input type="hidden" name="id" value="{{ std_variant.id }}" data-variant-input>
+              {%- if std_plan != blank -%}
+                <input type="hidden" name="selling_plan" value="{{ std_plan }}">
+              {%- endif -%}
 
               {%- unless std_product.has_only_default_variant -%}
                 <div class="mm-options">
@@ -460,7 +487,7 @@
                   <button type="button" aria-label="Increase quantity">+</button>
                 </div>
                 <input type="hidden" name="quantity" value="1">
-                <span class="mm-std-price" data-std-price>{{ std_variant.price | money }}</span>
+                <span class="mm-std-price" data-std-price>{{ std_price | money }}</span>
               </div>
 
               <button type="submit" class="mm-cta" data-buy-submit
@@ -475,10 +502,20 @@
               <script type="application/json" data-variant-json>
                 [
                   {%- for v in std_product.variants -%}
+                    {%- assign v_price = v.price -%}
+                    {%- if std_plan != blank -%}
+                      {%- for allocation in v.selling_plan_allocations -%}
+                        {%- assign a_s = allocation.selling_plan.id | append: '' -%}
+                        {%- if a_s == std_plan_s -%}
+                          {%- assign v_price = allocation.per_delivery_price -%}
+                          {%- break -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    {%- endif -%}
                     {
                       "id": {{ v.id }},
                       "available": {{ v.available }},
-                      "price": {{ v.price | money | json }},
+                      "price": {{ v_price | money | json }},
                       "options": {{ v.options | json }}
                     }{% unless forloop.last %},{% endunless %}
                   {%- endfor -%}
@@ -744,7 +781,10 @@
           : stdBtn.getAttribute('data-label-soldout');
       }
       document.dispatchEvent(new CustomEvent('mm:plan-change', {
-        detail: { variant: String(match.id), sellingPlan: '' }
+        detail: {
+          variant: String(match.id),
+          sellingPlan: stdForm.getAttribute('data-selling-plan') || ''
+        }
       }));
     }
 
@@ -833,6 +873,7 @@
       "default": "plans"
     },
     { "type": "text", "id": "standard_product_handle", "label": "Standard form product handle", "info": "Standard mode only. Leave empty to use the product this page is showing. A handle rather than a picker because Shopify allows only one product picker per section, and the gallery already uses it." },
+    { "type": "text", "id": "standard_selling_plan_id", "label": "Standard form selling plan ID (optional)", "info": "Standard mode only. If empty, a subscription-only product falls back to its first selling plan, which /cart/add requires." },
     { "type": "text", "id": "qty_label", "label": "Quantity label", "default": "Quantity" },
     { "type": "text", "id": "plans_title", "label": "Selector heading", "default": "CHOOSE YOUR ROUTINE" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "ADD TO CART" },
