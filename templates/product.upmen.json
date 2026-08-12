@@ -12,6 +12,23 @@
     "pdp_hero": {
       "type": "pdp-hero",
       "blocks": {
+        "plan_Be86UP": {
+          "type": "plan",
+          "settings": {
+            "product": "",
+            "product_handle": "",
+            "variant_id": "",
+            "selling_plan_id": "",
+            "is_default": false,
+            "name": "90-DAY ROUTINE",
+            "sub": "3 bottles delivered together",
+            "save_text": "",
+            "ribbon": "",
+            "ribbon_style": "orange",
+            "price_text": "",
+            "compare_text": ""
+          }
+        },
         "benefit_1": {
           "type": "benefit",
           "settings": {
@@ -48,13 +65,6 @@
             "text": "CGMP-certified facility"
           }
         },
-        "kaching_bundles_app_block_EJTUdb": {
-          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
-          "settings": {
-            "product": "{{product}}",
-            "manual_deal_block_id": ""
-          }
-        },
         "trust_1": {
           "type": "trust",
           "settings": {
@@ -81,11 +91,11 @@
         }
       },
       "block_order": [
+        "plan_Be86UP",
         "benefit_1",
         "benefit_2",
         "benefit_3",
         "benefit_4",
-        "kaching_bundles_app_block_EJTUdb",
         "trust_1",
         "trust_2",
         "trust_3"
@@ -101,7 +111,8 @@
         "fallback_image": "shopify://shop_images/ChatGPT_Image_31_de_jul._de_2026_16_06_06.png",
         "facts_alt": "UP MEN Supplement Facts panel",
         "facts_caption": "Suggested use: take 5 capsules daily with food. Exact amounts are shown on the Supplement Facts panel.",
-        "buy_mode": "app",
+        "buy_mode": "plans",
+        "standard_product_handle": "",
         "qty_label": "Quantity",
         "plans_title": "CHOOSE YOUR UP MEN ROUTINE",
         "cta_label": "ADD TO CART",
@@ -962,7 +973,7 @@
     "pdp_sticky_atc": {
       "type": "pdp-sticky-atc",
       "settings": {
-        "enabled": false,
+        "enabled": true,
         "title": "UP MEN — 9 Actives, One Daily Formula",
         "show_stars": true,
         "meta": "Rated 4.8 by verified customers",
@@ -974,6 +985,22 @@
         "selling_plan_id": "",
         "scroll_offset": 600
       }
+    },
+    "178655498345332146": {
+      "type": "apps",
+      "blocks": {
+        "kaching_bundles_app_block_EJTUdb": {
+          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+          "settings": {
+            "product": "{{product}}",
+            "manual_deal_block_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "kaching_bundles_app_block_EJTUdb"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -993,6 +1020,7 @@
     "marquee_fast",
     "reviews",
     "faq",
-    "pdp_sticky_atc"
+    "pdp_sticky_atc",
+    "178655498345332146"
   ]
 }
