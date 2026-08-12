@@ -9,7 +9,9 @@
  */
 {
   "current": {
-    "logo_height": 32,
+    "logo": "shopify://shop_images/ee796f80-ec6a-407b-8ca0-14266f26c748.png",
+    "logo_height": 46,
+    "favicon": "shopify://shop_images/ChatGPT_Image_12_08_2026_18_09_27.png",
     "color_brand": "#ff5600",
     "color_brand_dark": "#120804",
     "color_brand_soft": "#fff4ec",
