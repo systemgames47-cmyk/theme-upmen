@@ -101,7 +101,8 @@
 </style>
 
 <div id="mm-pdp-sticky-{{ sid }}" data-sticky-bar role="region" aria-label="{{ s.aria_label | default: 'Add to cart' | escape }}">
-  <form class="mm-wrap" action="{{ routes.cart_add_url }}" method="post" data-sticky-form>
+  <form class="mm-wrap" action="{{ routes.cart_add_url }}" method="post" data-sticky-form
+    {% if s.drawer_owner == 'app' %}data-no-theme-drawer{% endif %}>
     {%- comment -%} See the note in pdp-hero: a return_to pointing at checkout makes
       cart-drawer.liquid skip its AJAX intercept. {%- endcomment -%}
     {%- if s.after_add == 'checkout' -%}
@@ -222,6 +223,17 @@
         { "value": "checkout", "label": "Go straight to checkout" }
       ],
       "default": "drawer"
+    },
+    {
+      "type": "select",
+      "id": "drawer_owner",
+      "label": "Which cart drawer",
+      "info": "Set this to the bundle app if the app opens a drawer of its own, otherwise both drawers open on one click.",
+      "options": [
+        { "value": "theme", "label": "Theme cart drawer" },
+        { "value": "app", "label": "Let the bundle app handle it" }
+      ],
+      "default": "theme"
     },
     { "type": "text", "id": "sold_out_label", "label": "Button label when unavailable", "default": "UNAVAILABLE" },
     { "type": "image_picker", "id": "image", "label": "Thumbnail", "info": "Leave empty to use the product image." },

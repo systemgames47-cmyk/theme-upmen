@@ -253,6 +253,12 @@
     if (!f || f.tagName !== 'FORM') return;
     var action = f.getAttribute('action') || '';
     if (!/\/cart\/add/.test(action)) return;
+    // An app block ships its own cart UX — Kaching Bundles opens its own drawer,
+    // for one — so handling its form here stacks two drawers on a single click.
+    // Shopify wraps every app block in #shopify-block-*, which is what this looks for.
+    if (f.closest && f.closest('[id^="shopify-block-"]')) return;
+    // Explicit opt-out, for a theme section that has handed the cart to an app.
+    if (f.hasAttribute('data-no-theme-drawer')) return;
     var returnTo = f.querySelector('input[name="return_to"]');
     if (returnTo && /checkout/.test(returnTo.value)) return; // straight to checkout, no drawer
     e.preventDefault();
