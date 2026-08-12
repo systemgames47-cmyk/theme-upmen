@@ -27,8 +27,8 @@
       "settings": {
         "logo": "shopify://shop_images/ee796f80-ec6a-407b-8ca0-14266f26c748.png",
         "logo_height": 70,
-        "header_bg": "#0a0503",
-        "header_text": "#ffffff",
+        "header_bg": "#FFFFFF",
+        "header_text": "#000000",
         "show_cta": true,
         "cta_label": "VIEW 90-DAY OFFER",
         "cta_link": "",
