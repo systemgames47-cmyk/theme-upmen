@@ -32,8 +32,8 @@
         "show_cta": true,
         "cta_label": "VIEW 90-DAY OFFER",
         "cta_link": "",
-        "show_cart": false,
-        "show_cart_mobile": false,
+        "show_cart": true,
+        "show_cart_mobile": true,
         "show_cart_desktop": false,
         "menu": "main-menu",
         "show_mobile_menu_toggle": false
