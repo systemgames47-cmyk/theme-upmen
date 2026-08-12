@@ -58,6 +58,11 @@
     font-size: calc((14px) * var(--fs-h, 1)); font-weight: 700; color: #fff; line-height: 1.25;
   }
   #pq-cart-drawer .pq-drawer-item-variant { font-size: calc((12px) * var(--fs-b, 1)); color: rgba(255,255,255,0.55); }
+  {%- comment -%} Theme setting: Cart → "Show the quantity stepper in the cart drawer".
+    Hidden with CSS rather than skipped in the render, because the line markup is
+    built client-side from /cart.js and this keeps one code path. Removing a line
+    is unaffected. {%- endcomment -%}
+  {%- unless settings.cart_show_quantity == false -%}
   #pq-cart-drawer .pq-drawer-item-qty {
     display: inline-flex; align-items: center; gap: 8px; margin-top: 6px;
     border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; padding: 2px 4px;
@@ -71,6 +76,9 @@
   #pq-cart-drawer .pq-drawer-item-qty button:hover { background: rgba(255,255,255,0.12); }
   #pq-cart-drawer .pq-drawer-item-qty button:disabled { opacity: 0.4; cursor: not-allowed; }
   #pq-cart-drawer .pq-drawer-item-qty .num { font-size: calc((13px) * var(--fs-b, 1)); font-weight: 700; min-width: 18px; text-align: center; color: #fff; }
+  {%- else -%}
+  #pq-cart-drawer .pq-drawer-item-qty { display: none; }
+  {%- endunless -%}
   #pq-cart-drawer .pq-drawer-item-line {
     font-size: calc((14px) * var(--fs-b, 1)); font-weight: 800; color: var(--brand, #ff5600);
     text-align: right; white-space: nowrap;

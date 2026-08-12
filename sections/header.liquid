@@ -1,10 +1,11 @@
-{%- comment -%} Header — dark Up Men bar with wordmark, nav and CTA {%- endcomment -%}
+{%- comment -%} Header — dark Up Men bar with wordmark, nav, account and cart {%- endcomment -%}
 {%- assign sid = section.id -%}
-{%- assign logo_image = section.settings.logo | default: settings.logo -%}
-{%- if section.settings.favicon != blank -%}
+{%- assign s = section.settings -%}
+{%- assign logo_image = s.logo | default: settings.logo -%}
+{%- if s.favicon != blank -%}
 <script>
   (function(){
-    var href = {{ section.settings.favicon | image_url: width: 32, height: 32 | json }};
+    var href = {{ s.favicon | image_url: width: 32, height: 32 | json }};
     var link = document.querySelector('link[rel="icon"]');
     if (!link) {
       link = document.createElement('link');
@@ -17,23 +18,41 @@
   })();
 </script>
 {%- endif -%}
-{%- assign header_height = section.settings.logo_height | default: settings.logo_height | default: 32 -%}
+{%- assign header_height = s.logo_height | default: settings.logo_height | default: 32 -%}
+{%- assign header_height_mobile = s.logo_height_mobile | default: header_height -%}
+{%- assign hdr_text = s.header_text | default: '#ffffff' -%}
+{%- assign centered = false -%}
+{%- if s.logo_position == 'center' -%}{%- assign centered = true -%}{%- endif -%}
 
 <style>
   #mm-header-{{ sid }} {
     position: sticky; top: 0; z-index: 60;
-    background: {{ section.settings.header_bg | default: '#0a0503' }};
-    color: {{ section.settings.header_text | default: '#ffffff' }};
-    border-bottom: 1px solid rgba(255,255,255,0.10);
+    background: {{ s.header_bg | default: '#0a0503' }};
+    color: {{ hdr_text }};
+    border-bottom: 1px solid {{ s.header_border | default: 'rgba(255,255,255,0.10)' }};
   }
   #mm-header-{{ sid }} .mm-row {
     max-width: 1200px; margin: 0 auto; padding: 14px 16px;
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
   }
+  {%- if centered %}
+  /* Three tracks so the logo sits on the page's centre line, not merely between
+     whatever the nav and the actions happen to measure. */
+  #mm-header-{{ sid }} .mm-row {
+    display: grid; grid-template-columns: 1fr auto 1fr; justify-content: initial;
+  }
+  #mm-header-{{ sid }} .mm-lead { display: flex; align-items: center; gap: 12px; justify-self: start; }
+  #mm-header-{{ sid }} .mm-logo-link { justify-self: center; }
+  #mm-header-{{ sid }} .mm-actions { justify-self: end; }
+  {%- endif %}
   #mm-header-{{ sid }} .mm-logo-link { display: inline-flex; align-items: center; text-decoration: none; }
+  #mm-header-{{ sid }} .mm-logo-img { height: {{ header_height_mobile }}px; width: auto; display: block; }
+  @media (min-width: 990px) {
+    #mm-header-{{ sid }} .mm-logo-img { height: {{ header_height }}px; }
+  }
   #mm-header-{{ sid }} .mm-wordmark {
     font-family: var(--font-heading); font-weight: 800; letter-spacing: 0.28em;
-    font-size: 18px; color: {{ section.settings.header_text | default: '#ffffff' }};
+    font-size: {{ s.wordmark_size | default: 18 }}px; color: {{ hdr_text }};
     text-transform: uppercase; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
   }
   #mm-header-{{ sid }} .mm-wordmark .dot {
@@ -41,12 +60,12 @@
   }
   #mm-header-{{ sid }} nav { display: none; align-items: center; gap: 24px; }
   #mm-header-{{ sid }} nav a {
-    color: {{ section.settings.header_text | default: '#ffffff' }}; text-decoration: none;
-    font-family: var(--font-heading); font-size: calc((12px) * var(--fs-b, 1)); font-weight: 700;
+    color: {{ hdr_text }}; text-decoration: none;
+    font-family: var(--font-heading); font-size: calc(({{ s.nav_size | default: 12 }}px) * var(--fs-b, 1)); font-weight: 700;
     letter-spacing: 0.14em; text-transform: uppercase;
   }
   #mm-header-{{ sid }} nav a:hover { color: var(--brand, #ff5600); }
-  #mm-header-{{ sid }} .mm-actions { display: flex; align-items: center; gap: 12px; }
+  #mm-header-{{ sid }} .mm-actions { display: flex; align-items: center; gap: {{ s.action_gap | default: 12 }}px; }
   #mm-header-{{ sid }} .mm-cta {
     display: none; font-family: var(--font-heading); font-size: calc((12px) * var(--fs-b, 1)); font-weight: 700;
     letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
@@ -54,45 +73,86 @@
     border-radius: 8px; padding: 9px 16px; white-space: nowrap;
   }
   #mm-header-{{ sid }} .mm-cta:hover { background: var(--brand, #ff5600); color: #fff; }
-  #mm-header-{{ sid }} .mm-cart {
+  #mm-header-{{ sid }} .mm-icon-link {
     display: inline-flex; align-items: center; gap: 6px;
-    color: {{ section.settings.header_text | default: '#ffffff' }}; text-decoration: none;
-    font-family: var(--font-heading); font-size: calc((12px) * var(--fs-b, 1)); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: {{ hdr_text }}; text-decoration: none;
+    font-family: var(--font-heading); font-size: calc((12px) * var(--fs-b, 1)); font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
   }
-  #mm-header-{{ sid }} .mm-cart .mm-count {
+  #mm-header-{{ sid }} .mm-icon-link:hover { color: var(--brand, #ff5600); }
+  #mm-header-{{ sid }} .mm-icon-link svg { width: {{ s.icon_size | default: 20 }}px; height: {{ s.icon_size | default: 20 }}px; }
+  #mm-header-{{ sid }} .mm-account-label { display: none; }
+  @media (min-width: 990px) {
+    {%- if s.show_account_label %}
+    #mm-header-{{ sid }} .mm-account-label { display: inline; }
+    {%- endif %}
+  }
+  #mm-header-{{ sid }} .mm-count {
     background: var(--brand, #ff5600); color: #fff; font-size: calc((10px) * var(--fs-b, 1)); font-weight: 800;
     min-width: 18px; height: 18px; border-radius: 999px;
     display: inline-flex; align-items: center; justify-content: center; padding: 0 5px;
   }
-  #mm-header-{{ sid }} .menu-toggle { background: none; border: none; cursor: pointer; padding: 4px; display: inline-flex; color: {{ section.settings.header_text | default: '#ffffff' }}; }
+  #mm-header-{{ sid }} .menu-toggle {
+    background: none; border: none; cursor: pointer; padding: 4px; display: inline-flex;
+    color: {{ hdr_text }};
+  }
+  #mm-header-{{ sid }} .menu-toggle svg { width: {{ s.icon_size | default: 20 }}px; height: {{ s.icon_size | default: 20 }}px; }
+  #mm-header-{{ sid }} .menu-toggle .ic-close { display: none; }
+  #mm-header-{{ sid }} .menu-toggle[aria-expanded="true"] .ic-open { display: none; }
+  #mm-header-{{ sid }} .menu-toggle[aria-expanded="true"] .ic-close { display: block; }
+
   @media (min-width: 990px) {
     #mm-header-{{ sid }} nav { display: flex; }
     #mm-header-{{ sid }} .mm-cta { display: inline-flex; }
     #mm-header-{{ sid }} .menu-toggle { display: none; }
-    {%- unless section.settings.show_cart_desktop -%}
+    {%- unless s.show_cart_desktop -%}
     #mm-header-{{ sid }} .mm-cart { display: none; }
     {%- endunless -%}
   }
   @media (max-width: 989.98px) {
-    {%- unless section.settings.show_cart_mobile -%}
+    {%- unless s.show_cart_mobile -%}
     #mm-header-{{ sid }} .mm-cart { display: none; }
     {%- endunless -%}
+
+    {%- comment -%} The panel that was missing: assets/theme.js toggles .is-open on
+      the nav, but nothing here ever styled that class, so the button appeared to do
+      nothing on mobile. The header is sticky and therefore the containing block for
+      this absolutely positioned panel. {%- endcomment -%}
+    #mm-header-{{ sid }} nav.is-open {
+      display: flex; flex-direction: column; align-items: stretch; gap: 0;
+      position: absolute; left: 0; right: 0; top: 100%;
+      background: {{ s.header_bg | default: '#0a0503' }};
+      border-bottom: 1px solid {{ s.header_border | default: 'rgba(255,255,255,0.10)' }};
+      padding: 6px 16px 14px;
+      max-height: 75svh; overflow-y: auto;
+      box-shadow: 0 18px 30px rgba(0,0,0,0.45);
+    }
+    #mm-header-{{ sid }} nav.is-open a {
+      padding: 14px 2px;
+      border-bottom: 1px solid {{ s.header_border | default: 'rgba(255,255,255,0.10)' }};
+    }
+    #mm-header-{{ sid }} nav.is-open a:last-child { border-bottom: 0; }
   }
 </style>
 
 <header id="mm-header-{{ sid }}" role="banner">
   <div class="mm-row">
-    <a href="{{ routes.root_url }}" class="mm-logo-link" aria-label="{{ shop.name }}">
-      {%- if logo_image != blank -%}
-        <img src="{{ logo_image | image_url: width: 360 }}" alt="{{ shop.name }}" style="height: {{ header_height }}px; width: auto; display: block;">
-      {%- else -%}
-        <span class="mm-wordmark">UP MEN<span class="dot" aria-hidden="true"></span></span>
-      {%- endif -%}
-    </a>
+    {%- comment -%} On a centred layout the toggle and nav share the left track so the
+      logo can hold the middle one. {%- endcomment -%}
+    {%- if centered -%}<div class="mm-lead">{%- endif -%}
 
-    <nav data-site-nav aria-label="Main menu">
-      {%- if section.settings.menu != blank -%}
-        {%- for link in section.settings.menu.links -%}
+    {%- if s.show_mobile_menu_toggle and s.menu != blank -%}
+      <button class="menu-toggle" data-menu-toggle type="button"
+        aria-label="{{ s.menu_aria | default: 'Open menu' | escape }}"
+        aria-expanded="false" aria-controls="mm-nav-{{ sid }}">
+        <svg class="ic-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg class="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </button>
+    {%- endif -%}
+
+    <nav id="mm-nav-{{ sid }}" data-site-nav aria-label="Main menu">
+      {%- if s.menu != blank -%}
+        {%- for link in s.menu.links -%}
           <a href="{{ link.url }}">{{ link.title }}</a>
         {%- endfor -%}
       {%- else -%}
@@ -101,26 +161,92 @@
       {%- endif -%}
     </nav>
 
+    {%- if centered -%}</div>{%- endif -%}
+
+    <a href="{{ routes.root_url }}" class="mm-logo-link" aria-label="{{ shop.name }}">
+      {%- if logo_image != blank -%}
+        <img class="mm-logo-img" src="{{ logo_image | image_url: width: 480 }}"
+          width="{{ logo_image.width }}" height="{{ logo_image.height }}" alt="{{ shop.name }}">
+      {%- else -%}
+        <span class="mm-wordmark">{{ s.wordmark | default: 'UP MEN' }}<span class="dot" aria-hidden="true"></span></span>
+      {%- endif -%}
+    </a>
+
     <div class="mm-actions">
-      {%- if section.settings.show_cta -%}
-        <a href="{{ section.settings.cta_link | default: '#join_pkg' }}" class="mm-cta">{{ section.settings.cta_label }}</a>
+      {%- if s.show_cta -%}
+        <a href="{{ s.cta_link | default: '#join_pkg' }}" class="mm-cta">{{ s.cta_label }}</a>
       {%- endif -%}
 
-      {%- if section.settings.show_mobile_menu_toggle and section.settings.menu != blank -%}
-        <button class="menu-toggle" data-menu-toggle aria-label="Open menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
+      {%- if s.show_account -%}
+        {%- assign account_href = s.account_link -%}
+        {%- if account_href == blank -%}{%- assign account_href = routes.account_url -%}{%- endif -%}
+        <a href="{{ account_href }}" class="mm-icon-link mm-account"
+          aria-label="{{ s.account_label | default: 'Account' | escape }}">
+          {%- if s.account_icon != blank -%}
+            <img src="{{ s.account_icon | image_url: width: 60 }}" width="60" height="60"
+              alt="" style="width: {{ s.icon_size | default: 20 }}px; height: {{ s.icon_size | default: 20 }}px; object-fit: contain;">
+          {%- else -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          {%- endif -%}
+          <span class="mm-account-label">{{ s.account_label | default: 'Account' }}</span>
+        </a>
       {%- endif -%}
 
-      {%- if section.settings.show_cart -%}
-        <a href="{{ routes.cart_url }}" class="mm-cart" aria-label="View cart" data-mm-open-cart>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      {%- if s.show_cart -%}
+        <a href="{{ routes.cart_url }}" class="mm-icon-link mm-cart" aria-label="View cart" data-mm-open-cart>
+          {%- if s.cart_icon != blank -%}
+            <img src="{{ s.cart_icon | image_url: width: 60 }}" width="60" height="60"
+              alt="" style="width: {{ s.icon_size | default: 20 }}px; height: {{ s.icon_size | default: 20 }}px; object-fit: contain;">
+          {%- else -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          {%- endif -%}
           <span class="mm-count">{{ cart.item_count }}</span>
         </a>
       {%- endif -%}
     </div>
   </div>
 </header>
+
+<script>
+(function () {
+  var root = document.getElementById('shopify-section-{{ sid }}');
+  if (!root) return;
+  var toggle = root.querySelector('[data-menu-toggle]');
+  var nav = root.querySelector('[data-site-nav]');
+  if (!toggle || !nav) return;
+
+  /* assets/theme.js already binds the click and flips .is-open. Binding a second
+     handler here would toggle it straight back, so this only mirrors the state
+     onto aria-expanded and closes the panel on outside click, Escape and resize. */
+  var sync = function () {
+    toggle.setAttribute('aria-expanded', nav.classList.contains('is-open') ? 'true' : 'false');
+  };
+  new MutationObserver(sync).observe(nav, { attributes: true, attributeFilter: ['class'] });
+  sync();
+
+  function close() {
+    if (!nav.classList.contains('is-open')) return;
+    nav.classList.remove('is-open');
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!nav.classList.contains('is-open')) return;
+    if (nav.contains(e.target) || toggle.contains(e.target)) return;
+    close();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+  nav.addEventListener('click', function (e) {
+    /* Following a link should not leave the panel hanging open behind the new page,
+       and for an in-page anchor nothing would close it at all. */
+    if (e.target.closest('a')) close();
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth >= 990) close();
+  });
+})();
+</script>
 
 {% schema %}
 {
@@ -134,6 +260,16 @@
       "info": "If empty, uses the UP MEN wordmark."
     },
     {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Logo position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centered" }
+      ],
+      "default": "left"
+    },
+    {
       "type": "image_picker",
       "id": "favicon",
       "label": "Favicon (browser tab icon)",
@@ -142,15 +278,52 @@
     {
       "type": "range",
       "id": "logo_height",
-      "label": "Logo height (px)",
+      "label": "Logo height on desktop (px)",
       "min": 24,
       "max": 100,
       "step": 2,
       "default": 32
     },
+    {
+      "type": "range",
+      "id": "logo_height_mobile",
+      "label": "Logo height on mobile (px)",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "default": 28
+    },
+    { "type": "text", "id": "wordmark", "label": "Wordmark text", "info": "Used only when no logo image is set.", "default": "UP MEN" },
+    { "type": "range", "id": "wordmark_size", "label": "Wordmark size (px)", "min": 12, "max": 40, "step": 1, "default": 18 },
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "header_bg", "label": "Background color", "default": "#0a0503" },
     { "type": "color", "id": "header_text", "label": "Text and icon color", "default": "#ffffff" },
+    { "type": "color", "id": "header_border", "label": "Border color", "default": "#1f1611" },
+    { "type": "header", "content": "Navigation" },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    },
+    { "type": "range", "id": "nav_size", "label": "Menu text size (px)", "min": 10, "max": 20, "step": 1, "default": 12 },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_menu_toggle",
+      "label": "Show mobile menu button (hamburger)",
+      "info": "Only appears if a navigation menu is selected.",
+      "default": true
+    },
+    { "type": "text", "id": "menu_aria", "label": "Menu button screen-reader label", "default": "Open menu" },
+    { "type": "header", "content": "Icons" },
+    { "type": "range", "id": "icon_size", "label": "Icon size (px)", "min": 14, "max": 40, "step": 1, "default": 20 },
+    { "type": "range", "id": "action_gap", "label": "Space between icons (px)", "min": 4, "max": 32, "step": 1, "default": 12 },
+    { "type": "header", "content": "Customer account" },
+    { "type": "checkbox", "id": "show_account", "label": "Show account icon", "default": true },
+    { "type": "url", "id": "account_link", "label": "Account link", "info": "Leave empty to use the store's own account page." },
+    { "type": "text", "id": "account_label", "label": "Account label", "default": "Account" },
+    { "type": "checkbox", "id": "show_account_label", "label": "Show the label next to the icon on desktop", "default": false },
+    { "type": "image_picker", "id": "account_icon", "label": "Custom account icon", "info": "Optional. Replaces the built-in icon." },
     { "type": "header", "content": "CTA button" },
     { "type": "checkbox", "id": "show_cta", "label": "Show CTA button", "default": true },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "VIEW 90-DAY OFFER" },
@@ -159,20 +332,7 @@
     { "type": "checkbox", "id": "show_cart", "label": "Show cart icon", "default": true },
     { "type": "checkbox", "id": "show_cart_mobile", "label": "Show cart icon on mobile", "default": true },
     { "type": "checkbox", "id": "show_cart_desktop", "label": "Show cart icon on desktop", "default": true },
-    { "type": "header", "content": "Menu" },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Navigation menu",
-      "default": "main-menu"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_mobile_menu_toggle",
-      "label": "Show mobile menu button (hamburger)",
-      "info": "Only appears if a navigation menu is selected.",
-      "default": false
-    }
+    { "type": "image_picker", "id": "cart_icon", "label": "Custom cart icon", "info": "Optional. Replaces the built-in icon." }
   ],
   "presets": [
     {
@@ -180,12 +340,14 @@
       "settings": {
         "header_bg": "#0a0503",
         "header_text": "#ffffff",
+        "logo_position": "left",
         "show_cart": true,
         "show_cart_mobile": true,
         "show_cart_desktop": true,
+        "show_account": true,
         "show_cta": true,
         "cta_label": "VIEW 90-DAY OFFER",
-        "show_mobile_menu_toggle": false
+        "show_mobile_menu_toggle": true
       }
     }
   ]

@@ -70,6 +70,18 @@
     ]
   },
   {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_show_quantity",
+        "label": "Show the quantity stepper in the cart drawer",
+        "info": "Off hides the +/- control on each line. Customers can still remove an item, and a bundle app that fixes quantities is not second-guessed.",
+        "default": true
+      }
+    ]
+  },
+  {
     "name": "Contact",
     "settings": [
       {
