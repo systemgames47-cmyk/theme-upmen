@@ -48,23 +48,6 @@
             "text": "CGMP-certified facility"
           }
         },
-        "plan_kit": {
-          "type": "plan",
-          "settings": {
-            "product": "",
-            "product_handle": "3-month-auto-renew-subscription",
-            "variant_id": "",
-            "selling_plan_id": "",
-            "is_default": false,
-            "name": "90-DAY ROUTINE",
-            "sub": "3 bottles delivered together · renews every 90 days",
-            "save_text": "3 bottles for the price of 2 · save $59",
-            "ribbon": "BEST VALUE",
-            "ribbon_style": "green",
-            "price_text": "$118",
-            "compare_text": "$177"
-          }
-        },
         "trust_1": {
           "type": "trust",
           "settings": {
@@ -95,7 +78,6 @@
         "benefit_2",
         "benefit_3",
         "benefit_4",
-        "plan_kit",
         "trust_1",
         "trust_2",
         "trust_3"
