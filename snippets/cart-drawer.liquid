@@ -298,5 +298,51 @@
   } else {
     refresh();
   }
+
+  /* ---- keep the header badge honest when something else writes to the cart ----
+     When a bundle app owns the drawer, a removal happens inside the app's own UI
+     and never passes through changeQty() above, so the header keeps whatever
+     number Liquid rendered it with. Rather than name any app, watch for writes
+     to Shopify's cart endpoints and re-read the cart after them. Badges only —
+     the drawer body is re-rendered by refresh() when it opens. */
+  var CART_WRITE = /\/cart\/(add|change|update|clear)(\.js)?(\?|$)/;
+  var nativeFetch = window.fetch;
+
+  var badgeTimer;
+  function syncBadges(){
+    clearTimeout(badgeTimer);
+    badgeTimer = setTimeout(function(){
+      /* The unpatched fetch, so this read can never re-enter the hook below. */
+      nativeFetch.call(window, '/cart.js', { credentials: 'same-origin', headers: { 'Accept': 'application/json' } })
+        .then(function(r){ return r.json(); })
+        .then(updateBadges)
+        .catch(function(){});
+    }, 250);
+  }
+
+  if (nativeFetch) {
+    window.fetch = function(input){
+      var url = typeof input === 'string' ? input : (input && input.url) || '';
+      var res = nativeFetch.apply(this, arguments);
+      /* Second handler so a caller's own rejection never surfaces as an
+         unhandled one just because this branch observed the promise. */
+      if (CART_WRITE.test(url)) { res.then(syncBadges, function(){}); }
+      return res;
+    };
+  }
+
+  var nativeXhrOpen = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function(method, url){
+    if (CART_WRITE.test(String(url || ''))) { this.addEventListener('loadend', syncBadges); }
+    return nativeXhrOpen.apply(this, arguments);
+  };
+
+  /* Coming back with the browser's back button restores the page from bfcache
+     without firing DOMContentLoaded, so the badge would return with its old
+     number. Same for a tab that was left open while the cart changed elsewhere. */
+  window.addEventListener('pageshow', function(e){ if (e.persisted) syncBadges(); });
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState === 'visible') syncBadges();
+  });
 })();
 </script>

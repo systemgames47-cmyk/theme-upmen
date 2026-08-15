@@ -592,17 +592,32 @@
               {%- comment -%} The quantity input is always submitted; only the stepper
                 is optional, so hiding the control still posts a quantity of 1. {%- endcomment -%}
               <input type="hidden" name="quantity" value="1">
-              <div class="mm-qty-row">
-                {%- if s.show_quantity -%}
-                  <span class="mm-qty-label">{{ s.qty_label }}</span>
-                  <div class="mm-stepper" data-stepper>
-                    <button type="button" aria-label="Decrease quantity">−</button>
-                    <span class="num">1</span>
-                    <button type="button" aria-label="Increase quantity">+</button>
-                  </div>
-                {%- endif -%}
-                <span class="mm-std-price" data-std-price>{{ std_price | money }}</span>
-              </div>
+
+              {%- comment -%} A bundle app on this section owns the offer, and this
+                figure is the plain variant price — not the bundle's. Printing it
+                next to the app's own pricing puts two different numbers on one buy
+                box, so it is dropped whenever an app block is present. Without an
+                app block the merchant still decides. {%- endcomment -%}
+              {%- assign show_std_price = false -%}
+              {%- if has_app_block == false and s.show_std_price != false -%}
+                {%- assign show_std_price = true -%}
+              {%- endif -%}
+
+              {%- if s.show_quantity or show_std_price -%}
+                <div class="mm-qty-row">
+                  {%- if s.show_quantity -%}
+                    <span class="mm-qty-label">{{ s.qty_label }}</span>
+                    <div class="mm-stepper" data-stepper>
+                      <button type="button" aria-label="Decrease quantity">−</button>
+                      <span class="num">1</span>
+                      <button type="button" aria-label="Increase quantity">+</button>
+                    </div>
+                  {%- endif -%}
+                  {%- if show_std_price -%}
+                    <span class="mm-std-price" data-std-price>{{ std_price | money }}</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
 
               <button type="submit" class="mm-cta" data-buy-submit
                 data-label-available="{{ s.cta_label | escape }}"
@@ -1056,6 +1071,7 @@
     { "type": "text", "id": "standard_product_handle", "label": "Standard form product handle", "info": "Standard mode only. Leave empty to use the product this page is showing. A handle rather than a picker because Shopify allows only one product picker per section, and the gallery already uses it." },
     { "type": "text", "id": "standard_selling_plan_id", "label": "Standard form selling plan ID (optional)", "info": "Standard mode only. If empty, a subscription-only product falls back to its first selling plan, which /cart/add requires." },
     { "type": "checkbox", "id": "show_quantity", "label": "Show the quantity selector", "info": "Standard mode only. When off, one unit is added per click.", "default": true },
+    { "type": "checkbox", "id": "show_std_price", "label": "Show the variant price", "info": "Standard mode only. Hidden automatically whenever a bundle app block is on this section, since the app prices the offer and this figure is the plain variant price.", "default": true },
     { "type": "text", "id": "qty_label", "label": "Quantity label", "default": "Quantity" },
     { "type": "range", "id": "app_slot_reserve", "label": "Reserved height for the app buy box (px)", "info": "App block mode only. The bundle app draws its buy box after its script loads, so without this the page jumps once it lands — most visible on a phone, where there is no second column to absorb it. Set this to the height the widget settles at on a phone; it is released the moment the app draws, so an over-estimate costs nothing after that. 0 turns the reservation off.", "min": 0, "max": 700, "step": 20, "default": 360 },
     { "type": "header", "content": "Benefit icons" },
