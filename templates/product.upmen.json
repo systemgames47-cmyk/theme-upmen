@@ -136,7 +136,7 @@
         "buy_mode": "standard",
         "standard_product_handle": "",
         "standard_selling_plan_id": "",
-        "show_quantity": true,
+        "show_quantity": false,
         "qty_label": "Quantity",
         "benefit_icon_size": 20,
         "benefit_title_size": 10,
