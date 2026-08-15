@@ -111,7 +111,6 @@
         "trust_2",
         "trust_3"
       ],
-      "disabled": true,
       "settings": {
         "bg_color": "#ffffff",
         "heading_color": "#000000",
