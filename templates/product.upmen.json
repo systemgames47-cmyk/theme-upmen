@@ -709,11 +709,11 @@
         "note": "",
         "bg_mobile": "shopify://shop_images/ChatGPT_Image_15_08_2026_05_16_29.png",
         "bg_desktop": "shopify://shop_images/ChatGPT_Image_15_08_2026_05_25_33.png",
-        "overlay_enabled": false,
+        "overlay_enabled": true,
         "overlay_color": "#0a0503",
-        "overlay_opacity": 60,
+        "overlay_opacity": 5,
         "height_mobile": "large",
-        "height_desktop": "large"
+        "height_desktop": "full"
       }
     },
     "ingredients": {
