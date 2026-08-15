@@ -205,6 +205,8 @@
         "settings": {
           "height_mobile": "auto",
           "height_desktop": "auto",
+          "bg_mobile": "shopify://shop_images/mori_scratch_12_11e23fa9-303a-4455-93c4-6412d7c7a6a5.jpg",
+          "bg_desktop": "shopify://shop_images/mori_scratch_12_11e23fa9-303a-4455-93c4-6412d7c7a6a5.jpg",
           "slogan_pre": "ONE GIANT BOOST",
           "slogan_highlight": "FOR MANKIND.",
           "tagline": "Natural testosterone support for the modern man.",

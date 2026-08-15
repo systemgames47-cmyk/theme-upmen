@@ -162,19 +162,6 @@
         "guarantee_text": "COVERED BY OUR 90-DAY SATISFACTION GUARANTEE"
       }
     },
-    "marquee_intro": {
-      "type": "marquee-intro",
-      "settings": {
-        "bg_color": "",
-        "heading_color": "",
-        "text_color": "",
-        "accent_color": "",
-        "accent_on": "",
-        "panel_color": "",
-        "border_color": "",
-        "label": "FEATURED IN"
-      }
-    },
     "scarcity_cta": {
       "type": "scarcity-cta",
       "disabled": true,
@@ -196,8 +183,22 @@
         "height_desktop": "full"
       }
     },
+    "marquee_intro": {
+      "type": "marquee-intro",
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "label": "FEATURED IN"
+      }
+    },
     "pdp_expert_quote": {
       "type": "pdp-expert-quote",
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -283,6 +284,7 @@
         "row_6",
         "row_7"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -485,6 +487,7 @@
         "tab_ingredients",
         "tab_faq"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -690,58 +693,6 @@
     },
     "pdp_right_for_you": {
       "type": "pdp-right-for-you",
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You keep starting a supplement routine and dropping it after a few weeks."
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You are tired of buying five separate bottles and tracking five separate schedules."
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You want to see the exact amount of every active ingredient before you buy."
-          }
-        },
-        "item_4": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You train, work and sleep on a real schedule and need something that fits it."
-          }
-        },
-        "item_5": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You would rather commit to a 90-day routine than reorder every single month."
-          }
-        },
-        "item_6": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You want the guarantee terms in writing before you try something new."
-          }
-        }
-      },
-      "block_order": [
-        "item_1",
-        "item_2",
-        "item_3",
-        "item_4",
-        "item_5",
-        "item_6"
-      ],
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -750,15 +701,15 @@
         "accent_on": "",
         "panel_color": "",
         "border_color": "",
-        "title": "UP MEN IS RIGHT FOR YOU IF",
-        "title_highlight": "ANY OF THIS SOUNDS FAMILIAR",
-        "subtitle": "UP MEN is built for men who want the supplement step of their routine simplified — not another shelf of bottles to keep track of.",
-        "cta_label": "CHOOSE MY ROUTINE",
+        "title": "",
+        "title_highlight": "",
+        "subtitle": "",
+        "cta_label": "",
         "cta_link": "",
         "note": "",
-        "bg_mobile": "shopify://shop_images/gen_2690_0_1784052247170_57f36954-c7cd-44f9-8889-8940d951a3e9.png",
-        "bg_desktop": "shopify://shop_images/gen_2706_0_1784054542932_2.png",
-        "overlay_enabled": true,
+        "bg_mobile": "shopify://shop_images/ChatGPT_Image_15_08_2026_05_16_29.png",
+        "bg_desktop": "shopify://shop_images/ChatGPT_Image_15_08_2026_05_25_33.png",
+        "overlay_enabled": false,
         "overlay_color": "#0a0503",
         "overlay_opacity": 60,
         "height_mobile": "large",
@@ -895,8 +846,8 @@
         "badge_3"
       ],
       "settings": {
-        "bg_color": "",
-        "heading_color": "",
+        "bg_color": "#FFFFFF",
+        "heading_color": "#000000",
         "text_color": "",
         "accent_color": "",
         "accent_on": "",
@@ -1153,8 +1104,8 @@
   },
   "order": [
     "pdp_hero",
-    "marquee_intro",
     "scarcity_cta",
+    "marquee_intro",
     "pdp_expert_quote",
     "pdp_comparison",
     "pdp_ingredient_table",
