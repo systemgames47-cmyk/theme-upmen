@@ -43,6 +43,13 @@
   {%- assign gallery_product = product -%}
 {%- endif -%}
 
+{%- comment -%} Resolved up here because the stylesheet needs it: in "app" mode the
+  whole buy box is drawn client-side by the bundle app, which changes what this
+  section has to reserve room for. {%- endcomment -%}
+{%- assign buy_mode = s.buy_mode | default: 'plans' -%}
+{%- assign app_reserve = s.app_slot_reserve -%}
+{%- if app_reserve == blank -%}{%- assign app_reserve = 360 -%}{%- endif -%}
+
 <style>
   #mm-pdp-hero-{{ sid }} {
     background: var(--mars-black, #0a0503);
@@ -50,8 +57,17 @@
     padding: 24px 0 48px;
   }
   @media (min-width: 900px) { #mm-pdp-hero-{{ sid }} { padding: 40px 0 72px; } }
+  {%- comment -%} Single column below the two-column breakpoint, and the buy column
+    holds an app block whose markup belongs to the app. Clip on x so nothing it
+    draws can widen the page. `clip` rather than `hidden`: no scroll container,
+    and the sticky media column only exists from 900px up. {%- endcomment -%}
+  @media (max-width: 899.98px) { #mm-pdp-hero-{{ sid }} { overflow-x: clip; } }
   #mm-pdp-hero-{{ sid }} .mm-wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
-  #mm-pdp-hero-{{ sid }} .mm-cols { display: grid; grid-template-columns: 1fr; gap: 28px; }
+  {%- comment -%} minmax(0, 1fr), not 1fr: a bare 1fr track keeps min-width:auto and
+    cannot shrink under its content, so one wide child in the app block pushes the
+    column past the viewport. The 900px rule already read this way, which is why
+    only mobile broke. {%- endcomment -%}
+  #mm-pdp-hero-{{ sid }} .mm-cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
   @media (min-width: 900px) {
     #mm-pdp-hero-{{ sid }} .mm-cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
     #mm-pdp-hero-{{ sid }} .mm-media { position: sticky; top: 24px; }
@@ -209,7 +225,19 @@
   #mm-pdp-hero-{{ sid }} .mm-ribbon.alt { background: var(--brand-green, #39c46e); color: #06210f; }
 
   /* ---------- app block slot (Kaching Bundles and similar) ---------- */
-  #mm-pdp-hero-{{ sid }} .mm-app-slot { margin: 0 0 16px; }
+  {%- comment -%} The app ships an empty custom element and fills it once its script
+    runs, so this slot is zero-height on first paint and everything under it jumps
+    when the widget lands. On mobile that is the whole page moving mid-scroll,
+    because there is no second column to absorb it. Hold a reserved height until
+    the app block reports one of its own; the script below drops the class the
+    moment it does, and after a timeout even if the app never loads. {%- endcomment -%}
+  #mm-pdp-hero-{{ sid }} .mm-app-slot {
+    margin: 0 0 16px; min-width: 0; max-width: 100%;
+    {%- if buy_mode == 'app' and app_reserve > 0 %}
+    min-height: {{ app_reserve }}px;
+    {%- endif %}
+  }
+  #mm-pdp-hero-{{ sid }} .mm-app-slot.is-filled { min-height: 0; }
   #mm-pdp-hero-{{ sid }} .mm-app-slot:empty { display: none; }
 
   /* ---------- standard product form ---------- */
@@ -467,15 +495,16 @@
 
           App blocks render in their own slot above the form in every mode, so a
           bundle app can sit over the standard form or replace it entirely.
+          buy_mode is resolved at the top of this file, because the stylesheet
+          depends on it too.
         {%- endcomment -%}
-        {%- assign buy_mode = s.buy_mode | default: 'plans' -%}
 
         {%- assign has_app_block = false -%}
         {%- for block in section.blocks -%}
           {%- if block.type == '@app' -%}{%- assign has_app_block = true -%}{%- break -%}{%- endif -%}
         {%- endfor -%}
         {%- if has_app_block -%}
-          <div class="mm-app-slot">
+          <div class="mm-app-slot" data-app-slot>
             {%- for block in section.blocks -%}
               {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
             {%- endfor -%}
@@ -770,6 +799,30 @@
   var root = document.getElementById('shopify-section-{{ sid }}');
   if (!root) return;
 
+  /* ---- release the app buy box's reserved height once the app has drawn ----
+     Measured on the app block itself, never on the slot: the slot carries the
+     reservation, so its own height is never zero. Deliberately app-agnostic —
+     it asks the DOM whether anything got rendered, not what rendered it. */
+  var appSlot = root.querySelector('[data-app-slot]');
+  var appBlock = appSlot && appSlot.firstElementChild;
+  if (appSlot && appBlock) {
+    var fill = function () {
+      if (appBlock.getBoundingClientRect().height <= 0) return false;
+      appSlot.classList.add('is-filled');
+      return true;
+    };
+    if (!fill()) {
+      if ('ResizeObserver' in window) {
+        var ro = new ResizeObserver(function () { if (fill()) ro.disconnect(); });
+        ro.observe(appBlock);
+        /* Never leave an empty placeholder standing if the app never loads. */
+        setTimeout(function () { appSlot.classList.add('is-filled'); ro.disconnect(); }, 10000);
+      } else {
+        setTimeout(function () { appSlot.classList.add('is-filled'); }, 3000);
+      }
+    }
+  }
+
   /* ---- gallery: arrows + thumbs. Horizontal drag comes free from overflow-x. ---- */
   root.querySelectorAll('[data-gal]').forEach(function (gal) {
     var track = gal.querySelector('[data-gal-track]');
@@ -969,6 +1022,7 @@
     { "type": "text", "id": "standard_selling_plan_id", "label": "Standard form selling plan ID (optional)", "info": "Standard mode only. If empty, a subscription-only product falls back to its first selling plan, which /cart/add requires." },
     { "type": "checkbox", "id": "show_quantity", "label": "Show the quantity selector", "info": "Standard mode only. When off, one unit is added per click.", "default": true },
     { "type": "text", "id": "qty_label", "label": "Quantity label", "default": "Quantity" },
+    { "type": "range", "id": "app_slot_reserve", "label": "Reserved height for the app buy box (px)", "info": "App block mode only. The bundle app draws its buy box after its script loads, so without this the page jumps once it lands — most visible on a phone, where there is no second column to absorb it. Set this to the height the widget settles at on a phone; it is released the moment the app draws, so an over-estimate costs nothing after that. 0 turns the reservation off.", "min": 0, "max": 700, "step": 20, "default": 360 },
     { "type": "header", "content": "Benefit icons" },
     { "type": "range", "id": "benefit_icon_size", "label": "Icon size (px)", "min": 12, "max": 64, "step": 2, "default": 20 },
     { "type": "range", "id": "benefit_title_size", "label": "Title size (px)", "min": 8, "max": 20, "step": 1, "default": 10 },
