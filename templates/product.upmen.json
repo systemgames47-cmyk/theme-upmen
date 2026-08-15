@@ -187,7 +187,7 @@
     "marquee_intro": {
       "type": "marquee-intro",
       "settings": {
-        "bg_color": "",
+        "bg_color": "#000000",
         "heading_color": "",
         "text_color": "",
         "accent_color": "",
@@ -680,7 +680,7 @@
         "expert_5"
       ],
       "settings": {
-        "bg_color": "",
+        "bg_color": "#000000",
         "heading_color": "",
         "text_color": "",
         "accent_color": "",
@@ -709,7 +709,7 @@
         "cta_link": "",
         "note": "",
         "bg_mobile": "shopify://shop_images/adsdasdas.png",
-        "bg_desktop": "shopify://shop_images/banner_1.png",
+        "bg_desktop": "shopify://shop_images/gen_2675_0_1784031014632.png",
         "overlay_enabled": true,
         "overlay_color": "#0a0503",
         "overlay_opacity": 5,
@@ -804,7 +804,7 @@
         "ingredient_8"
       ],
       "settings": {
-        "bg_color": "",
+        "bg_color": "#000000",
         "heading_color": "",
         "text_color": "",
         "accent_color": "",
@@ -847,7 +847,7 @@
         "badge_3"
       ],
       "settings": {
-        "bg_color": "#ffffff",
+        "bg_color": "#000000",
         "heading_color": "#000000",
         "text_color": "",
         "accent_color": "",
@@ -922,7 +922,7 @@
         "review_4"
       ],
       "settings": {
-        "bg_color": "",
+        "bg_color": "#000000",
         "heading_color": "",
         "text_color": "",
         "accent_color": "",
