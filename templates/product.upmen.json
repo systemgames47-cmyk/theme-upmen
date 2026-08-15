@@ -712,12 +712,12 @@
         "cta_link": "",
         "note": "",
         "bg_mobile": "shopify://shop_images/adsdasdas.png",
-        "bg_desktop": "shopify://shop_images/gen_2675_0_1784031014632.png",
-        "overlay_enabled": true,
+        "bg_desktop": "shopify://shop_images/banner_1.png",
+        "overlay_enabled": false,
         "overlay_color": "#0a0503",
-        "overlay_opacity": 5,
+        "overlay_opacity": 0,
         "height_mobile": "large",
-        "height_desktop": "full"
+        "height_desktop": "medium"
       }
     },
     "ingredients": {
