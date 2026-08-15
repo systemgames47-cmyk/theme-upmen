@@ -156,7 +156,7 @@
         "plans_title": "CHOOSE YOUR UP MEN ROUTINE",
         "cta_label": "ADD TO CART",
         "after_add": "checkout",
-        "drawer_owner": "theme",
+        "drawer_owner": "app",
         "sold_out_label": "CURRENTLY UNAVAILABLE",
         "cta_note": "Order processing and delivery estimates are shown at checkout.",
         "guarantee_text": "COVERED BY OUR 90-DAY SATISFACTION GUARANTEE"
