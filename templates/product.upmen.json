@@ -198,7 +198,6 @@
     },
     "pdp_expert_quote": {
       "type": "pdp-expert-quote",
-      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -537,7 +536,6 @@
         "step_2",
         "step_3"
       ],
-      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -599,7 +597,6 @@
         "step_3",
         "step_4"
       ],
-      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
