@@ -111,6 +111,7 @@
         "trust_2",
         "trust_3"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "#ffffff",
         "heading_color": "#000000",
@@ -846,7 +847,7 @@
         "badge_3"
       ],
       "settings": {
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "heading_color": "#000000",
         "text_color": "",
         "accent_color": "",
