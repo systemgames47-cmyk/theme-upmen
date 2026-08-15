@@ -619,6 +619,31 @@
         "height_desktop": "auto"
       }
     },
+    "pdp_right_for_you": {
+      "type": "pdp-right-for-you",
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title": "",
+        "title_highlight": "",
+        "subtitle": "",
+        "cta_label": "",
+        "cta_link": "",
+        "note": "",
+        "bg_mobile": "shopify://shop_images/adsdasdas.png",
+        "bg_desktop": "shopify://shop_images/banner_1.png",
+        "overlay_enabled": false,
+        "overlay_color": "#0a0503",
+        "overlay_opacity": 0,
+        "height_mobile": "full",
+        "height_desktop": "medium"
+      }
+    },
     "testimonials": {
       "type": "testimonials",
       "blocks": {
@@ -693,31 +718,6 @@
         "title_pre": "Recommended by",
         "title_highlight": "Men's Health Specialists",
         "hint": "SWIPE TO SEE MORE →"
-      }
-    },
-    "pdp_right_for_you": {
-      "type": "pdp-right-for-you",
-      "settings": {
-        "bg_color": "",
-        "heading_color": "",
-        "text_color": "",
-        "accent_color": "",
-        "accent_on": "",
-        "panel_color": "",
-        "border_color": "",
-        "title": "",
-        "title_highlight": "",
-        "subtitle": "",
-        "cta_label": "",
-        "cta_link": "",
-        "note": "",
-        "bg_mobile": "shopify://shop_images/adsdasdas.png",
-        "bg_desktop": "shopify://shop_images/banner_1.png",
-        "overlay_enabled": false,
-        "overlay_color": "#0a0503",
-        "overlay_opacity": 0,
-        "height_mobile": "full",
-        "height_desktop": "medium"
       }
     },
     "ingredients": {
@@ -1116,8 +1116,8 @@
     "pdp_tabs",
     "how_to_use",
     "timeline",
-    "testimonials",
     "pdp_right_for_you",
+    "testimonials",
     "ingredients",
     "facility",
     "reviews",
