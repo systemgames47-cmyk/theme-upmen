@@ -115,7 +115,7 @@
         "fallback_image": "shopify://shop_images/ChatGPT_Image_31_de_jul._de_2026_16_06_06.png",
         "facts_alt": "UP MEN Supplement Facts panel",
         "facts_caption": "Suggested use: take 5 capsules daily with food. Exact amounts are shown on the Supplement Facts panel.",
-        "buy_mode": "standard",
+        "buy_mode": "plans",
         "standard_product_handle": "",
         "standard_selling_plan_id": "",
         "show_quantity": false,
