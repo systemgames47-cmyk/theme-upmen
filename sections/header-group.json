@@ -41,7 +41,7 @@
         "icon_size": 20,
         "action_gap": 12,
         "show_account": true,
-        "account_link": "",
+        "account_link": "https://getupmen.com/a/loop_subscriptions/customer",
         "account_label": "Account",
         "show_account_label": false,
         "show_cta": true,
