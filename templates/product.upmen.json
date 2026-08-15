@@ -693,6 +693,7 @@
     },
     "pdp_right_for_you": {
       "type": "pdp-right-for-you",
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
