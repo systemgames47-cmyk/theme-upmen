@@ -137,6 +137,7 @@
         "standard_product_handle": "",
         "standard_selling_plan_id": "",
         "show_quantity": false,
+        "show_std_price": true,
         "qty_label": "Quantity",
         "app_slot_reserve": 360,
         "benefit_icon_size": 20,
@@ -624,7 +625,7 @@
         "expert_1": {
           "type": "expert",
           "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_34_34.png",
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_29_47.png",
             "image_asset": "rdm-experts-1.jpg",
             "name": "DR. ROBERT DORFMAN",
             "role": "PLASTIC SURGEON · FOUNDER, DONE BY DORFMAN",
@@ -634,7 +635,7 @@
         "expert_2": {
           "type": "expert",
           "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_21_50.png",
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_32_16.png",
             "image_asset": "rdm-experts-2.jpg",
             "name": "ERIC LEIJA",
             "role": "PRIMAL SWOLEDIER",
@@ -653,6 +654,7 @@
         },
         "expert_4": {
           "type": "expert",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_32_16.png",
             "image_asset": "rdm-experts-6.jpg",
@@ -663,6 +665,7 @@
         },
         "expert_5": {
           "type": "expert",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_29_47.png",
             "image_asset": "rdm-experts-13.jpg",
@@ -848,7 +851,7 @@
       ],
       "settings": {
         "bg_color": "#000000",
-        "heading_color": "#FFFFFF",
+        "heading_color": "#ffffff",
         "text_color": "",
         "accent_color": "",
         "accent_on": "",
