@@ -1,0 +1,262 @@
+{%- comment -%}
+  PDP Sticky add-to-cart bar.
+
+  Slides in once the buy box in "PDP Hero" has scrolled out of view and hides
+  again when it comes back, so the page never shows two competing CTAs at once.
+
+  It does not own a plan choice of its own: it mirrors whatever plan is selected
+  in the hero, listening for the mm:plan-change event that section dispatches and
+  reading the checked radio on load. That keeps one source of truth for the
+  variant and selling plan being sold.
+
+  This is a normal section placed in the product template. It does not touch the
+  header, the footer, or sections/sticky-footer.liquid.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- assign s = section.settings -%}
+
+{%- comment -%} Fallback purchase target, used when the hero is absent from the
+  template or has no plan connected. {%- endcomment -%}
+{%- assign sp = s.product -%}
+{%- if sp == blank or sp.id == blank -%}
+  {%- if s.product_handle != blank -%}{%- assign sp = all_products[s.product_handle] -%}{%- endif -%}
+{%- endif -%}
+{%- if sp == blank or sp.id == blank -%}{%- assign sp = product -%}{%- endif -%}
+
+{%- assign sp_variant = blank -%}
+{%- assign sp_variant_id = blank -%}
+{%- assign sp_plan_id = blank -%}
+{%- assign sp_available = false -%}
+{%- if sp != blank and sp.id != blank -%}
+  {%- assign sp_variant = sp.selected_or_first_available_variant -%}
+  {%- if sp_variant != blank -%}
+    {%- assign sp_variant_id = sp_variant.id -%}
+    {%- assign sp_available = sp_variant.available -%}
+  {%- endif -%}
+  {%- assign sp_plan_id = s.selling_plan_id -%}
+  {%- if sp_plan_id == blank and sp.selling_plan_groups.size > 0 -%}
+    {%- assign sp_plan_id = sp.selling_plan_groups.first.selling_plans.first.id -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- assign bar_image = s.image -%}
+{%- if bar_image == blank and sp != blank and sp.id != blank -%}
+  {%- assign bar_image = sp.featured_image -%}
+{%- endif -%}
+
+{%- comment -%} Turned off when the offer is owned by a bundle app, so the bar
+  cannot add a plain variant behind the app's back. {%- endcomment -%}
+{%- if s.enabled -%}
+
+<style>
+  #mm-pdp-sticky-{{ sid }} {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    background: rgba(10,5,3,0.96); border-top: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    backdrop-filter: blur(8px);
+    padding: 10px 0 calc(10px + env(safe-area-inset-bottom, 0px));
+    transform: translateY(110%); transition: transform .28s ease; will-change: transform;
+    color: var(--text, #fff);
+  }
+  #mm-pdp-sticky-{{ sid }}.is-visible { transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { #mm-pdp-sticky-{{ sid }} { transition: none; } }
+  #mm-pdp-sticky-{{ sid }} .mm-wrap {
+    max-width: 1180px; margin: 0 auto; padding: 0 16px;
+    display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; align-items: center;
+  }
+  @media (min-width: 768px) {
+    #mm-pdp-sticky-{{ sid }} .mm-wrap { grid-template-columns: 56px minmax(0, 1fr) auto; gap: 16px; }
+  }
+  #mm-pdp-sticky-{{ sid }} .mm-thumb {
+    width: 44px; height: 44px; border-radius: 10px; object-fit: cover; display: block;
+    background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+  }
+  @media (min-width: 768px) { #mm-pdp-sticky-{{ sid }} .mm-thumb { width: 56px; height: 56px; } }
+  #mm-pdp-sticky-{{ sid }} .mm-name {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((12px) * var(--fs-b, 1)); line-height: 1.25; margin: 0;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  @media (min-width: 768px) { #mm-pdp-sticky-{{ sid }} .mm-name { font-size: calc((14px) * var(--fs-b, 1)); } }
+  #mm-pdp-sticky-{{ sid }} .mm-meta {
+    margin: 3px 0 0; font-size: calc((11px) * var(--fs-b, 1)); line-height: 1.35;
+    color: rgba(255,255,255,0.65); font-weight: 300;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  @media (min-width: 768px) { #mm-pdp-sticky-{{ sid }} .mm-meta { font-size: calc((12px) * var(--fs-b, 1)); } }
+  #mm-pdp-sticky-{{ sid }} .mm-stars { color: var(--brand-yellow, #ff8a00); letter-spacing: 1px; }
+  #mm-pdp-sticky-{{ sid }} .mm-cta {
+    border: 0; cursor: pointer; white-space: nowrap;
+    background: var(--brand, #ff5600); color: #fff;
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((12px) * var(--fs-b, 1)); letter-spacing: .05em;
+    padding: 14px 18px; border-radius: 999px;
+    transition: background .16s ease, transform .12s ease;
+  }
+  @media (min-width: 768px) {
+    #mm-pdp-sticky-{{ sid }} .mm-cta { font-size: calc((13.5px) * var(--fs-b, 1)); padding: 15px 34px; }
+  }
+  #mm-pdp-sticky-{{ sid }} .mm-cta:hover { background: #ff6a1f; }
+  #mm-pdp-sticky-{{ sid }} .mm-cta:active { transform: translateY(2px); }
+  #mm-pdp-sticky-{{ sid }} .mm-cta[disabled] { background: #4a3629; cursor: not-allowed; }
+</style>
+
+{%- capture mm_sel -%}mm-pdp-sticky-{{ section.id }}{%- endcapture -%}
+{% render 'mm-section-colors', sel: mm_sel, s: section.settings %}
+
+<div id="mm-pdp-sticky-{{ sid }}" data-sticky-bar role="region" aria-label="{{ s.aria_label | default: 'Add to cart' | escape }}">
+  <form class="mm-wrap" action="{{ routes.cart_add_url }}" method="post" data-sticky-form
+    {% if s.drawer_owner == 'app' %}data-no-theme-drawer{% endif %}>
+    {%- comment -%} See the note in pdp-hero: a return_to pointing at checkout makes
+      cart-drawer.liquid skip its AJAX intercept. {%- endcomment -%}
+    {%- if s.after_add == 'checkout' -%}
+      <input type="hidden" name="return_to" value="/checkout">
+    {%- endif -%}
+    <input type="hidden" name="id" value="{{ sp_variant_id }}" data-variant-input>
+    <input type="hidden" name="selling_plan" value="{{ sp_plan_id }}" data-plan-input {% if sp_plan_id == blank %}disabled{% endif %}>
+    <input type="hidden" name="quantity" value="1">
+
+    {%- if bar_image != blank -%}
+      <img class="mm-thumb" src="{{ bar_image | image_url: width: 160 }}" width="160" height="160" alt="" loading="lazy">
+    {%- else -%}
+      <img class="mm-thumb" src="{{ 'MM_ProductImages_PDP_1x1__1.png' | asset_url }}" width="160" height="160" alt="" loading="lazy">
+    {%- endif -%}
+
+    <div>
+      <p class="mm-name">{{ s.title | default: product.title | default: shop.name }}</p>
+      {%- if s.meta != blank or s.show_stars -%}
+        <p class="mm-meta">
+          {%- if s.show_stars -%}
+            <span class="mm-stars" aria-hidden="true">★★★★★</span>
+          {%- endif -%}
+          {%- if s.meta != blank -%} {{ s.meta }}{%- endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <button type="submit" class="mm-cta" data-sticky-submit {% unless sp_available %}disabled{% endunless %}>
+      {%- if sp_available -%}{{ s.cta_label }}{%- else -%}{{ s.sold_out_label }}{%- endif -%}
+    </button>
+  </form>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('shopify-section-{{ sid }}');
+  if (!root) return;
+  var bar = root.querySelector('[data-sticky-bar]');
+  var form = root.querySelector('[data-sticky-form]');
+  if (!bar || !form) return;
+
+  var variantInput = form.querySelector('[data-variant-input]');
+  var planInput = form.querySelector('[data-plan-input]');
+  var submit = form.querySelector('[data-sticky-submit]');
+
+  /* ---- mirror the hero's plan choice ---- */
+  function apply(variant, plan) {
+    if (variantInput) variantInput.value = variant || '';
+    if (planInput) {
+      planInput.value = plan || '';
+      /* Shopify rejects an empty selling_plan, and disabled inputs are not posted. */
+      planInput.disabled = !plan;
+    }
+    if (submit) submit.disabled = !variant;
+  }
+
+  document.addEventListener('mm:plan-change', function (e) {
+    if (!e.detail) return;
+    apply(e.detail.variant, e.detail.sellingPlan);
+  });
+
+  var heroChecked = document.querySelector('[data-plan-radio]:checked');
+  if (heroChecked) {
+    apply(heroChecked.getAttribute('data-variant'), heroChecked.getAttribute('data-selling-plan'));
+  }
+
+  /* ---- show the bar only while the hero buy box is off screen ---- */
+  var anchor = document.querySelector('[data-buy-form]');
+
+  function show() { bar.classList.add('is-visible'); }
+  function hide() { bar.classList.remove('is-visible'); }
+
+  if (anchor && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { hide(); } else { show(); }
+      });
+    }, { rootMargin: '0px 0px -40% 0px' }).observe(anchor);
+  } else {
+    /* No hero on this template (or no IO support): fall back to a scroll offset. */
+    var threshold = {{ s.scroll_offset | default: 600 }};
+    var onScroll = function () {
+      if (window.scrollY > threshold) { show(); } else { hide(); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* In the theme editor the bar is hidden until scrolled, which makes it look
+     broken while the merchant is editing it. Pin it open when selected. */
+  if (window.Shopify && window.Shopify.designMode) {
+    document.addEventListener('shopify:section:select', function (e) {
+      if (e.detail && e.target === root) show();
+    });
+  }
+})();
+</script>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PDP Sticky Cart",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Colours" },
+    { "type": "paragraph", "content": "Leave a colour empty to keep the section's built-in styling." },
+    { "type": "color", "id": "bg_color", "label": "Background" },
+    { "type": "color", "id": "heading_color", "label": "Headings" },
+    { "type": "color", "id": "text_color", "label": "Body text" },
+    { "type": "color", "id": "accent_color", "label": "Accent" },
+    { "type": "color", "id": "accent_on", "label": "Text on accent" },
+    { "type": "color", "id": "panel_color", "label": "Cards and panels" },
+    { "type": "color", "id": "border_color", "label": "Borders" },
+    { "type": "paragraph", "content": "Mirrors the plan selected in the PDP Hero section. Appears once the buy box scrolls out of view." },
+    { "type": "checkbox", "id": "enabled", "label": "Show the sticky bar", "info": "Turn this off when a bundle app owns the offer, so the bar cannot add a plain variant behind the app's back.", "default": true },
+    { "type": "text", "id": "title", "label": "Product name", "info": "Leave empty to use the product's title." },
+    { "type": "checkbox", "id": "show_stars", "label": "Show stars", "default": true },
+    { "type": "text", "id": "meta", "label": "Line under the name", "default": "Rated 4.8 by verified customers" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "ADD TO CART" },
+    {
+      "type": "select",
+      "id": "after_add",
+      "label": "After adding to cart",
+      "options": [
+        { "value": "drawer", "label": "Open the cart drawer" },
+        { "value": "checkout", "label": "Go straight to checkout" }
+      ],
+      "default": "drawer"
+    },
+    {
+      "type": "select",
+      "id": "drawer_owner",
+      "label": "Which cart drawer",
+      "info": "Set this to the bundle app if the app opens a drawer of its own, otherwise both drawers open on one click.",
+      "options": [
+        { "value": "theme", "label": "Theme cart drawer" },
+        { "value": "app", "label": "Let the bundle app handle it" }
+      ],
+      "default": "theme"
+    },
+    { "type": "text", "id": "sold_out_label", "label": "Button label when unavailable", "default": "UNAVAILABLE" },
+    { "type": "image_picker", "id": "image", "label": "Thumbnail", "info": "Leave empty to use the product image." },
+    { "type": "text", "id": "aria_label", "label": "Screen-reader label for the bar", "default": "Add to cart" },
+    { "type": "header", "content": "Fallback product" },
+    { "type": "paragraph", "content": "Used only if the PDP Hero section is not on this template." },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "product_handle", "label": "Or product handle" },
+    { "type": "text", "id": "selling_plan_id", "label": "Selling plan ID (optional)" },
+    { "type": "range", "id": "scroll_offset", "label": "Fallback scroll offset (px)", "min": 200, "max": 2000, "step": 50, "default": 600 }
+  ],
+  "presets": [{ "name": "PDP Sticky Cart" }]
+}
+{% endschema %}

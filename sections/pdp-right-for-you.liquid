@@ -1,0 +1,213 @@
+{%- comment -%}
+  PDP "Right for you if…" — the qualifying checklist the reference runs before
+  its final CTA.
+
+  Items are blocks over an optional background image. The list is a single column
+  on mobile and two on desktop, which keeps each line on one or two lines instead
+  of the ragged wrap a three-column grid produces at this copy length.
+{%- endcomment -%}
+{%- assign sid = section.id -%}
+{%- assign s = section.settings -%}
+
+{%- case s.height_mobile -%}
+  {%- when 'small' -%}{%- assign minh_mobile = '55svh' -%}
+  {%- when 'medium' -%}{%- assign minh_mobile = '70svh' -%}
+  {%- when 'large' -%}{%- assign minh_mobile = '85svh' -%}
+  {%- when 'full' -%}{%- assign minh_mobile = '100svh' -%}
+  {%- else -%}{%- assign minh_mobile = 'auto' -%}
+{%- endcase -%}
+{%- case s.height_desktop -%}
+  {%- when 'small' -%}{%- assign minh_desktop = '520px' -%}
+  {%- when 'medium' -%}{%- assign minh_desktop = '640px' -%}
+  {%- when 'large' -%}{%- assign minh_desktop = '85vh' -%}
+  {%- when 'full' -%}{%- assign minh_desktop = '100vh' -%}
+  {%- else -%}{%- assign minh_desktop = 'auto' -%}
+{%- endcase -%}
+
+{%- if s.bg_mobile != blank -%}
+  {%- assign bg_m = s.bg_mobile | image_url: width: 1200 -%}
+{%- endif -%}
+{%- if s.bg_desktop != blank -%}
+  {%- assign bg_d = s.bg_desktop | image_url: width: 2400 -%}
+{%- endif -%}
+
+<style>
+  #mm-pdp-rfy-{{ sid }} {
+    position: relative; color: var(--text, #fff);
+    background: var(--mars-black, #0a0503){% if bg_m %} url('{{ bg_m }}') center / cover no-repeat{% endif %};
+    padding: 56px 0; min-height: {{ minh_mobile }};
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  @media (min-width: 768px) {
+    #mm-pdp-rfy-{{ sid }} {
+      padding: 88px 0; min-height: {{ minh_desktop }};
+      {% if bg_d %}background-image: url('{{ bg_d }}');{% endif %}
+    }
+  }
+  {%- if s.overlay_enabled -%}
+  #mm-pdp-rfy-{{ sid }}::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: {{ s.overlay_color | default: '#0a0503' }};
+    opacity: {{ s.overlay_opacity | default: 55 | divided_by: 100.0 }};
+  }
+  {%- endif -%}
+  #mm-pdp-rfy-{{ sid }} .mm-wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 16px; }
+  #mm-pdp-rfy-{{ sid }} h2 {
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; text-align: center;
+    font-size: calc((clamp(23px, 4.6vw, 38px)) * var(--fs-h, 1)); margin: 0 0 12px; line-height: 1.18;
+  }
+  #mm-pdp-rfy-{{ sid }} h2 .orange { color: var(--brand, #ff5600); }
+  #mm-pdp-rfy-{{ sid }} .mm-sub {
+    text-align: center; font-family: var(--font-body); font-weight: 300; line-height: 1.65;
+    font-size: calc((14.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.78);
+    margin: 0 auto 30px; max-width: 640px;
+  }
+  #mm-pdp-rfy-{{ sid }} .mm-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  @media (min-width: 768px) { #mm-pdp-rfy-{{ sid }} .mm-list { grid-template-columns: 1fr 1fr; gap: 14px; } }
+  #mm-pdp-rfy-{{ sid }} .mm-list li {
+    display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 12px; align-items: start;
+    background: rgba(26,14,7,0.80); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
+    border-radius: 12px; padding: 14px 16px;
+    font-family: var(--font-body); font-weight: 300; line-height: 1.55;
+    font-size: calc((13.5px) * var(--fs-b, 1)); color: rgba(255,255,255,0.85);
+  }
+  @media (min-width: 768px) { #mm-pdp-rfy-{{ sid }} .mm-list li { font-size: calc((14.5px) * var(--fs-b, 1)); } }
+  #mm-pdp-rfy-{{ sid }} .mm-check {
+    width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: rgba(57,196,110,0.16); color: var(--brand-green, #39c46e);
+    font-size: 13px; font-weight: 700; line-height: 1; flex-shrink: 0;
+  }
+  #mm-pdp-rfy-{{ sid }} .mm-cta-row { text-align: center; margin-top: 30px; }
+  #mm-pdp-rfy-{{ sid }} .mm-cta {
+    display: inline-block; text-decoration: none;
+    background: var(--brand, #ff5600); color: #fff;
+    font-family: var(--font-heading); font-weight: 800; text-transform: uppercase;
+    font-size: calc((13.5px) * var(--fs-b, 1)); letter-spacing: .05em;
+    padding: 17px 36px; border-radius: 999px;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.35); transition: background .16s ease, transform .12s ease;
+  }
+  #mm-pdp-rfy-{{ sid }} .mm-cta:hover { background: #ff6a1f; }
+  #mm-pdp-rfy-{{ sid }} .mm-cta:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.35); }
+  #mm-pdp-rfy-{{ sid }} .mm-note {
+    text-align: center; font-size: calc((11.5px) * var(--fs-b, 1)); line-height: 1.6;
+    color: rgba(255,255,255,0.55); margin: 14px auto 0; max-width: 640px;
+  }
+  #mm-pdp-rfy-{{ sid }} .mm-warn {
+    margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; line-height: 1.5;
+    background: rgba(255,138,0,0.12); border: 1px solid rgba(255,138,0,0.45);
+    font-size: calc((12px) * var(--fs-b, 1)); color: #ffd9b0;
+  }
+</style>
+
+{%- capture mm_sel -%}mm-pdp-rfy-{{ section.id }}{%- endcapture -%}
+{% render 'mm-section-colors', sel: mm_sel, s: section.settings %}
+
+<section id="mm-pdp-rfy-{{ sid }}" class="reveal" data-testid="pdp-right-for-you">
+  <div class="mm-wrap">
+    {%- if s.title != blank or s.title_highlight != blank -%}
+      <h2>{{ s.title }} {%- if s.title_highlight != blank %} <span class="orange">{{ s.title_highlight }}</span>{% endif -%}</h2>
+    {%- endif -%}
+    {%- if s.subtitle != blank -%}<p class="mm-sub">{{ s.subtitle }}</p>{%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="mm-list">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            <span class="mm-check" aria-hidden="true">{{ block.settings.icon | default: '✓' }}</span>
+            <span>{{ block.settings.text }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- elsif request.design_mode -%}
+      <div class="mm-warn">⚙️ Add “Item” blocks to build the checklist.</div>
+    {%- endif -%}
+
+    {%- if s.cta_label != blank -%}
+      <div class="mm-cta-row">
+        <a class="mm-cta" href="{{ s.cta_link | default: '#buy' }}">{{ s.cta_label }}</a>
+      </div>
+    {%- endif -%}
+    {%- if s.note != blank -%}<p class="mm-note">{{ s.note }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PDP Right For You",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Colours" },
+    { "type": "paragraph", "content": "Leave a colour empty to keep the section's built-in styling." },
+    { "type": "color", "id": "bg_color", "label": "Background" },
+    { "type": "color", "id": "heading_color", "label": "Headings" },
+    { "type": "color", "id": "text_color", "label": "Body text" },
+    { "type": "color", "id": "accent_color", "label": "Accent" },
+    { "type": "color", "id": "accent_on", "label": "Text on accent" },
+    { "type": "color", "id": "panel_color", "label": "Cards and panels" },
+    { "type": "color", "id": "border_color", "label": "Borders" },
+    { "type": "text", "id": "title", "label": "Title", "default": "UP MEN IS RIGHT FOR YOU IF" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight (orange)", "default": "ANY OF THIS SOUNDS FAMILIAR" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "UP MEN is built for men who want the supplement step of their routine simplified — not another shelf of bottles to keep track of." },
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "CHOOSE MY ROUTINE" },
+    { "type": "url", "id": "cta_link", "label": "Button link", "info": "Defaults to the buy box on this page (#buy)." },
+    { "type": "textarea", "id": "note", "label": "Note under the button" },
+    { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "bg_mobile", "label": "Background image (mobile)" },
+    { "type": "image_picker", "id": "bg_desktop", "label": "Background image (desktop)" },
+    { "type": "checkbox", "id": "overlay_enabled", "label": "Darken background", "default": true },
+    { "type": "color", "id": "overlay_color", "label": "Overlay colour", "default": "#0a0503" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 55 },
+    { "type": "header", "content": "Banner size" },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Banner height (mobile)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (55% of screen)" },
+        { "value": "medium", "label": "Medium (70% of screen)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Banner height (desktop)",
+      "options": [
+        { "value": "auto", "label": "Auto (fit content)" },
+        { "value": "small", "label": "Small (520px)" },
+        { "value": "medium", "label": "Medium (640px)" },
+        { "value": "large", "label": "Large (85% of screen)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "auto"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon", "default": "✓" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PDP Right For You",
+      "blocks": [
+        { "type": "item", "settings": { "text": "You keep starting a supplement routine and dropping it after a few weeks." } },
+        { "type": "item", "settings": { "text": "You are tired of buying five separate bottles and tracking five separate schedules." } },
+        { "type": "item", "settings": { "text": "You want to see the exact amount of every active ingredient before you buy." } },
+        { "type": "item", "settings": { "text": "You train, work and sleep on a real schedule and need something that fits it." } },
+        { "type": "item", "settings": { "text": "You would rather commit to a 90-day routine than reorder every month." } },
+        { "type": "item", "settings": { "text": "You want a guarantee in writing before you try something new." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
