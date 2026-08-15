@@ -19,23 +19,6 @@
             "manual_deal_block_id": ""
           }
         },
-        "plan_Be86UP": {
-          "type": "plan",
-          "settings": {
-            "product": "",
-            "product_handle": "",
-            "variant_id": "",
-            "selling_plan_id": "",
-            "is_default": false,
-            "name": "90-DAY ROUTINE",
-            "sub": "3 bottles delivered together",
-            "save_text": "",
-            "ribbon": "",
-            "ribbon_style": "orange",
-            "price_text": "",
-            "compare_text": ""
-          }
-        },
         "benefit_1": {
           "type": "benefit",
           "settings": {
@@ -102,7 +85,6 @@
       },
       "block_order": [
         "kaching_bundles_app_block_DPN8Ra",
-        "plan_Be86UP",
         "benefit_1",
         "benefit_2",
         "benefit_3",
