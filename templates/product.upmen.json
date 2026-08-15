@@ -155,7 +155,7 @@
         "trust_border": "",
         "plans_title": "CHOOSE YOUR UP MEN ROUTINE",
         "cta_label": "ADD TO CART",
-        "after_add": "drawer",
+        "after_add": "checkout",
         "drawer_owner": "app",
         "sold_out_label": "CURRENTLY UNAVAILABLE",
         "cta_note": "Order processing and delivery estimates are shown at checkout.",
