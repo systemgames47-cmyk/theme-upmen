@@ -635,7 +635,7 @@
         "cta_label": "",
         "cta_link": "",
         "note": "",
-        "bg_mobile": "shopify://shop_images/adsdasdas.png",
+        "bg_mobile": "shopify://shop_images/mobile_banner_01.png",
         "bg_desktop": "shopify://shop_images/banner_01_deskt.png",
         "overlay_enabled": false,
         "overlay_color": "#0a0503",
