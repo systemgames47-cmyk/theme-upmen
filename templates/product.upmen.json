@@ -41,8 +41,8 @@
           "settings": {
             "icon_image": "shopify://shop_images/dddasdasd.png",
             "icon": "⚡",
-            "title": "ONE DAILY FORMULA",
-            "text": "9 actives in one serving"
+            "title": "Harder, Fuller Erections She Feels",
+            "text": ""
           }
         },
         "benefit_2": {
@@ -50,8 +50,8 @@
           "settings": {
             "icon_image": "shopify://shop_images/fsdfsd.png",
             "icon": "🎯",
-            "title": "BUILT FOR CONSISTENCY",
-            "text": "A routine you can repeat"
+            "title": "Raw Sex Drive That Doesn't Quit",
+            "text": ""
           }
         },
         "benefit_3": {
@@ -59,8 +59,8 @@
           "settings": {
             "icon_image": "shopify://shop_images/rwer.png",
             "icon": "🧪",
-            "title": "TRANSPARENT DOSES",
-            "text": "Exact amounts on the label"
+            "title": "She Finishes First. You Keep Going.",
+            "text": ""
           }
         },
         "benefit_4": {
@@ -68,8 +68,8 @@
           "settings": {
             "icon_image": "shopify://shop_images/dsfdsfcd.png",
             "icon": "🇺🇸",
-            "title": "MADE IN THE USA",
-            "text": "CGMP-certified facility"
+            "title": "Fast Absorption",
+            "text": ""
           }
         },
         "trust_1": {
@@ -128,18 +128,21 @@
         "stars_color": "",
         "rating_text": "RATED 4.8 · VERIFIED CUSTOMER FEEDBACK",
         "rating_text_size": 13,
+        "rating_text_color": "",
         "gallery_product": "",
         "fallback_image": "shopify://shop_images/ChatGPT_Image_31_de_jul._de_2026_16_06_06.png",
         "facts_alt": "UP MEN Supplement Facts panel",
         "facts_caption": "Suggested use: take 5 capsules daily with food. Exact amounts are shown on the Supplement Facts panel.",
-        "buy_mode": "standard",
+        "buy_mode": "app",
         "standard_product_handle": "",
         "standard_selling_plan_id": "",
-        "show_quantity": true,
+        "show_quantity": false,
         "qty_label": "Quantity",
         "benefit_icon_size": 20,
         "benefit_title_size": 10,
         "benefit_text_size": 11,
+        "benefit_title_color": "",
+        "benefit_text_color": "",
         "trust_style": "plain",
         "trust_align": "start",
         "trust_icon_size": 15,
@@ -161,6 +164,7 @@
     },
     "scarcity_cta": {
       "type": "scarcity-cta",
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -179,8 +183,22 @@
         "height_desktop": "full"
       }
     },
+    "marquee_intro": {
+      "type": "marquee-intro",
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "label": "FEATURED IN"
+      }
+    },
     "pdp_expert_quote": {
       "type": "pdp-expert-quote",
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -266,6 +284,7 @@
         "row_6",
         "row_7"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -468,6 +487,7 @@
         "tab_ingredients",
         "tab_faq"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -517,6 +537,7 @@
         "step_2",
         "step_3"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -672,58 +693,6 @@
     },
     "pdp_right_for_you": {
       "type": "pdp-right-for-you",
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You keep starting a supplement routine and dropping it after a few weeks."
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You are tired of buying five separate bottles and tracking five separate schedules."
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You want to see the exact amount of every active ingredient before you buy."
-          }
-        },
-        "item_4": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You train, work and sleep on a real schedule and need something that fits it."
-          }
-        },
-        "item_5": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You would rather commit to a 90-day routine than reorder every single month."
-          }
-        },
-        "item_6": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "text": "You want the guarantee terms in writing before you try something new."
-          }
-        }
-      },
-      "block_order": [
-        "item_1",
-        "item_2",
-        "item_3",
-        "item_4",
-        "item_5",
-        "item_6"
-      ],
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -732,19 +701,19 @@
         "accent_on": "",
         "panel_color": "",
         "border_color": "",
-        "title": "UP MEN IS RIGHT FOR YOU IF",
-        "title_highlight": "ANY OF THIS SOUNDS FAMILIAR",
-        "subtitle": "UP MEN is built for men who want the supplement step of their routine simplified — not another shelf of bottles to keep track of.",
-        "cta_label": "CHOOSE MY ROUTINE",
+        "title": "",
+        "title_highlight": "",
+        "subtitle": "",
+        "cta_label": "",
         "cta_link": "",
         "note": "",
-        "bg_mobile": "shopify://shop_images/gen_2690_0_1784052247170_57f36954-c7cd-44f9-8889-8940d951a3e9.png",
-        "bg_desktop": "shopify://shop_images/gen_2706_0_1784054542932_2.png",
+        "bg_mobile": "shopify://shop_images/adsdasdas.png",
+        "bg_desktop": "shopify://shop_images/banner_1.png",
         "overlay_enabled": true,
         "overlay_color": "#0a0503",
-        "overlay_opacity": 60,
+        "overlay_opacity": 5,
         "height_mobile": "large",
-        "height_desktop": "large"
+        "height_desktop": "full"
       }
     },
     "ingredients": {
@@ -877,8 +846,8 @@
         "badge_3"
       ],
       "settings": {
-        "bg_color": "",
-        "heading_color": "",
+        "bg_color": "#ffffff",
+        "heading_color": "#000000",
         "text_color": "",
         "accent_color": "",
         "accent_on": "",
@@ -887,19 +856,6 @@
         "title_pre": "MADE IN A CGMP",
         "title_highlight": "FACILITY IN THE USA",
         "autoplay_preview": true
-      }
-    },
-    "marquee_intro": {
-      "type": "marquee-intro",
-      "settings": {
-        "bg_color": "",
-        "heading_color": "",
-        "text_color": "",
-        "accent_color": "",
-        "accent_on": "",
-        "panel_color": "",
-        "border_color": "",
-        "label": "FEATURED IN"
       }
     },
     "reviews": {
@@ -1117,6 +1073,7 @@
     },
     "pdp_sticky_atc": {
       "type": "pdp-sticky-atc",
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -1148,6 +1105,7 @@
   "order": [
     "pdp_hero",
     "scarcity_cta",
+    "marquee_intro",
     "pdp_expert_quote",
     "pdp_comparison",
     "pdp_ingredient_table",
@@ -1158,7 +1116,6 @@
     "pdp_right_for_you",
     "ingredients",
     "facility",
-    "marquee_intro",
     "reviews",
     "faq",
     "marquee_fast",
