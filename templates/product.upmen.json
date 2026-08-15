@@ -1122,6 +1122,7 @@
     },
     "pdp_sticky_atc": {
       "type": "pdp-sticky-atc",
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
