@@ -75,8 +75,13 @@
 
   /* ---------- gallery ---------- */
   #mm-pdp-hero-{{ sid }} .mm-gal { position: relative; }
+  {%- comment -%} The arrows are centred against this, not against .mm-gal: the thumb
+    strip is a child of .mm-gal too, so centring on .mm-gal put them half the strip's
+    height below the image. {%- endcomment -%}
+  #mm-pdp-hero-{{ sid }} .mm-gal-stage { position: relative; }
   #mm-pdp-hero-{{ sid }} .mm-gal-track {
     display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
     scrollbar-width: none; -ms-overflow-style: none; border-radius: 16px;
     background: var(--mars-panel, #1a0e07); border: 1px solid var(--mars-line, rgba(255,255,255,0.12));
   }
@@ -93,8 +98,13 @@
   #mm-pdp-hero-{{ sid }} .mm-gal-nav.prev { left: 10px; }
   #mm-pdp-hero-{{ sid }} .mm-gal-nav.next { right: 10px; }
   #mm-pdp-hero-{{ sid }} .mm-gal-nav[disabled] { opacity: .35; cursor: default; }
+  {%- comment -%} Scrolls on its own once the strip is wider than the column. That only
+    works because .mm-cols sizes its track with minmax(0, 1fr) — with a bare 1fr the
+    column adopted the strip's full width (8 thumbs = 568px) and pushed the page
+    sideways. {%- endcomment -%}
   #mm-pdp-hero-{{ sid }} .mm-gal-thumbs {
     display: flex; gap: 8px; margin-top: 10px; overflow-x: auto;
+    overscroll-behavior-x: contain;
     scrollbar-width: none; -ms-overflow-style: none;
   }
   #mm-pdp-hero-{{ sid }} .mm-gal-thumbs::-webkit-scrollbar { display: none; }
@@ -383,19 +393,25 @@
         {%- if gallery_product != blank and gallery_product.id != blank and gal_images.size > 0 -%}
           {%- assign img_count = gal_images.size -%}
           <div class="mm-gal{% if img_count > 1 %} has-many{% endif %}" data-gal>
-            <div class="mm-gal-track" data-gal-track tabindex="0" role="group" aria-label="{{ gallery_product.title | escape }}">
-              {%- for image in gal_images -%}
-                <div class="mm-gal-slide">
-                  <img src="{{ image | image_url: width: 900 }}" width="900" height="900"
-                    alt="{{ image.alt | default: gallery_product.title | escape }}"
-                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                    {% if forloop.first %}fetchpriority="high"{% endif %}>
-                </div>
-              {%- endfor -%}
+            {%- comment -%} The stage wraps only the image track, so the arrows centre
+              on the image instead of on the image plus the thumb strip. {%- endcomment -%}
+            <div class="mm-gal-stage">
+              <div class="mm-gal-track" data-gal-track tabindex="0" role="group" aria-label="{{ gallery_product.title | escape }}">
+                {%- for image in gal_images -%}
+                  <div class="mm-gal-slide">
+                    <img src="{{ image | image_url: width: 900 }}" width="900" height="900"
+                      alt="{{ image.alt | default: gallery_product.title | escape }}"
+                      loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                      {% if forloop.first %}fetchpriority="high"{% endif %}>
+                  </div>
+                {%- endfor -%}
+              </div>
+              {%- if img_count > 1 -%}
+                <button type="button" class="mm-gal-nav prev" data-gal-prev aria-label="Previous image">‹</button>
+                <button type="button" class="mm-gal-nav next" data-gal-next aria-label="Next image">›</button>
+              {%- endif -%}
             </div>
             {%- if img_count > 1 -%}
-              <button type="button" class="mm-gal-nav prev" data-gal-prev aria-label="Previous image">‹</button>
-              <button type="button" class="mm-gal-nav next" data-gal-next aria-label="Next image">›</button>
               <div class="mm-gal-thumbs" data-gal-thumbs>
                 {%- for image in gal_images -%}
                   <button type="button" class="mm-gal-thumb{% if forloop.first %} is-active{% endif %}"
@@ -832,10 +848,28 @@
     var prev = gal.querySelector('[data-gal-prev]');
     var next = gal.querySelector('[data-gal-next]');
     var thumbs = gal.querySelectorAll('[data-gal-thumb]');
+    var strip = gal.querySelector('[data-gal-thumbs]');
 
     function current() {
       var w = track.clientWidth;
       return w ? Math.round(track.scrollLeft / w) : 0;
+    }
+    /* Past six or so images the strip is wider than the column and the active
+       thumb walks off its edge, so the highlight disappears while you page
+       through the gallery. Scroll the strip itself — never scrollIntoView,
+       which would drag the page vertically along with it. */
+    function revealThumb(i) {
+      if (!strip) return;
+      var t = thumbs[i];
+      if (!t) return;
+      var pad = 8;
+      var left = t.offsetLeft;
+      var right = left + t.offsetWidth;
+      if (left - pad < strip.scrollLeft) {
+        strip.scrollTo({ left: Math.max(0, left - pad), behavior: 'smooth' });
+      } else if (right + pad > strip.scrollLeft + strip.clientWidth) {
+        strip.scrollTo({ left: right + pad - strip.clientWidth, behavior: 'smooth' });
+      }
     }
     function goTo(i) {
       var max = slides.length - 1;
@@ -848,6 +882,7 @@
       thumbs.forEach(function (t, n) { t.classList.toggle('is-active', n === i); });
       if (prev) prev.disabled = i <= 0;
       if (next) next.disabled = i >= slides.length - 1;
+      revealThumb(i);
     }
 
     if (prev) prev.addEventListener('click', function () { goTo(current() - 1); });
