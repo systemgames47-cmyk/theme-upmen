@@ -716,7 +716,7 @@
         "overlay_enabled": false,
         "overlay_color": "#0a0503",
         "overlay_opacity": 0,
-        "height_mobile": "large",
+        "height_mobile": "full",
         "height_desktop": "medium"
       }
     },
