@@ -46,7 +46,7 @@
         "show_account_label": false,
         "show_cta": true,
         "cta_label": "VIEW 90-DAY OFFER",
-        "cta_link": "",
+        "cta_link": "shopify://products/monthly-plan",
         "show_cart": true,
         "show_cart_mobile": true,
         "show_cart_desktop": true
