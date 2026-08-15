@@ -16,8 +16,8 @@
       "settings": {
         "pre_text": "90-DAY PLAN:",
         "highlight": "3 BOTTLES FOR $118",
-        "post_text": "+ 5 WELCOME GIFTS",
-        "post_text_mobile": "+ 5 WELCOME GIFTS",
+        "post_text": "+ GIFTS",
+        "post_text_mobile": "+ GIFTS",
         "show_countdown": false,
         "countdown_target": ""
       }
