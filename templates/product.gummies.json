@@ -1,0 +1,1143 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "pdp_hero": {
+      "type": "pdp-hero",
+      "blocks": {
+        "kaching_bundles_app_block_DPN8Ra": {
+          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+          "settings": {
+            "product": "{{product}}",
+            "manual_deal_block_id": ""
+          }
+        },
+        "plan_Be86UP": {
+          "type": "plan",
+          "settings": {
+            "product": "",
+            "product_handle": "",
+            "variant_id": "",
+            "selling_plan_id": "",
+            "is_default": false,
+            "name": "90-DAY ROUTINE",
+            "sub": "3 bottles delivered together",
+            "save_text": "",
+            "ribbon": "",
+            "ribbon_style": "orange",
+            "price_text": "",
+            "compare_text": ""
+          }
+        },
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon_image": "shopify://shop_images/dddasdasd.png",
+            "icon": "⚡",
+            "title": "Harder, Fuller Erections She Feels",
+            "text": ""
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon_image": "shopify://shop_images/fsdfsd.png",
+            "icon": "🎯",
+            "title": "Raw Sex Drive That Doesn't Quit",
+            "text": ""
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon_image": "shopify://shop_images/rwer.png",
+            "icon": "🧪",
+            "title": "She Finishes First. You Keep Going.",
+            "text": ""
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon_image": "shopify://shop_images/dsfdsfcd.png",
+            "icon": "🇺🇸",
+            "title": "Fast Absorption",
+            "text": ""
+          }
+        },
+        "trust_1": {
+          "type": "trust",
+          "disabled": true,
+          "settings": {
+            "icon": "🎁",
+            "strong": "Welcome gifts",
+            "text": "ship with your first order. The digital guide is delivered by email, and gifts are included once — not repeated on renewals."
+          }
+        },
+        "trust_2": {
+          "type": "trust",
+          "disabled": true,
+          "settings": {
+            "icon": "🔁",
+            "strong": "Skip, pause or cancel",
+            "text": "by contacting UP MEN support before your next billing date."
+          }
+        },
+        "trust_3": {
+          "type": "trust",
+          "disabled": true,
+          "settings": {
+            "icon": "🚚",
+            "strong": "FREE U.S. shipping",
+            "text": "on your first order. Delivery estimates are shown at checkout."
+          }
+        }
+      },
+      "block_order": [
+        "kaching_bundles_app_block_DPN8Ra",
+        "plan_Be86UP",
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "trust_1",
+        "trust_2",
+        "trust_3"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "heading_color": "#000000",
+        "text_color": "#000000",
+        "accent_color": "",
+        "accent_on": "#000000",
+        "panel_color": "#ffffff",
+        "border_color": "#000000",
+        "title": "",
+        "title_highlight": "",
+        "lede": "<p>9 active ingredients in one daily men's wellness formula, designed to simplify consistency around training, nutrition, sleep and everyday routines.</p>",
+        "show_stars": true,
+        "rating_value": 5,
+        "stars_size": 21,
+        "stars_color": "",
+        "rating_text": "RATED 4.8 · VERIFIED CUSTOMER FEEDBACK",
+        "rating_text_size": 13,
+        "rating_text_color": "",
+        "gallery_product": "",
+        "fallback_image": "shopify://shop_images/ChatGPT_Image_31_de_jul._de_2026_16_06_06.png",
+        "facts_alt": "UP MEN Supplement Facts panel",
+        "facts_caption": "Suggested use: take 5 capsules daily with food. Exact amounts are shown on the Supplement Facts panel.",
+        "buy_mode": "standard",
+        "standard_product_handle": "",
+        "standard_selling_plan_id": "",
+        "show_quantity": false,
+        "show_std_price": true,
+        "qty_label": "Quantity",
+        "app_slot_reserve": 360,
+        "benefit_icon_size": 20,
+        "benefit_title_size": 10,
+        "benefit_text_size": 11,
+        "benefit_title_color": "",
+        "benefit_text_color": "",
+        "trust_style": "plain",
+        "trust_align": "start",
+        "trust_icon_size": 15,
+        "trust_text_size": 13,
+        "trust_gap": 10,
+        "trust_radius": 12,
+        "trust_icon_color": "",
+        "trust_strong_color": "#ffffff",
+        "trust_bg": "",
+        "trust_border": "",
+        "plans_title": "CHOOSE YOUR UP MEN ROUTINE",
+        "cta_label": "ADD TO CART",
+        "after_add": "checkout",
+        "drawer_owner": "app",
+        "sold_out_label": "CURRENTLY UNAVAILABLE",
+        "cta_note": "Order processing and delivery estimates are shown at checkout.",
+        "guarantee_text": "COVERED BY OUR 90-DAY SATISFACTION GUARANTEE"
+      }
+    },
+    "scarcity_cta": {
+      "type": "scarcity-cta",
+      "disabled": true,
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "badge": "90-DAY SATISFACTION GUARANTEE",
+        "title_pre": "TRY THE UP MEN ROUTINE",
+        "title_highlight": "FOR 90 DAYS",
+        "text": "Your purchase is covered by our 90-day satisfaction guarantee. If UP MEN is not the right fit for you, request a refund according to the published guarantee terms.",
+        "cta_label": "REVIEW THE 90-DAY GUARANTEE",
+        "cta_link": "/policies/refund-policy",
+        "height_mobile": "auto",
+        "height_desktop": "full"
+      }
+    },
+    "marquee_intro": {
+      "type": "marquee-intro",
+      "settings": {
+        "bg_color": "#000000",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "label": "FEATURED IN"
+      }
+    },
+    "custom_liquid_RfDALj": {
+      "type": "custom-liquid",
+      "name": "Custom Liquid",
+      "settings": {
+        "heading": "",
+        "custom_liquid": "{% comment %}\n  ============================================================\n  UP MEN — \"Doctor Approved\" Tabs (original UltimaPeak design)\n  Single self-contained Custom Liquid block for Shopify\n  Keeps the original markup, classes (mpv1-dtv2), icons and\n  photos — only the content is adapted to UP MEN.\n  How to use: Theme editor → Add \"Custom Liquid\" block →\n  paste this entire code.\n  ============================================================\n{% endcomment %}\n\n{%- assign dtv2_id = 'doctor_tabs_v2_' | append: section.id -%}\n\n<style>\n  .mpv1-dtv2{max-width:640px;margin:0 auto;padding:8px 0;font-family:inherit;color:#1a1a1a;}\n  .mpv1-dtv2 *{box-sizing:border-box;}\n\n  /* ---------- Tabs header ---------- */\n  .mpv1-dtv2__header{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 2px;margin-bottom:16px;}\n  .mpv1-dtv2__header::-webkit-scrollbar{display:none;}\n  .mpv1-dtv2__tab{flex:0 0 auto;appearance:none;border:1px solid #e6e2da;background:#fff;color:#1a1a1a;\n    font-size:13px;font-weight:600;line-height:1.2;padding:10px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:all .2s ease;font-family:inherit;}\n  .mpv1-dtv2__tab:hover{border-color:#1a1a1a;}\n  .mpv1-dtv2__tab--active{background:#1a1a1a;border-color:#1a1a1a;color:#fff;}\n\n  /* ---------- Panels ---------- */\n  .mpv1-dtv2__panel{display:none;background:#faf8f4;border:1px solid #e6e2da;border-radius:16px;padding:20px;}\n  .mpv1-dtv2__panel--active{display:block;animation:dtv2Fade .25s ease;}\n  @keyframes dtv2Fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}\n\n  /* ---------- Doctor Approved ---------- */\n  .mpv1-dtv2__quote{font-size:15px;line-height:1.6;margin:0 0 16px;font-style:italic;}\n  .mpv1-dtv2__author{display:flex;align-items:center;gap:12px;}\n  .mpv1-dtv2__avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:0 0 auto;}\n  .mpv1-dtv2__author-name{margin:0;font-weight:700;font-size:14px;}\n  .mpv1-dtv2__author-specialty{margin:2px 0 0;font-size:13px;color:#6b6b6b;line-height:1.4;}\n\n  /* ---------- Comparison table ---------- */\n  .mpv1-dtv2__comparison-header,.mpv1-dtv2__comparison-row{display:grid;grid-template-columns:1fr 72px 72px;align-items:center;gap:8px;}\n  .mpv1-dtv2__comparison-header{padding:0 0 12px;border-bottom:1px solid #e6e2da;}\n  .mpv1-dtv2__comparison-row{padding:14px 0;border-bottom:1px solid #e6e2da;}\n  .mpv1-dtv2__comparison-row:last-child{border-bottom:none;padding-bottom:0;}\n  .mpv1-dtv2__comparison-col--brand,.mpv1-dtv2__comparison-col--others{text-align:center;font-size:13px;font-weight:700;}\n  .mpv1-dtv2__comparison-logo{max-width:44px;height:auto;display:inline-block;}\n  .mpv1-dtv2__comparison-brand-text{font-size:13px;font-weight:800;letter-spacing:.02em;}\n  .mpv1-dtv2__comparison-feature-name{margin:0;font-size:14px;font-weight:700;line-height:1.35;}\n  .mpv1-dtv2__comparison-feature-sub{margin:3px 0 0;font-size:12.5px;color:#6b6b6b;line-height:1.4;}\n  .mpv1-dtv2__comparison-col--check,.mpv1-dtv2__comparison-col--cross{display:flex;justify-content:center;}\n\n  /* ---------- Ingredients ---------- */\n  .mpv1-dtv2__ingredients-header,.mpv1-dtv2__ingredients-row{display:grid;grid-template-columns:1fr 1px 110px;align-items:center;gap:12px;}\n  .mpv1-dtv2__ingredients-header{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6b6b6b;padding-bottom:12px;border-bottom:1px solid #e6e2da;}\n  .mpv1-dtv2__ingredients-header .mpv1-dtv2__ingredients-col--mg{text-align:right;}\n  .mpv1-dtv2__ingredients-row{padding:14px 0;border-bottom:1px solid #e6e2da;}\n  .mpv1-dtv2__ingredients-row:last-child{border-bottom:none;padding-bottom:0;}\n  .mpv1-dtv2__ingredients-divider{width:1px;height:100%;background:transparent;}\n  .mpv1-dtv2__ingredient-name{margin:0;font-size:14px;font-weight:700;line-height:1.35;}\n  .mpv1-dtv2__ingredient-sub{margin:3px 0 0;font-size:12.5px;color:#6b6b6b;line-height:1.4;}\n  .mpv1-dtv2__ingredient-mg{margin:0;font-size:14px;font-weight:700;text-align:right;white-space:nowrap;}\n\n  /* ---------- FAQ ---------- */\n  .mpv1-dtv2__faq-item{border-bottom:1px solid #e6e2da;}\n  .mpv1-dtv2__faq-item:last-child{border-bottom:none;}\n  .mpv1-dtv2__faq-question{appearance:none;background:none;border:none;width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;\n    padding:14px 0;font-size:14px;font-weight:600;text-align:left;color:#1a1a1a;cursor:pointer;font-family:inherit;line-height:1.4;}\n  .mpv1-dtv2__faq-chevron{flex:0 0 auto;transition:transform .25s ease;}\n  .mpv1-dtv2__faq-question[aria-expanded=\"true\"] .mpv1-dtv2__faq-chevron{transform:rotate(180deg);}\n  .mpv1-dtv2__faq-answer{padding:0 0 14px;}\n  .mpv1-dtv2__faq-answer[hidden]{display:none;}\n  .mpv1-dtv2__faq-answer p{margin:0 0 12px;font-size:13.5px;line-height:1.6;color:#3a3a3a;}\n  .mpv1-dtv2__faq-answer p:last-child{margin-bottom:0;}\n\n  @media (max-width:480px){\n    .mpv1-dtv2__panel{padding:16px;}\n    .mpv1-dtv2__comparison-header,.mpv1-dtv2__comparison-row{grid-template-columns:1fr 56px 56px;}\n    .mpv1-dtv2__ingredients-header,.mpv1-dtv2__ingredients-row{grid-template-columns:1fr 1px 90px;}\n  }\n</style>\n\n<div class=\"mpv1-dtv2\" id=\"{{ dtv2_id }}\">\n  <div class=\"mpv1-dtv2__header\" role=\"tablist\">\n    <button type=\"button\" class=\"mpv1-dtv2__tab mpv1-dtv2__tab--active\" role=\"tab\" aria-selected=\"true\" aria-controls=\"mpv1-dtv2-panel-0-{{ dtv2_id }}\" data-dtv2-tab=\"0\">\n      Doctor Approved\n    </button>\n    <button type=\"button\" class=\"mpv1-dtv2__tab\" role=\"tab\" aria-selected=\"false\" aria-controls=\"mpv1-dtv2-panel-1-{{ dtv2_id }}\" data-dtv2-tab=\"1\">\n      Product Details\n    </button>\n    <button type=\"button\" class=\"mpv1-dtv2__tab\" role=\"tab\" aria-selected=\"false\" aria-controls=\"mpv1-dtv2-panel-2-{{ dtv2_id }}\" data-dtv2-tab=\"2\">\n      Comparison Table\n    </button>\n    <button type=\"button\" class=\"mpv1-dtv2__tab\" role=\"tab\" aria-selected=\"false\" aria-controls=\"mpv1-dtv2-panel-3-{{ dtv2_id }}\" data-dtv2-tab=\"3\">\n      Ingredients\n    </button>\n    <button type=\"button\" class=\"mpv1-dtv2__tab\" role=\"tab\" aria-selected=\"false\" aria-controls=\"mpv1-dtv2-panel-4-{{ dtv2_id }}\" data-dtv2-tab=\"4\">\n      FAQ's\n    </button>\n  </div>\n\n  <div class=\"mpv1-dtv2__panels\">\n\n    {%- comment -%} ===== Tab 1: Doctor Approved ===== {%- endcomment -%}\n    <div id=\"mpv1-dtv2-panel-0-{{ dtv2_id }}\" class=\"mpv1-dtv2__panel mpv1-dtv2__panel--active\" role=\"tabpanel\" data-dtv2-panel=\"0\">\n      <p class=\"mpv1-dtv2__quote\">\"Most men don't have a bedroom problem - they have a hormone problem. This formula attacks it at the root, using full clinical doses of Tongkat Ali and Fenugreek to drive natural testosterone, and Taurine to fuel blood flow - restoring drive and performance naturally, without a prescription.\"</p>\n      <div class=\"mpv1-dtv2__author\">\n        <img src=\"//ultimapeak.com/cdn/shop/files/reviewr_image_beef_png_cb7820c0-bd79-42f2-8747-7a17d4ae6b17.webp?v=1780563794&amp;width=112\" alt=\"\" srcset=\"//ultimapeak.com/cdn/shop/files/reviewr_image_beef_png_cb7820c0-bd79-42f2-8747-7a17d4ae6b17.webp?v=1780563794&amp;width=56 56w\" width=\"56\" height=\"56\" loading=\"lazy\" class=\"mpv1-dtv2__avatar\">\n        <div class=\"mpv1-dtv2__author-info\">\n          <p class=\"mpv1-dtv2__author-name\">Dr. Marcus Thorne, M.D.</p>\n          <p class=\"mpv1-dtv2__author-specialty\">Board-Certified Physician &amp; Men's Health Specialist</p>\n        </div>\n      </div>\n    </div>\n\n    {%- comment -%} ===== Tab 2: Product Details ===== {%- endcomment -%}\n    <div id=\"mpv1-dtv2-panel-1-{{ dtv2_id }}\" class=\"mpv1-dtv2__panel\" role=\"tabpanel\" data-dtv2-panel=\"1\">\n      <p style=\"margin:0 0 12px;font-size:14px;line-height:1.6;\">UP MEN is a men's daily supplement with 9 active ingredients in each serving, formulated to support testosterone, energy, focus, muscle recovery and overall male vitality.</p>\n      <p style=\"margin:0 0 12px;font-size:14px;line-height:1.6;\">Suggested use: take 5 capsules daily with food, at the same time each day for consistent results.</p>\n      <p style=\"margin:0;font-size:14px;line-height:1.6;\">Made in the USA in a CGMP-certified facility and third-party tested for quality, purity and safety.</p>\n    </div>\n\n    {%- comment -%} ===== Tab 3: Comparison Table ===== {%- endcomment -%}\n    <div id=\"mpv1-dtv2-panel-2-{{ dtv2_id }}\" class=\"mpv1-dtv2__panel\" role=\"tabpanel\" data-dtv2-panel=\"2\">\n      <div class=\"mpv1-dtv2__comparison\">\n        <div class=\"mpv1-dtv2__comparison-header\">\n          <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--feature\"></div>\n          <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--brand\">\n            {%- comment -%}\n              To use your logo image instead of text, replace the span below with:\n              <img src=\"YOUR_UPMEN_LOGO_URL\" alt=\"UP MEN\" width=\"44\" height=\"29\" loading=\"lazy\" class=\"mpv1-dtv2__comparison-logo\">\n            {%- endcomment -%}\n            <span class=\"mpv1-dtv2__comparison-brand-text\">UP MEN</span>\n          </div>\n          <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--others\">\n            Others\n          </div>\n        </div>\n        <div class=\"mpv1-dtv2__comparison-body\">\n\n          <div class=\"mpv1-dtv2__comparison-row\">\n            <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--feature\">\n              <p class=\"mpv1-dtv2__comparison-feature-name\">Works Every Day, Not Just Date Night</p>\n              <p class=\"mpv1-dtv2__comparison-feature-sub\">Morning wood, random drive, all day</p>\n            </div>\n            <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--brand mpv1-dtv2__comparison-col--check\">\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M4.45312 11.422L10.1852 16.8711L19.4998 6.46878\" stroke=\"#4FA250\" stroke-width=\"2\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg>\n            </div>\n            <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--others mpv1-dtv2__comparison-col--cross\">\n              <svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M12.0131 10.25L16.7384 5.52474C17.0872 5.17594 17.0872 4.61041 16.7384 4.26161C16.3896 3.9128 15.8241 3.9128 15.4753 4.26158L10.75 8.98687L6.02476 4.26161C5.67595 3.9128 5.11043 3.9128 4.76162 4.26161C4.41282 4.61041 4.41282 5.17594 4.76162 5.52474L9.48691 10.25L4.7616 14.9753C4.4128 15.3241 4.4128 15.8896 4.76162 16.2384C5.11043 16.5872 5.67595 16.5872 6.02476 16.2384L10.75 11.5131L15.4753 16.2384C15.8256 16.5856 16.3911 16.5831 16.7384 16.2328C17.0835 15.8847 17.0835 15.3234 16.7384 14.9753L12.0131 10.25Z\" fill=\"#E34E36\"></path></svg>\n            </div>\n          </div>\n\n          <div class=\"mpv1-dtv2__comparison-row\">\n            <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--feature\">\n              <p class=\"mpv1-dtv2__comparison-feature-name\">Gets You Hard Without A Prescription</p>\n              <p class=\"mpv1-dtv2__comparison-feature-sub\">Natural ingredients, not sketchy pills</p>\n            </div>\n            <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--brand mpv1-dtv2__comparison-col--check\">\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M4.45312 11.422L10.1852 16.8711L19.4998 6.46878\" stroke=\"#4FA250\" stroke-width=\"2\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg>\n            </div>\n            <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--others mpv1-dtv2__comparison-col--cross\">\n              <svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M12.0131 10.25L16.7384 5.52474C17.0872 5.17594 17.0872 4.61041 16.7384 4.26161C16.3896 3.9128 15.8241 3.9128 15.4753 4.26158L10.75 8.98687L6.02476 4.26161C5.67595 3.9128 5.11043 3.9128 4.76162 4.26161C4.41282 4.61041 4.41282 5.17594 4.76162 5.52474L9.48691 10.25L4.7616 14.9753C4.4128 15.3241 4.4128 15.8896 4.76162 16.2384C5.11043 16.5872 5.67595 16.5872 6.02476 16.2384L10.75 11.5131L15.4753 16.2384C15.8256 16.5856 16.3911 16.5831 16.7384 16.2328C17.0835 15.8847 17.0835 15.3234 16.7384 14.9753L12.0131 10.25Z\" fill=\"#E34E36\"></path></svg>\n            </div>\n          </div>\n\n          <div class=\"mpv1-dtv2__comparison-row\">\n            <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--feature\">\n              <p class=\"mpv1-dtv2__comparison-feature-name\">Full Clinical Doses, No Fairy Dusting</p>\n              <p class=\"mpv1-dtv2__comparison-feature-sub\">1,000mg Tongkat Ali + 1,000mg Fenugreek per serving</p>\n            </div>\n            <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--brand mpv1-dtv2__comparison-col--check\">\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M4.45312 11.422L10.1852 16.8711L19.4998 6.46878\" stroke=\"#4FA250\" stroke-width=\"2\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg>\n            </div>\n            <div class=\"mpv1-dtv2__comparison-col mpv1-dtv2__comparison-col--others mpv1-dtv2__comparison-col--cross\">\n              <svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M12.0131 10.25L16.7384 5.52474C17.0872 5.17594 17.0872 4.61041 16.7384 4.26161C16.3896 3.9128 15.8241 3.9128 15.4753 4.26158L10.75 8.98687L6.02476 4.26161C5.67595 3.9128 5.11043 3.9128 4.76162 4.26161C4.41282 4.61041 4.41282 5.17594 4.76162 5.52474L9.48691 10.25L4.7616 14.9753C4.4128 15.3241 4.4128 15.8896 4.76162 16.2384C5.11043 16.5872 5.67595 16.5872 6.02476 16.2384L10.75 11.5131L15.4753 16.2384C15.8256 16.5856 16.3911 16.5831 16.7384 16.2328C17.0835 15.8847 17.0835 15.3234 16.7384 14.9753L12.0131 10.25Z\" fill=\"#E34E36\"></path></svg>\n            </div>\n          </div>\n\n        </div>\n      </div>\n    </div>\n\n    {%- comment -%} ===== Tab 4: Ingredients ===== {%- endcomment -%}\n    <div id=\"mpv1-dtv2-panel-3-{{ dtv2_id }}\" class=\"mpv1-dtv2__panel\" role=\"tabpanel\" data-dtv2-panel=\"3\">\n      <div class=\"mpv1-dtv2__ingredients\">\n        <div class=\"mpv1-dtv2__ingredients-header\">\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--name\">\n            Name\n          </div>\n          <div class=\"mpv1-dtv2__ingredients-divider\" aria-hidden=\"true\"></div>\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--mg\">\n            MG\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__ingredients-row\">\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--name\">\n            <p class=\"mpv1-dtv2__ingredient-name\">Tongkat Ali</p>\n            <p class=\"mpv1-dtv2__ingredient-sub\">The reason she's tapping out round 3</p>\n          </div>\n          <div class=\"mpv1-dtv2__ingredients-divider\" aria-hidden=\"true\"></div>\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--mg\">\n            <p class=\"mpv1-dtv2__ingredient-mg\">1,000mg</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__ingredients-row\">\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--name\">\n            <p class=\"mpv1-dtv2__ingredient-name\">Fenugreek</p>\n            <p class=\"mpv1-dtv2__ingredient-sub\">Fuels testosterone, DHT and raw male drive</p>\n          </div>\n          <div class=\"mpv1-dtv2__ingredients-divider\" aria-hidden=\"true\"></div>\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--mg\">\n            <p class=\"mpv1-dtv2__ingredient-mg\">1,000mg</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__ingredients-row\">\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--name\">\n            <p class=\"mpv1-dtv2__ingredient-name\">Taurine</p>\n            <p class=\"mpv1-dtv2__ingredient-sub\">Drives blood flow — the reason she thinks you got bigger</p>\n          </div>\n          <div class=\"mpv1-dtv2__ingredients-divider\" aria-hidden=\"true\"></div>\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--mg\">\n            <p class=\"mpv1-dtv2__ingredient-mg\">675mg</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__ingredients-row\">\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--name\">\n            <p class=\"mpv1-dtv2__ingredient-name\">Shilajit</p>\n            <p class=\"mpv1-dtv2__ingredient-sub\">Ancient mineral resin. Boosts T and fertility.</p>\n          </div>\n          <div class=\"mpv1-dtv2__ingredients-divider\" aria-hidden=\"true\"></div>\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--mg\">\n            <p class=\"mpv1-dtv2__ingredient-mg\">400mg</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__ingredients-row\">\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--name\">\n            <p class=\"mpv1-dtv2__ingredient-name\">Zinc</p>\n            <p class=\"mpv1-dtv2__ingredient-sub\">The mineral your testosterone can't live without</p>\n          </div>\n          <div class=\"mpv1-dtv2__ingredients-divider\" aria-hidden=\"true\"></div>\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--mg\">\n            <p class=\"mpv1-dtv2__ingredient-mg\">30mg</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__ingredients-row\">\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--name\">\n            <p class=\"mpv1-dtv2__ingredient-name\">Boron</p>\n            <p class=\"mpv1-dtv2__ingredient-sub\">Frees up your T, keeps estrogen in check</p>\n          </div>\n          <div class=\"mpv1-dtv2__ingredients-divider\" aria-hidden=\"true\"></div>\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--mg\">\n            <p class=\"mpv1-dtv2__ingredient-mg\">4mg</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__ingredients-row\">\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--name\">\n            <p class=\"mpv1-dtv2__ingredient-name\">Vitamin D</p>\n            <p class=\"mpv1-dtv2__ingredient-sub\">The sunshine hormone your T levels are begging for</p>\n          </div>\n          <div class=\"mpv1-dtv2__ingredients-divider\" aria-hidden=\"true\"></div>\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--mg\">\n            <p class=\"mpv1-dtv2__ingredient-mg\">100mcg</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__ingredients-row\">\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--name\">\n            <p class=\"mpv1-dtv2__ingredient-name\">Vitamin K1 + K2</p>\n            <p class=\"mpv1-dtv2__ingredient-sub\">Bone strength, better mood, more T production</p>\n          </div>\n          <div class=\"mpv1-dtv2__ingredients-divider\" aria-hidden=\"true\"></div>\n          <div class=\"mpv1-dtv2__ingredients-col mpv1-dtv2__ingredients-col--mg\">\n            <p class=\"mpv1-dtv2__ingredient-mg\">200mcg</p>\n          </div>\n        </div>\n\n      </div>\n    </div>\n\n    {%- comment -%} ===== Tab 5: FAQ's ===== {%- endcomment -%}\n    <div id=\"mpv1-dtv2-panel-4-{{ dtv2_id }}\" class=\"mpv1-dtv2__panel\" role=\"tabpanel\" data-dtv2-panel=\"4\">\n      <div class=\"mpv1-dtv2__faq\">\n\n        <div class=\"mpv1-dtv2__faq-item\">\n          <button type=\"button\" class=\"mpv1-dtv2__faq-question\" aria-expanded=\"false\" aria-controls=\"mpv1-dtv2-faq-{{ dtv2_id }}-1\">\n            <span>How Do I Take UP MEN?</span>\n            <svg class=\"mpv1-dtv2__faq-chevron\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M7.29414 10.709C7.68477 11.0996 8.31914 11.0996 8.70977 10.709L14.7098 4.70896C15.1004 4.31834 15.1004 3.68396 14.7098 3.29333C14.3191 2.90271 13.6848 2.90271 13.2941 3.29333L8.00039 8.58709L2.70664 3.29646C2.31602 2.90583 1.68164 2.90583 1.29102 3.29646C0.900391 3.68708 0.900391 4.32146 1.29102 4.71208L7.29102 10.7121L7.29414 10.709Z\" fill=\"#1A1A1A\"></path></svg>\n          </button>\n          <div id=\"mpv1-dtv2-faq-{{ dtv2_id }}-1\" class=\"mpv1-dtv2__faq-answer\" hidden>\n            <p>Take 5 capsules daily with food. Consistency is key — daily use at the same time helps your body get the most from the formula's blend of Tongkat Ali, Fenugreek, Taurine, Shilajit, Zinc, Boron and Vitamins D, K1 and K2.</p>\n            <p>For best results, make UP MEN part of your daily routine.</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__faq-item\">\n          <button type=\"button\" class=\"mpv1-dtv2__faq-question\" aria-expanded=\"false\" aria-controls=\"mpv1-dtv2-faq-{{ dtv2_id }}-2\">\n            <span>What If It Doesn't Work For Me?</span>\n            <svg class=\"mpv1-dtv2__faq-chevron\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M7.29414 10.709C7.68477 11.0996 8.31914 11.0996 8.70977 10.709L14.7098 4.70896C15.1004 4.31834 15.1004 3.68396 14.7098 3.29333C14.3191 2.90271 13.6848 2.90271 13.2941 3.29333L8.00039 8.58709L2.70664 3.29646C2.31602 2.90583 1.68164 2.90583 1.29102 3.29646C0.900391 3.68708 0.900391 4.32146 1.29102 4.71208L7.29102 10.7121L7.29414 10.709Z\" fill=\"#1A1A1A\"></path></svg>\n          </button>\n          <div id=\"mpv1-dtv2-faq-{{ dtv2_id }}-2\" class=\"mpv1-dtv2__faq-answer\" hidden>\n            <p>Your purchase is backed by our 90-Day Satisfaction Guarantee, according to the terms of the published policy. We encourage you to use UP MEN consistently to experience the full benefits of the formula.</p>\n            <p>If you're not completely satisfied, simply contact our support team and we'll make it right.</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__faq-item\">\n          <button type=\"button\" class=\"mpv1-dtv2__faq-question\" aria-expanded=\"false\" aria-controls=\"mpv1-dtv2-faq-{{ dtv2_id }}-3\">\n            <span>When Will I See Results?</span>\n            <svg class=\"mpv1-dtv2__faq-chevron\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M7.29414 10.709C7.68477 11.0996 8.31914 11.0996 8.70977 10.709L14.7098 4.70896C15.1004 4.31834 15.1004 3.68396 14.7098 3.29333C14.3191 2.90271 13.6848 2.90271 13.2941 3.29333L8.00039 8.58709L2.70664 3.29646C2.31602 2.90583 1.68164 2.90583 1.29102 3.29646C0.900391 3.68708 0.900391 4.32146 1.29102 4.71208L7.29102 10.7121L7.29414 10.709Z\" fill=\"#1A1A1A\"></path></svg>\n          </button>\n          <div id=\"mpv1-dtv2-faq-{{ dtv2_id }}-3\" class=\"mpv1-dtv2__faq-answer\" hidden>\n            <p>Results vary from person to person. Some customers report feeling improvements in energy, focus, and overall vitality within the first few weeks of consistent use.</p>\n            <p>For optimal results, we recommend taking UP MEN daily for at least 8–12 weeks.</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__faq-item\">\n          <button type=\"button\" class=\"mpv1-dtv2__faq-question\" aria-expanded=\"false\" aria-controls=\"mpv1-dtv2-faq-{{ dtv2_id }}-4\">\n            <span>How Fast Is Shipping?</span>\n            <svg class=\"mpv1-dtv2__faq-chevron\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M7.29414 10.709C7.68477 11.0996 8.31914 11.0996 8.70977 10.709L14.7098 4.70896C15.1004 4.31834 15.1004 3.68396 14.7098 3.29333C14.3191 2.90271 13.6848 2.90271 13.2941 3.29333L8.00039 8.58709L2.70664 3.29646C2.31602 2.90583 1.68164 2.90583 1.29102 3.29646C0.900391 3.68708 0.900391 4.32146 1.29102 4.71208L7.29102 10.7121L7.29414 10.709Z\" fill=\"#1A1A1A\"></path></svg>\n          </button>\n          <div id=\"mpv1-dtv2-faq-{{ dtv2_id }}-4\" class=\"mpv1-dtv2__faq-answer\" hidden>\n            <p>Orders are processed quickly and shipped directly from our fulfillment center. Tracking information is provided as soon as your order ships — and all physical welcome gifts ship together with your first order.</p>\n            <p>Delivery times may vary depending on your location.</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__faq-item\">\n          <button type=\"button\" class=\"mpv1-dtv2__faq-question\" aria-expanded=\"false\" aria-controls=\"mpv1-dtv2-faq-{{ dtv2_id }}-5\">\n            <span>Is UP MEN Third-Party Tested?</span>\n            <svg class=\"mpv1-dtv2__faq-chevron\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M7.29414 10.709C7.68477 11.0996 8.31914 11.0996 8.70977 10.709L14.7098 4.70896C15.1004 4.31834 15.1004 3.68396 14.7098 3.29333C14.3191 2.90271 13.6848 2.90271 13.2941 3.29333L8.00039 8.58709L2.70664 3.29646C2.31602 2.90583 1.68164 2.90583 1.29102 3.29646C0.900391 3.68708 0.900391 4.32146 1.29102 4.71208L7.29102 10.7121L7.29414 10.709Z\" fill=\"#1A1A1A\"></path></svg>\n          </button>\n          <div id=\"mpv1-dtv2-faq-{{ dtv2_id }}-5\" class=\"mpv1-dtv2__faq-answer\" hidden>\n            <p>Yes. Every batch is made in the USA in a CGMP-certified facility and undergoes third-party testing for quality, purity, and safety. We believe you should know exactly what you're putting into your body.</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__faq-item\">\n          <button type=\"button\" class=\"mpv1-dtv2__faq-question\" aria-expanded=\"false\" aria-controls=\"mpv1-dtv2-faq-{{ dtv2_id }}-6\">\n            <span>Who Is UP MEN For?</span>\n            <svg class=\"mpv1-dtv2__faq-chevron\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M7.29414 10.709C7.68477 11.0996 8.31914 11.0996 8.70977 10.709L14.7098 4.70896C15.1004 4.31834 15.1004 3.68396 14.7098 3.29333C14.3191 2.90271 13.6848 2.90271 13.2941 3.29333L8.00039 8.58709L2.70664 3.29646C2.31602 2.90583 1.68164 2.90583 1.29102 3.29646C0.900391 3.68708 0.900391 4.32146 1.29102 4.71208L7.29102 10.7121L7.29414 10.709Z\" fill=\"#1A1A1A\"></path></svg>\n          </button>\n          <div id=\"mpv1-dtv2-faq-{{ dtv2_id }}-6\" class=\"mpv1-dtv2__faq-answer\" hidden>\n            <p>UP MEN is designed for men who want to support their testosterone, energy, focus, confidence, and overall performance. Whether you're balancing work, fitness, family life, or all three, UP MEN is formulated to help you perform at your best every day.</p>\n          </div>\n        </div>\n\n        <div class=\"mpv1-dtv2__faq-item\">\n          <button type=\"button\" class=\"mpv1-dtv2__faq-question\" aria-expanded=\"false\" aria-controls=\"mpv1-dtv2-faq-{{ dtv2_id }}-7\">\n            <span>Is This Harmful To Take With Medication?</span>\n            <svg class=\"mpv1-dtv2__faq-chevron\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M7.29414 10.709C7.68477 11.0996 8.31914 11.0996 8.70977 10.709L14.7098 4.70896C15.1004 4.31834 15.1004 3.68396 14.7098 3.29333C14.3191 2.90271 13.6848 2.90271 13.2941 3.29333L8.00039 8.58709L2.70664 3.29646C2.31602 2.90583 1.68164 2.90583 1.29102 3.29646C0.900391 3.68708 0.900391 4.32146 1.29102 4.71208L7.29102 10.7121L7.29414 10.709Z\" fill=\"#1A1A1A\"></path></svg>\n          </button>\n          <div id=\"mpv1-dtv2-faq-{{ dtv2_id }}-7\" class=\"mpv1-dtv2__faq-answer\" hidden>\n            <p>The ingredients are generally well tolerated. However, if you take any medication (especially anticoagulants), have a medical condition, or already use supplements containing vitamin D, vitamin K, zinc or boron, consult a qualified healthcare professional before use.</p>\n          </div>\n        </div>\n\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<script>\n  (function () {\n    var root = document.getElementById('{{ dtv2_id }}');\n    if (!root || root.hasAttribute('data-dtv2-init')) return;\n    root.setAttribute('data-dtv2-init', '');\n\n    /* ---- Tabs ---- */\n    var tabs = root.querySelectorAll('[data-dtv2-tab]');\n    var panels = root.querySelectorAll('[data-dtv2-panel]');\n    tabs.forEach(function (tab) {\n      tab.addEventListener('click', function () {\n        var idx = tab.getAttribute('data-dtv2-tab');\n        tabs.forEach(function (t) {\n          var active = t === tab;\n          t.classList.toggle('mpv1-dtv2__tab--active', active);\n          t.setAttribute('aria-selected', active ? 'true' : 'false');\n        });\n        panels.forEach(function (p) {\n          p.classList.toggle('mpv1-dtv2__panel--active', p.getAttribute('data-dtv2-panel') === idx);\n        });\n      });\n    });\n\n    /* ---- FAQ accordion ---- */\n    root.querySelectorAll('.mpv1-dtv2__faq-question').forEach(function (btn) {\n      btn.addEventListener('click', function () {\n        var answer = document.getElementById(btn.getAttribute('aria-controls'));\n        var isOpen = btn.getAttribute('aria-expanded') === 'true';\n\n        /* close the others */\n        root.querySelectorAll('.mpv1-dtv2__faq-question[aria-expanded=\"true\"]').forEach(function (openBtn) {\n          if (openBtn !== btn) {\n            openBtn.setAttribute('aria-expanded', 'false');\n            var openAnswer = document.getElementById(openBtn.getAttribute('aria-controls'));\n            if (openAnswer) openAnswer.hidden = true;\n          }\n        });\n\n        btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');\n        if (answer) answer.hidden = isOpen;\n      });\n    });\n  })();\n</script>",
+        "full_width": false,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "bg_color": "#FFFFFF",
+        "text_color": "#ffffff"
+      }
+    },
+    "pdp_expert_quote": {
+      "type": "pdp-expert-quote",
+      "disabled": true,
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "badge": "EXPERT PERSPECTIVE",
+        "quote": "",
+        "name": "",
+        "role": "",
+        "photo_asset": "",
+        "disclosure": ""
+      }
+    },
+    "pdp_comparison": {
+      "type": "pdp-comparison",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "claim": "9 active ingredients in a single daily serving",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "claim": "Exact amount of every active shown on the Supplement Facts",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "claim": "3 bottles for the price of 2 on the 90-day plan",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "claim": "Welcome kit included with your first shipment",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "claim": "Made in a CGMP-certified facility in the USA",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "claim": "Skip, pause or cancel before renewal",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "claim": "90-day satisfaction guarantee",
+            "ours": true,
+            "theirs": false
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7"
+      ],
+      "disabled": true,
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title": "UP MEN VS",
+        "title_highlight": "THE USUAL STACK",
+        "subtitle": "What you get with one daily UP MEN serving, next to buying separate supplements month by month.",
+        "ours_label": "UP MEN",
+        "theirs_label": "OTHERS",
+        "claim_col_label": "Feature",
+        "table_caption": "UP MEN compared with buying supplements separately",
+        "note": "Comparison refers to the UP MEN offer terms described on this page. It is not a claim about any specific competing product.",
+        "cta_label": "CHOOSE MY ROUTINE",
+        "cta_link": ""
+      }
+    },
+    "pdp_ingredient_table": {
+      "type": "pdp-ingredient-table",
+      "blocks": {
+        "ing_1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Tongkat Ali",
+            "dose": "1,000 mg",
+            "description": "A root extract traditionally used in men's wellness formulas.",
+            "image_asset": "ing-1.png"
+          }
+        },
+        "ing_2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Shilajit",
+            "dose": "400 mg",
+            "description": "A mineral-rich resin used in traditional preparations.",
+            "image_asset": "ing-2.png"
+          }
+        },
+        "ing_3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Vitamin K1 + K2",
+            "dose": "100 mcg + 100 mcg",
+            "description": "Two forms of vitamin K, an essential nutrient.",
+            "image_asset": "ing-3.png"
+          }
+        },
+        "ing_4": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Vitamin D",
+            "dose": "100 mcg (4,000 IU)",
+            "description": "An essential vitamin many men do not get enough of from diet alone.",
+            "image_asset": "ing-4.png"
+          }
+        },
+        "ing_5": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Zinc",
+            "dose": "30 mg",
+            "description": "An essential trace mineral.",
+            "image_asset": "ing-5.png"
+          }
+        },
+        "ing_6": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Taurine",
+            "dose": "675 mg",
+            "description": "An amino acid found naturally in the body.",
+            "image_asset": "ing-6.png"
+          }
+        },
+        "ing_7": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Fenugreek",
+            "dose": "1,000 mg",
+            "description": "A seed extract long used in men's supplement formulas.",
+            "image_asset": "ing-7.png"
+          }
+        },
+        "ing_8": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Boron",
+            "dose": "4 mg",
+            "description": "A trace mineral included at a low daily amount.",
+            "image_asset": "ing-8.png"
+          }
+        }
+      },
+      "block_order": [
+        "ing_1",
+        "ing_2",
+        "ing_3",
+        "ing_4",
+        "ing_5",
+        "ing_6",
+        "ing_7",
+        "ing_8"
+      ],
+      "disabled": true,
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title": "WHAT'S IN EACH",
+        "title_highlight": "DAILY SERVING",
+        "subtitle": "EXACT AMOUNTS SHOWN ON THE SUPPLEMENT FACTS",
+        "col_name": "Ingredient",
+        "col_dose": "Amount",
+        "col_desc": "What it is",
+        "disclaimer": "* These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.",
+        "cta_label": "TRY IT NOW",
+        "cta_link": ""
+      }
+    },
+    "pdp_tabs": {
+      "type": "pdp-tabs",
+      "blocks": {
+        "tab_details": {
+          "type": "tab",
+          "settings": {
+            "label": "Product Details",
+            "heading": "WHAT UP MEN IS",
+            "content": "<p>UP MEN is a men's dietary supplement with 9 active ingredients in each daily serving. It is designed to simplify the supplementation step inside a broader routine that can include nutrition, movement, training, sleep and consistent self-care.</p><p>Suggested use: take 5 capsules daily with food. The exact amount of every active ingredient is printed on the Supplement Facts panel.</p>",
+            "jump_link": ""
+          }
+        },
+        "tab_included": {
+          "type": "tab",
+          "settings": {
+            "label": "What's Included",
+            "heading": "YOUR PLAN AND YOUR WELCOME KIT",
+            "content": "<p>The <strong>90-day routine</strong> ships 3 bottles together and includes the Complete Welcome Kit: UP MEN Branded Thermal Bottle, UP MEN Crossbody Pack, Keychain Pill Case, Smart Activity Band and the UP MEN Men's Wellness Guide (digital, delivered by email).</p><p>The <strong>30-day routine</strong> ships 1 bottle with the Starter Welcome Kit: UP MEN Branded Thermal Bottle, Keychain Pill Case and the digital guide.</p><p>All physical welcome gifts ship with your first order. Welcome gifts are included once and are not repeated on renewals.</p>",
+            "jump_link": ""
+          }
+        },
+        "tab_subscription": {
+          "type": "tab",
+          "settings": {
+            "label": "Subscription",
+            "heading": "HOW BILLING WORKS",
+            "content": "<p>The 90-day plan is charged at the $118 subscriber rate shown at checkout and renews at that same rate every 90 days unless you skip, pause or cancel before renewal. Each renewal contains 3 bottles of UP MEN only.</p><p>The 30-day plan is charged at $59 and renews every 30 days on the same terms.</p><p>To change or cancel a future renewal, contact UP MEN support before your next billing date. Review the Subscription Policy for complete terms.</p>",
+            "jump_link": ""
+          }
+        },
+        "tab_guarantee": {
+          "type": "tab",
+          "settings": {
+            "label": "Guarantee",
+            "heading": "90-DAY SATISFACTION GUARANTEE",
+            "content": "<p>Your purchase is protected according to the terms of the published 90-day satisfaction guarantee. Review the <a href=\"/policies/refund-policy\">Refund Policy</a> for eligibility, deadlines, required steps and any conditions before ordering.</p>",
+            "jump_link": ""
+          }
+        },
+        "tab_comparison": {
+          "type": "tab",
+          "settings": {
+            "label": "Comparison",
+            "heading": "",
+            "content": "",
+            "jump_link": "#comparison"
+          }
+        },
+        "tab_ingredients": {
+          "type": "tab",
+          "settings": {
+            "label": "Ingredients",
+            "heading": "",
+            "content": "",
+            "jump_link": "#ingredient-table"
+          }
+        },
+        "tab_faq": {
+          "type": "tab",
+          "settings": {
+            "label": "FAQ's",
+            "heading": "",
+            "content": "",
+            "jump_link": "#faq"
+          }
+        }
+      },
+      "block_order": [
+        "tab_details",
+        "tab_included",
+        "tab_subscription",
+        "tab_guarantee",
+        "tab_comparison",
+        "tab_ingredients",
+        "tab_faq"
+      ],
+      "disabled": true,
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title": "",
+        "title_highlight": "",
+        "aria_label": "Product information"
+      }
+    },
+    "how_to_use": {
+      "type": "how-to-use",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/responsive_video_1_3_024459fc-0af3-4b00-810a-c1e78973d89b.gif",
+            "video_autoplay": true,
+            "title": "Take your daily serving every morning.",
+            "subtitle": "With water and food, for best absorption."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/responsive_video_1_2__000_1_1_5332831b-abc1-41cf-a206-957b1be25abc.gif",
+            "video_autoplay": true,
+            "title": "Stay consistent — every single day.",
+            "subtitle": "Use the free metal case to carry it anywhere."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/gif_1.gif",
+            "video_autoplay": true,
+            "title": "Track your transformation for 90 days.",
+            "subtitle": "Use the free 90-Day Transformation Tracker."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "disabled": true,
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title_pre": "HOW TO",
+        "title_highlight": "USE IT",
+        "media_format": "square",
+        "media_size_mobile": "full",
+        "media_size_desktop": "full"
+      }
+    },
+    "timeline": {
+      "type": "timeline",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/a6bac833-2f7e-4bf4-b326-e29a4fbad397.png",
+            "day": "BEFORE",
+            "phase": "This was me before I discovered Up Men.",
+            "items": ""
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/04.png",
+            "day": "1 MONTH WITH UP MEN",
+            "phase": "SPARK",
+            "items": "Boron helps free stuck T\nZinc provides T-making materials\nWorkouts feel intense again\nDrive and focus keep climbing"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_9_08_2026_00_17_10.png",
+            "day": "2 MONTH WITH UP MEN",
+            "phase": "LIFTOFF",
+            "items": "All 9 active ingredients working together in one daily serving\nBody looks leaner, stronger, more masculine\nRecovery between sessions speeds up\nPeople ask what you're doing differently"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/52b575df-1867-4f63-9b27-c008306f8088.png",
+            "day": "3 MONTH WITH UP MEN",
+            "phase": "ORBIT",
+            "items": "The daily serving is fully part of your routine\nStrength, sleep and mood at a new baseline\nA routine you can keep repeating\nWelcome to the man you're supposed to be"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "disabled": true,
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title": "What should I expect from consistent use of UP MEN",
+        "subtitle": "What to expect from week 1 to month 3 — as the daily serving becomes part of your routine.",
+        "cta_label": "TRY IT NOW",
+        "cta_link": "",
+        "show_preview_images": true,
+        "height_mobile": "auto",
+        "height_desktop": "auto"
+      }
+    },
+    "pdp_right_for_you": {
+      "type": "pdp-right-for-you",
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title": "",
+        "title_highlight": "",
+        "subtitle": "",
+        "cta_label": "",
+        "cta_link": "",
+        "note": "",
+        "bg_mobile": "shopify://shop_images/mobile_banner_01_fdc86aac-fa39-4de8-8013-a76e6360205d.png",
+        "bg_desktop": "shopify://shop_images/dasdadsa.png",
+        "overlay_enabled": false,
+        "overlay_color": "#0a0503",
+        "overlay_opacity": 0,
+        "height_mobile": "full",
+        "height_desktop": "large"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "expert_1": {
+          "type": "expert",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_29_47.png",
+            "image_asset": "rdm-experts-1.jpg",
+            "name": "DR. ROBERT DORFMAN",
+            "role": "PLASTIC SURGEON · FOUNDER, DONE BY DORFMAN",
+            "bio": "Beverly Hills plastic surgeon trained at Northwestern, Oxford, and UCLA. Through his work with thousands of patients, he helps men take ownership of their health and show up more confidently."
+          }
+        },
+        "expert_2": {
+          "type": "expert",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_32_16.png",
+            "image_asset": "rdm-experts-2.jpg",
+            "name": "ERIC LEIJA",
+            "role": "PRIMAL SWOLEDIER",
+            "bio": "Eric Leija has dedicated his career to helping men build functional strength and train in ways that enhance everyday life — emphasizing longevity, athleticism, and resilience."
+          }
+        },
+        "expert_3": {
+          "type": "expert",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_41_33.png",
+            "image_asset": "Dr._Schilling.png",
+            "name": "DR. BLAINE SCHILLING",
+            "role": "HORMONAL HEALTH SPECIALIST",
+            "bio": "With over 30 years of experience in family medicine, Dr. Schilling has spent his career helping men navigate the realities of aging — a trusted voice on health, energy, and performance."
+          }
+        },
+        "expert_4": {
+          "type": "expert",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_32_16.png",
+            "image_asset": "rdm-experts-6.jpg",
+            "name": "DR. KYLE GILLETT",
+            "role": "DOUBLE BOARD-CERTIFIED PHYSICIAN",
+            "bio": "Specializes in hormone optimization, longevity, and men's health. He combines advanced testing, evidence-based medicine, and personalized plans to help men perform at their highest level."
+          }
+        },
+        "expert_5": {
+          "type": "expert",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_27_de_jul._de_2026_08_29_47.png",
+            "image_asset": "rdm-experts-13.jpg",
+            "name": "DANIEL CORMIER",
+            "role": "UFC HALL OF FAME · UFC CHAMPION · OLYMPIAN",
+            "bio": "Beyond his accomplishments in combat sports, Daniel embodies the values at the core of Up Men: consistency, accountability, and the belief that strong men are built through daily habits."
+          }
+        }
+      },
+      "block_order": [
+        "expert_1",
+        "expert_2",
+        "expert_3",
+        "expert_4",
+        "expert_5"
+      ],
+      "settings": {
+        "bg_color": "#000000",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title_pre": "Recommended by",
+        "title_highlight": "Men's Health Specialists",
+        "hint": "SWIPE TO SEE MORE →"
+      }
+    },
+    "ingredients": {
+      "type": "ingredients",
+      "blocks": {
+        "ingredient_1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Tongkat Ali",
+            "dose": "1,000 mg",
+            "description": "Boosts testosterone, enhances libido, improves fertility & supports muscle growth",
+            "image_asset": "ing-1.png"
+          }
+        },
+        "ingredient_2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Shilajit",
+            "dose": "400 mg",
+            "description": "Improves fertility and boosts testosterone levels",
+            "image_asset": "ing-2.png"
+          }
+        },
+        "ingredient_3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Vitamin K1 + K2",
+            "dose": "100 mcg K1 + 100 mcg K2",
+            "description": "Supports bone health and density, improves mood, and encourages T production",
+            "image_asset": "ing-3.png"
+          }
+        },
+        "ingredient_4": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Vitamin D",
+            "dose": "100 mcg (4,000 IU)",
+            "description": "Essential for maintaining cellular health and helping regulate testosterone",
+            "image_asset": "ing-4.png"
+          }
+        },
+        "ingredient_5": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Zinc",
+            "dose": "30 mg",
+            "description": "An essential trace mineral that plays a role in testosterone metabolism and immune function",
+            "image_asset": "ing-5.png"
+          }
+        },
+        "ingredient_6": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Taurine",
+            "dose": "675 mg",
+            "description": "Reduces oxidative stress, improves blood flow, and supports increased testosterone levels",
+            "image_asset": "ing-6.png"
+          }
+        },
+        "ingredient_7": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Fenugreek",
+            "dose": "1,000 mg",
+            "description": "Supports testosterone production, DHT levels, and male vitality",
+            "image_asset": "ing-7.png"
+          }
+        },
+        "ingredient_8": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Boron",
+            "dose": "4 mg",
+            "description": "Trace mineral with the potential to increase free T and regulate estrogen levels",
+            "image_asset": "ing-8.png"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_1",
+        "ingredient_2",
+        "ingredient_3",
+        "ingredient_4",
+        "ingredient_5",
+        "ingredient_6",
+        "ingredient_7",
+        "ingredient_8"
+      ],
+      "settings": {
+        "bg_color": "#000000",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title": "9 ACTIVE INGREDIENTS IN 1 DAILY FORMULA",
+        "subtitle": "EXACT AMOUNTS SHOWN ON THE SUPPLEMENT FACTS",
+        "cta_label": "TRY IT NOW",
+        "cta_link": "shopify://products/monthly-plan",
+        "height_mobile": "auto",
+        "height_desktop": "auto"
+      }
+    },
+    "facility": {
+      "type": "facility",
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "text": "CGMP Certified"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "text": "Third-Party Tested"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "text": "Made in the USA"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3"
+      ],
+      "settings": {
+        "bg_color": "#000000",
+        "heading_color": "#ffffff",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title_pre": "MADE IN A CGMP",
+        "title_highlight": "FACILITY IN THE USA",
+        "autoplay_preview": true
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "name": "Marcus T.",
+            "flag": "🇺🇸",
+            "country": "United States",
+            "date": "06/28/2026",
+            "rating": 5,
+            "title": "MY ENERGY IS BACK — FOR REAL",
+            "body": "I'm 55 and had been feeling flat for a couple of years: dragging through the afternoon, no drive in the gym, short fuse at home. Six weeks into Up Men and my mornings feel completely different. I wake up before my alarm, my lifts are climbing again, and my wife noticed the difference before I even said anything. The 90-day guarantee is what got me to try it — I won't be needing it.",
+            "photo": "shopify://shop_images/gen_3988_0_1784840338469.png",
+            "photo_2": "shopify://shop_images/gen_3995_0_1784840982235.png"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "name": "David R.",
+            "flag": "🇺🇸",
+            "country": "United States",
+            "date": "06/11/2026",
+            "rating": 5,
+            "title": "Finally something that isn't hype",
+            "body": "I've tried at least four different T-boosters over the years and this is the first one where I can actually feel the difference. Sharper at work, better sleep, and recovery between training days is noticeably faster. The ingredient doses match what the studies use, which is why I picked it in the first place.",
+            "photo": "shopify://shop_images/gen_3969_0_1784838830451.png"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "name": "James K.",
+            "flag": "🇨🇦",
+            "country": "Canada",
+            "date": "05/30/2026",
+            "rating": 5,
+            "title": "Third month, still impressed",
+            "body": "Ordered the Launch Kit, now on my third month. The focus improvement showed up first (around week two), then strength and drive followed. No jitters, no crash, nothing weird — just steady improvement. The free gifts were actually useful too, especially the tracker.",
+            "photo": "shopify://shop_images/gen_4000_0_1784841310117.png"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "name": "Robert M.",
+            "flag": "🇺🇸",
+            "country": "United States",
+            "date": "05/17/2026",
+            "rating": 5,
+            "title": "Skeptical husband, converted",
+            "body": "My wife bought this for me as a not-so-subtle hint. I rolled my eyes — and then a month later realized I was training four days a week again and actually had energy left after work. Bloodwork at my last checkup came back better than it's been in years. I owe her one."
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ],
+      "settings": {
+        "bg_color": "#000000",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title_pre": "WHAT VERIFIED",
+        "title_highlight": "CUSTOMERS SAY",
+        "subtitle": "Real feedback on routine, delivery, value and support.",
+        "avg_rating": "4.8",
+        "total_reviews": "",
+        "total_prefix": "VERIFIED CUSTOMER FEEDBACK",
+        "total_suffix": "",
+        "dist_pcts": "86|8|3|1|2",
+        "dist_counts": "3,911|364|136|46|91",
+        "tab_label": "Reviews",
+        "filter_label": "With Photos",
+        "filter_active_label": "Showing photos only",
+        "empty_label": "No reviews with photos yet.",
+        "verified_label": "Verified Purchase",
+        "review_photo_label": "Review photo",
+        "photos_alt_prefix": "Customer photo",
+        "photo_1": "shopify://shop_images/gen_2813_0_1784390330727.png",
+        "photo_2": "shopify://shop_images/gen_2817_0_1784391543403.png",
+        "photo_3": "shopify://shop_images/Gemini_Generated_Image_d5ckeyd5ckeyd5ck.jpg",
+        "photo_4": "shopify://shop_images/ourmzqg92r7ez5x9gwxc7503kfhx.jpg"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "WHAT IS UP MEN?",
+            "answer": "UP MEN is a men's dietary supplement with 9 active ingredients in each daily serving. It is designed to simplify the supplementation step inside a broader routine that can include nutrition, movement, training, sleep and consistent self-care."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "HOW DO I TAKE UP MEN?",
+            "answer": "Suggested use: take 5 capsules daily with food. Keeping the serving at the same point in your day is what makes the routine easy to repeat."
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "WHAT DO I RECEIVE WITH THE 30-DAY PLAN?",
+            "answer": "You receive 1 bottle with a 30-day supply, an UP MEN Branded Thermal Bottle, a Keychain Pill Case and the UP MEN Men's Wellness Guide (Digital). The physical gifts ship with your first order, and the digital guide is delivered by email."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "WHAT DO I RECEIVE WITH THE 90-DAY PLAN?",
+            "answer": "You receive 3 bottles delivered together for a complete 90-day supply, plus the Complete Welcome Kit: an UP MEN Branded Thermal Bottle, UP MEN Crossbody Pack, Keychain Pill Case, Smart Activity Band and the UP MEN Men's Wellness Guide (Digital — delivered by email)."
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "WHY IS THE 90-DAY PLAN THE BEST VALUE?",
+            "answer": "The 90-day plan includes 3 bottles for $118, the same product cost as 2 monthly bottles at $59 each. Compared with three separate monthly shipments totaling $177, the 90-day subscriber rate saves $59 every 90 days. Welcome gifts are included once with the first shipment and are not repeated on renewals."
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "WHEN WILL MY WELCOME GIFTS ARRIVE?",
+            "answer": "All physical welcome gifts ship with your first order. The digital guide is delivered by email after purchase. Welcome gifts are included once and are not repeated on subscription renewals."
+          }
+        },
+        "faq_7": {
+          "type": "faq",
+          "settings": {
+            "question": "HOW DOES THE 90-DAY SUBSCRIPTION RENEW?",
+            "answer": "Your 90-day subscription is charged at the $118 subscriber rate shown at checkout, and it renews at that same rate every 90 days unless you skip, pause or cancel before renewal. Each renewal contains 3 bottles of UP MEN only — welcome gifts are included once with the first shipment."
+          }
+        },
+        "faq_8": {
+          "type": "faq",
+          "settings": {
+            "question": "CAN I SKIP, PAUSE OR CANCEL?",
+            "answer": "To change or cancel a future renewal, contact UP MEN support before your next billing date. Changes must be requested before the next order is processed. Review the Subscription Policy for complete terms."
+          }
+        },
+        "faq_9": {
+          "type": "faq",
+          "settings": {
+            "question": "HOW DOES THE 90-DAY SATISFACTION GUARANTEE WORK?",
+            "answer": "Your purchase is protected according to the terms of the published 90-day satisfaction guarantee. Review the Refund Policy for eligibility, deadlines, required steps and any conditions before ordering."
+          }
+        },
+        "faq_10": {
+          "type": "faq",
+          "settings": {
+            "question": "WHEN WILL MY ORDER SHIP?",
+            "answer": "Shipping estimates and tracking information are shown during checkout and sent by email when available."
+          }
+        },
+        "faq_11": {
+          "type": "faq",
+          "settings": {
+            "question": "WHO SHOULD SPEAK WITH A HEALTHCARE PROFESSIONAL BEFORE USE?",
+            "answer": "Consult a qualified healthcare professional before use if you take medication, particularly anticoagulants, have a medical condition, are preparing for surgery or use other supplements containing vitamin D, vitamin K, zinc or boron."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10",
+        "faq_11"
+      ],
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "title_pre": "FREQUENTLY ASKED",
+        "title_highlight": "QUESTIONS",
+        "height_mobile": "auto",
+        "height_desktop": "auto"
+      }
+    },
+    "marquee_fast": {
+      "type": "marquee-fast",
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "text": "ONE GIANT BOOST FOR MANKIND."
+      }
+    },
+    "pdp_sticky_atc": {
+      "type": "pdp-sticky-atc",
+      "disabled": true,
+      "settings": {
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "accent_color": "",
+        "accent_on": "",
+        "panel_color": "",
+        "border_color": "",
+        "enabled": true,
+        "title": "UP MEN — 9 Actives, One Daily Formula",
+        "show_stars": true,
+        "meta": "Rated 4.8 by verified customers",
+        "cta_label": "ADD TO CART",
+        "after_add": "drawer",
+        "drawer_owner": "app",
+        "sold_out_label": "UNAVAILABLE",
+        "aria_label": "Add to cart",
+        "product": "",
+        "product_handle": "3-month-auto-renew-subscription",
+        "selling_plan_id": "",
+        "scroll_offset": 600
+      }
+    },
+    "178655498345332146": {
+      "type": "apps",
+      "settings": {}
+    }
+  },
+  "order": [
+    "pdp_hero",
+    "scarcity_cta",
+    "marquee_intro",
+    "custom_liquid_RfDALj",
+    "pdp_expert_quote",
+    "pdp_comparison",
+    "pdp_ingredient_table",
+    "pdp_tabs",
+    "how_to_use",
+    "timeline",
+    "pdp_right_for_you",
+    "testimonials",
+    "ingredients",
+    "facility",
+    "reviews",
+    "faq",
+    "marquee_fast",
+    "pdp_sticky_atc",
+    "178655498345332146"
+  ]
+}
