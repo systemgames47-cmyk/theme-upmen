@@ -102,8 +102,8 @@
         "details_label": "View Details",
         "details_link": "",
         "scroll_label": "Scroll to explore",
-        "bg_color": "#fcfcfc",
-        "text_color": "#111111",
+        "bg_color": "#000000",
+        "text_color": "#FFFFFF",
         "use_google_fonts": true
       }
     },
@@ -570,8 +570,6 @@
         "cta_label": "",
         "cta_link": "",
         "note": "",
-        "bg_mobile": "shopify://shop_images/mobile_banner_01_fdc86aac-fa39-4de8-8013-a76e6360205d.png",
-        "bg_desktop": "shopify://shop_images/dasdadsa.png",
         "overlay_enabled": false,
         "overlay_color": "#0a0503",
         "overlay_opacity": 0,
@@ -642,6 +640,7 @@
         "expert_4",
         "expert_5"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "#000000",
         "heading_color": "",
@@ -741,6 +740,7 @@
         "ingredient_7",
         "ingredient_8"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "#000000",
         "heading_color": "",
@@ -784,6 +784,7 @@
         "badge_2",
         "badge_3"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "#000000",
         "heading_color": "#ffffff",
@@ -859,6 +860,7 @@
         "review_3",
         "review_4"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "#000000",
         "heading_color": "",
@@ -983,6 +985,7 @@
         "faq_10",
         "faq_11"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "",
         "heading_color": "",
@@ -1039,6 +1042,165 @@
     "178655498345332146": {
       "type": "apps",
       "settings": {}
+    },
+    "1787136559a445bb13": {
+      "type": "apps",
+      "settings": {}
+    },
+    "nhm_collection_nJJE9D": {
+      "type": "nhm-collection",
+      "blocks": {
+        "tag_UXzzFa": {
+          "type": "tag",
+          "settings": {
+            "label": "Educational"
+          }
+        },
+        "tag_BHeXkE": {
+          "type": "tag",
+          "settings": {
+            "label": "Authentic"
+          }
+        },
+        "tag_jcFtr4": {
+          "type": "tag",
+          "settings": {
+            "label": "Inspiring"
+          }
+        },
+        "chapter_qe4r7T": {
+          "type": "chapter",
+          "settings": {
+            "name": "Age of Dinosaurs",
+            "image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779624247/01_udnber.png"
+          }
+        },
+        "chapter_cHLk3H": {
+          "type": "chapter",
+          "settings": {
+            "name": "Fossils of Ancient Life",
+            "image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779624374/02_pmvxxl.png"
+          }
+        },
+        "chapter_6U7hTb": {
+          "type": "chapter",
+          "settings": {
+            "name": "Reptiles of the Mesozoic",
+            "image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779624236/03_hcp3jc.png"
+          }
+        },
+        "chapter_anCEWP": {
+          "type": "chapter",
+          "settings": {
+            "name": "Marine Fossil Gallery",
+            "image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779624256/04_get63z.png"
+          }
+        },
+        "chapter_WkHDgD": {
+          "type": "chapter",
+          "settings": {
+            "name": "Prehistoric Giants",
+            "image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779624251/05_kz1tyu.png"
+          }
+        }
+      },
+      "block_order": [
+        "tag_UXzzFa",
+        "tag_BHeXkE",
+        "tag_jcFtr4",
+        "chapter_qe4r7T",
+        "chapter_cHLk3H",
+        "chapter_6U7hTb",
+        "chapter_anCEWP",
+        "chapter_WkHDgD"
+      ],
+      "name": "NHM Collection",
+      "settings": {
+        "show_overlap": true,
+        "overlap_image": "shopify://shop_images/ChatGPT_Image_19_08_2026_07_07_19.png",
+        "overlap_image_url": "https://res.cloudinary.com/dsdxaxkiz/image/upload/v1779625001/ChatGPT_Image_May_23_2026_12_24_44_PM_1_lv1dne.png",
+        "overlap_alt": "",
+        "overlap_width": 600,
+        "heading_pre": "Curated from millions of years of wonder",
+        "show_head_icons": true,
+        "head_icons": "bone,dna,leaf",
+        "heading_post": "& discovery.",
+        "tagline": "WE DON'T JUST DISPLAY FOSSILS\nWE SHARE EARTH'S STORY",
+        "bar_text": "Explore the past. Understand the present.",
+        "chapter_word": "Chapter",
+        "asterisks": "***",
+        "interval": 3500,
+        "start_chapter": 3,
+        "foot_text": "DIGGING INTO OUR PLANET'S PAST",
+        "bg_color": "#0a0a0a",
+        "text_color": "#ffffff",
+        "use_google_fonts": true
+      }
+    },
+    "nhm_explore_tTVNfn": {
+      "type": "nhm-explore",
+      "blocks": {
+        "pill_bLyHcB": {
+          "type": "pill",
+          "settings": {
+            "icon": "bone",
+            "label": "Dinosaurs",
+            "link": ""
+          }
+        },
+        "pill_C8kwdd": {
+          "type": "pill",
+          "settings": {
+            "icon": "dna",
+            "label": "Ancient Life",
+            "link": ""
+          }
+        },
+        "pill_CQJakT": {
+          "type": "pill",
+          "settings": {
+            "icon": "gem",
+            "label": "Minerals",
+            "link": ""
+          }
+        },
+        "pill_6YCfAz": {
+          "type": "pill",
+          "settings": {
+            "icon": "leaf",
+            "label": "Fossils",
+            "link": ""
+          }
+        },
+        "pill_wP3Pra": {
+          "type": "pill",
+          "settings": {
+            "icon": "book",
+            "label": "Learn More",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "pill_bLyHcB",
+        "pill_C8kwdd",
+        "pill_CQJakT",
+        "pill_6YCfAz",
+        "pill_wP3Pra"
+      ],
+      "name": "NHM Explore",
+      "settings": {
+        "label_number": "02",
+        "label_text": "Explore Our World",
+        "heading": "Unearth the stories of our planet's past\nthrough fossils, minerals, and ancient wonders.",
+        "spacer_mobile": 220,
+        "spacer_desktop": 450,
+        "foot_left": "WE DON'T JUST TELL STORIES.",
+        "foot_right": "PALEONTOLOGY (C) 2026",
+        "bg_color": "#fcfcfc",
+        "text_color": "#111111",
+        "use_google_fonts": true
+      }
     }
   },
   "order": [
@@ -1060,6 +1222,9 @@
     "faq",
     "marquee_fast",
     "pdp_sticky_atc",
-    "178655498345332146"
+    "178655498345332146",
+    "1787136559a445bb13",
+    "nhm_collection_nJJE9D",
+    "nhm_explore_tTVNfn"
   ]
 }
