@@ -24,6 +24,7 @@
     },
     "header": {
       "type": "header",
+      "disabled": true,
       "settings": {
         "logo": "shopify://shop_images/ee796f80-ec6a-407b-8ca0-14266f26c748.png",
         "logo_position": "center",
